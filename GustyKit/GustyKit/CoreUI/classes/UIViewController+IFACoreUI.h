@@ -134,6 +134,8 @@
 
 + (BOOL)ifa_isStoryboardDeviceSpecific;
 
++ (UIViewController *)ifa_popoverControllerPresenter;
+
 /**
 * @returns Thread safe calendar.
 */

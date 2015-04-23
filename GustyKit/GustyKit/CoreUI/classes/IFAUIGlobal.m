@@ -36,6 +36,10 @@
 
 #pragma mark - Public
 
+- (UIViewController *)popoverControllerPresenter {
+    return [[UIViewController class] popoverControllerPresenter];
+}
+
 - (UIViewController *)semiModalViewController {
     return [[UIViewController class] semiModalViewController];
 }

@@ -53,6 +53,8 @@ static char c_toolbarUpdatedBeforeViewAppearedKey;
 static char c_previousVisibleViewControllerKey;
 static char c_sessionCompletionNotifiedKey;
 
+static UIViewController *c_popoverControllerPresenter;
+
 @interface UIViewController (IFACategory_Private)
 
 @property (nonatomic, strong) UIPopoverController *ifa_activePopoverController;
@@ -195,7 +197,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 //    NSLog(@"a_popoverController.popoverContentSize: %@", NSStringFromCGSize(a_popoverController.popoverContentSize));
 //    NSLog(@"a_popoverController.contentViewController.view.frame.size: %@", NSStringFromCGSize(a_popoverController.contentViewController.view.frame.size));
     self.ifa_activePopoverController = a_popoverController;
-    [IFAUIGlobal sharedInstance].popoverControllerPresenter = a_presenter;
+    c_popoverControllerPresenter = a_presenter;
     self.ifa_activePopoverControllerBarButtonItem = a_barButtonItem;
 }
 
@@ -685,11 +687,11 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 
 -(BOOL)ifa_presentedAsModal {
     //    NSLog(@"presentingViewController: %@, presentedViewController: %@, self: %@, topViewController: %@, visibleViewController: %@, viewController[0]: %@, navigationController.parentViewController: %@, parentViewController: %@, presentedAsSemiModal: %u", [self.presentingViewController description], [self.presentedViewController description], [self description], self.navigationController.topViewController, self.navigationController.visibleViewController, [self.navigationController.viewControllers objectAtIndex:0], self.navigationController.parentViewController, self.parentViewController, self.presentedAsSemiModal);
-    return [IFAUIGlobal sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController==self.navigationController
-            || [IFAUIGlobal sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController==self
+    return c_popoverControllerPresenter.ifa_activePopoverController.contentViewController==self.navigationController
+            || c_popoverControllerPresenter.ifa_activePopoverController.contentViewController==self
             || ( self.navigationController.presentingViewController!=nil && (self.navigationController.viewControllers)[0] ==self)
             || self.parentViewController.presentedAsSemiModal
-            || [[IFAUIGlobal sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController isKindOfClass:[UIActivityViewController class]];
+            || c_popoverControllerPresenter.ifa_activePopoverController.contentViewController isKindOfClass:[UIActivityViewController class]];
 }
 
 - (void)ifa_updateToolbarForEditing:(BOOL)a_editing animated:(BOOL)a_animated {
@@ -1609,6 +1611,10 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
                                         style:UIAlertControllerStyleActionSheet
                                       actions:@[cancelAction, destructiveAction]
                                    completion:nil];
+}
+
++ (UIViewController *)ifa_popoverControllerPresenter {
+    return c_popoverControllerPresenter;
 }
 
 //-(void)m_simulateMemoryWarning{

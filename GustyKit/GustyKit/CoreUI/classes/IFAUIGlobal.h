@@ -19,7 +19,7 @@
 
 
 @interface IFAUIGlobal : NSObject
-@property (nonatomic) UIViewController *popoverControllerPresenter;
+@property (nonatomic, readonly) UIViewController *popoverControllerPresenter;
 @property (nonatomic, readonly) UIViewController *semiModalViewController;
 @property (nonatomic, readonly) BOOL semiModalViewPresentedInLandscapeInterfaceOrientation;
 
