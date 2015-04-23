@@ -6,16 +6,6 @@ link_with 'GustyKitTests'
 # CoreUI dependencies
 pod 'ODRefreshControl', '1.1.0'
 
-# GoogleMobileAdsSupport dependencies
-pod 'Google-Mobile-Ads-SDK', '~> 6'
-
-# FlurrySupport dependencies
-pod 'FlurrySDK'
-
-# Html dependencies
-pod 'DTFoundation', '1.7.2'
-pod 'MWFeedParser', '1.0.1'
-
 # Tests dependencies
 pod 'IFATestingSupport'
 #pod 'IFATestingSupport', :git => 'https://github.com/marcelo-schroeder/IFATestingSupport.git', :tag => 'v0.1.1'

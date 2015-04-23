@@ -18,6 +18,10 @@
 //  limitations under the License.
 //
 
+//wip: clean up
+//wip: CoreUI	RENAME TO: Core
+
+
 // Apple Frameworks
 #import <CoreData/CoreData.h>
 #import <CoreText/CoreText.h>
@@ -34,16 +38,10 @@
 /*************/
 // KNSemiModal
 #import "UIViewController+IFA_KNSemiModal.h"
-// IFA_ECSlidingViewController
-#import "IFA_ECSlidingViewController.h"
-// IFA_SVWebViewController
-#import "IFA_SVWebViewController.h"
 // ODRefreshControl
 #import <ODRefreshControl/ODRefreshControl.h>
 // GrowingTextView
 #import "IFA_HPGrowingTextView.h"
-// IBActionSheet
-#import "IFA_IBActionSheet.h"
 
 // GustyKit
 #import "GustyKitFoundation.h"
@@ -59,7 +57,7 @@
 #import "IFAActionSheet.h"
 #import "IFAAppearanceTheme.h"
 #import "IFAAppearanceThemeManager.h"
-#import "IFAApplicationDelegate.h"
+//#import "IFAApplicationDelegate.h"
 #import "IFAApplicationLog.h"
 #import "IFAApplicationLog+IFACategory.h"
 #import "IFAApplicationLogViewController.h"
@@ -89,13 +87,13 @@
 #import "IFAFormTableViewCellContentView.h"
 #import "IFAFormTextFieldTableViewCell.h"
 #import "IFAFormViewController.h"
-#import "IFAInternalWebBrowserActivity.h"
-#import "IFAInternalWebBrowserViewController.h"
+//#import "IFAInternalWebBrowserActivity.h"
+//#import "IFAInternalWebBrowserViewController.h"
 #import "IFAListViewController.h"
 #import "IFALongTextEditorViewController.h"
 #import "IFAMapAnnotation.h"
 #import "IFAMasterDetailViewController.h"
-#import "IFAMenuViewController.h"
+//#import "IFAMenuViewController.h"
 #import "IFAModalViewController.h"
 #import "IFAMultipleSelectionListViewController.h"
 #import "IFANavigationController.h"
@@ -118,8 +116,8 @@
 #import "IFASingleSelectionListViewController.h"
 #import "IFASingleSelectionManager.h"
 #import "IFASlidingFrostedGlassViewController.h"
-#import "IFASlidingViewController.h"
-#import "IFASplitViewController.h"
+//#import "IFASlidingViewController.h"
+//#import "IFASplitViewController.h"
 #import "IFAStaticPagingContainerViewController.h"
 #import "IFASubjectActivityItem.h"
 #import "IFASwitchTableViewCell.h"
@@ -176,10 +174,10 @@
 #import "IFADimmedFadingOverlayViewControllerTransitioningDelegate.h"
 #import "IFAFadingOverlayViewControllerTransitioningDelegate.h"
 #import "NSObject+IFACoreUI.h"
-#import "NSURL+IFACoreUI.h"
+//#import "NSURL+IFACoreUI.h"
 #import "IFAOperation.h"
 #import "NSAttributedString+IFACoreUI.h"
 #import "IFALazyTableDataLoadingViewController.h"
 #import "IFAPersistenceChangeDetector.h"
-#import "IFAUserNotificationSettingsManager.h"
+//#import "IFAUserNotificationSettingsManager.h"
 #import "IFAHtmlDocument.h"

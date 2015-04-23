@@ -513,14 +513,14 @@ static UIImage *c_menuBarButtonItemImage = nil;
     return c_menuBarButtonItemImage;
 }
 
-+(void)dismissSplitViewControllerPopover {
-    UIWindow *l_window = [UIApplication sharedApplication].delegate.window;
-    UIViewController *l_appRootViewController = l_window.rootViewController;
-    if ([l_appRootViewController isKindOfClass:[IFASplitViewController class]]) {
-        IFASplitViewController *l_splitViewController = (IFASplitViewController *)l_appRootViewController;
-        [l_splitViewController.splitViewControllerPopoverController dismissPopoverAnimated:NO];
-    }
-}
+//+(void)dismissSplitViewControllerPopover {
+//    UIWindow *l_window = [UIApplication sharedApplication].delegate.window;
+//    UIViewController *l_appRootViewController = l_window.rootViewController;
+//    if ([l_appRootViewController isKindOfClass:[IFASplitViewController class]]) {
+//        IFASplitViewController *l_splitViewController = (IFASplitViewController *)l_appRootViewController;
+//        [l_splitViewController.splitViewControllerPopoverController dismissPopoverAnimated:NO];
+//    }
+//}
 
 +(void)setKeyWindowRootViewController:(UIViewController*)a_viewController{
     [self dismissSplitViewControllerPopover];

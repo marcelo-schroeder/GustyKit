@@ -215,10 +215,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     [self ifa_removeLeftBarButtonItem:a_notification.object];
 }
 
--(void)IFA_onSlidingMenuButtonAction:(UIBarButtonItem*)a_button{
-    [self.slidingViewController anchorTopViewTo:ECRight];
-}
-
 /*
 -(void)IFA_releaseViewForController:(UIViewController*)a_viewController{
 //    NSLog(@"IFA_releaseViewForController: %@", [a_viewController description]);
@@ -295,29 +291,13 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     [a_items removeObjectsInArray:l_objectsToRemove];
 }
 
-- (void)IFA_showLeftSlidingPaneButtonIfRequired {
-    if ([self ifa_shouldShowLeftSlidingPaneButton]) {
-        if (self.slidingViewController) {
-            self.navigationController.view.layer.shadowOpacity = 0.75f;
-            self.navigationController.view.layer.shadowRadius = 10.0f;
-            self.navigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-            [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
-
-            BOOL l_shouldShowMenuButton = self.navigationController.topViewController== (self.navigationController.viewControllers)[0];
-            if (l_shouldShowMenuButton) {
-                if (!self.IFA_slidingMenuBarButtonItem) {
-                    self.IFA_slidingMenuBarButtonItem = [[self ifa_appearanceTheme] slidingMenuBarButtonItemForViewController:self];
-                    self.IFA_slidingMenuBarButtonItem.target = self;
-                    self.IFA_slidingMenuBarButtonItem.action = @selector(IFA_onSlidingMenuButtonAction:);
-                    self.IFA_slidingMenuBarButtonItem.tag = IFABarItemTagLeftSlidingPaneButton;
-                }
-                [self ifa_addToNavigationBarForSlidingMenuBarButtonItem:self.IFA_slidingMenuBarButtonItem];
-            }
-        }else if (self.splitViewController) {
-            [self ifa_addLeftBarButtonItem:((IFASplitViewController *) self.splitViewController).splitViewControllerPopoverControllerBarButtonItem];
-        }
-    }
-}
+//- (void)IFA_showLeftSlidingPaneButtonIfRequired {
+//    if ([self ifa_shouldShowLeftSlidingPaneButton]) {
+//        if (self.splitViewController) {
+//            [self ifa_addLeftBarButtonItem:((IFASplitViewController *) self.splitViewController).splitViewControllerPopoverControllerBarButtonItem];
+//        }
+//    }
+//}
 
 // Determines the best presenting view controller for the situation.
 //  For instance, a view controller set as the master view controller in a split view controller is not
@@ -901,23 +881,23 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     return [IFAAsynchronousWorkManager sharedInstance];
 }
 
--(void)ifa_dismissMenuPopoverController {
-    [self ifa_dismissMenuPopoverControllerWithAnimation:YES];
-}
+//-(void)ifa_dismissMenuPopoverController {
+//    [self ifa_dismissMenuPopoverControllerWithAnimation:YES];
+//}
 
--(void)ifa_dismissMenuPopoverControllerWithAnimation:(BOOL)a_animated{
-    // Dismiss the popover controller if a split view controller is used and this controller is not presented as modal
-    if (!self.ifa_presentedAsModal) {
-        [((IFASplitViewController *)self.splitViewController).splitViewControllerPopoverController dismissPopoverAnimated:a_animated];
-    }
-}
+//-(void)ifa_dismissMenuPopoverControllerWithAnimation:(BOOL)a_animated{
+//    // Dismiss the popover controller if a split view controller is used and this controller is not presented as modal
+//    if (!self.ifa_presentedAsModal) {
+//        [((IFASplitViewController *)self.splitViewController).splitViewControllerPopoverController dismissPopoverAnimated:a_animated];
+//    }
+//}
 
 -(void)ifa_resetActivePopoverController {
     [self IFA_setActivePopoverController:nil presenter:nil barButtonItem:nil];
 }
 
 -(void)ifa_prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    [self ifa_dismissMenuPopoverController];
+//    [self ifa_dismissMenuPopoverController];
 }
 
 -(id<IFAAppearanceTheme>)ifa_appearanceTheme {
@@ -1106,8 +1086,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
 
-    // Manage left sliding menu button visibility
-    [self IFA_showLeftSlidingPaneButtonIfRequired];
+//    // Manage left sliding menu button visibility
+//    [self IFA_showLeftSlidingPaneButtonIfRequired];
 
     // Set appearance
     [[[IFAAppearanceThemeManager sharedInstance] activeAppearanceTheme] setAppearanceOnViewWillAppearForViewController:self];
@@ -1127,9 +1107,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 
 - (BOOL)ifa_shouldShowLeftSlidingPaneButton {
     BOOL l_shouldShowIt = NO;
-    if (self.slidingViewController) {
-        l_shouldShowIt = self.slidingViewController.topViewController==self.navigationController && self.navigationController.viewControllers[0]==self;
-    }else if (self.splitViewController) {
+    if (self.splitViewController) {
         l_shouldShowIt = [self ifa_isDetailViewController];
     }
 //    NSLog(@"  [self ifa_shouldShowLeftSlidingPaneButton] for %@: %u", [self description], l_shouldShowIt);
@@ -1235,8 +1213,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
         l_shouldAutorotate = toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
     }
     if (l_shouldAutorotate) {
-        if ([IFAApplicationDelegate sharedInstance].semiModalViewController) {
-            l_shouldAutorotate = UIInterfaceOrientationIsLandscape(toInterfaceOrientation) == UIInterfaceOrientationIsLandscape([IFAApplicationDelegate sharedInstance].semiModalInterfaceOrientation);
+        if (self.class.semiModalViewController) {
+            l_shouldAutorotate = UIInterfaceOrientationIsLandscape(toInterfaceOrientation) == self.class.semiModalViewPresentedInLandscapeInterfaceOrientation;
         }
     }
     return l_shouldAutorotate;
@@ -1244,8 +1222,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 
 // iOS 6 or greater (the previous method is for iOS 5)
 -(NSUInteger)ifa_supportedInterfaceOrientations {
-    if ([IFAApplicationDelegate sharedInstance].semiModalViewController) {
-        if (UIInterfaceOrientationIsLandscape([IFAApplicationDelegate sharedInstance].semiModalInterfaceOrientation)) {
+    if (self.class.semiModalViewController) {
+        if (self.class.semiModalViewPresentedInLandscapeInterfaceOrientation) {
             return UIInterfaceOrientationMaskLandscape;
         }else{
             return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown : UIInterfaceOrientationMaskPortrait;

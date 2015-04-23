@@ -816,14 +816,14 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
     return nil;
 }
 
-- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url{
-    return [self newInternalWebBrowserViewControllerWithUrl:a_url completionBlock:nil];
-}
-
-- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url completionBlock:(void(^)(void))a_completionBlock{
-    IFAInternalWebBrowserViewController *l_viewController = [[IFAInternalWebBrowserViewController alloc] initWithURL:a_url completionBlock:a_completionBlock];
-    return l_viewController;
-}
+//- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url{
+//    return [self newInternalWebBrowserViewControllerWithUrl:a_url completionBlock:nil];
+//}
+//
+//- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url completionBlock:(void(^)(void))a_completionBlock{
+//    IFAInternalWebBrowserViewController *l_viewController = [[IFAInternalWebBrowserViewController alloc] initWithURL:a_url completionBlock:a_completionBlock];
+//    return l_viewController;
+//}
 
 - (Class)navigationControllerClass {
     return [IFANavigationController class];

@@ -122,7 +122,7 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 +(NSString*)menuBarButtonItemImageName;
 +(UIImage*)menuBarButtonItemImage;
 
-+(void)dismissSplitViewControllerPopover;
+//+(void)dismissSplitViewControllerPopover;
 +(void)setKeyWindowRootViewController:(UIViewController*)a_viewController;
 +(void)setKeyWindowRootViewControllerToMainStoryboardInitialViewController;
 

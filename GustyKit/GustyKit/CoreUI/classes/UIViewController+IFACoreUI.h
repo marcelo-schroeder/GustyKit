@@ -271,8 +271,8 @@
 -(void)ifa_willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 -(void)ifa_willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration;
 -(void)ifa_didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
--(void)ifa_dismissMenuPopoverController;
--(void)ifa_dismissMenuPopoverControllerWithAnimation:(BOOL)a_animated;
+//-(void)ifa_dismissMenuPopoverController;
+//-(void)ifa_dismissMenuPopoverControllerWithAnimation:(BOOL)a_animated;
 -(void)ifa_resetActivePopoverController;
 
 -(void)ifa_addLeftBarButtonItem:(UIBarButtonItem*)a_barButtonItem;
