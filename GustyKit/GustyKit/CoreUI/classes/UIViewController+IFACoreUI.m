@@ -195,7 +195,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 //    NSLog(@"a_popoverController.popoverContentSize: %@", NSStringFromCGSize(a_popoverController.popoverContentSize));
 //    NSLog(@"a_popoverController.contentViewController.view.frame.size: %@", NSStringFromCGSize(a_popoverController.contentViewController.view.frame.size));
     self.ifa_activePopoverController = a_popoverController;
-    [IFAApplicationDelegate sharedInstance].popoverControllerPresenter = a_presenter;
+    [IFAUIGlobal sharedInstance].popoverControllerPresenter = a_presenter;
     self.ifa_activePopoverControllerBarButtonItem = a_barButtonItem;
 }
 
@@ -685,11 +685,11 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 
 -(BOOL)ifa_presentedAsModal {
     //    NSLog(@"presentingViewController: %@, presentedViewController: %@, self: %@, topViewController: %@, visibleViewController: %@, viewController[0]: %@, navigationController.parentViewController: %@, parentViewController: %@, presentedAsSemiModal: %u", [self.presentingViewController description], [self.presentedViewController description], [self description], self.navigationController.topViewController, self.navigationController.visibleViewController, [self.navigationController.viewControllers objectAtIndex:0], self.navigationController.parentViewController, self.parentViewController, self.presentedAsSemiModal);
-    return [IFAApplicationDelegate sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController==self.navigationController
-            || [IFAApplicationDelegate sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController==self
+    return [IFAUIGlobal sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController==self.navigationController
+            || [IFAUIGlobal sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController==self
             || ( self.navigationController.presentingViewController!=nil && (self.navigationController.viewControllers)[0] ==self)
             || self.parentViewController.presentedAsSemiModal
-            || [[IFAApplicationDelegate sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController isKindOfClass:[UIActivityViewController class]];
+            || [[IFAUIGlobal sharedInstance].popoverControllerPresenter.ifa_activePopoverController.contentViewController isKindOfClass:[UIActivityViewController class]];
 }
 
 - (void)ifa_updateToolbarForEditing:(BOOL)a_editing animated:(BOOL)a_animated {
@@ -868,7 +868,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
         [self.ifa_activePopoverController dismissPopoverAnimated:a_animate];
         [self ifa_resetActivePopoverController];
     }else if(self.presentingSemiModal){
-        UIViewController *l_presentedViewController = [IFAApplicationDelegate sharedInstance].semiModalViewController; // Add retain cycle
+        UIViewController *l_presentedViewController = [IFAUIGlobal sharedInstance].semiModalViewController; // Add retain cycle
         [self dismissSemiModalViewWithCompletionBlock:^{
             if ([l_weakSelf conformsToProtocol:@protocol(IFAPresenter)]) {
                 [l_weakSelf didDismissViewController:l_presentedViewController changesMade:a_changesMade data:a_data];
@@ -1213,8 +1213,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
         l_shouldAutorotate = toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
     }
     if (l_shouldAutorotate) {
-        if (self.class.semiModalViewController) {
-            l_shouldAutorotate = UIInterfaceOrientationIsLandscape(toInterfaceOrientation) == self.class.semiModalViewPresentedInLandscapeInterfaceOrientation;
+        if ([IFAUIGlobal sharedInstance].semiModalViewController) {
+            l_shouldAutorotate = UIInterfaceOrientationIsLandscape(toInterfaceOrientation) == [IFAUIGlobal sharedInstance].semiModalViewPresentedInLandscapeInterfaceOrientation;
         }
     }
     return l_shouldAutorotate;
@@ -1222,8 +1222,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 
 // iOS 6 or greater (the previous method is for iOS 5)
 -(NSUInteger)ifa_supportedInterfaceOrientations {
-    if (self.class.semiModalViewController) {
-        if (self.class.semiModalViewPresentedInLandscapeInterfaceOrientation) {
+    if ([IFAUIGlobal sharedInstance].semiModalViewController) {
+        if ([IFAUIGlobal sharedInstance].semiModalViewPresentedInLandscapeInterfaceOrientation) {
             return UIInterfaceOrientationMaskLandscape;
         }else{
             return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown : UIInterfaceOrientationMaskPortrait;

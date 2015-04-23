@@ -19,6 +19,7 @@
 //
 
 #import "GustyKitCoreUI.h"
+#import "IFAUIGlobal.h"
 
 @interface IFAAppearanceThemeManager ()
 
@@ -184,11 +185,11 @@
     }
 
     // Dismiss activity view controller popover
-    [[IFAApplicationDelegate sharedInstance].popoverControllerPresenter ifa_dismissModalViewControllerWithChangesMade:NO
+    [[IFAUIGlobal sharedInstance].popoverControllerPresenter ifa_dismissModalViewControllerWithChangesMade:NO
                                                                                                                  data:nil ];
 
-    // Dismiss popover menu if using the custom split view controller
-    [IFAUIUtils dismissSplitViewControllerPopover];
+//    // Dismiss popover menu if using the custom split view controller
+//    [IFAUIUtils dismissSplitViewControllerPopover];
 
     [self IFA_setThemeAppearanceIfRequired];
 

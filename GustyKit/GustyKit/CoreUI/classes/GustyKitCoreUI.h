@@ -181,3 +181,4 @@
 #import "IFAPersistenceChangeDetector.h"
 //#import "IFAUserNotificationSettingsManager.h"
 #import "IFAHtmlDocument.h"
+#import "IFAUIGlobal.h"
