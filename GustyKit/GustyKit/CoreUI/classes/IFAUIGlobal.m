@@ -25,13 +25,10 @@
 #pragma mark - Overrides
 
 - (instancetype)init {
-    self = [super init];
-    if (self) {
-        @throw [NSException exceptionWithName:NSGenericException
-                                       reason:@"Illegal singleton init. Use sharedInstance."
-                                     userInfo:nil];
-    }
-    return self;
+    @throw [NSException exceptionWithName:NSGenericException
+                                   reason:@"Illegal singleton init. Use sharedInstance."
+                                 userInfo:nil];
+    return nil;
 }
 
 #pragma mark - Public
