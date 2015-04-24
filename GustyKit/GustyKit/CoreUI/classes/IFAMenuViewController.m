@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "GustyAppKitCoreUI.h"
+#import "GustyKitCoreUI.h"
 
 @interface IFAMenuViewController ()
 @property (nonatomic, strong) IFAContextSwitchingManager *IFA_contextSwitchingManager;

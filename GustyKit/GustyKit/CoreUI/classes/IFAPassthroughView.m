@@ -78,7 +78,7 @@
     if (self.IFA_excludeMyself) {   // It is attempting to predict which view will be hit ignoring self, so bail out immediately returning nil
         return nil;
     } else {
-        CGRect keyboardFrame = [IFAApplicationDelegate sharedInstance].keyboardFrame;
+        CGRect keyboardFrame = [IFAKeyboardVisibilityManager sharedInstance].keyboardFrame;
         CGPoint pointInGlobalCoordinateSystem = [self convertPoint:point toView:nil];
         if (CGRectContainsPoint(keyboardFrame, pointInGlobalCoordinateSystem)) {
             return [super hitTest:point withEvent:event];

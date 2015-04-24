@@ -25,7 +25,7 @@
 #pragma mark - Public
 
 - (UIViewController *)popoverControllerPresenter {
-    return [[UIViewController class] popoverControllerPresenter];
+    return [[UIViewController class] ifa_popoverControllerPresenter];
 }
 
 - (UIViewController *)semiModalViewController {
