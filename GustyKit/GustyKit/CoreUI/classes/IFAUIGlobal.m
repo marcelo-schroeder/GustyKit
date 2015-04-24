@@ -15,20 +15,11 @@
 //  limitations under the License.
 //
 
-#import "IFAUIGlobal.h"
+#import "GustyKitCoreUI.h"
 
 
 @implementation IFAUIGlobal {
 
-}
-
-#pragma mark - Overrides
-
-- (instancetype)init {
-    @throw [NSException exceptionWithName:NSGenericException
-                                   reason:@"Illegal singleton init. Use sharedInstance."
-                                 userInfo:nil];
-    return nil;
 }
 
 #pragma mark - Public
