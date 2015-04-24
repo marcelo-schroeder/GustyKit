@@ -177,4 +177,7 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 */
 + (NSString *)cancelButtonTitle;
 
++ (void)                 openUrl:(NSURL *)a_url
+withAlertPresenterViewController:(UIViewController *)a_alertPresenterViewController
+               completionHandler:(void (^)(BOOL success))a_completionHandler;
 @end

@@ -42,32 +42,32 @@
     }
 }
 
-- (void)IFA_transitionViewsWithAnimationDuration:(NSTimeInterval)a_animationDuration
-                                animationOptions:(UIViewAnimationOptions)a_animationOptions
-                                 completionBlock:(void (^)(BOOL finished))a_completionBlock {
+//- (void)IFA_transitionViewsWithAnimationDuration:(NSTimeInterval)a_animationDuration
+//                                animationOptions:(UIViewAnimationOptions)a_animationOptions
+//                                 completionBlock:(void (^)(BOOL finished))a_completionBlock {
+//
+//    UIWindow *l_window = [self IFA_window];
+//    [UIView
+//            transitionWithView:l_window
+//                      duration:a_animationDuration
+//                       options:a_animationOptions
+//                    animations:^(void) {
+//                        BOOL oldState = [UIView areAnimationsEnabled];
+//                        [UIView setAnimationsEnabled:NO];
+//                        l_window.rootViewController = [[self.loadedAppearanceTheme storyboard] instantiateInitialViewController];
+//                        [UIView setAnimationsEnabled:oldState];
+//                    }
+//                    completion:^(BOOL finished) {
+//                        if (a_completionBlock) {
+//                            a_completionBlock(finished);
+//                        }
+//                    }];
+//
+//}
 
-    UIWindow *l_window = [self IFA_window];
-    [UIView
-            transitionWithView:l_window
-                      duration:a_animationDuration
-                       options:a_animationOptions
-                    animations:^(void) {
-                        BOOL oldState = [UIView areAnimationsEnabled];
-                        [UIView setAnimationsEnabled:NO];
-                        l_window.rootViewController = [[self.loadedAppearanceTheme storyboard] instantiateInitialViewController];
-                        [UIView setAnimationsEnabled:oldState];
-                    }
-                    completion:^(BOOL finished) {
-                        if (a_completionBlock) {
-                            a_completionBlock(finished);
-                        }
-                    }];
-
-}
-
-- (UIWindow *)IFA_window {
-    return [UIApplication sharedApplication].delegate.window;
-}
+//- (UIWindow *)IFA_window {
+//    return [UIApplication sharedApplication].delegate.window;
+//}
 
 #pragma mark - Overrides
 
@@ -81,25 +81,25 @@
 
 #pragma mark - Public
 
-- (void)reloadUiWithNoTransitionAnimation {
-    [self applyAppearanceTheme];
-    UIWindow *l_window = [self IFA_window];
-    UIViewController *l_newViewController = [[self.loadedAppearanceTheme storyboard] instantiateInitialViewController];
-    l_window.rootViewController = l_newViewController;
-}
-
--(void)reloadUiWithAnimationOptions:(UIViewAnimationOptions)a_animationOptions{
-    [self reloadUiWithAnimationDuration:IFAAnimationDuration animationOptions:a_animationOptions
-                        completionBlock:nil];
-}
-
-- (void)reloadUiWithAnimationDuration:(NSTimeInterval)a_animationDuration
-                     animationOptions:(UIViewAnimationOptions)a_animationOptions
-                      completionBlock:(void (^)(BOOL finished))a_completionBlock {
-    [self applyAppearanceTheme];
-    [self IFA_transitionViewsWithAnimationDuration:a_animationDuration animationOptions:a_animationOptions
-                                   completionBlock:a_completionBlock];
-}
+//- (void)reloadUiWithNoTransitionAnimation {
+//    [self applyAppearanceTheme];
+//    UIWindow *l_window = [self IFA_window];
+//    UIViewController *l_newViewController = [[self.loadedAppearanceTheme storyboard] instantiateInitialViewController];
+//    l_window.rootViewController = l_newViewController;
+//}
+//
+//-(void)reloadUiWithAnimationOptions:(UIViewAnimationOptions)a_animationOptions{
+//    [self reloadUiWithAnimationDuration:IFAAnimationDuration animationOptions:a_animationOptions
+//                        completionBlock:nil];
+//}
+//
+//- (void)reloadUiWithAnimationDuration:(NSTimeInterval)a_animationDuration
+//                     animationOptions:(UIViewAnimationOptions)a_animationOptions
+//                      completionBlock:(void (^)(BOOL finished))a_completionBlock {
+//    [self applyAppearanceTheme];
+//    [self IFA_transitionViewsWithAnimationDuration:a_animationDuration animationOptions:a_animationOptions
+//                                   completionBlock:a_completionBlock];
+//}
 
 /*
 -(void)reloadUiWithTransitionAnimation:(SMUiReloadTransitionAnimation)a_transitionAnimation{

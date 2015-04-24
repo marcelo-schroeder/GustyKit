@@ -46,7 +46,9 @@
                                                            style:UIAlertActionStyleCancel
                                                          handler:nil]];
         void (^settingsHandlerBlock)(UIAlertAction *) = ^(UIAlertAction *action) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            [IFAUIUtils  openUrl:[NSURL URLWithString:UIApplicationOpenSettingsURLString]
+withAlertPresenterViewController:nil
+               completionHandler:nil];
         };
         [l_alertActions addObject:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"Settings", @"GustyKitLocalizable", nil)
                                                            style:UIAlertActionStyleDefault

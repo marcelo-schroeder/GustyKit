@@ -30,28 +30,27 @@
     return l_url;
 }
 
-- (BOOL)IFA_isPhoneServiceAvailable {
-    NSURL *l_dummyTelURL = [self IFA_buildTelURL:@"12345678"];
-    UIApplication *l_sharedApplication = [UIApplication sharedApplication];
-    return [l_sharedApplication canOpenURL:l_dummyTelURL];
-}
-
 #pragma mark - Public
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedMethodInspection"
 - (void)dialPhoneNumber:(NSString *)a_phoneNumber {
-    if ([self IFA_isPhoneServiceAvailable]) {
-        NSURL *l_url = [self IFA_buildTelURL:a_phoneNumber];
-        UIApplication *l_sharedApplication = [UIApplication sharedApplication];
-        [l_sharedApplication openURL:l_url];
-    } else {
-        NSString *l_alertMessage = nil;
-        NSString *l_alertTitle = @"";
-        NSString *l_formattedPhoneNumber = [NSNumberFormatter ifa_stringFromAustralianPhoneNumberString:a_phoneNumber];
-        l_alertMessage = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Please call %@ using a phone", @"GustyKitLocalizable", @"Please call <PHONE_NUMBER> using a phone"), l_formattedPhoneNumber];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:l_alertTitle message:l_alertMessage delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"GustyKitLocalizable", nil) otherButtonTitles:nil, nil];
-        [alert show];
-    }
+    NSURL *url = [self IFA_buildTelURL:a_phoneNumber];
+    void (^completionHandler)(BOOL) = ^(BOOL success) {
+        if (!success) {
+            NSString *l_alertMessage = nil;
+            NSString *l_alertTitle = @"";
+            NSString *l_formattedPhoneNumber = [NSNumberFormatter ifa_stringFromAustralianPhoneNumberString:a_phoneNumber];
+            l_alertMessage = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Please call %@ using a phone", @"GustyKitLocalizable", @"Please call <PHONE_NUMBER> using a phone"), l_formattedPhoneNumber];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:l_alertTitle message:l_alertMessage delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"GustyKitLocalizable", nil) otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    };
+    [IFAUIUtils          openUrl:url
+withAlertPresenterViewController:nil
+               completionHandler:completionHandler];
 }
+#pragma clang diagnostic pop
 
 + (IFAPhoneServiceManager *)sharedInstance {
     static dispatch_once_t c_dispatchOncePredicate;

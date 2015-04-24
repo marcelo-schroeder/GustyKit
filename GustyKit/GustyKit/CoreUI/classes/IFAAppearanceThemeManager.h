@@ -29,12 +29,12 @@
 @property (nonatomic, strong, readonly) id<IFAAppearanceTheme> loadedAppearanceTheme;
 @property (nonatomic, strong, readonly) IFAColorScheme *loadedColorScheme;
 
-- (void)reloadUiWithNoTransitionAnimation;
-
-- (void)reloadUiWithAnimationOptions:(UIViewAnimationOptions)a_animationOptions;
-- (void)reloadUiWithAnimationDuration:(NSTimeInterval)a_animationDuration
-                     animationOptions:(UIViewAnimationOptions)a_animationOptions
-                      completionBlock:(void (^)(BOOL finished))a_completionBlock;
+//- (void)reloadUiWithNoTransitionAnimation;
+//
+//- (void)reloadUiWithAnimationOptions:(UIViewAnimationOptions)a_animationOptions;
+//- (void)reloadUiWithAnimationDuration:(NSTimeInterval)a_animationDuration
+//                     animationOptions:(UIViewAnimationOptions)a_animationOptions
+//                      completionBlock:(void (^)(BOOL finished))a_completionBlock;
 
 //-(void)reloadUiWithTransitionAnimation:(SMUiReloadTransitionAnimation)a_transitionAnimation;
 //-(void)reloadUiWithTransitionAnimation:(SMUiReloadTransitionAnimation)a_transitionAnimation completionBlock:(void (^)(BOOL finished))a_completionBlock;

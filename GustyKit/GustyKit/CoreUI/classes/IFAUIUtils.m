@@ -682,4 +682,23 @@ static UIImage *c_menuBarButtonItemImage = nil;
     return NSLocalizedStringFromTable(@"Cancel", @"GustyKitLocalizable", nil);
 }
 
++ (void)openUrl:(NSURL *)a_url withAlertPresenterViewController:(UIViewController *)a_alertPresenterViewController completionHandler:(void (^)(BOOL success))a_completionHandler {
+    SEL aSelector = NSSelectorFromString(@"ifa_openWithAlertPresenterViewController:completionHandler:");
+    if ([a_url respondsToSelector:aSelector]) { // Selector only available when integrated with GustyAppKit
+        NSInvocation *invocation = [NSInvocation
+                invocationWithMethodSignature:[a_url methodSignatureForSelector:aSelector]];
+        invocation.target = a_url;
+        invocation.selector = aSelector;
+        [invocation setArgument:&a_alertPresenterViewController
+                        atIndex:2];
+        [invocation setArgument:&a_completionHandler
+                        atIndex:3];
+        [invocation invoke];
+    } else {
+        @throw [NSException exceptionWithName:NSGenericException
+                                       reason:@"URL opening only available to apps."
+                                     userInfo:nil];
+    }
+}
+
 @end

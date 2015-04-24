@@ -21,5 +21,8 @@
 @interface IFAPhoneServiceManager : NSObject
 + (IFAPhoneServiceManager *)sharedInstance;
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedMethodInspection"
 - (void)dialPhoneNumber:(NSString *)a_phoneNumber;
+#pragma clang diagnostic pop
 @end
