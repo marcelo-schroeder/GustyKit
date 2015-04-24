@@ -36,10 +36,6 @@
     return _IFA_contextSwitchingManager;
 }
 
--(void)onSlidingViewTopDidResetNotification:(NSNotification*)a_notification{
-    [[self firstResponder] resignFirstResponder];
-}
-
 #pragma mark - Public
 
 -(void)restoreCurrentSelection {
@@ -58,7 +54,7 @@
 
 -(UIViewController*)newViewControllerForIndexPath:(NSIndexPath*)a_indexPath{
     UITableViewCell *l_cell = [self tableView:self.tableView cellForRowAtIndexPath:a_indexPath];
-    BOOL l_useDeviceAgnosticMainStoryboard = [IFAApplicationDelegate sharedInstance].useDeviceAgnosticMainStoryboard;
+    BOOL l_useDeviceAgnosticMainStoryboard = [IFAUIConfiguration sharedInstance].useDeviceAgnosticMainStoryboard;
     UIStoryboard *l_storyboard = l_useDeviceAgnosticMainStoryboard ? self.storyboard : [self ifa_commonStoryboard];
     NSString *storyboardViewControllerId = l_cell.reuseIdentifier;  // Use the cell reuse ID by default
     if ([self.menuViewControllerDataSource respondsToSelector:@selector(storyboardViewControllerIdForIndexPath:menuViewController:)]) {
@@ -66,7 +62,7 @@
                                                                                             menuViewController:self];
     }
     UIViewController *l_viewController = [l_storyboard instantiateViewControllerWithIdentifier:storyboardViewControllerId];
-    if ((self.splitViewController || self.slidingViewController) && ![l_viewController isKindOfClass:[UINavigationController class]]) {
+    if ((self.splitViewController) && ![l_viewController isKindOfClass:[UINavigationController class]]) {
         // Automatically add a navigation controller as the parent
         l_viewController = [[[[self ifa_appearanceTheme] navigationControllerClass] alloc] initWithRootViewController:l_viewController];
     }
@@ -99,32 +95,21 @@
 
     UIViewController *l_viewController = [self viewControllerForIndexPath:a_indexPath];
 
-    if (self.splitViewController || self.slidingViewController) {
+    if (self.splitViewController) {
         [self.IFA_contextSwitchingManager willCommitContextSwitchForViewController:l_viewController];
     }
 
     if (self.splitViewController) {
         self.splitViewController.viewControllers = @[(self.splitViewController.viewControllers)[0], l_viewController];
-    }else if(self.slidingViewController){
-        if (self.slidingViewController.topViewController) {
-            __weak __typeof(self) l_weakSelf = self;
-            [IFAUtils dispatchAsyncMainThreadBlock:^{
-                if (l_weakSelf.slidingViewController.topViewController != l_viewController) {
-                    l_weakSelf.slidingViewController.topViewController = l_viewController;
-                }
-                [l_weakSelf.slidingViewController resetTopView];
-            }                           afterDelay:0.05];
-        }else { // First time only
-            self.slidingViewController.topViewController = l_viewController;
-        }
-    }else {
-        [self.navigationController pushViewController:l_viewController animated:YES];
+    } else {
+        [self.navigationController pushViewController:l_viewController
+                                             animated:YES];
     }
 
     self.selectedIndexPath = a_indexPath;
     //    NSLog(@"self.selectedIndexPath: %@", [self.selectedIndexPath description]);
     
-    if (self.splitViewController || self.slidingViewController) {
+    if (self.splitViewController) {
         [self.IFA_contextSwitchingManager didCommitContextSwitchForViewController:l_viewController];
     }
     
@@ -144,16 +129,10 @@
 +(IFAMenuViewController *)mainMenuViewController {
     IFAMenuViewController *l_menuViewController = nil;
     UIViewController *l_rootViewController = [[UIApplication sharedApplication].delegate.window rootViewController];
-    if ([l_rootViewController isKindOfClass:[UISplitViewController class]] || [l_rootViewController isKindOfClass:[IFASlidingViewController class]]) {
-        if ([l_rootViewController isKindOfClass:[UISplitViewController class]]) {
-            UISplitViewController *l_splitViewController = (UISplitViewController*)l_rootViewController;
-            UINavigationController *l_navigationController = (UINavigationController*) (l_splitViewController.viewControllers)[0];
-            l_menuViewController = (IFAMenuViewController *)l_navigationController.topViewController;
-        }else{
-            IFASlidingViewController *l_slidingViewController = (IFASlidingViewController *)l_rootViewController;
-            UINavigationController *l_navigationController = (UINavigationController*)l_slidingViewController.underLeftViewController;
-            l_menuViewController = (IFAMenuViewController *)l_navigationController.topViewController;
-        }
+    if ([l_rootViewController isKindOfClass:[UISplitViewController class]]) {
+        UISplitViewController *l_splitViewController = (UISplitViewController *) l_rootViewController;
+        UINavigationController *l_navigationController = (UINavigationController *) (l_splitViewController.viewControllers)[0];
+        l_menuViewController = (IFAMenuViewController *) l_navigationController.topViewController;
     }
     return l_menuViewController;
 }
@@ -181,31 +160,13 @@
     // Clear view controller dictionary in case the UI has been re-loaded   
     [self.indexPathToViewControllerDictionary removeAllObjects];
 
-    // Add observers if required
-    if (self.splitViewController || self.slidingViewController) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onSlidingViewTopDidResetNotification:)
-                                                     name:ECSlidingViewTopDidReset
-                                                   object:nil];
-    }
-
-}
-
--(void)dealloc{
-    
-    // Remove observers if required
-    if (self.splitViewController || self.slidingViewController) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECSlidingViewTopDidReset
-                                                      object:nil];
-    }
-
 }
 
 -(void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
 
-    if (self.splitViewController || self.slidingViewController) {
+    if (self.splitViewController) {
         [self highlightCurrentSelection];
     }
 
@@ -224,7 +185,7 @@
     
     [[self firstResponder] resignFirstResponder];
     
-    if (self.splitViewController || self.slidingViewController) {
+    if (self.splitViewController) {
         if (![self.IFA_contextSwitchingManager requestContextSwitchForObject:indexPath]) {
             return;
         }
