@@ -577,13 +577,11 @@ static UIImage *c_menuBarButtonItemImage = nil;
 }
 
 + (BOOL)isKeyboardVisible {
-    IFAApplicationDelegate *l_applicationDelegate = (IFAApplicationDelegate *)[UIApplication sharedApplication].delegate;
-    return l_applicationDelegate.isKeyboardVisible;
+    return [IFAKeyboardVisibilityManager sharedInstance].isKeyboardVisible;
 }
 
 + (CGRect)keyboardFrame {
-    IFAApplicationDelegate *l_applicationDelegate = (IFAApplicationDelegate *)[UIApplication sharedApplication].delegate;
-    return l_applicationDelegate.keyboardFrame;
+    return [IFAKeyboardVisibilityManager sharedInstance].keyboardFrame;
 }
 
 +(void)appLogWithTitle:(NSString*)a_title

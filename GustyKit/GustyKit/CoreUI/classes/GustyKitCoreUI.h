@@ -181,3 +181,4 @@
 #import "IFAHtmlDocument.h"
 #import "IFAUIGlobal.h"
 #import "IFAUIConfiguration.h"
+#import "IFAKeyboardVisibilityManager.h"
