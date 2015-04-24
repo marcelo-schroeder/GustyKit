@@ -522,15 +522,6 @@ static UIImage *c_menuBarButtonItemImage = nil;
 //    }
 //}
 
-+(void)setKeyWindowRootViewController:(UIViewController*)a_viewController{
-    [self dismissSplitViewControllerPopover];
-    [UIApplication sharedApplication].keyWindow.rootViewController = a_viewController;
-}
-
-+(void)setKeyWindowRootViewControllerToMainStoryboardInitialViewController {
-    [self setKeyWindowRootViewController:[[[IFAApplicationDelegate sharedInstance] storyboard] instantiateInitialViewController]];
-}
-
 +(void)adjustImageInsetsForBarButtonItem:(UIBarButtonItem*)a_barButtonItem insetValue:(CGFloat)a_insetValue{
     UIEdgeInsets l_imageInsets = UIEdgeInsetsZero;
     l_imageInsets.top = a_insetValue;
