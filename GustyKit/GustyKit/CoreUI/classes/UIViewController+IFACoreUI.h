@@ -297,9 +297,6 @@
 
 - (UIPopoverArrowDirection)ifa_permittedPopoverArrowDirectionForViewController:(UIViewController *)a_viewController;
 
-- (void)ifa_presentActivityViewControllerFromBarButtonItem:(UIBarButtonItem *)a_barButtonItem
-                                                   webView:(UIWebView *)a_webView;
-
 // Message "beginRefreshing" to self.ifa_refreshControl but does not show control
 -(void)ifa_beginRefreshingWithScrollView:(UIScrollView*)a_scrollView;
 // Message "beginRefreshing" to self.ifa_refreshControl with option to show control or not

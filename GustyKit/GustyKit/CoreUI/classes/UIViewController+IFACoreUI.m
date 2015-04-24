@@ -1356,14 +1356,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 }
 
 - (UIPopoverArrowDirection)ifa_permittedPopoverArrowDirectionForViewController:(UIViewController *)a_viewController {
-    return [IFAApplicationDelegate sharedInstance].keyboardVisible ? k_arrowDirectionWithKeyboard : k_arrowDirectionWithoutKeyboard;
-}
-
-- (void)ifa_presentActivityViewControllerFromBarButtonItem:(UIBarButtonItem *)a_barButtonItem
-                                                   webView:(UIWebView *)a_webView {
-    NSString *l_subjectString = [a_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    NSURL *l_url = a_webView.request.URL;
-    [self ifa_presentActivityViewControllerFromBarButtonItem:a_barButtonItem subject:l_subjectString url:l_url];
+    return [IFAKeyboardVisibilityManager sharedInstance].keyboardVisible ? k_arrowDirectionWithKeyboard : k_arrowDirectionWithoutKeyboard;
 }
 
 - (void)ifa_addChildViewController:(UIViewController *)a_childViewController parentView:(UIView *)a_parentView {
