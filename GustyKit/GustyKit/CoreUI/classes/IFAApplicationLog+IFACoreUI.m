@@ -1,5 +1,5 @@
 //
-//  IFAApplicationLog+IFACategory.h
+//  IFAApplicationLog+IFACategory.m
 //  Gusty
 //
 //  Created by Marcelo Schroeder on 6/05/11.
@@ -18,6 +18,17 @@
 //  limitations under the License.
 //
 
-@interface IFAApplicationLog (IFACategory)
+#import "GustyKitCoreUI.h"
+
+
+@implementation IFAApplicationLog (IFACoreUI)
+
+- (NSString*)ifa_displayValue {
+    NSDateFormatter *l_dateFormatter = [[NSDateFormatter alloc] init];
+    [l_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [l_dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSString *l_formattedDate = [l_dateFormatter stringFromDate:self.date];
+    return [NSString stringWithFormat:@"%@: %@", l_formattedDate, self.title];
+}
 
 @end

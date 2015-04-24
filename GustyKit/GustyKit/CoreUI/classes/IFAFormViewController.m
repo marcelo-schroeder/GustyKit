@@ -1267,6 +1267,12 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController {
     return self.IFA_isManagedObject ? (NSManagedObject*)self.object : nil;
 }
 
+- (void)openUrl:(NSURL *)a_url {
+    @throw [NSException exceptionWithName:NSGenericException
+                                   reason:@"URL opening only available to apps."
+                                 userInfo:nil];
+}
+
 #pragma mark -
 #pragma mark UITableViewDataSource
 
@@ -1408,7 +1414,7 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController {
         NSString *l_urlPropertyName = [self IFA_urlPropertyNameForIndexPath:indexPath];
         NSString *l_urlString = [self.object valueForKeyPath:l_urlPropertyName];
         NSURL *l_url = [NSURL URLWithString:l_urlString];
-        [l_url ifa_openWithAlertPresenterViewController:self];
+        [self openUrl:l_url];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }

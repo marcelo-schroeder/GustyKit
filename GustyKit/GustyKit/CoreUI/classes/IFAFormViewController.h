@@ -161,6 +161,9 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController;
 */
 - (NSString *)titleForFooterInSection:(NSInteger)a_section;
 
+//wip: add documentation
+- (void)openUrl:(NSURL *)a_url;
+
 @end
 
 @protocol IFAFormViewControllerDelegate <NSObject>

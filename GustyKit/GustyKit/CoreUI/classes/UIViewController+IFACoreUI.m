@@ -1366,17 +1366,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     [self ifa_presentActivityViewControllerFromBarButtonItem:a_barButtonItem subject:l_subjectString url:l_url];
 }
 
-- (void)ifa_presentActivityViewControllerFromBarButtonItem:(UIBarButtonItem *)a_barButtonItem
-                                                   subject:(NSString *)a_subject url:(NSURL *)a_url {
-    IFASubjectActivityItem *l_subject = [[IFASubjectActivityItem alloc] initWithSubject:a_subject];
-    NSArray *l_activityItems = @[l_subject, a_url];
-    id l_externalWebBrowserActivity = [IFAExternalWebBrowserActivity new];
-    NSArray *l_applicationActivities = @[l_externalWebBrowserActivity];
-    UIActivityViewController *l_activityVC = [[UIActivityViewController alloc] initWithActivityItems:l_activityItems applicationActivities:l_applicationActivities];
-    l_activityVC.ifa_presenter = self;
-    [self ifa_presentModalSelectionViewController:l_activityVC fromBarButtonItem:a_barButtonItem];
-}
-
 - (void)ifa_addChildViewController:(UIViewController *)a_childViewController parentView:(UIView *)a_parentView {
     [self ifa_addChildViewController:a_childViewController parentView:a_parentView
                  shouldFillSuperview:YES];
