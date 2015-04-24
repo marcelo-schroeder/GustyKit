@@ -1268,9 +1268,21 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController {
 }
 
 - (void)openUrl:(NSURL *)a_url {
-    @throw [NSException exceptionWithName:NSGenericException
-                                   reason:@"URL opening only available to apps."
-                                 userInfo:nil];
+    SEL aSelector = NSSelectorFromString(@"ifa_openWithAlertPresenterViewController:");
+    if ([a_url respondsToSelector:aSelector]) { // Selector only available when integrated with GustyAppKit
+        __weak NSURL *weakUrl = a_url;
+        NSInvocation *invocation = [NSInvocation
+                invocationWithMethodSignature:[weakUrl methodSignatureForSelector:aSelector]];
+        invocation.target = weakUrl;
+        invocation.selector = aSelector;
+        [invocation setArgument:(__bridge void *)(self)
+                        atIndex:2];
+        [invocation invoke];
+    } else {
+        @throw [NSException exceptionWithName:NSGenericException
+                                       reason:@"URL opening only available to apps."
+                                     userInfo:nil];
+    }
 }
 
 #pragma mark -

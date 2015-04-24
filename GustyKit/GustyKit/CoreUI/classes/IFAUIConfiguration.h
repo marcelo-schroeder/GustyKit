@@ -30,7 +30,10 @@
 - (NSString *)storyboardFileName;
 -(NSString*)storyboardInitialViewControllerId;
 -(UIStoryboard*)storyboard;
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedMethodInspection"
 -(UIViewController*)initialViewController;
+#pragma clang diagnostic pop
 + (instancetype)sharedInstance;
 @end
 

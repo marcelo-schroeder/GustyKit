@@ -36,7 +36,8 @@
     if ([self.dataSource respondsToSelector:@selector(appearanceThemeClass)]) {
         return self.dataSource.appearanceThemeClass;
     } else {
-        return [IFADefaultAppearanceTheme class];
+        Class appAppearanceThemeClass = NSClassFromString(@"IFADefaultAppAppearanceTheme");
+        return appAppearanceThemeClass?:[IFADefaultAppearanceTheme class];
     }
 }
 
@@ -98,6 +99,8 @@
     }
 }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedMethodInspection"
 -(UIViewController*)initialViewController {
     if ([self.dataSource respondsToSelector:@selector(initialViewController)]) {
         return self.dataSource.initialViewController;
@@ -114,6 +117,7 @@
         return l_initialViewController;
     }
 }
+#pragma clang diagnostic pop
 
 + (instancetype)sharedInstance {
     static dispatch_once_t c_dispatchOncePredicate;
