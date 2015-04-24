@@ -127,7 +127,7 @@
 #import "IFATableViewController.h"
 #import "IFATextViewContainer.h"
 #import "IFATextViewController.h"
-#import "IFAThirdPartyCodeCreditsViewController.h"
+//#import "IFAThirdPartyCodeCreditsViewController.h"
 #import "IFAUIUtils.h"
 #import "IFAView.h"
 #import "IFAViewController.h"
