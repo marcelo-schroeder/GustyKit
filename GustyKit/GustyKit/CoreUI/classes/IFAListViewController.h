@@ -20,6 +20,7 @@
 
 #import "IFAFetchedResultsTableViewController.h"
 #import "IFASelectionManager.h"
+#import "UIViewController+IFACoreUI.h"
 
 #ifdef IFA_AVAILABLE_Help
 #import "IFAHelpTarget.h"

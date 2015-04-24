@@ -655,11 +655,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
 
     } else if ([a_object isKindOfClass:[UIViewController class]]) {
 
-        if ([a_object isKindOfClass:[IFAAboutFormViewController class]]) {
-            IFAAboutFormViewController *obj = (IFAAboutFormViewController *) a_object;
-            obj.appNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-            obj.copyrightNoticeLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-        } else if ([a_object isKindOfClass:[IFAListViewController class]]) {
+        if ([a_object isKindOfClass:[IFAListViewController class]]) {
             IFAListViewController *obj = (IFAListViewController *) a_object;
             obj.noDataPlaceholderAddHintPrefixLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
             obj.noDataPlaceholderAddHintSuffixLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
