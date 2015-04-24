@@ -117,8 +117,8 @@ typedef NS_ENUM(NSUInteger, IFABarButtonItemSpacingBarType) {
                                          barType:(IFABarButtonItemSpacingBarType)a_barType
                                   viewController:(UIViewController *)a_viewController items:(NSArray *)a_items;
 
-//- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url;
-//- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url completionBlock:(void(^)(void))a_completionBlock;
+- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url;
+- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url completionBlock:(void(^)(void))a_completionBlock;
 
 -(Class)navigationControllerClass;
 

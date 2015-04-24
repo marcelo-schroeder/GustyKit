@@ -19,6 +19,7 @@
 //
 
 //wip: clean up
+//wip: need to set it up on the build server
 
 // Apple Frameworks
 #import <CoreData/CoreData.h>

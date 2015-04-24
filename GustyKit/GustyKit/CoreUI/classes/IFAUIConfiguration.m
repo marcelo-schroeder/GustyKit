@@ -26,15 +26,6 @@
 
 }
 
-#pragma mark - Overrides
-
-- (instancetype)init {
-    @throw [NSException exceptionWithName:NSGenericException
-                                   reason:@"Illegal singleton init. Use sharedInstance."
-                                 userInfo:nil];
-    return nil;
-}
-
 #pragma mark - Public
 
 - (BOOL)useDeviceAgnosticMainStoryboard {

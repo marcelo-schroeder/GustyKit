@@ -812,14 +812,16 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
     return nil;
 }
 
-//- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url{
-//    return [self newInternalWebBrowserViewControllerWithUrl:a_url completionBlock:nil];
-//}
-//
-//- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url completionBlock:(void(^)(void))a_completionBlock{
-//    IFAInternalWebBrowserViewController *l_viewController = [[IFAInternalWebBrowserViewController alloc] initWithURL:a_url completionBlock:a_completionBlock];
-//    return l_viewController;
-//}
+- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url{
+    return [self newInternalWebBrowserViewControllerWithUrl:a_url completionBlock:nil];
+}
+
+- (UIViewController *)newInternalWebBrowserViewControllerWithUrl:(NSURL *)a_url completionBlock:(void(^)(void))a_completionBlock{
+    @throw [NSException exceptionWithName:NSGenericException
+                                   reason:@"Internal browser only available to apps."
+                                 userInfo:nil];
+    return nil;
+}
 
 - (Class)navigationControllerClass {
     return [IFANavigationController class];
