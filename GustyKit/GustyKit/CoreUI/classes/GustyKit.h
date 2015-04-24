@@ -23,6 +23,7 @@
 //wip: document framework support and restrictions on GitHub
 //wip: document how to use it as framework in app extensions
 //wip: need to release the world when the framework work is finished
+//wip: does the localisable stuff need to be split into kit and appKit too?
 
 // Foundation
 #import "GustyKitFoundation.h"
