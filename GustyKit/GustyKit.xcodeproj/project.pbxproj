@@ -188,6 +188,7 @@
 		F7C8062C1AE8C6BD0097280C /* IFA_HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C806241AE8C6BD0097280C /* IFA_HPTextViewInternal.m */; };
 		F7C8062F1AE8C6BD0097280C /* UIViewController+IFA_KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C8062A1AE8C6BD0097280C /* UIViewController+IFA_KNSemiModal.m */; };
 		F7C806381AE9956F0097280C /* IFAPassthroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C806371AE9956F0097280C /* IFAPassthroughView.m */; };
+		F7C806471AE9CB5D0097280C /* IFAMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C806461AE9CB5D0097280C /* IFAMenuViewController.m */; };
 		F7D4D83718EA00E600ABF401 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D4D83618EA00E600ABF401 /* Foundation.framework */; };
 		F7D4D84518EA00E600ABF401 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D4D84418EA00E600ABF401 /* XCTest.framework */; };
 		F7D4D84618EA00E600ABF401 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D4D83618EA00E600ABF401 /* Foundation.framework */; };
@@ -620,6 +621,8 @@
 		F7C8062A1AE8C6BD0097280C /* UIViewController+IFA_KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+IFA_KNSemiModal.m"; sourceTree = "<group>"; };
 		F7C806361AE9956F0097280C /* IFAPassthroughView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAPassthroughView.h; sourceTree = "<group>"; };
 		F7C806371AE9956F0097280C /* IFAPassthroughView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAPassthroughView.m; sourceTree = "<group>"; };
+		F7C806451AE9CB5D0097280C /* IFAMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAMenuViewController.h; sourceTree = "<group>"; };
+		F7C806461AE9CB5D0097280C /* IFAMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAMenuViewController.m; sourceTree = "<group>"; };
 		F7D4D83318EA00E600ABF401 /* libGustyKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGustyKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D4D83618EA00E600ABF401 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F7D4D83A18EA00E600ABF401 /* GustyKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GustyKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -710,6 +713,8 @@
 			isa = PBXGroup;
 			children = (
 				F7C8061F1AE8C6BD0097280C /* 3rd party */,
+				F7C806451AE9CB5D0097280C /* IFAMenuViewController.h */,
+				F7C806461AE9CB5D0097280C /* IFAMenuViewController.m */,
 				F7C806361AE9956F0097280C /* IFAPassthroughView.h */,
 				F7C806371AE9956F0097280C /* IFAPassthroughView.m */,
 				F7FF4AF01AE787B700D33ACE /* IFAHtmlDocument.h */,
@@ -1561,6 +1566,7 @@
 				1073832FBFEFF33B16E7AB0B /* IFAFadingOverlayViewControllerTransitioningDelegate.m in Sources */,
 				1073854924D96E8C9CC27275 /* IFAFoundationConstants.m in Sources */,
 				10738A24B716F780926159D5 /* NSNumberFormatter+IFAFoundation.m in Sources */,
+				F7C806471AE9CB5D0097280C /* IFAMenuViewController.m in Sources */,
 				10738E109CC705DBCA72E973 /* IFAPurgeableObject.m in Sources */,
 				107388A8162C86B22C77F7FD /* IFAUtils.m in Sources */,
 				10738DEFD01166006065B4E7 /* IFAZeroingWeakReferenceContainer.m in Sources */,

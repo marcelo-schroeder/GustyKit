@@ -685,7 +685,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
 }
 
 -(NSString*)storyboardName {
-    return [[IFAApplicationDelegate sharedInstance] storyboardName];
+    return [[IFAUIConfiguration sharedInstance] storyboardName];
 }
 
 -(UIStoryboard*)storyboard {
@@ -882,8 +882,8 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
 }
 
 -(IFAColorScheme *)colorScheme {
-    if (![self.IFA_colorScheme isEqual:[[IFAApplicationDelegate sharedInstance] colorScheme]]) {
-        self.IFA_colorScheme = [[IFAApplicationDelegate sharedInstance] colorScheme];
+    if (![self.IFA_colorScheme isEqual:[[IFAUIConfiguration sharedInstance] colorScheme]]) {
+        self.IFA_colorScheme = [[IFAUIConfiguration sharedInstance] colorScheme];
     }
     return self.IFA_colorScheme;
 }

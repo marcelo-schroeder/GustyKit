@@ -148,7 +148,7 @@
 -(id<IFAAppearanceTheme>)activeAppearanceTheme {
     id<IFAAppearanceTheme> l_appearanceTheme = self.loadedAppearanceTheme;
     if (!l_appearanceTheme) {
-        l_appearanceTheme = [[IFAApplicationDelegate sharedInstance] appearanceTheme];
+        l_appearanceTheme = [[IFAUIConfiguration sharedInstance] appearanceTheme];
     }
     return l_appearanceTheme;
 }
@@ -176,8 +176,8 @@
 -(void)applyAppearanceTheme {
 
     // Obtain and save the appearance theme & color scheme
-    self.loadedAppearanceTheme = [[IFAApplicationDelegate sharedInstance] appearanceTheme];
-    self.loadedColorScheme = [[IFAApplicationDelegate sharedInstance] colorScheme];
+    self.loadedAppearanceTheme = [[IFAUIConfiguration sharedInstance] appearanceTheme];
+    self.loadedColorScheme = [[IFAUIConfiguration sharedInstance] colorScheme];
 
     // Notify theme we're about to reload the UI
     if ([self.loadedAppearanceTheme respondsToSelector:@selector(willReloadUi)]) {
