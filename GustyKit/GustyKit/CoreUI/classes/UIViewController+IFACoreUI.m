@@ -691,7 +691,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
             || c_popoverControllerPresenter.ifa_activePopoverController.contentViewController==self
             || ( self.navigationController.presentingViewController!=nil && (self.navigationController.viewControllers)[0] ==self)
             || self.parentViewController.presentedAsSemiModal
-            || c_popoverControllerPresenter.ifa_activePopoverController.contentViewController isKindOfClass:[UIActivityViewController class]];
+            || [c_popoverControllerPresenter.ifa_activePopoverController.contentViewController isKindOfClass:[UIActivityViewController class]];
 }
 
 - (void)ifa_updateToolbarForEditing:(BOOL)a_editing animated:(BOOL)a_animated {
