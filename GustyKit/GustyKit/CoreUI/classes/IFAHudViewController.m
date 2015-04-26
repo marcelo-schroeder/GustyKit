@@ -264,7 +264,7 @@
 
 - (UIWindow *)IFA_window {
     if (!_IFA_window) {
-        _IFA_window = [[UIWindow alloc] initWithFrame:[UIApplication sharedApplication].delegate.window.bounds];
+        _IFA_window = [[UIWindow alloc] initWithFrame:[IFAUIUtils screenBounds]];
         _IFA_window.backgroundColor = [UIColor clearColor];
         UIViewController *rootViewController = [UIViewController new];
         _IFA_window.rootViewController = rootViewController;
