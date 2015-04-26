@@ -20,7 +20,7 @@
 
 #import "IFAContextSwitchTarget.h"
 
-@class IFAAbstractPagingContainerViewController;
+@protocol IFAPagingContainer;
 
 @interface IFATableViewController : UITableViewController <IFAContextSwitchTarget>
 
@@ -28,7 +28,7 @@
 @property (nonatomic) BOOL doneButtonSaves;
 @property (nonatomic, strong) id contextSwitchRequestObject;
 @property (nonatomic, readonly) BOOL selectedViewControllerInPagingContainer;
-@property (nonatomic, readonly) IFAAbstractPagingContainerViewController *pagingContainerViewController;
+@property (nonatomic, readonly) id<IFAPagingContainer> pagingContainer;
 @property (nonatomic, weak) UIViewController *previousVisibleViewController;
 @property (nonatomic, strong) UIColor *tableCellTextColor;
 @property (nonatomic) BOOL shouldCreateContainerViewOnLoadView;

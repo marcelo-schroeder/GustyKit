@@ -365,19 +365,6 @@ static UIImage *c_menuBarButtonItemImage = nil;
 	return [UIScreen mainScreen].bounds;
 }
 
-+ (CGSize)statusBarSize{
-	return [self statusBarFrame].size;
-}
-
-+ (CGSize)statusBarSizeForCurrentOrientation{
-    CGSize l_statusBarSize = [self statusBarSize];
-    return [self isDeviceInLandscapeOrientation] && ![IFAUtils isIOS8OrGreater] ? CGSizeMake(l_statusBarSize.height, l_statusBarSize.width) : l_statusBarSize;
-}
-
-+ (CGRect)statusBarFrame{
-    return [[UIApplication sharedApplication] statusBarFrame];
-}
-
 +(BOOL)isDeviceInLandscapeOrientation{
     CGSize screenBounds = [self screenBoundsSize];
     return screenBounds.width > screenBounds.height;

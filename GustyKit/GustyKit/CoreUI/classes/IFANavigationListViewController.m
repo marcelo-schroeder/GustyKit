@@ -32,7 +32,7 @@
 #pragma mark - Private
 
 -(void)IFA_updateLeftBarButtonItemsStates {
-    if (!self.pagingContainerViewController || self.selectedViewControllerInPagingContainer) {
+    if (!self.pagingContainer || self.selectedViewControllerInPagingContainer) {
         [self ifa_addLeftBarButtonItem:self.addBarButtonItem];
     }
 }

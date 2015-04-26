@@ -105,9 +105,9 @@ didReceiveContextSwitchRequestReplyForObject:a_notification.object
             [l_navigationController popToRootViewControllerAnimated:NO];
 
             UIViewController *l_topViewController = l_navigationController.topViewController;
-            if ([l_topViewController isKindOfClass:[IFAAbstractPagingContainerViewController class]]) {
-                IFAAbstractPagingContainerViewController *l_pagingContainerViewController = (IFAAbstractPagingContainerViewController *) l_topViewController;
-                l_contentViewController = l_pagingContainerViewController.selectedViewController;
+            if ([l_topViewController conformsToProtocol:@protocol(IFAPagingContainer)]) {
+                id<IFAPagingContainer> pagingContainer = (id <IFAPagingContainer>) l_topViewController;
+                l_contentViewController = pagingContainer.selectedViewController;
             } else {
                 l_contentViewController = l_topViewController;
             }

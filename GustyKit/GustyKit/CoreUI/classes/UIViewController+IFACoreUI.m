@@ -1182,8 +1182,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 
 -(BOOL)ifa_isReturningVisibleViewController {
 //    NSLog(@"m_isReturningTopViewController: %@, previousVisibleViewController: %@", self, self.previousVisibleViewController);
-    if ([self.parentViewController isKindOfClass:[IFAAbstractPagingContainerViewController class]]) {
-        return [((IFAAbstractPagingContainerViewController *) self.parentViewController) ifa_isReturningVisibleViewController];
+    if ([self.parentViewController conformsToProtocol:@protocol(IFAPagingContainer)]) {
+        return [self.parentViewController ifa_isReturningVisibleViewController];
     }else {
         return self.ifa_previousVisibleViewController && self!=self.ifa_previousVisibleViewController && ![self.ifa_previousVisibleViewController isKindOfClass:[IFAMenuViewController class]];
     }
@@ -1284,7 +1284,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 }
 
 -(UINavigationItem*)ifa_navigationItem {
-    if ([self.parentViewController isKindOfClass:[IFAAbstractPagingContainerViewController class]] || [self.parentViewController isKindOfClass:[UITabBarController class]]) {
+    if ([self.parentViewController conformsToProtocol:@protocol(IFAPagingContainer)] || [self.parentViewController isKindOfClass:[UITabBarController class]]) {
         return self.parentViewController.navigationItem;
     }else{
         return self.navigationItem;

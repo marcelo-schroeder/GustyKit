@@ -101,8 +101,8 @@
 }
 
 - (BOOL)selectedViewControllerInPagingContainer {
-//    NSLog(@"self: %@, self.pagingContainerViewController: %@, self.pagingContainerViewController.p_mainChildViewController: %@", [self description], [self.pagingContainerViewController description], [self.pagingContainerViewController.p_mainChildViewController description]);
-    return self.pagingContainerViewController.selectedViewController == self;
+//    NSLog(@"self: %@, self.pagingContainer: %@, self.pagingContainer.p_mainChildViewController: %@", [self description], [self.pagingContainer description], [self.pagingContainer.p_mainChildViewController description]);
+    return self.pagingContainer.selectedViewController == self;
 }
 
 -(NSCalendar*)calendar {
@@ -272,7 +272,7 @@
     [super viewDidAppear:animated];
     [self ifa_viewDidAppear];
         
-    if ( (!self.pagingContainerViewController || self.selectedViewControllerInPagingContainer) && (![IFAUIUtils isIPad] || self.ifa_isDetailViewController) ) {
+    if ( (!self.pagingContainer || self.selectedViewControllerInPagingContainer) && (![IFAUIUtils isIPad] || self.ifa_isDetailViewController) ) {
         
         // Add observers
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -400,8 +400,8 @@
         [self replyToContextSwitchRequestWithGranted:YES];
     }
 
-    if (self.pagingContainerViewController) {
-        self.pagingContainerViewController.scrollView.scrollEnabled = !editing;
+    if (self.pagingContainer) {
+        self.pagingContainer.scrollView.scrollEnabled = !editing;
     }
 
     if (self.shouldReloadTableViewDataAfterQuittingEditing && !editing) {
@@ -421,11 +421,11 @@
 }
 
 -(BOOL)ifa_manageToolbar {
-    return !self.pagingContainerViewController;
+    return !self.pagingContainer;
 }
 
--(IFAAbstractPagingContainerViewController *)pagingContainerViewController {
-    return [self.parentViewController isKindOfClass:[IFAAbstractPagingContainerViewController class]] ? (IFAAbstractPagingContainerViewController *)self.parentViewController : nil;
+-(id<IFAPagingContainer>)pagingContainer {
+    return (id <IFAPagingContainer>) ([self.parentViewController conformsToProtocol:@protocol(IFAPagingContainer)] ? self.parentViewController : nil);
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

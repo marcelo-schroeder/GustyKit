@@ -77,10 +77,6 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 + (CGSize)screenBoundsSizeForCurrentOrientation;
 + (CGRect)screenBounds;
 
-+ (CGSize)statusBarSize;
-+ (CGSize)statusBarSizeForCurrentOrientation;
-+ (CGRect)statusBarFrame;
-
 + (NSString*)stringValueForObject:(id)anObject;
 + (NSString*)stringValueForBoolean:(BOOL)aBoolean;
 + (NSString*)onOffStringValueForBoolean:(BOOL)aBoolean;

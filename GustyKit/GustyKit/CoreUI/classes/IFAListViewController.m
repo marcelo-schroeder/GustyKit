@@ -60,7 +60,7 @@
             NSAssert(NO, @"Unexpected fetching strategy: %lu", (unsigned long)self.fetchingStrategy);
             break;
     }
-    if (self.pagingContainerViewController || self.objects.count > 0) {
+    if (self.pagingContainer || self.objects.count > 0) {
         self.staleData = NO;
     }
     [self IFA_didCompleteFindEntities];
@@ -100,7 +100,7 @@
 //        NSLog(@"completion block - start for %@", [l_weakSelf description]);
         @synchronized (l_weakSelf) {
             l_weakSelf.entities = [[IFAPersistenceManager sharedInstance] managedObjectsForIds:a_managedObjectIds];
-            if (l_weakSelf.pagingContainerViewController || [l_weakSelf.entities count] > 0) {
+            if (l_weakSelf.pagingContainer || [l_weakSelf.entities count] > 0) {
                 l_weakSelf.staleData = NO;
             }
         }
@@ -142,17 +142,17 @@
 
     } copy];
 
-    if (a_withPagingContainerCoordination && self.pagingContainerViewController) {
+    if (a_withPagingContainerCoordination && self.pagingContainer) {
 
 //        NSLog(@"Container Coordination for child %@, block: %@", [self description], [l_block description]);
 
         self.pagingContainerChildRefreshAndReloadDataAsynchronousBlock = l_block;
-        self.pagingContainerViewController.childViewDidAppearCount++;
-//        NSLog(@"  self.pagingContainerViewController.newChildViewControllerCount: %lu", (unsigned long)self.pagingContainerViewController.newChildViewControllerCount);
-//        NSLog(@"  self.pagingContainerViewController.childViewDidAppearCount: %lu", (unsigned long)self.pagingContainerViewController.childViewDidAppearCount);
-        if (self.pagingContainerViewController.newChildViewControllerCount == self.pagingContainerViewController.childViewDidAppearCount) {
+        self.pagingContainer.childViewDidAppearCount++;
+//        NSLog(@"  self.pagingContainer.newChildViewControllerCount: %lu", (unsigned long)self.pagingContainer.newChildViewControllerCount);
+//        NSLog(@"  self.pagingContainer.childViewDidAppearCount: %lu", (unsigned long)self.pagingContainer.childViewDidAppearCount);
+        if (self.pagingContainer.newChildViewControllerCount == self.pagingContainer.childViewDidAppearCount) {
 //            NSLog(@"  => calling refreshAndReloadChildData on container...");
-            [self.pagingContainerViewController refreshAndReloadChildData];
+            [self.pagingContainer refreshAndReloadChildData];
         }
 
     } else {
@@ -221,7 +221,7 @@
 
 - (void)IFA_updatenoDataPlaceholderViewLayout {
     UIViewController *modelViewController;
-    if (!(modelViewController = self.pagingContainerViewController.selectedViewController)) {    // If this is a paging container child, then use the selected view controller to gather layout info from
+    if (!(modelViewController = self.pagingContainer.selectedViewController)) {    // If this is a paging container child, then use the selected view controller to gather layout info from
         modelViewController = self;
     }
     self.IFA_noDataPlaceholderViewCenterYConstraint.constant = -(modelViewController.topLayoutGuide.length + modelViewController.bottomLayoutGuide.length) / 2;
@@ -712,9 +712,9 @@
                     BOOL shouldRefreshAndReloadData = [self.listViewControllerDataSource shouldRefreshAndReloadDataWhenDataBecomesStaleAndViewIsVisibleForListViewController:self];
                     [IFAUtils dispatchAsyncMainThreadBlock:^{
                         if (shouldRefreshAndReloadData) {
-                            if (self.pagingContainerViewController) {
+                            if (self.pagingContainer) {
                                 if (self.selectedViewControllerInPagingContainer) {
-                                    [self.pagingContainerViewController refreshAndReloadChildData];
+                                    [self.pagingContainer refreshAndReloadChildData];
                                 }
                             } else {
                                 [self refreshAndReloadData];
@@ -723,7 +723,7 @@
                     }];
                 }
             }
-            if (!self.pagingContainerViewController) {
+            if (!self.pagingContainer) {
                 _staleData = NO;
             }
         }
@@ -767,9 +767,9 @@
     }
 
     if (!self.fetchedResultsController && (a_changesMade || self.staleData)) {
-        if (self.pagingContainerViewController) {
+        if (self.pagingContainer) {
 //            NSLog(@"  => calling refreshAndReloadChildData on container FOR SESSION COMPLETE...");
-            [self.pagingContainerViewController refreshAndReloadChildData];
+            [self.pagingContainer refreshAndReloadChildData];
         }else {
 //            NSLog(@"  => calling refreshAndReloadData on child FOR SESSION COMPLETE...");
             [self refreshAndReloadData];
