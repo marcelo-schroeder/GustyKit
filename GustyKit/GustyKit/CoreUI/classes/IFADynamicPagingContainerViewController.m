@@ -156,10 +156,10 @@ static NSArray *c_pageDataLoadingOrder = nil;
     if ([self.dataSource respondsToSelector:@selector(titleForPage:)]) {
         NSString *l_title = [self.dataSource titleForPage:self.selectedPage];
         self.navigationItem.title = l_title;
-        if ([self.ifa_appearanceTheme respondsToSelector:@selector(setNavigationItemTitleViewForViewController:interfaceOrientation:)]) {
+        if ([self.ifa_appearanceTheme respondsToSelector:@selector(setNavigationItemTitleViewForViewController:interfaceOrientationLandscape:)]) {
             self.ifa_titleViewDefault.titleLabel.text = l_title;
             [self.ifa_appearanceTheme setNavigationItemTitleViewForViewController:self
-                                                             interfaceOrientation:[UIApplication sharedApplication].statusBarOrientation];
+                                                    interfaceOrientationLandscape:[IFAUIUtils isDeviceInLandscapeOrientation]];
         }
     }
 }

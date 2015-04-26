@@ -19,8 +19,6 @@
 //
 
 #import "GustyKitCoreUI.h"
-#import "IFASingleSelectionListViewControllerHeaderView.h"
-#import "IFAHudView.h"
 
 #ifdef IFA_AVAILABLE_Help
 #import "GustyKitHelp.h"
@@ -345,7 +343,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
     a_viewController.ifa_titleViewLandscapePhone.subTitleLabel.text = a_viewController.ifa_subTitle;
 
     [self setNavigationItemTitleViewForViewController:a_viewController
-                                 interfaceOrientation:[UIApplication sharedApplication].statusBarOrientation];
+                        interfaceOrientationLandscape:[IFAUIUtils isDeviceInLandscapeOrientation]];
     
     if ([a_viewController isKindOfClass:[IFAAbstractFieldEditorViewController class]]) {
         NSString *l_imageName = [IFAUtils infoPList][@"IFAThemeFieldEditorToolbarBackgroundImageName"];
@@ -378,7 +376,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
 - (void)setAppearanceOnWillRotateForViewController:(UIViewController *)a_viewController
                             toInterfaceOrientation:(UIInterfaceOrientation)a_toInterfaceOrientation {
     [self setNavigationItemTitleViewForViewController:a_viewController
-                                 interfaceOrientation:a_toInterfaceOrientation];
+                        interfaceOrientationLandscape:UIInterfaceOrientationIsLandscape(a_toInterfaceOrientation)];
 }
 
 -(void)setAppearanceOnWillAnimateRotationForViewController:(UIViewController *)a_viewController interfaceOrientation:(UIInterfaceOrientation)a_toInterfaceOrientation{
@@ -578,14 +576,15 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
     [self setTextAppearanceForSelectedContentSizeCategoryInObject:a_view];
 }
 
--(void)setNavigationItemTitleViewForViewController:(UIViewController *)a_viewController interfaceOrientation:(UIInterfaceOrientation)a_interfaceOrientation{
+- (void)setNavigationItemTitleViewForViewController:(UIViewController *)a_viewController
+                      interfaceOrientationLandscape:(BOOL)a_interfaceOrientationLandscape {
 
     if (a_viewController.ifa_titleViewDefault && a_viewController.ifa_titleViewLandscapePhone) {
 
         CGFloat l_navigationBarHeight = a_viewController.navigationController.navigationBar.bounds.size.height;
 
         // Determine which title view to use
-        BOOL l_isIPhoneLandscape = ![IFAUIUtils isIPad] && UIInterfaceOrientationIsLandscape(a_interfaceOrientation);
+        BOOL l_isIPhoneLandscape = ![IFAUIUtils isIPad] && a_interfaceOrientationLandscape;
 //        NSLog(@"l_isIPhoneLandscape: %u", l_isIPhoneLandscape);
         IFANavigationItemTitleView *l_titleView = l_isIPhoneLandscape ? a_viewController.ifa_titleViewLandscapePhone : a_viewController.ifa_titleViewDefault;
 

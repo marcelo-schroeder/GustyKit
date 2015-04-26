@@ -235,7 +235,11 @@
 }
 
 + (BOOL)isIOS7OrGreater {
-    return !(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1);
+    return floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1;
+}
+
++ (BOOL)isIOS8OrGreater {
+    return floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1;
 }
 
 + (NSString *)hardwareType {

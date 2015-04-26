@@ -68,6 +68,7 @@
 +(BOOL)isProductionAps;
 
 + (BOOL)isIOS7OrGreater;
++ (BOOL)isIOS8OrGreater;
 
 + (NSString *)hardwareType;
 

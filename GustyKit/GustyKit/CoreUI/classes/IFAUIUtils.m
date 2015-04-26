@@ -344,8 +344,8 @@ static UIImage *c_menuBarButtonItemImage = nil;
 	return [[UIScreen mainScreen] applicationFrame];
 }
 
-+ (CGRect)convertToCurrentOrientationForFrame:(CGRect)a_frame{
-    return [self isDeviceInLandscapeOrientation] ? CGRectMake(a_frame.origin.y, a_frame.origin.x, a_frame.size.height, a_frame.size.width) : a_frame;
++ (CGRect)convertToCurrentOrientationForFrame:(CGRect)a_frame {
+    return [self isDeviceInLandscapeOrientation] && ![IFAUtils isIOS8OrGreater] ? CGRectMake(a_frame.origin.y, a_frame.origin.x, a_frame.size.height, a_frame.size.width) : a_frame;
 }
 
 + (CGPoint)screenBoundsOrigin{
@@ -358,7 +358,7 @@ static UIImage *c_menuBarButtonItemImage = nil;
 
 + (CGSize)screenBoundsSizeForCurrentOrientation{
     CGSize l_screenBoundsSize = [self screenBoundsSize];
-    return [self isDeviceInLandscapeOrientation] ? CGSizeMake(l_screenBoundsSize.height, l_screenBoundsSize.width) : l_screenBoundsSize;
+    return [self isDeviceInLandscapeOrientation] && ![IFAUtils isIOS8OrGreater] ? CGSizeMake(l_screenBoundsSize.height, l_screenBoundsSize.width) : l_screenBoundsSize;
 }
 
 + (CGRect)screenBounds{
@@ -371,7 +371,7 @@ static UIImage *c_menuBarButtonItemImage = nil;
 
 + (CGSize)statusBarSizeForCurrentOrientation{
     CGSize l_statusBarSize = [self statusBarSize];
-    return [self isDeviceInLandscapeOrientation] ? CGSizeMake(l_statusBarSize.height, l_statusBarSize.width) : l_statusBarSize;
+    return [self isDeviceInLandscapeOrientation] && ![IFAUtils isIOS8OrGreater] ? CGSizeMake(l_statusBarSize.height, l_statusBarSize.width) : l_statusBarSize;
 }
 
 + (CGRect)statusBarFrame{
@@ -379,8 +379,8 @@ static UIImage *c_menuBarButtonItemImage = nil;
 }
 
 +(BOOL)isDeviceInLandscapeOrientation{
-//    NSLog(@"[UIApplication sharedApplication].statusBarOrientation: %u", [UIApplication sharedApplication].statusBarOrientation);
-    return UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
+    CGSize screenBounds = [self screenBoundsSize];
+    return screenBounds.width > screenBounds.height;
 }
 
 + (NSString*)stringValueForObject:(id)anObject{
@@ -476,8 +476,8 @@ static UIImage *c_menuBarButtonItemImage = nil;
                  landscapeNumerator:(float)a_landscapeNumerator
                landscapeDenominator:(float)a_landscapeDenominator
 {
-    float l_numerator = [IFAUIUtils isDeviceInLandscapeOrientation] ? a_landscapeNumerator : a_portraitNumerator;
-    float l_denominator = [IFAUIUtils isDeviceInLandscapeOrientation] ? a_landscapeDenominator : a_portraitDenominator;
+    float l_numerator = [IFAUIUtils isDeviceInLandscapeOrientation] && ![IFAUtils isIOS8OrGreater] ? a_landscapeNumerator : a_portraitNumerator;
+    float l_denominator = [IFAUIUtils isDeviceInLandscapeOrientation] && ![IFAUtils isIOS8OrGreater] ? a_landscapeDenominator : a_portraitDenominator;
     CGFloat l_width = [IFAUIUtils screenBoundsSizeForCurrentOrientation].width * (l_numerator / l_denominator);
     return l_width;
 }
