@@ -23,7 +23,6 @@
 /* Begin PBXBuildFile section */
 		1073800928EF23408942168D /* IFACoreUITestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738A6FC2F5FF3529167F34 /* IFACoreUITestCase.m */; };
 		1073800E6272830317775D61 /* IFAEntityConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738E93F21BF564C6C975FB /* IFAEntityConfig.m */; };
-		107380450A6A5C19D0B52099 /* IFAMasterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 107389F5AF995FE83A5EDB5B /* IFAMasterDetailViewController.m */; };
 		1073804C9F097C3B75D64AD5 /* UICollectionView+IFACoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 107380FFAFF02FD902B39D05 /* UICollectionView+IFACoreUI.m */; };
 		1073804D290D61D1F6765F34 /* IFATextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738124D23614FD13D02001 /* IFATextViewController.m */; };
 		1073809C8318CB91760D580A /* IFAWorkInProgressModalViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1073879A8D689A464D0A5A3A /* IFAWorkInProgressModalViewManager.m */; };
@@ -422,12 +421,10 @@
 		107389DC16AE9C8998B844FC /* IFAViewControllerAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAViewControllerAnimatedTransitioning.h; sourceTree = "<group>"; };
 		107389DEC2A683E0159F6BBA /* NSFileManager+IFAFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+IFAFoundation.h"; sourceTree = "<group>"; };
 		107389E862A101A12C0C9D8C /* 277-MultiplyCircle-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "277-MultiplyCircle-black.png"; sourceTree = "<group>"; };
-		107389F5AF995FE83A5EDB5B /* IFAMasterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAMasterDetailViewController.m; sourceTree = "<group>"; };
 		10738A0D4012D09C1E7C45D5 /* IFAPersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAPersistenceManager.m; sourceTree = "<group>"; };
 		10738A2EA6B3F9AE5B1F6448 /* GustyKitCoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GustyKitCoreUI.h; sourceTree = "<group>"; };
 		10738A3B0B726B13DA3A5C1D /* IFAHudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAHudView.h; sourceTree = "<group>"; };
 		10738A401ED190F8147688FF /* 277-MultiplyCircle-black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "277-MultiplyCircle-black@2x.png"; sourceTree = "<group>"; };
-		10738A4148D82794E0F899DB /* IFAMasterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAMasterDetailViewController.h; sourceTree = "<group>"; };
 		10738A46FAFB86D380601A1F /* IFAAbstractSelectionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAAbstractSelectionListViewController.m; sourceTree = "<group>"; };
 		10738A52D02AC68260C4D1EF /* TempTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempTest.h; sourceTree = "<group>"; };
 		10738A650E9692599B8B1B1A /* IFA_1PixelLineHorizontalBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IFA_1PixelLineHorizontalBottom@2x.png"; sourceTree = "<group>"; };
@@ -785,8 +782,6 @@
 				10738BB178D4A9D13192958C /* IFAMapSettingsViewController.m */,
 				107381D195372D8F72DB353B /* IFAMapViewController.h */,
 				1073882BB778567856523B4C /* IFAMapViewController.m */,
-				10738A4148D82794E0F899DB /* IFAMasterDetailViewController.h */,
-				107389F5AF995FE83A5EDB5B /* IFAMasterDetailViewController.m */,
 				107384914A38816F1A30134F /* IFAModalViewController.h */,
 				107382D5D3D8E6C6CCE4B547 /* IFAModalViewController.m */,
 				107381B14F3C426A6D7ED9D9 /* IFAMultipleSelectionListViewCell.h */,
@@ -1425,7 +1420,6 @@
 				107384695783BDF2B1EF2BAA /* IFAListViewController.m in Sources */,
 				10738A72F5D061C310FEA5FA /* IFALongTextEditorViewController.m in Sources */,
 				1073854D1F1676A6265EBC68 /* IFAMapAnnotation.m in Sources */,
-				107380450A6A5C19D0B52099 /* IFAMasterDetailViewController.m in Sources */,
 				10738DDAD2262E0F8FCA7AA9 /* IFAModalViewController.m in Sources */,
 				10738F331302C3C7EB7F3FD0 /* IFAMultipleSelectionListViewController.m in Sources */,
 				10738FC7B63B729F9A8664DD /* IFANavigationController.m in Sources */,

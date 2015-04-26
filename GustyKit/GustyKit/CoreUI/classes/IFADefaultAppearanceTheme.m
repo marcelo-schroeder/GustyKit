@@ -303,11 +303,6 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
             listViewController.noDataPlaceholderAddHintImageView.image = newNoDataHelpAddHintImage;
         }
 
-    }else if([a_viewController isKindOfClass:[IFAMasterDetailViewController class]]) {
-
-        IFAMasterDetailViewController *l_viewController = (IFAMasterDetailViewController *) a_viewController;
-        l_viewController.separatorView.backgroundColor = [self.class splitViewControllerDividerColour];
-
 #ifdef IFA_AVAILABLE_Help
     }else if ([a_viewController isKindOfClass:[IFAHelpViewController class]]) {
 
