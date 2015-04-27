@@ -29,3 +29,13 @@
 
 // CoreUI
 #import "GustyKitCoreUI.h"
+
+// Help
+#ifdef IFA_AVAILABLE_Help
+#import "GustyAppKitHelp.h"
+#endif
+
+// GoogleMobileAdsSupport
+#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
+#import "GustyAppKitGoogleMobileAdsSupport.h"
+#endif

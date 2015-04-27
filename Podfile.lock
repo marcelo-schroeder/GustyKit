@@ -1,4 +1,5 @@
 PODS:
+  - Google-Mobile-Ads-SDK (6.12.2)
   - IFATestingSupport (1.0.1):
     - OCHamcrest (~> 4)
     - OCMock (~> 3)
@@ -7,12 +8,14 @@ PODS:
   - ODRefreshControl (1.1.0)
 
 DEPENDENCIES:
+  - Google-Mobile-Ads-SDK (~> 6)
   - IFATestingSupport
   - OCHamcrest
   - OCMock
   - ODRefreshControl (= 1.1.0)
 
 SPEC CHECKSUMS:
+  Google-Mobile-Ads-SDK: 40217793219e3466f24cb884d1d44023f37a20ee
   IFATestingSupport: 6c403fe2b2842315ba76193b8023d61050175e6a
   OCHamcrest: 6f03ffa81d12feab872638490a44ab0a6d3aca10
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
