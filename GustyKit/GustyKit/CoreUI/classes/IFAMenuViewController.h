@@ -46,8 +46,6 @@
 -(void)commitSelectionForIndexPath:(NSIndexPath*)a_indexPath;
 -(void)selectMenuItemAtIndex:(NSUInteger)a_index;
 
-+(IFAMenuViewController *)mainMenuViewController;
-
 @end
 
 @protocol IFAMenuViewControllerDataSource <NSObject>
