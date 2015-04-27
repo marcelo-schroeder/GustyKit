@@ -12,11 +12,15 @@
 
 @required
 
-@property (nonatomic, readonly) UIScrollView *scrollView;
-@property (nonatomic, readonly, strong) IFATableViewController *selectedViewController;
-@property (nonatomic) NSUInteger childViewDidAppearCount;
-@property (nonatomic) NSUInteger newChildViewControllerCount;
+@property(nonatomic, readonly) UIScrollView *scrollView;
+@property(nonatomic, readonly, strong) IFATableViewController *selectedViewController;
+@property(nonatomic) NSUInteger childViewDidAppearCount;
+@property(nonatomic) NSUInteger newChildViewControllerCount;
 
--(void)refreshAndReloadChildData;
+- (void)refreshAndReloadChildData;
+
+- (void)updateContentLayout;
+
+- (void)updateContentLayoutWithAnimation:(BOOL)a_animated;
 
 @end
