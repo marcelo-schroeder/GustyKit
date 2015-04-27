@@ -541,7 +541,7 @@ static UIImage *c_menuBarButtonItemImage = nil;
 
 + (void)showServerErrorAlertViewForNetworkReachable:(BOOL)a_networkReachable
                                   alertViewDelegate:(id <UIAlertViewDelegate>)a_alertViewDelegate {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     NSString *l_title;
     NSString *l_messageArgument;
     if (a_networkReachable) {
