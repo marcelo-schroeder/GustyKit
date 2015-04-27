@@ -34,34 +34,6 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 
 }
 
-+ (void) showAlertWithMessage:(NSString*)aMessage title:(NSString*)aTitle;
-+ (void) showAlertWithMessage:(NSString*)aMessage title:(NSString*)aTitle buttonLabel:(NSString*)aButtonLabel;
-+ (void) showAlertWithMessage:(NSString*)aMessage title:(NSString*)aTitle delegate:(id)aDelegate;
-+ (void) showAlertWithMessage:(NSString*)aMessage title:(NSString*)aTitle delegate:(id)aDelegate buttonLabel:(NSString*)aButtonLabel;
-+ (void) showAlertWithMessage:(NSString*)aMessage title:(NSString*)aTitle delegate:(id)aDelegate buttonLabel:(NSString*)aButtonLabel tag:(NSInteger)aTag;
-
-+(UIView*)actionSheetShowInViewForViewController:(UIViewController*)a_viewController;
-+ (void) showActionSheetWithMessage:(NSString*)aMessage
-	   destructiveButtonLabelSuffix:(NSString*)aDestructiveButtonLabelSuffix
-                     viewController:(UIViewController*)aViewController
-                      barButtonItem:(UIBarButtonItem*)aBarButtonItem
-						   delegate:(id<UIActionSheetDelegate>)aDelegate;
-
-+ (void) showActionSheetWithMessage:(NSString*)aMessage 
-	   destructiveButtonLabelSuffix:(NSString*)aDestructiveButtonLabelSuffix
-                     viewController:(UIViewController*)aViewController
-                      barButtonItem:(UIBarButtonItem*)aBarButtonItem
-						   delegate:(id<UIActionSheetDelegate>)aDelegate
-								tag:(NSInteger)aTag;
-
-+ (void) showActionSheetWithMessage:(NSString*)aMessage 
-			cancelButtonLabelSuffix:(NSString*)aCancelButtonLabelSuffix 
-	   destructiveButtonLabelSuffix:(NSString*)aDestructiveButtonLabelSuffix
-							   view:(UIView*)aView
-                      barButtonItem:(UIBarButtonItem*)aBarButtonItem
-						   delegate:(id<UIActionSheetDelegate>)aDelegate
-								tag:(NSInteger)aTag;
-
 + (UIBarButtonItem*)barButtonItemForType:(IFABarButtonItemType)a_type target:(id)a_target action:(SEL)a_action;
 
 +(BOOL)isDeviceInLandscapeOrientation;
@@ -123,9 +95,6 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 
 // mimic iOS default separator inset
 + (UIEdgeInsets)tableViewCellDefaultSeparatorInset;
-
-+ (void)showServerErrorAlertViewForNetworkReachable:(BOOL)a_networkReachable
-                                  alertViewDelegate:(id <UIAlertViewDelegate>)a_alertViewDelegate;
 
 /**
 * Calculates height given width and aspect ratio.

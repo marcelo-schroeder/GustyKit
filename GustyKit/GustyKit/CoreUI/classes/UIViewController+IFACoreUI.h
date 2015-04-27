@@ -218,7 +218,6 @@
 - (void)ifa_updateToolbarForEditing:(BOOL)a_editing animated:(BOOL)a_animated;
 
 -(BOOL)ifa_isReturningVisibleViewController;
--(UIView*)ifa_viewForActionSheet;
 
 -(BOOL)ifa_hasFixedSize;
 

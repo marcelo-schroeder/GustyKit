@@ -1194,10 +1194,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 //    return self.previousVisibleViewController && self!=self.previousVisibleViewController;
 //}
 
--(UIView*)ifa_viewForActionSheet {
-    return [IFAUIUtils actionSheetShowInViewForViewController:self];
-}
-
 // iOS 5 (the next method is for iOS 6 or greater)
 -(BOOL)ifa_shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
     BOOL l_shouldAutorotate;
