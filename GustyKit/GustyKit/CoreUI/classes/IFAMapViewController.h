@@ -55,6 +55,8 @@
 */
 @property (nonatomic) IFALocationAuthorizationType locationAuthorizationType;
 
+//wip: add documentation
+- (void)locateUserWithCompletionBlock:(void (^)(BOOL a_success))a_completionBlock;
 @end
 
 @protocol IFAMapViewControllerDelegate <NSObject>

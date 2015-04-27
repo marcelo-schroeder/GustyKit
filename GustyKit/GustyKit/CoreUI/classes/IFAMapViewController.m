@@ -50,6 +50,32 @@
     return _mapSettingsBarButtonItem;
 }
 
+- (void)locateUserWithCompletionBlock:(void (^)(BOOL a_success))a_completionBlock {
+    if (self.IFA_userLocationRequested) {
+        // A request is in progress - bail out.
+        return;
+    }
+    if (self.mapView.userLocation.location) {
+        self.IFA_userLocationRequestCompletionBlock = nil;
+        if (a_completionBlock) {
+            a_completionBlock(YES);
+        }
+    } else {
+        self.IFA_userLocationRequestCompletionBlock = a_completionBlock;
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+            void (^currentLocationBasedBlock)(CLAuthorizationStatus) = ^(CLAuthorizationStatus status) {
+                // Does nothing as the status change is being handled somewhere else
+            };
+            [self.currentLocationManager withAuthorizationType:self.locationAuthorizationType
+                              executeCurrentLocationBasedBlock:currentLocationBasedBlock];
+        } else {
+            self.IFA_userLocationRequested = YES;
+            [self.IFA_progressViewManager showViewWithMessage:NSLocalizedStringFromTable(@"Locating...", @"GustyKitLocalizable", nil)];
+            self.mapView.showsUserLocation = YES;
+        }
+    }
+}
+
 #pragma mark - Overrides
 
 - (void)viewDidLoad {
@@ -57,32 +83,13 @@
     self.mapView.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    // Add observer
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(IFA_onLocationAuthorizationStatusChange:)
-                                                 name:IFANotificationLocationAuthorizationStatusChange
-                                               object:nil];
-}
-
 -(void)viewDidAppear:(BOOL)animated{
 
     if (!self.ifa_isReturningVisibleViewController) {
-        [self IFA_locateUserWithCompletionBlock:nil];
+        [self locateUserWithCompletionBlock:nil];
     }
 
     [super viewDidAppear:animated];
-
-}
-
--(void)viewDidDisappear:(BOOL)animated{
-
-    [super viewDidDisappear:animated];
-
-    // Remover observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IFANotificationLocationAuthorizationStatusChange object:nil];
 
 }
 
@@ -97,7 +104,7 @@
     [super ifa_onApplicationDidBecomeActiveNotification:aNotification];
     if (self.ifa_isVisibleTopChildViewController) {
         // Give a chance for the app to locate the user in case privacy settings have been changed while the app was in the background
-        [self IFA_locateUserWithCompletionBlock:nil];
+        [self locateUserWithCompletionBlock:nil];
     }
 }
 
@@ -127,9 +134,10 @@
 #pragma mark - Private
 
 - (void)IFA_onUserLocationButtonTap:(UIBarButtonItem *)a_barButtonItem {
-    [self IFA_locateUserWithCompletionBlock:^(BOOL a_success) {
+    [self locateUserWithCompletionBlock:^(BOOL a_success) {
         if (a_success) {
-            [self.mapView showAnnotations:@[self.mapView.userLocation] animated:YES];
+            [self.mapView showAnnotations:@[self.mapView.userLocation]
+                                 animated:YES];
             if ([self.mapViewControllerDelegate respondsToSelector:@selector(mapViewControllerDidCompleteUserRequestToShowCurrentLocation:)]) {
                 [self.mapViewControllerDelegate mapViewControllerDidCompleteUserRequestToShowCurrentLocation:self];
             }
@@ -162,39 +170,6 @@
 
 - (void)IFA_onUserLocationProgressViewCancelled {
     [self IFA_handleUserLocationRequestedCompletionWithSuccess:NO];
-}
-
-- (void)IFA_locateUserWithCompletionBlock:(void (^)(BOOL a_success))a_completionBlock {
-    if (self.IFA_userLocationRequested) {
-        // A request is in progress - bail out.
-        return;
-    }
-    if (self.mapView.userLocation.location) {
-        self.IFA_userLocationRequestCompletionBlock = nil;
-        if (a_completionBlock) {
-            a_completionBlock(YES);
-        }
-    } else {
-        self.IFA_userLocationRequestCompletionBlock = a_completionBlock;
-        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
-            void (^currentLocationBasedBlock)(CLAuthorizationStatus) = ^(CLAuthorizationStatus status) {
-                // Does nothing as the status change is being handled somewhere else
-            };
-            [self.currentLocationManager withAuthorizationType:self.locationAuthorizationType
-                              executeCurrentLocationBasedBlock:currentLocationBasedBlock];
-        } else {
-            self.IFA_userLocationRequested = YES;
-            [self.IFA_progressViewManager showViewWithMessage:NSLocalizedStringFromTable(@"Locating...", @"GustyKitLocalizable", nil)];
-            self.mapView.showsUserLocation = YES;
-        }
-    }
-}
-
--(void)IFA_onLocationAuthorizationStatusChange:(NSNotification*)a_notification {
-    // Respond to authorisation changes requested by this view controller
-    if ([UIApplication sharedApplication].applicationState==UIApplicationStateActive) {
-        [self IFA_locateUserWithCompletionBlock:nil];
-    }
 }
 
 - (void)IFA_handleUserLocationRequestedCompletionWithSuccess:(BOOL)a_success {
