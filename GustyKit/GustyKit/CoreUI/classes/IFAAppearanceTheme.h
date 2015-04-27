@@ -80,6 +80,7 @@ typedef NS_ENUM(NSUInteger, IFABarButtonItemSpacingBarType) {
 -(UIColor*)importantBarButtonItemTintColor;
 -(UIColor*)tableCellTextColor;
 -(UIFont*)tableCellTextFont;
+-(UIColor *)defaultTintColor;
 
 //-(UIButton*)newDetailDisclosureButton;
 -(UIView*)newDisclosureIndicatorView;

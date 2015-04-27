@@ -101,7 +101,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
 
     l_toolbar.translucent = NO;
     l_toolbar.barTintColor = [UIColor ifa_colorWithSpaceOrTabDelimitedRGB:@"240\t241\t242\t"];
-    l_toolbar.tintColor = self.IFA_defaultTintColor;
+    l_toolbar.tintColor = self.defaultTintColor;
 
     // Correct trailing space for the "Done" button
     NSMutableArray *l_items = [l_toolbar.items mutableCopy];
@@ -115,10 +115,6 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
     [l_items addObject:l_rightSpace];
     l_toolbar.items = l_items;
 
-}
-
-- (UIColor *)IFA_defaultTintColor {
-    return [UIApplication sharedApplication].delegate.window.tintColor;
 }
 
 - (void)IFA_tintImageInButton:(UIButton *)a_button withColor:(UIColor *)a_color{
@@ -299,7 +295,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
             listViewController.noDataPlaceholderAddHintSuffixLabel.textColor = noDataHelpColor;
             listViewController.noDataPlaceholderDescriptionLabel.textColor = noDataHelpColor;
             UIImage *currentNoDataHelpAddHintImage = listViewController.noDataPlaceholderAddHintImageView.image;
-            UIImage *newNoDataHelpAddHintImage = [currentNoDataHelpAddHintImage ifa_imageWithOverlayColor:self.IFA_defaultTintColor];
+            UIImage *newNoDataHelpAddHintImage = [currentNoDataHelpAddHintImage ifa_imageWithOverlayColor:self.defaultTintColor];
             listViewController.noDataPlaceholderAddHintImageView.image = newNoDataHelpAddHintImage;
         }
 
@@ -403,7 +399,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
         [self setTextAppearanceForChildrenOfView:((UITableViewCell *) a_view).contentView];
         if ([a_view isKindOfClass:[IFAMultipleSelectionListViewCell class]]) {
             IFAMultipleSelectionListViewCell *l_cell = (IFAMultipleSelectionListViewCell *) a_view;
-            UIColor *l_defaultTintColor = self.IFA_defaultTintColor;
+            UIColor *l_defaultTintColor = self.defaultTintColor;
             l_cell.addToSelectionImageView.image = [l_cell.addToSelectionImageView.image ifa_imageWithOverlayColor:l_defaultTintColor];
             l_cell.removeFromSelectionImageView.image = [l_cell.removeFromSelectionImageView.image ifa_imageWithOverlayColor:l_defaultTintColor];
         }
@@ -445,7 +441,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
         IFAFormTableViewCell *l_formTableViewCell = (IFAFormTableViewCell *) a_cell;
         if ([l_formTableViewCell.formViewController fieldTypeForIndexPath:l_formTableViewCell.indexPath]==IFAEntityConfigFieldTypeButton) {
             BOOL l_isDestructiveButton = [l_formTableViewCell.formViewController isDestructiveButtonForCell:l_formTableViewCell];
-            UIColor *l_textColor = l_isDestructiveButton ? [UIColor redColor] : self.IFA_defaultTintColor;
+            UIColor *l_textColor = l_isDestructiveButton ? [UIColor redColor] : self.defaultTintColor;
             l_formTableViewCell.centeredLabel.textColor = l_textColor;
         }
         if ([l_formTableViewCell isKindOfClass:[IFASegmentedControlTableViewCell class]]) {
@@ -819,6 +815,10 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
 
 - (Class)navigationControllerClass {
     return [IFANavigationController class];
+}
+
+- (UIColor *)defaultTintColor {
+    return [UIColor blackColor];
 }
 
 #pragma mark - Public
