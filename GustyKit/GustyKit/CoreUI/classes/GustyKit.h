@@ -24,6 +24,7 @@
 //wip: document how to use it as framework in app extensions
 //wip: need to release the world when the framework work is finished
 //wip: does the localisable stuff need to be split into kit and appKit too?
+//wip: for the classes that are paired in both frameworks, add a note about this fact in the class documentation
 
 // Foundation
 #import "GustyKitFoundation.h"
