@@ -330,7 +330,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 //todo: remove the need for this assertion one day
 - (void)IFA_assertManagedObjectContextCountForViewController:(UIViewController *)a_viewController {
     UIViewController *l_topLevelContentViewController = nil;
-    UIViewController *l_rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    UIViewController *l_rootViewController = self.view.window.rootViewController;
     if ([l_rootViewController isKindOfClass:[UITabBarController class]]) {
         UITabBarController *l_tabBarController = (UITabBarController *) l_rootViewController;
         UIViewController *l_tabBarSelectedViewController = l_tabBarController.selectedViewController;
