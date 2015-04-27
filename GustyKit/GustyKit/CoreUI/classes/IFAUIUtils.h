@@ -149,14 +149,6 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 + (BOOL)isKeyboardVisible;
 + (CGRect)keyboardFrame;
 
-+(void)appLogWithTitle:(NSString*)a_title
-               message:(NSString*)a_message
-              location:(CLLocation*)a_location
-                 error:(NSError*)a_error
-             showAlert:(BOOL)a_showAlert;
-
-+(void)appLogWithTitle:(NSString*)a_title message:(NSString*)a_message;
-
 + (void) handleUnrecoverableError:(NSError *)anErrorContainer;
 + (NSError*) newErrorWithCode:(NSInteger)anErrorCode errorMessage:(NSString*)anErrorMessage;
 + (NSError*) newErrorContainer;
