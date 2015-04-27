@@ -35,7 +35,6 @@ typedef void (^IFAAsynchronousWorkManagerOperationCompletionBlock)(NSOperation *
 + (IFAAsynchronousWorkManager *)sharedInstance;
 
 -(void)showNonModalProgressIndicatorInViewController:(UIViewController *)a_viewController;
--(void)showNonModalProgressIndicator;
 -(void)hideNonModalProgressIndicatorWithAnimation:(BOOL)a_animate;
 
 /** @name Methods based on NSOperation */

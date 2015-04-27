@@ -441,19 +441,6 @@ static UIImage *c_menuBarButtonItemImage = nil;
                               autoDismissDelay:1];
 }
 
-+(UIViewController *)nonModalHudContainerViewController {
-    UIViewController *viewController = nil;
-    UIWindow *l_window = [UIApplication sharedApplication].delegate.window;
-    if ([l_window.rootViewController isKindOfClass:[UISplitViewController class]]) {
-        UISplitViewController *l_splitViewController = (UISplitViewController *) l_window.rootViewController;
-        UIViewController *l_detailViewController = (l_splitViewController.viewControllers)[1];
-        viewController = l_detailViewController;
-    } else {
-        viewController = l_window.rootViewController;
-    };
-    return viewController;
-}
-
 +(void)traverseHierarchyForView:(UIView *)a_view withBlock:(void (^) (UIView*))a_block{
     [self IFA_traverseHierarchyForView:a_view withBlock:a_block level:0];
 }

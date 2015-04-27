@@ -67,10 +67,6 @@
     }
 }
 
--(void)showNonModalProgressIndicator {
-    [self showNonModalProgressIndicatorInViewController:[IFAUIUtils nonModalHudContainerViewController]];
-}
-
 -(void)hideNonModalProgressIndicatorWithAnimation:(BOOL)a_animate{
     @synchronized(self){
         [self.IFA_hudViewController dismissHudViewControllerWithAnimated:a_animate
@@ -155,20 +151,25 @@
 -(void)dispatchSerialBlock:(dispatch_block_t)a_block{
     [self dispatchSerialBlock:a_block showProgressIndicator:NO cancelPreviousBlocks:NO];
 }
-    
--(void)dispatchSerialBlock:(dispatch_block_t)a_block cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks{
+
+- (void)dispatchSerialBlock:(dispatch_block_t)a_block
+       cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks {
     [self dispatchSerialBlock:a_block showProgressIndicator:NO cancelPreviousBlocks:a_cancelPreviousBlocks];
 }
 
--(void)dispatchSerialBlock:(dispatch_block_t)a_block showProgressIndicator:(BOOL)a_showProgressIndicator{
+- (void)dispatchSerialBlock:(dispatch_block_t)a_block
+      showProgressIndicator:(BOOL)a_showProgressIndicator {
     [self dispatchSerialBlock:a_block showProgressIndicator:a_showProgressIndicator cancelPreviousBlocks:NO];
 }
-    
--(void)dispatchSerialBlock:(dispatch_block_t)a_block showProgressIndicator:(BOOL)a_showProgressIndicator
-      cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks{
-    [self            dispatchSerialBlock:a_block
-progressIndicatorContainerViewController:a_showProgressIndicator ? [IFAUIUtils nonModalHudContainerViewController] : nil
-                    cancelPreviousBlocks:a_cancelPreviousBlocks];
+
+- (void)dispatchSerialBlock:(dispatch_block_t)a_block
+      showProgressIndicator:(BOOL)a_showProgressIndicator
+       cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks {
+    [self dispatchSerialBlock:a_block
+                   showProgressIndicator:a_showProgressIndicator
+progressIndicatorContainerViewController:nil
+                    cancelPreviousBlocks:a_cancelPreviousBlocks
+          usePrivateManagedObjectContext:YES];
 }
 
 -(void)              dispatchSerialBlock:(dispatch_block_t)a_block
@@ -176,12 +177,26 @@ progressIndicatorContainerViewController:(UIViewController *)a_progressIndicator
                     cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks{
     [self            dispatchSerialBlock:a_block
 progressIndicatorContainerViewController:a_progressIndicatorContainerViewController
-                    cancelPreviousBlocks:a_cancelPreviousBlocks usePrivateManagedObjectContext:YES];
+                    cancelPreviousBlocks:a_cancelPreviousBlocks
+          usePrivateManagedObjectContext:YES];
 }
 
--(void)              dispatchSerialBlock:(dispatch_block_t)a_block
+- (void)             dispatchSerialBlock:(dispatch_block_t)a_block
 progressIndicatorContainerViewController:(UIViewController *)a_progressIndicatorContainerViewController
-                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks usePrivateManagedObjectContext:(BOOL)a_usePrivateManagedObjectContext{
+                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks
+          usePrivateManagedObjectContext:(BOOL)a_usePrivateManagedObjectContext {
+    [self dispatchSerialBlock:a_block
+                   showProgressIndicator:a_progressIndicatorContainerViewController!= nil
+progressIndicatorContainerViewController:a_progressIndicatorContainerViewController
+                    cancelPreviousBlocks:a_cancelPreviousBlocks
+          usePrivateManagedObjectContext:a_usePrivateManagedObjectContext];
+}
+
+- (void)dispatchSerialBlock:(dispatch_block_t)a_block
+                   showProgressIndicator:(BOOL)a_showProgressIndicator
+progressIndicatorContainerViewController:(UIViewController *)a_progressIndicatorContainerViewController
+                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks
+          usePrivateManagedObjectContext:(BOOL)a_usePrivateManagedObjectContext {
     
     // Generate a UUID to identify this block
     NSString *l_blockUuid = [IFAUtils generateUuid];
@@ -193,7 +208,7 @@ progressIndicatorContainerViewController:(UIViewController *)a_progressIndicator
     }
 
     // Hide progress indicator if required
-    if (a_progressIndicatorContainerViewController) {
+    if (a_showProgressIndicator) {
         self.IFA_nonModalProgressIndicatorOwnerUuid = l_blockUuid;
 //        NSLog(@"self.IFA_nonModalProgressIndicatorOwnerUuid set to %@", self.IFA_nonModalProgressIndicatorOwnerUuid);
         [self showNonModalProgressIndicatorInViewController:a_progressIndicatorContainerViewController];
@@ -230,7 +245,7 @@ progressIndicatorContainerViewController:(UIViewController *)a_progressIndicator
 //        NSLog(@"inner block executed!");
 
         // Hide progress indicator if required
-        if (a_progressIndicatorContainerViewController && [l_weakSelf.IFA_nonModalProgressIndicatorOwnerUuid isEqualToString:l_blockUuid]) {
+        if (a_showProgressIndicator && [l_weakSelf.IFA_nonModalProgressIndicatorOwnerUuid isEqualToString:l_blockUuid]) {
             [IFAUtils dispatchAsyncMainThreadBlock:^{
                 [l_weakSelf hideNonModalProgressIndicatorWithAnimation:YES];
             }];

@@ -99,11 +99,6 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 */
 + (void)showAndHideModeToggleConfirmationHudWithText:(NSString*)a_text on:(BOOL)a_on;
 
-/**
-* @returns Top level UIViewController instance to be used as the parent view controller for non-modal presentations of the <IFAHudViewController>.
-*/
-+(UIViewController *)nonModalHudContainerViewController;
-
 +(void)traverseHierarchyForView:(UIView *)a_view withBlock:(void (^) (UIView*))a_block;
 
 +(CGFloat)widthForPortraitNumerator:(float)a_portraitNumerator
