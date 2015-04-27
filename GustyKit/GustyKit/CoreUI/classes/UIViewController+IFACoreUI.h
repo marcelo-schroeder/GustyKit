@@ -267,7 +267,6 @@
 -(void)ifa_notifySessionCompletion;
 - (void)ifa_notifySessionCompletionAnimated:(BOOL)a_animate;
 
--(UIViewController*)ifa_mainViewController;
 -(BOOL)ifa_shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
 -(NSUInteger)ifa_supportedInterfaceOrientations;
 -(void)ifa_willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;

@@ -1198,14 +1198,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     return [IFAUIUtils actionSheetShowInViewForViewController:self];
 }
 
--(UIViewController*)ifa_mainViewController {
-    if (((UIViewController*) (self.navigationController.viewControllers)[0]).ifa_presentedAsModal) {
-        return self.navigationController;
-    }else{
-        return [UIApplication sharedApplication].delegate.window.rootViewController;
-    }
-}
-
 // iOS 5 (the next method is for iOS 6 or greater)
 -(BOOL)ifa_shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
     BOOL l_shouldAutorotate;
