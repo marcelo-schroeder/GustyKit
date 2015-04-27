@@ -36,7 +36,7 @@
     if ([self.dataSource respondsToSelector:@selector(appearanceThemeClass)]) {
         return self.dataSource.appearanceThemeClass;
     } else {
-        Class appAppearanceThemeClass = NSClassFromString(@"IFADefaultAppAppearanceTheme");
+        Class appAppearanceThemeClass = NSClassFromString(@"IFAAppDefaultAppearanceTheme");
         return appAppearanceThemeClass?:[IFADefaultAppearanceTheme class];
     }
 }
