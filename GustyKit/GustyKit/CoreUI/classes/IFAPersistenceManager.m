@@ -1136,7 +1136,33 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 
         // Remove the old persistent store
         {
-            //wip: need to remove old persistent store files
+            NSURL *privateContainerStoreBaseUrl = [self IFA_sqlStoreBaseUrlWithSecurityApplicationGroupIdentifier:nil];
+            NSError *error;
+            NSLog(@"  Removing old persistent store files...");
+            NSArray *contents = [fileManager contentsOfDirectoryAtURL:privateContainerStoreBaseUrl
+                                           includingPropertiesForKeys:nil
+                                                              options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                                error:&error];
+            if (contents) {
+                for (NSURL *url in contents) {
+                    if ([url.lastPathComponent hasPrefix:[NSString stringWithFormat:@"%@.", a_databaseResourceName]]) {
+                        NSLog(@"    Removing file at %@", url);
+                        BOOL success = [fileManager removeItemAtURL:url
+                                                              error:&error];
+                        if (!success) {
+                            NSLog(@"      file removal error = %@", error);
+                            [IFAUIUtils handleUnrecoverableError:error];
+                            return NO;
+                        }
+                        NSLog(@"      ...file removed");
+                    }
+                }
+            } else {
+                NSLog(@"    contens discovery error = %@", error);
+                [IFAUIUtils handleUnrecoverableError:error];
+                return NO;
+            }
+            NSLog(@"    ...old persistent store files removed");
         }
 
         return YES;
