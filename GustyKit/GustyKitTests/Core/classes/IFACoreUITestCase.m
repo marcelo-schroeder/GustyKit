@@ -29,7 +29,8 @@
 - (void)createInMemoryTestDatabase {
     [[IFAPersistenceManager sharedInstance] configureWithDatabaseResourceName:nil
                                                managedObjectModelResourceName:@"GustyKitCoreUITestsModel"
-                                             managedObjectModelResourceBundle:[NSBundle bundleForClass:[self class]]];
+                                             managedObjectModelResourceBundle:[NSBundle bundleForClass:[self class]]
+                                           securityApplicationGroupIdentifier:nil];
 }
 
 - (IFAAsynchronousWorkManager *)asynchronousWorkManagerMock {

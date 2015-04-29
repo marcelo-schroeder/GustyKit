@@ -149,6 +149,11 @@
 
 -(NSMutableArray*)managedObjectsForIds:(NSArray*)a_managedObjectIds;
 
+- (BOOL)migratePersistentStoreFromPrivateContainerToGroupContainerIfRequiredWithDatabaseResourceName:(NSString *)a_databaseResourceName
+                                                                      managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
+                                                                    managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
+                                                                  securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier;
+
 /**
 * Configure the persistence manager instance, including the Core Data stack.
 *
@@ -161,7 +166,8 @@
 */
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
-         managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle;
+         managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
+       securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier;
 
 - (void)manageDatabaseVersioningChangeWithBlock:(void (^)(NSUInteger a_oldSystemEntitiesVersion, NSUInteger a_newSystemEntitiesVersion))a_block;
 
