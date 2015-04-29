@@ -1060,6 +1060,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 
 //wip: clean up
 //wip: review exceptional scenarios and avoid the situation where it was adding data on top of the shared store multiple times
+//wip: add the error back to the method signature - it should be responsibility of the caller to abort
 - (BOOL)migratePersistentStoreFromPrivateContainerToGroupContainerIfRequiredWithDatabaseResourceName:(NSString *)a_databaseResourceName
                                                                       managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
                                                                     managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
@@ -1073,34 +1074,46 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 
         NSLog(@"  ...required!");
 
-        // Create destination directory if required
+        NSURL *groupContainerStoreBaseUrl = [self IFA_sqlStoreBaseUrlWithSecurityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier];
+
+        // Remove destination directory if already exists (i.e. from a previous failed migration)
         {
-            NSURL *persistentStoreBaseUrl = [self IFA_sqlStoreBaseUrlWithSecurityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier];
-            if (![fileManager fileExistsAtPath:persistentStoreBaseUrl.path]) {
-                NSLog(@"  Creating directory...");
-                NSError *error;
-                [fileManager createDirectoryAtURL:persistentStoreBaseUrl
-                      withIntermediateDirectories:YES
-                                       attributes:nil
-                                            error:&error];
-                if (error) {
-                    NSLog(@"    directory creation error = %@", error);
-                    [IFAUIUtils handleUnrecoverableError:error];
-                    return NO;
-                }
-                NSLog(@"    ...directory created");
-            } else {
-                NSLog(@"  Directory already exists");
+            NSError *error;
+            NSLog(@"  Removing directory and its contents...");
+            BOOL success = [fileManager removeItemAtURL:groupContainerStoreBaseUrl
+                                                  error:&error];
+            if (!success) {
+                NSLog(@"    directory removal error = %@", error);
+                [IFAUIUtils handleUnrecoverableError:error];
+                return NO;
             }
+            NSLog(@"    ...directory and contents removed");
         }
+
+        // Create destination directory
+        {
+            NSLog(@"  Creating directory...");
+            NSError *error;
+            BOOL success = [fileManager createDirectoryAtURL:groupContainerStoreBaseUrl
+                                 withIntermediateDirectories:YES
+                                                  attributes:nil
+                                                       error:&error];
+            if (!success) {
+                NSLog(@"    directory creation error = %@", error);
+                [IFAUIUtils handleUnrecoverableError:error];
+                return NO;
+            }
+            NSLog(@"    ...directory created");
+        }
+
+        NSManagedObjectModel *managedObjectModel = [self IFA_managedObjectModelForResourceNamed:a_managedObjectModelResourceName
+                                                                                       inBundle:a_managedObjectModelResourceBundle];
+        NSString *persistentStoreType = NSSQLiteStoreType;
 
         // Perform the Core Data migration
         {
-            NSManagedObjectModel *managedObjectModel = [self IFA_managedObjectModelForResourceNamed:a_managedObjectModelResourceName
-                                                                                           inBundle:a_managedObjectModelResourceBundle];
             NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-            NSString *persistentStoreType = NSSQLiteStoreType;
-            NSPersistentStore *persistentStore = [self IFA_addPersistentStoreWithType:persistentStoreType
+            NSPersistentStore *oldPersistentStore = [self IFA_addPersistentStoreWithType:persistentStoreType
                                                                                andUrl:privateContainerStoreUrl
                                                          toPersistentStoreCoordinator:persistentStoreCoordinator];
             NSURL *groupContainerStoreUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
@@ -1108,12 +1121,12 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
             NSLog(@"  groupContainerStoreUrl = %@", groupContainerStoreUrl);
             NSError *error;
             NSLog(@"  Migrating...");
-            [persistentStoreCoordinator migratePersistentStore:persistentStore
-                                                         toURL:groupContainerStoreUrl
-                                                       options:nil
-                                                      withType:persistentStoreType
-                                                         error:&error];
-            if (error) {
+            NSPersistentStore *newPersistenceStore = [persistentStoreCoordinator migratePersistentStore:oldPersistentStore
+                                                                                                  toURL:groupContainerStoreUrl
+                                                                                                options:nil
+                                                                                               withType:persistentStoreType
+                                                                                                  error:&error];
+            if (!newPersistenceStore) {
                 NSLog(@"    migration error = %@", error);
                 [IFAUIUtils handleUnrecoverableError:error];
                 return NO;
@@ -1123,7 +1136,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 
         // Remove the old persistent store
         {
-
+            //wip: need to remove old persistent store files
         }
 
         return YES;
