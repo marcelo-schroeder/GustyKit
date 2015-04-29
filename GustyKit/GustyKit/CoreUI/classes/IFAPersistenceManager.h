@@ -168,7 +168,8 @@
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
-       securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier;
+       securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
+                                 readOnly:(BOOL)a_readOnly;
 
 - (void)manageDatabaseVersioningChangeWithBlock:(void (^)(NSUInteger a_oldSystemEntitiesVersion, NSUInteger a_newSystemEntitiesVersion))a_block;
 

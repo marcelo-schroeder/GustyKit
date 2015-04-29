@@ -542,11 +542,15 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 
 - (NSPersistentStore *)IFA_addPersistentStoreWithType:(NSString *)a_persistentStoreType
                                                andUrl:(NSURL *)a_persistentStoreUrl
-                         toPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)a_persistentStoreCoordinator {
-    NSDictionary *options = @{
+                         toPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)a_persistentStoreCoordinator
+                                             readOnly:(BOOL)a_readOnly {
+    NSMutableDictionary *options = [@{
             NSMigratePersistentStoresAutomaticallyOption : @(YES),
             NSInferMappingModelAutomaticallyOption : @(YES),
-    };
+    } mutableCopy];
+    if (a_readOnly) {
+        options[NSReadOnlyPersistentStoreOption] = @(YES);
+    }
     NSError *error;
     NSPersistentStore *persistentStore = [a_persistentStoreCoordinator addPersistentStoreWithType:a_persistentStoreType
                                                                                     configuration:nil
@@ -1166,8 +1170,9 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
         {
             NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
             NSPersistentStore *oldPersistentStore = [self IFA_addPersistentStoreWithType:persistentStoreType
-                                                                               andUrl:privateContainerStoreUrl
-                                                         toPersistentStoreCoordinator:persistentStoreCoordinator];
+                                                                                  andUrl:privateContainerStoreUrl
+                                                            toPersistentStoreCoordinator:persistentStoreCoordinator
+                                                                                readOnly:NO];
             NSURL *groupContainerStoreUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
                                                       securityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier];
             NSLog(@"  groupContainerStoreUrl = %@", groupContainerStoreUrl);
@@ -1234,7 +1239,8 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
-       securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier {
+       securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
+                                 readOnly:(BOOL)a_readOnly {
 
     // SQLite or InMemory store type?
     NSURL *storeUrl;
@@ -1260,7 +1266,8 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
     self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     [self IFA_addPersistentStoreWithType:persistentStoreType
                                   andUrl:storeUrl
-            toPersistentStoreCoordinator:self.persistentStoreCoordinator];
+            toPersistentStoreCoordinator:self.persistentStoreCoordinator
+                                readOnly:a_readOnly];
 
     // Configure parent managedObjectContext using a main queue concurrency type
     self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
