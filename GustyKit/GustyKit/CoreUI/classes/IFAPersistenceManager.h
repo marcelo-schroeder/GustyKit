@@ -152,7 +152,8 @@
 - (BOOL)migratePersistentStoreFromPrivateContainerToGroupContainerIfRequiredWithDatabaseResourceName:(NSString *)a_databaseResourceName
                                                                       managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
                                                                     managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
-                                                                  securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier;
+                                                                  securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
+                                                                                               error:(NSError **)a_error;
 
 /**
 * Configure the persistence manager instance, including the Core Data stack.
