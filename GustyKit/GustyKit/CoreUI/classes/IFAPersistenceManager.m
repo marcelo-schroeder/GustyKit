@@ -1287,16 +1287,18 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
                                                  name:NSManagedObjectContextWillSaveNotification
                                                object:self.managedObjectContext];
     
-    self.entityConfig = [[IFAEntityConfig alloc] initWithManagedObjectContext:self.managedObjectContext];
+    self.entityConfig = [[IFAEntityConfig alloc] initWithManagedObjectContext:self.managedObjectContext
+                                                                       bundle:a_managedObjectModelResourceBundle];
     
     // Force creation of the preferences record
     [[IFAPreferencesManager sharedInstance] preferences];
     
 }
 
-- (void)manageDatabaseVersioningChangeWithBlock:(void (^)(NSUInteger a_oldSystemEntitiesVersion, NSUInteger a_newSystemEntitiesVersion))a_block{
+- (void)manageDatabaseVersioningChangeWithSystemEntityConfigBundle:(NSBundle *)a_systemEntityConfigBundle
+                                                             block:(void (^)(NSUInteger a_oldSystemEntitiesVersion, NSUInteger a_newSystemEntitiesVersion))a_block {
     
-    NSDictionary *l_systemEntityConfig = [IFAUtils getPlistAsDictionary:@"SystemEntityConfig"];
+    NSDictionary *l_systemEntityConfig = [IFAUtils getPlistAsDictionary:@"SystemEntityConfig" bundle:a_systemEntityConfigBundle];
     NSUInteger l_newSystemEntitiesVersion = [(NSNumber*)[l_systemEntityConfig valueForKey:@"version"] intValue];
     NSUInteger l_oldSystemEntitiesVersion = [self systemDbTablesVersion];
     [IFAUtils logBooleanWithLabel:@"System tables loaded" value:[self systemDbTablesLoaded]];

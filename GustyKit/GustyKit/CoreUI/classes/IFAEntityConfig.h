@@ -37,7 +37,8 @@ typedef NS_ENUM(NSUInteger, IFAEntityConfigFieldType){
 
 @property (strong, readonly) NSManagedObjectContext *managedObjectContext;
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)aManagedObjectContext;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)a_managedObjectContext
+                            bundle:(NSBundle *)a_bundle;
 
 - (NSIndexPath*)indexPathForProperty:(NSString*)aPropertyName inObject:(NSObject*)aObject inForm:(NSString*)aFormName createMode:(BOOL)aCreateMode;
 - (NSString*)labelForProperty:(NSString*)aPropertyName inEntity:(NSString*)anEntityName;

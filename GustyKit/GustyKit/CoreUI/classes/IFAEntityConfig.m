@@ -27,6 +27,7 @@
 @interface IFAEntityConfig ()
 
 @property (strong) NSManagedObjectContext *managedObjectContext;
+@property(nonatomic) NSBundle *bundle;
 @property (strong) NSMutableDictionary *IFA_entityToDependencyParentChildrenDict;
 @property (strong) NSMutableDictionary *IFA_entityToDependencyChildParentDict;
 
@@ -41,7 +42,7 @@
 - (NSDictionary*)entityConfigDictionary{
     NSMutableDictionary *l_dictionary = [[IFADynamicCache sharedInstance] objectForKey:(IFACacheKeyEntityConfigDictionary)];
 	if(!l_dictionary){
-        l_dictionary = [NSMutableDictionary dictionaryWithDictionary:[IFAUtils getPlistAsDictionary:@"IFAEntityConfig"]];
+        l_dictionary = [NSMutableDictionary dictionaryWithDictionary:[IFAUtils getPlistAsDictionary:@"IFAEntityConfig" bundle:self.bundle]];
         [l_dictionary addEntriesFromDictionary:[IFAUtils getPlistAsDictionary:@"EntityConfig"]];
         [[IFADynamicCache sharedInstance] setObject:l_dictionary forKey:IFACacheKeyEntityConfigDictionary];
 	}
@@ -118,11 +119,13 @@
 
 #pragma mark - Public
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)aManagedObjectContext{
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)a_managedObjectContext
+                            bundle:(NSBundle *)a_bundle {
 	
 	if ((self=[super init])) {
 
-		self.managedObjectContext = aManagedObjectContext;
+		self.managedObjectContext = a_managedObjectContext;
+        self.bundle = a_bundle;
         
         self.IFA_entityToDependencyParentChildrenDict = [[NSMutableDictionary alloc] init];
         self.IFA_entityToDependencyChildParentDict = [[NSMutableDictionary alloc] init];

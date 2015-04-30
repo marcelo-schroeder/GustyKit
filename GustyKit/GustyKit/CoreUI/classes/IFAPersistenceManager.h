@@ -171,7 +171,8 @@
        securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
                                  readOnly:(BOOL)a_readOnly;
 
-- (void)manageDatabaseVersioningChangeWithBlock:(void (^)(NSUInteger a_oldSystemEntitiesVersion, NSUInteger a_newSystemEntitiesVersion))a_block;
+- (void)manageDatabaseVersioningChangeWithSystemEntityConfigBundle:(NSBundle *)a_systemEntityConfigBundle
+                                                             block:(void (^)(NSUInteger a_oldSystemEntitiesVersion, NSUInteger a_newSystemEntitiesVersion))a_block;
 
 -(void)pushChildManagedObjectContext;
 -(void)popChildManagedObjectContext;
