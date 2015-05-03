@@ -224,7 +224,7 @@ progressIndicatorContainerViewController:(UIViewController *)a_progressIndicator
 //        NSLog(@"a_block: %@", [a_block description]);
         
         // Reset the managed object context to avoid stale objects for this session
-        [l_weakSelf.managedObjectContext reset];
+        [l_weakSelf.managedObjectContext reset]; //wip: shouldn't this be inside the if below that checks if the private MOC will be used? - decide what to do after I find out what's going on with the Core Data issue in Timed
         
         if (l_weakSelf.areAllBlocksCancelled && [l_weakSelf.IFA_cancelAllBlocksRequestOwnerUuid isEqualToString:l_blockUuid]) {
             l_weakSelf.areAllBlocksCancelled = NO;
