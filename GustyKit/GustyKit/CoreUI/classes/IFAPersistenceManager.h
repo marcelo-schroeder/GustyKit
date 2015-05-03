@@ -168,6 +168,7 @@
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
+                       entityConfigBundle:(NSBundle *)a_entityConfigBundle
        securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
                                  readOnly:(BOOL)a_readOnly;
 

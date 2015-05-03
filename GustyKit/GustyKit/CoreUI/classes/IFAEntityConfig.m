@@ -42,8 +42,8 @@
 - (NSDictionary*)entityConfigDictionary{
     NSMutableDictionary *l_dictionary = [[IFADynamicCache sharedInstance] objectForKey:(IFACacheKeyEntityConfigDictionary)];
 	if(!l_dictionary){
-        l_dictionary = [NSMutableDictionary dictionaryWithDictionary:[IFAUtils getPlistAsDictionary:@"IFAEntityConfig" bundle:self.bundle]];
-        [l_dictionary addEntriesFromDictionary:[IFAUtils getPlistAsDictionary:@"EntityConfig"]];
+        l_dictionary = [NSMutableDictionary dictionaryWithDictionary:[IFAUtils getPlistAsDictionary:@"IFAEntityConfig" bundle:[NSBundle bundleForClass:self.class]]];
+        [l_dictionary addEntriesFromDictionary:[IFAUtils getPlistAsDictionary:@"EntityConfig" bundle:self.bundle]];
         [[IFADynamicCache sharedInstance] setObject:l_dictionary forKey:IFACacheKeyEntityConfigDictionary];
 	}
 	return l_dictionary;

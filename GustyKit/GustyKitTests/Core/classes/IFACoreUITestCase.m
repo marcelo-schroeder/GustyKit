@@ -30,6 +30,7 @@
     [[IFAPersistenceManager sharedInstance] configureWithDatabaseResourceName:nil
                                                managedObjectModelResourceName:@"GustyKitCoreUITestsModel"
                                              managedObjectModelResourceBundle:[NSBundle bundleForClass:[self class]]
+                                                           entityConfigBundle:nil
                                            securityApplicationGroupIdentifier:nil
                                                                      readOnly:NO];
 }

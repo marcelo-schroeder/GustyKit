@@ -1239,6 +1239,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
+                       entityConfigBundle:(NSBundle *)a_entityConfigBundle
        securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
                                  readOnly:(BOOL)a_readOnly {
 
@@ -1288,7 +1289,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
                                                object:self.managedObjectContext];
     
     self.entityConfig = [[IFAEntityConfig alloc] initWithManagedObjectContext:self.managedObjectContext
-                                                                       bundle:a_managedObjectModelResourceBundle];
+                                                                       bundle:a_entityConfigBundle];
     
     // Force creation of the preferences record
     [[IFAPreferencesManager sharedInstance] preferences];
