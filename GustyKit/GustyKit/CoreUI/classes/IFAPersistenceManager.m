@@ -573,9 +573,15 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
     return managedObjectModel;
 }
 
-- (NSURL *)IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
-               securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier {
+- (NSURL *)
+IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
+    databaseResourceRelativeFolderPath:(NSString *)a_databaseResourceRelativeFolderPath
+    securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier {
     NSURL *storeBaseUrl = [self IFA_sqlStoreBaseUrlWithSecurityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier];
+    if (a_databaseResourceRelativeFolderPath) {
+        storeBaseUrl = [NSURL URLWithString:a_databaseResourceRelativeFolderPath
+                              relativeToURL:storeBaseUrl];
+    }
     NSString *lastUrlPathComponent = [NSString stringWithFormat:@"%@.sqlite",
                                                                 a_databaseResourceName];
     NSURL *sqlStoreUrl = [NSURL URLWithString:lastUrlPathComponent
@@ -1119,6 +1125,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
                                                                                                error:(NSError **)a_error {
     NSLog(@"Checking if container migration is required...");
     NSURL *privateContainerStoreUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
+                                                databaseResourceRelativeFolderPath:nil
                                                 securityApplicationGroupIdentifier:nil];
     NSLog(@"  privateContainerStoreUrl = %@", privateContainerStoreUrl);
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -1174,6 +1181,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
                                                             toPersistentStoreCoordinator:persistentStoreCoordinator
                                                                                 readOnly:NO];
             NSURL *groupContainerStoreUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
+                                                      databaseResourceRelativeFolderPath:nil
                                                       securityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier];
             NSLog(@"  groupContainerStoreUrl = %@", groupContainerStoreUrl);
             NSError *error;
@@ -1237,6 +1245,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 }
 
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
+       databaseResourceRelativeFolderPath:(NSString *)a_databaseResourceRelativeFolderPath
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
                        entityConfigBundle:(NSBundle *)a_entityConfigBundle
@@ -1244,20 +1253,45 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
                                  readOnly:(BOOL)a_readOnly {
 
     // SQLite or InMemory store type?
-    NSURL *storeUrl;
+    NSURL *dataStoreUrl;
     NSString *persistentStoreType;
     if (a_databaseResourceName) {
-        storeUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
+        dataStoreUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
+                             databaseResourceRelativeFolderPath:a_databaseResourceRelativeFolderPath
                              securityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier];
         persistentStoreType = NSSQLiteStoreType;
     } else {
-        storeUrl = nil;
+        dataStoreUrl = nil;
         persistentStoreType = NSInMemoryStoreType;
     }
 
 #ifdef DEBUG
-    NSLog(@"Persistent store URL: %@", storeUrl);
+    NSLog(@"Data store URL: %@", dataStoreUrl);
 #endif
+
+    // Create data store directory if required
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *storeDirectoryUrl = [dataStoreUrl URLByDeletingLastPathComponent];
+#ifdef DEBUG
+    NSLog(@"Checking if data store directory exists: %@", storeDirectoryUrl.path);
+#endif
+    if (![fileManager fileExistsAtPath:storeDirectoryUrl.path]) {
+#ifdef DEBUG
+        NSLog(@"  Creating data store directory...");
+#endif
+        NSError *error;
+        BOOL success = [fileManager createDirectoryAtURL:storeDirectoryUrl
+                             withIntermediateDirectories:YES
+                                              attributes:nil
+                                                   error:&error];
+        if (!success) {
+            [IFAUIUtils handleUnrecoverableError:error];
+            return;
+        }
+#ifdef DEBUG
+        NSLog(@"  ...done");
+#endif
+    }
 
     // Configure managedObjectModel
     self.managedObjectModel = [self IFA_managedObjectModelForResourceNamed:a_managedObjectModelResourceName
@@ -1266,7 +1300,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
     // Configure persistentStoreCoordinator
     self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     [self IFA_addPersistentStoreWithType:persistentStoreType
-                                  andUrl:storeUrl
+                                  andUrl:dataStoreUrl
             toPersistentStoreCoordinator:self.persistentStoreCoordinator
                                 readOnly:a_readOnly];
 

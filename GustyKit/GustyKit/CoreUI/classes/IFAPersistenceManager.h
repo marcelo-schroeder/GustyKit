@@ -166,6 +166,7 @@
 * @param a_managedObjectModelResourceBundle Bundle for the data model resource. If nil, main bundle will be used.
 */
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
+       databaseResourceRelativeFolderPath:(NSString *)a_databaseResourceRelativeFolderPath
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
                        entityConfigBundle:(NSBundle *)a_entityConfigBundle
