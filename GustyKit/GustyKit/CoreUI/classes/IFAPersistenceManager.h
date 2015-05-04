@@ -71,7 +71,12 @@
                   includeSubentities:(BOOL)a_includeSubentities
                  usedForRelationship:(BOOL)a_usedForRelationship;
 
-- (void) deleteAllForEntityAndSave:(NSString *)entityName validationAlertPresenter:(UIViewController *)a_validationAlertPresenter;
+- (void)deleteAllAndSaveForEntity:(NSString *)entityName
+         validationAlertPresenter:(UIViewController *)a_validationAlertPresenter;
+
+- (void)deleteAllForEntity:(NSString *)a_entityName
+  validationAlertPresenter:(UIViewController *)a_validationAlertPresenter;
+
 - (NSManagedObject *) findSystemEntityById:(NSUInteger)anId entity:(NSString *)anEntityName;
 - (NSManagedObject *) findByName:(NSString*)aName entity:(NSString *)anEntityName;
 - (NSManagedObject *) findById:(NSManagedObjectID*)anObjectId;

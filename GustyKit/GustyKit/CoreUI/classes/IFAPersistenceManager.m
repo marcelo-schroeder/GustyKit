@@ -790,11 +790,18 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 
 }
 
-- (void) deleteAllForEntityAndSave:(NSString *)entityName validationAlertPresenter:(UIViewController *)a_validationAlertPresenter{
-    for (NSManagedObject *l_managedObject in [self findAllForEntity:entityName]) {
+- (void)deleteAllAndSaveForEntity:(NSString *)entityName
+         validationAlertPresenter:(UIViewController *)a_validationAlertPresenter{
+    [self deleteAllForEntity:entityName
+    validationAlertPresenter:a_validationAlertPresenter];
+    [self save];
+}
+
+- (void)deleteAllForEntity:(NSString *)a_entityName
+  validationAlertPresenter:(UIViewController *)a_validationAlertPresenter {
+    for (NSManagedObject *l_managedObject in [self findAllForEntity:a_entityName]) {
         [l_managedObject ifa_deleteWithValidationAlertPresenter:a_validationAlertPresenter];
     }
-    [self save];
 }
 
 - (NSManagedObject *) findSystemEntityById:(NSUInteger)anId entity:(NSString *)anEntityName{
