@@ -33,6 +33,7 @@
                                              managedObjectModelResourceBundle:[NSBundle bundleForClass:[self class]]
                                                            entityConfigBundle:nil
                                            securityApplicationGroupIdentifier:nil
+                                                      muteChangeNotifications:NO
                                                                      readOnly:NO];
 }
 

@@ -1257,6 +1257,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
                        entityConfigBundle:(NSBundle *)a_entityConfigBundle
        securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
+                  muteChangeNotifications:(BOOL)a_muteChangeNotifications
                                  readOnly:(BOOL)a_readOnly {
 
     // SQLite or InMemory store type?
@@ -1319,16 +1320,19 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     self.privateQueueManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [self.privateQueueManagedObjectContext setParentContext:self.managedObjectContext];
     
-    // Add observers
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onNotification:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                               object:self.managedObjectContext];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onNotification:)
-                                                 name:NSManagedObjectContextWillSaveNotification
-                                               object:self.managedObjectContext];
+    // Add observers if required
+    if (!a_muteChangeNotifications) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onNotification:)
+                                                     name:NSManagedObjectContextDidSaveNotification
+                                                   object:self.managedObjectContext];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onNotification:)
+                                                     name:NSManagedObjectContextWillSaveNotification
+                                                   object:self.managedObjectContext];
+    }
     
+    // Instantiate entity configuration
     self.entityConfig = [[IFAEntityConfig alloc] initWithManagedObjectContext:self.managedObjectContext
                                                                        bundle:a_entityConfigBundle];
     

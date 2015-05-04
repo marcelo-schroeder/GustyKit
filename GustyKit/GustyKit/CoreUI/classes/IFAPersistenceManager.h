@@ -160,6 +160,7 @@
                                                                   securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
                                                                                                error:(NSError **)a_error;
 
+//wip: update documentation
 /**
 * Configure the persistence manager instance, including the Core Data stack.
 *
@@ -176,6 +177,7 @@
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
                        entityConfigBundle:(NSBundle *)a_entityConfigBundle
        securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
+                  muteChangeNotifications:(BOOL)a_muteChangeNotifications
                                  readOnly:(BOOL)a_readOnly;
 
 - (void)manageDatabaseVersioningChangeWithSystemEntityConfigBundle:(NSBundle *)a_systemEntityConfigBundle
