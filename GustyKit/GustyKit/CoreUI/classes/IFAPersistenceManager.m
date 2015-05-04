@@ -520,17 +520,17 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 }
 
 - (BOOL) systemDbTablesLoaded{
-	return [(NSString*)[[IFAPersistenceManager sharedInstance] metadataValueForKey:METADATA_KEY_SYSTEM_DB_TABLES_LOADED] isEqualToString:METADATA_VALUE_SYSTEM_DB_TABLES_LOADED];
+	return [(NSString*)[self metadataValueForKey:METADATA_KEY_SYSTEM_DB_TABLES_LOADED] isEqualToString:METADATA_VALUE_SYSTEM_DB_TABLES_LOADED];
 }
 
 - (NSUInteger) systemDbTablesVersion{
-    id l_value = [[IFAPersistenceManager sharedInstance] metadataValueForKey:METADATA_KEY_SYSTEM_DB_TABLES_VERSION];
+    id l_value = [self metadataValueForKey:METADATA_KEY_SYSTEM_DB_TABLES_VERSION];
     return l_value ? [(NSNumber*)l_value integerValue] : 0;
 }
 
 - (void) setSystemDbTablesVersion:(NSUInteger)a_version{
-	[[IFAPersistenceManager sharedInstance] setMetadataValue:METADATA_VALUE_SYSTEM_DB_TABLES_LOADED forKey:METADATA_KEY_SYSTEM_DB_TABLES_LOADED];
-	[[IFAPersistenceManager sharedInstance] setMetadataValue:@(a_version) forKey:METADATA_KEY_SYSTEM_DB_TABLES_VERSION];
+	[self setMetadataValue:METADATA_VALUE_SYSTEM_DB_TABLES_LOADED forKey:METADATA_KEY_SYSTEM_DB_TABLES_LOADED];
+	[self setMetadataValue:@(a_version) forKey:METADATA_KEY_SYSTEM_DB_TABLES_VERSION];
 }
 
 -(NSManagedObjectContext*)IFA_privateQueueManagedObjectContext {
@@ -746,7 +746,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 - (NSManagedObject *)instantiate:(NSString *)entityName{
     NSManagedObject *l_mo = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:[self currentManagedObjectContext]];
     NSError *l_error;
-    NSManagedObjectContext *l_moc = [[IFAPersistenceManager sharedInstance] currentManagedObjectContext];
+    NSManagedObjectContext *l_moc = [self currentManagedObjectContext];
     if(![l_moc obtainPermanentIDsForObjects:@[l_mo]
                                       error:&l_error]){
         [IFAUIUtils handleUnrecoverableError:l_error];
@@ -1362,7 +1362,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
                     NSLog(@"Row: %@", [l_row description]);
                     NSNumber *l_systemEntityId = [l_row valueForKey:@"systemEntityId"];
                     NSLog(@"  Checking if system entity instance with id %lu already exists...", (unsigned long)[l_systemEntityId unsignedIntegerValue]);
-                    IFASystemEntity *l_systemEntity = (IFASystemEntity *)[[IFAPersistenceManager sharedInstance] findSystemEntityById:[l_systemEntityId unsignedIntegerValue] entity:l_entityName];
+                    IFASystemEntity *l_systemEntity = (IFASystemEntity *)[self findSystemEntityById:[l_systemEntityId unsignedIntegerValue] entity:l_entityName];
                     NSNumber *l_activeIndicator = [l_row objectForKey:@"active"];
                     BOOL l_isActive = l_activeIndicator ? [l_activeIndicator boolValue] : YES;
                     if (l_systemEntity) {
@@ -1377,7 +1377,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
                         NSLog(@"  Entity instance does NOT exist");
                         if (l_isActive) {
                             NSLog(@"    Entity instance will be created");
-                            l_systemEntity = (IFASystemEntity *) [[IFAPersistenceManager sharedInstance] instantiate:l_entityName];
+                            l_systemEntity = (IFASystemEntity *) [self instantiate:l_entityName];
                         }else{
                             NSLog(@"    Entity instance will NOT be created (not active)");
                         }
@@ -1401,7 +1401,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
         a_block(l_oldSystemEntitiesVersion, l_newSystemEntitiesVersion);
 
 		[self setSystemDbTablesVersion:l_newSystemEntitiesVersion];
-		[[IFAPersistenceManager sharedInstance] save];
+		[self save];
 
         NSLog(@"System tables loaded");
 
