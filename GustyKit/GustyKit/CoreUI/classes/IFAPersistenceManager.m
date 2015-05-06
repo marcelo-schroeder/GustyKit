@@ -1278,27 +1278,29 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 #endif
 
     // Create data store directory if required
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *storeDirectoryUrl = [dataStoreUrl URLByDeletingLastPathComponent];
+    if (persistentStoreType == NSSQLiteStoreType) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSURL *storeDirectoryUrl = [dataStoreUrl URLByDeletingLastPathComponent];
 #ifdef DEBUG
-    NSLog(@"Checking if data store directory exists: %@", storeDirectoryUrl.path);
+        NSLog(@"Checking if data store directory exists: %@", storeDirectoryUrl.path);
 #endif
-    if (![fileManager fileExistsAtPath:storeDirectoryUrl.path]) {
+        if (![fileManager fileExistsAtPath:storeDirectoryUrl.path]) {
 #ifdef DEBUG
-        NSLog(@"  Creating data store directory...");
+            NSLog(@"  Creating data store directory...");
 #endif
-        NSError *error;
-        BOOL success = [fileManager createDirectoryAtURL:storeDirectoryUrl
-                             withIntermediateDirectories:YES
-                                              attributes:nil
-                                                   error:&error];
-        if (!success) {
-            [IFAUIUtils handleUnrecoverableError:error];
-            return;
+            NSError *error;
+            BOOL success = [fileManager createDirectoryAtURL:storeDirectoryUrl
+                                 withIntermediateDirectories:YES
+                                                  attributes:nil
+                                                       error:&error];
+            if (!success) {
+                [IFAUIUtils handleUnrecoverableError:error];
+                return;
+            }
+#ifdef DEBUG
+            NSLog(@"  ...done");
+#endif
         }
-#ifdef DEBUG
-        NSLog(@"  ...done");
-#endif
     }
 
     // Configure managedObjectModel
