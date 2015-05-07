@@ -63,6 +63,7 @@ typedef NS_ENUM(NSUInteger, IFAEntityConfigFieldType){
 - (NSString*)listGroupedByForEntity:(NSString*)anEntityName;
 - (NSString*)listFetchedResultsControllerSectionNameKeyPathForEntity:(NSString*)anEntityName;
 - (NSString*)labelForEntity:(NSString*)anEntityName;
+- (NSString*)uuidPropertyNameForEntity:(NSString*)anEntityName;
 - (NSString*)indefiniteArticleForEntity:(NSString*)anEntityName;
 - (IFAEditorType)fieldEditorForEntity:(NSString*)anEntityName;
 - (NSString*)labelForObject:(NSObject*)anObject;

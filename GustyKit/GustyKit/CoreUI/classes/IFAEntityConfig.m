@@ -329,6 +329,10 @@
     }
 }
 
+- (NSString *)uuidPropertyNameForEntity:(NSString *)anEntityName {
+    return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"uuidPropertyName"];
+}
+
 - (NSString*)indefiniteArticleForEntity:(NSString*)anEntityName{
 	return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"indefiniteArticle"];
 }

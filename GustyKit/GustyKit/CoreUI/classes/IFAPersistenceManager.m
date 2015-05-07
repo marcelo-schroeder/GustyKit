@@ -751,6 +751,11 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
                                       error:&l_error]){
         [IFAUIUtils handleUnrecoverableError:l_error];
     };
+    NSString *uuidPropertyName = [self.entityConfig uuidPropertyNameForEntity:entityName];
+    if (uuidPropertyName) {
+        [l_mo setValue:[IFAUtils generateUuid]
+                forKey:uuidPropertyName];
+    }
 	return l_mo;
 }
 
