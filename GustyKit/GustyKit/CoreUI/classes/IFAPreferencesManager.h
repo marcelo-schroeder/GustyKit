@@ -22,6 +22,8 @@
 
 @interface IFAPreferencesManager : NSObject
 
+- (instancetype)initWithPersistenceManager:(IFAPersistenceManager *)persistenceManager NS_DESIGNATED_INITIALIZER;
+
 + (IFAPreferencesManager *)sharedInstance;
 
 -(id)preferences;

@@ -24,6 +24,7 @@
 
 @property (nonatomic, strong) NSManagedObjectID *IFA_preferencesManagedObjectId;
 
+@property(nonatomic, strong) IFAPersistenceManager *persistenceManager;
 @end
 
 @implementation IFAPreferencesManager {
@@ -31,6 +32,14 @@
 }
 
 #pragma mark - Public
+
+- (instancetype)initWithPersistenceManager:(IFAPersistenceManager *)persistenceManager {
+    self = [super init];
+    if (self) {
+        self.persistenceManager = persistenceManager;
+    }
+    return self;
+}
 
 -(id)preferences {
 
@@ -40,15 +49,15 @@
 
         if (self.IFA_preferencesManagedObjectId) {    // ID is known, so load by ID
 
-            return [[IFAPersistenceManager sharedInstance] findById:self.IFA_preferencesManagedObjectId];
+            return [self.persistenceManager findById:self.IFA_preferencesManagedObjectId];
 
         }else{  // ID is not known
 
-            NSManagedObject *l_mo = [[IFAPersistenceManager sharedInstance] fetchSingleForEntity:l_preferencesClassName];
+            NSManagedObject *l_mo = [self.persistenceManager fetchSingleForEntity:l_preferencesClassName];
             if (l_mo) { // Preferences record already exists, so make a note of the ID for later use
                 self.IFA_preferencesManagedObjectId = l_mo.objectID;
             }else{  // Preferences record does not exist, so create it and make a note of the ID for later use
-                self.IFA_preferencesManagedObjectId = [[IFAPersistenceManager sharedInstance] instantiate:l_preferencesClassName].objectID;
+                self.IFA_preferencesManagedObjectId = [self.persistenceManager instantiate:l_preferencesClassName].objectID;
             }
             return l_mo;
 
@@ -69,6 +78,15 @@
         c_instance = [self new];
     });
     return c_instance;
+}
+
+#pragma mark - Private
+
+- (IFAPersistenceManager *)persistenceManager {
+    if (!_persistenceManager) {
+        _persistenceManager = [IFAPersistenceManager sharedInstance];
+    }
+    return _persistenceManager;
 }
 
 @end
