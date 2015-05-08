@@ -832,6 +832,20 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     return [self findById:l_managedObjectId];
 }
 
+- (NSManagedObject *)findByUuid:(NSString *)uuid entityName:(NSString *)entityName {
+    if (uuid) {
+        NSString *uuidPropertyName = [self.entityConfig uuidPropertyNameForEntity:entityName];
+        if (uuidPropertyName) {
+            return [self findSingleByKeysAndValues:@{uuidPropertyName: uuid}
+                                            entity:entityName];
+        } else {
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+}
+
 -(NSArray*)findByKeysAndValues:(NSDictionary*)aDictionary entity:(NSString *)anEntityName{
     return [self fetchWithPredicate:[self predicateForKeysAndValues:aDictionary] entity:anEntityName];
 }

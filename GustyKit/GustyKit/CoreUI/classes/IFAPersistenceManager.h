@@ -81,6 +81,10 @@
 - (NSManagedObject *) findByName:(NSString*)aName entity:(NSString *)anEntityName;
 - (NSManagedObject *) findById:(NSManagedObjectID*)anObjectId;
 - (NSManagedObject *) findByStringId:(NSString*)aStringId;
+
+- (NSManagedObject *)findByUuid:(NSString *)uuid
+                     entityName:(NSString *)entityName;
+
 -(NSArray*)findByKeysAndValues:(NSDictionary*)aDictionary entity:(NSString *)anEntityName;
 -(NSManagedObject*)findSingleByKeysAndValues:(NSDictionary*)aDictionary entity:(NSString *)anEntityName;
 - (BOOL)isSystemEntityForEntity:(NSString*)anEntityName;
