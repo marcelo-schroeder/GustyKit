@@ -36,9 +36,9 @@
 @property (strong, readonly) NSPersistentStore *persistentStore;
 @property (strong, readonly) IFAEntityConfig *entityConfig;
 
-@property (nonatomic) BOOL isCurrentManagedObjectDirty;
+@property BOOL isCurrentManagedObjectDirty;
 
-@property (nonatomic) BOOL savesInMainThreadOnly;
+@property BOOL savesInMainThreadOnly;
 
 - (void) resetEditSession;
 

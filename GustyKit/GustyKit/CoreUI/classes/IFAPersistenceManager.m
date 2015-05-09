@@ -20,8 +20,6 @@
 
 #import "GustyKitCoreUI.h"
 
-static NSString * const k_threadDictKeyManagedObjectContext = @"com.infoaccent.gusty.pm.managedObjectContext";
-
 static NSString *METADATA_KEY_SYSTEM_DB_TABLES_LOADED = @"systemDbTablesLoaded";
 static NSString *METADATA_VALUE_SYSTEM_DB_TABLES_LOADED = @"Y";
 static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion";
@@ -38,6 +36,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 @property (strong) IFAEntityConfig *entityConfig;
 @property (strong) NSDictionary *IFA_metadata;
 @property (strong) NSMutableArray *IFA_childManagedObjectContexts;
+@property (strong) NSString *threadDictionaryKeyManagedObjectContext;
 
 @end
 
@@ -50,6 +49,8 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
     if (self) {
         self.savesInMainThreadOnly = YES;
         self.IFA_childManagedObjectContexts = [NSMutableArray new];
+        self.threadDictionaryKeyManagedObjectContext = [NSString stringWithFormat:@"com.infoaccent.GustyKit.PersistenceManager.ManagedObjectContext.%@",
+                                                                                  [IFAUtils generateUuid]];
     }
     return self;
 }
@@ -59,9 +60,9 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 -(void (^)())IFA_wrapperForBlock:(void (^)())a_block managedObjectContext:(NSManagedObjectContext*)a_managedObjectContext{
     return ^{
         NSMutableDictionary *l_threadDict = [[NSThread currentThread] threadDictionary];
-        [l_threadDict setObject:a_managedObjectContext forKey:k_threadDictKeyManagedObjectContext];
+        l_threadDict[self.threadDictionaryKeyManagedObjectContext] = a_managedObjectContext;
         a_block();
-        [l_threadDict removeObjectForKey:k_threadDictKeyManagedObjectContext];
+        [l_threadDict removeObjectForKey:self.threadDictionaryKeyManagedObjectContext];
     };
 }
 
@@ -1485,7 +1486,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 -(NSManagedObjectContext*)currentManagedObjectContext{
 //    NSLog(@" ");
 //    NSLog(@"currentManagedObjectContext");
-    NSManagedObjectContext *l_managedObjectContext = [[NSThread currentThread] threadDictionary][k_threadDictKeyManagedObjectContext];
+    NSManagedObjectContext *l_managedObjectContext = [[NSThread currentThread] threadDictionary][self.threadDictionaryKeyManagedObjectContext];
 //    NSLog(@"  from threadDictionary: %@", [l_managedObjectContext description]);
     if (!l_managedObjectContext) {
         if (self.IFA_childManagedObjectContexts.count>0) {
