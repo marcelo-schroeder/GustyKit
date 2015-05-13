@@ -72,7 +72,6 @@
 #import "IFACurrentLocationManager.h"
 #import "IFACustomLayoutSupport.h"
 #import "IFADatePickerViewController.h"
-#import "IFADefaultAppearanceTheme.h"
 #import "IFADirectionsManager.h"
 //#import "IFADynamicPagingContainerViewController.h"
 //#import "IFADynamicPagingContainerViewControllerDataSource.h"
