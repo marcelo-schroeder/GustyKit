@@ -127,10 +127,11 @@
 
         __block NSMutableArray *l_entities = [NSMutableArray new];
         NSManagedObjectContext *managedObjectContext = persistenceManager.privateQueueChildManagedObjectContext;
-        [persistenceManager performBlockAndWait:^{
-            [managedObjectContext reset];
-            l_entities = [IFAPersistenceManager idsForManagedObjects:[[NSMutableArray alloc] initWithArray:[l_weakSelf findEntities]]];
-        } managedObjectContext:managedObjectContext];
+        [persistenceManager performAndWaitOnQueueOfManagedObjectContext:managedObjectContext
+                                                                  block:^{
+                                                                      [managedObjectContext reset];
+                                                                      l_entities = [IFAPersistenceManager idsForManagedObjects:[[NSMutableArray alloc] initWithArray:[l_weakSelf findEntities]]];
+                                                                  }];
         //        NSLog(@"find done");
 
         if (l_weakSelf.ifa_asynchronousWorkManager.areAllBlocksCancelled) {

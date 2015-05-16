@@ -1099,21 +1099,36 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 	return sortDescriptors;
 }
 
-- (void)performBlock:(void (^)())a_block{
-    [self performBlock:a_block managedObjectContext:self.managedObjectContext];
+- (void)performOnMainManagedObjectContextQueue:(void (^)())a_block{
+    [self performOnQueueOfManagedObjectContext:self.managedObjectContext
+                                         block:a_block];
 }
 
-- (void)performBlockAndWait:(void (^)())a_block{
-    [self performBlockAndWait:a_block managedObjectContext:self.managedObjectContext];
+- (void)performAndWaitOnMainManagedObjectContextQueue:(void (^)())a_block{
+    [self performAndWaitOnQueueOfManagedObjectContext:self.managedObjectContext
+                                                block:a_block];
 }
 
-- (void)performBlock:(void (^)())a_block managedObjectContext:(NSManagedObjectContext*)a_managedObjectContext{
+- (void)performOnQueueOfManagedObjectContext:(NSManagedObjectContext *)a_managedObjectContext
+                                       block:(void (^)())a_block {
     [a_managedObjectContext performBlock:[self IFA_wrapperForBlock:a_block managedObjectContext:a_managedObjectContext]];
 }
 
-- (void)performBlockAndWait:(void (^)())a_block managedObjectContext:(NSManagedObjectContext*)a_managedObjectContext{
+- (void)performAndWaitOnQueueOfManagedObjectContext:(NSManagedObjectContext *)a_managedObjectContext
+                                              block:(void (^)())a_block {
     [a_managedObjectContext performBlockAndWait:[self IFA_wrapperForBlock:a_block
                                                      managedObjectContext:a_managedObjectContext]];
+}
+
+- (void)performOnCurrentThreadForMainManagedObjectContext:(void (^)())a_block {
+    [self IFA_wrapperForBlock:a_block
+         managedObjectContext:self.managedObjectContext]();
+}
+
+- (void)performOnCurrentThreadWithManagedObjectContext:(NSManagedObjectContext *)a_managedObjectContext
+                                                 block:(void (^)())a_block {
+    [self IFA_wrapperForBlock:a_block
+         managedObjectContext:a_managedObjectContext]();
 }
 
 -(NSMutableArray*)managedObjectsForIds:(NSArray*)a_managedObjectIds{
