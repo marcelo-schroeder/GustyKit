@@ -96,10 +96,11 @@
 
     IFAListViewController *__weak l_weakSelf = self;
 
+    IFAPersistenceManager *persistenceManager = [IFAPersistenceManager sharedInstance];
     void (^l_completionBlock)(NSMutableArray *) = ^(NSMutableArray *a_managedObjectIds) {
 //        NSLog(@"completion block - start for %@", [l_weakSelf description]);
         @synchronized (l_weakSelf) {
-            l_weakSelf.entities = [[IFAPersistenceManager sharedInstance] managedObjectsForIds:a_managedObjectIds];
+            l_weakSelf.entities = [persistenceManager managedObjectsForIds:a_managedObjectIds];
             if (l_weakSelf.pagingContainer || [l_weakSelf.entities count] > 0) {
                 l_weakSelf.staleData = NO;
             }
@@ -125,9 +126,11 @@
 //        }
 
         __block NSMutableArray *l_entities = [NSMutableArray new];
-        [[IFAPersistenceManager sharedInstance] performBlockInPrivateQueueAndWait:^{
+        NSManagedObjectContext *managedObjectContext = persistenceManager.privateQueueChildManagedObjectContext;
+        [persistenceManager performBlockAndWait:^{
+            [managedObjectContext reset];
             l_entities = [IFAPersistenceManager idsForManagedObjects:[[NSMutableArray alloc] initWithArray:[l_weakSelf findEntities]]];
-        }];
+        } managedObjectContext:managedObjectContext];
         //        NSLog(@"find done");
 
         if (l_weakSelf.ifa_asynchronousWorkManager.areAllBlocksCancelled) {

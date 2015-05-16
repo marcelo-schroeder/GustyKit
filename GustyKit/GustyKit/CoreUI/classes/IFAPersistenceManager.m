@@ -28,7 +28,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 
 @property (strong) NSManagedObjectModel *managedObjectModel;
 @property (strong) NSManagedObjectContext *managedObjectContext;
-@property (strong) NSManagedObjectContext *privateQueueManagedObjectContext;
+@property (strong) NSManagedObjectContext *privateQueueChildManagedObjectContext;
 //@property BOOL p_isPrivateQueueManagedObjectContextStale;
 @property (strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong) NSMutableDictionary *IFA_managedObjectChangedValuesDictionary;
@@ -532,13 +532,6 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 - (void) setSystemDbTablesVersion:(NSUInteger)a_version{
 	[self setMetadataValue:METADATA_VALUE_SYSTEM_DB_TABLES_LOADED forKey:METADATA_KEY_SYSTEM_DB_TABLES_LOADED];
 	[self setMetadataValue:@(a_version) forKey:METADATA_KEY_SYSTEM_DB_TABLES_VERSION];
-}
-
--(NSManagedObjectContext*)IFA_privateQueueManagedObjectContext {
-    NSManagedObjectContext *l_managedObjectContext = [[NSThread currentThread] threadDictionary][IFAKeySerialQueueManagedObjectContext];
-    NSAssert(l_managedObjectContext!=nil, @"Thread managed object context must be not nil");
-    NSAssert(l_managedObjectContext!=self.managedObjectContext, @"Thread managed object context must be different than main one");
-    return l_managedObjectContext;
 }
 
 - (NSPersistentStore *)IFA_addPersistentStoreWithType:(NSString *)a_persistentStoreType
@@ -1114,14 +1107,6 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     [self performBlockAndWait:a_block managedObjectContext:self.managedObjectContext];
 }
 
-- (void)performBlockInPrivateQueue:(void (^)())a_block{
-    [self performBlock:a_block managedObjectContext:[self IFA_privateQueueManagedObjectContext]];
-}
-
-- (void)performBlockInPrivateQueueAndWait:(void (^)())a_block{
-    [self performBlockAndWait:a_block managedObjectContext:[self IFA_privateQueueManagedObjectContext]];
-}
-
 - (void)performBlock:(void (^)())a_block managedObjectContext:(NSManagedObjectContext*)a_managedObjectContext{
     [a_managedObjectContext performBlock:[self IFA_wrapperForBlock:a_block managedObjectContext:a_managedObjectContext]];
 }
@@ -1339,8 +1324,8 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     [self.managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
     
     // Configure child managedObjectContext using a private queue concurrency type (used for async fetches)
-    self.privateQueueManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [self.privateQueueManagedObjectContext setParentContext:self.managedObjectContext];
+    self.privateQueueChildManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [self.privateQueueChildManagedObjectContext setParentContext:self.managedObjectContext];
     
     // Add observers if required
     if (!a_muteChangeNotifications) {

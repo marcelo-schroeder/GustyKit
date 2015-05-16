@@ -25,10 +25,9 @@ typedef void (^IFAAsynchronousWorkManagerOperationCompletionBlock)(NSOperation *
 * There is also the option to show progress information on the UI.
 * A shared instance can be used via the <sharedInstance> method, or independent instances can be created to isolate work.
 * Each instance will create its own operation queue (for work based on NSOperation instances) and serial dispatch queue (for work based on dispatch blocks).
+* The operation queue will have its maxConcurrentOperationCount set to 1 by default.
 */
 @interface IFAAsynchronousWorkManager : NSObject
-
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @property (readonly) BOOL areAllBlocksCancelled;
 
@@ -75,19 +74,23 @@ typedef void (^IFAAsynchronousWorkManagerOperationCompletionBlock)(NSOperation *
 
 /** @name Methods based on GCD serial dispatch queues */
 
--(void)dispatchSerialBlock:(dispatch_block_t)a_block;
--(void)dispatchSerialBlock:(dispatch_block_t)a_block cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks;
--(void)dispatchSerialBlock:(dispatch_block_t)a_block showProgressIndicator:(BOOL)a_showProgressIndicator;
--(void)dispatchSerialBlock:(dispatch_block_t)a_block showProgressIndicator:(BOOL)a_showProgressIndicator
-      cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks;
--(void)              dispatchSerialBlock:(dispatch_block_t)a_block
+- (void)dispatchSerialBlock:(dispatch_block_t)a_block;
+
+- (void)dispatchSerialBlock:(dispatch_block_t)a_block
+       cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks;
+
+- (void)dispatchSerialBlock:(dispatch_block_t)a_block
+      showProgressIndicator:(BOOL)a_showProgressIndicator;
+
+- (void)dispatchSerialBlock:(dispatch_block_t)a_block
+      showProgressIndicator:(BOOL)a_showProgressIndicator
+       cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks;
+
+- (void)             dispatchSerialBlock:(dispatch_block_t)a_block
 progressIndicatorContainerViewController:(UIViewController *)a_progressIndicatorContainerViewController
                     cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks;
--(void)              dispatchSerialBlock:(dispatch_block_t)a_block
-progressIndicatorContainerViewController:(UIViewController *)a_progressIndicatorContainerViewController
-                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks usePrivateManagedObjectContext:(BOOL)a_usePrivateManagedObjectContext;
--(void)dispatchSerialBlock:(dispatch_block_t)a_block usePrivateManagedObjectContext:(BOOL)a_usePrivateManagedObjectContext;
--(void)cancelAllSerialBlocks;
+
+- (void)cancelAllSerialBlocks;
 
 /* the methods below are based on GCD global concurrent dispatch queues */
 

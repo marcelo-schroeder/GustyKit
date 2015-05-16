@@ -154,7 +154,9 @@
 
 - (void)dispatchSerialBlock:(dispatch_block_t)a_block
        cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks {
-    [self dispatchSerialBlock:a_block showProgressIndicator:NO cancelPreviousBlocks:a_cancelPreviousBlocks];
+    [self dispatchSerialBlock:a_block
+        showProgressIndicator:NO
+         cancelPreviousBlocks:a_cancelPreviousBlocks];
 }
 
 - (void)dispatchSerialBlock:(dispatch_block_t)a_block
@@ -168,35 +170,22 @@
     [self dispatchSerialBlock:a_block
                    showProgressIndicator:a_showProgressIndicator
 progressIndicatorContainerViewController:nil
-                    cancelPreviousBlocks:a_cancelPreviousBlocks
-          usePrivateManagedObjectContext:YES];
-}
-
--(void)              dispatchSerialBlock:(dispatch_block_t)a_block
-progressIndicatorContainerViewController:(UIViewController *)a_progressIndicatorContainerViewController
-                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks{
-    [self            dispatchSerialBlock:a_block
-progressIndicatorContainerViewController:a_progressIndicatorContainerViewController
-                    cancelPreviousBlocks:a_cancelPreviousBlocks
-          usePrivateManagedObjectContext:YES];
+                    cancelPreviousBlocks:a_cancelPreviousBlocks];
 }
 
 - (void)             dispatchSerialBlock:(dispatch_block_t)a_block
 progressIndicatorContainerViewController:(UIViewController *)a_progressIndicatorContainerViewController
-                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks
-          usePrivateManagedObjectContext:(BOOL)a_usePrivateManagedObjectContext {
+                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks {
     [self dispatchSerialBlock:a_block
-                   showProgressIndicator:a_progressIndicatorContainerViewController!= nil
+                   showProgressIndicator:a_progressIndicatorContainerViewController != nil
 progressIndicatorContainerViewController:a_progressIndicatorContainerViewController
-                    cancelPreviousBlocks:a_cancelPreviousBlocks
-          usePrivateManagedObjectContext:a_usePrivateManagedObjectContext];
+                    cancelPreviousBlocks:a_cancelPreviousBlocks];
 }
 
 - (void)dispatchSerialBlock:(dispatch_block_t)a_block
                    showProgressIndicator:(BOOL)a_showProgressIndicator
 progressIndicatorContainerViewController:(UIViewController *)a_progressIndicatorContainerViewController
-                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks
-          usePrivateManagedObjectContext:(BOOL)a_usePrivateManagedObjectContext {
+                    cancelPreviousBlocks:(BOOL)a_cancelPreviousBlocks {
     
     // Generate a UUID to identify this block
     NSString *l_blockUuid = [IFAUtils generateUuid];
@@ -223,9 +212,6 @@ progressIndicatorContainerViewController:(UIViewController *)a_progressIndicator
 //        NSLog(@"IFA_cancelAllBlocksRequestOwnerUuid: %@", [IFA_cancelAllBlocksRequestOwnerUuid description]);
 //        NSLog(@"a_block: %@", [a_block description]);
         
-        // Reset the managed object context to avoid stale objects for this session
-        [l_weakSelf.managedObjectContext reset]; //wip: shouldn't this be inside the if below that checks if the private MOC will be used? - decide what to do after I find out what's going on with the Core Data issue in Timed
-        
         if (l_weakSelf.areAllBlocksCancelled && [l_weakSelf.IFA_cancelAllBlocksRequestOwnerUuid isEqualToString:l_blockUuid]) {
             l_weakSelf.areAllBlocksCancelled = NO;
             l_weakSelf.IFA_cancelAllBlocksRequestOwnerUuid = nil;
@@ -233,15 +219,7 @@ progressIndicatorContainerViewController:(UIViewController *)a_progressIndicator
 
         // Execute "the" block
 //        NSLog(@"about to execute inner block...");
-        NSMutableDictionary *l_threadDict = nil;
-        if (a_usePrivateManagedObjectContext) {
-            l_threadDict = [[NSThread currentThread] threadDictionary];
-            l_threadDict[IFAKeySerialQueueManagedObjectContext] = l_weakSelf.managedObjectContext;
-        }
         a_block();
-        if (l_threadDict) {
-            [l_threadDict removeObjectForKey:IFAKeySerialQueueManagedObjectContext];
-        }
 //        NSLog(@"inner block executed!");
 
         // Hide progress indicator if required
@@ -259,11 +237,6 @@ progressIndicatorContainerViewController:(UIViewController *)a_progressIndicator
     // Start work requested
     dispatch_async(self.IFA_mainSerialDispatchQueue, l_block);
 
-}
-
--(void)dispatchSerialBlock:(dispatch_block_t)a_block usePrivateManagedObjectContext:(BOOL)a_usePrivateManagedObjectContext{
-    [self  dispatchSerialBlock:a_block progressIndicatorContainerViewController:nil cancelPreviousBlocks:NO
-usePrivateManagedObjectContext:a_usePrivateManagedObjectContext];
 }
 
 -(void)dispatchConcurrentBackgroundBlock:(dispatch_block_t)a_block{
@@ -304,12 +277,10 @@ usePrivateManagedObjectContext:a_usePrivateManagedObjectContext];
         NSString *uuid = [IFAUtils generateUuid];
         self.IFA_operationQueue = [[NSOperationQueue alloc] init];
         self.IFA_operationQueue.name = [NSString stringWithFormat:@"com.infoaccent.IFAAsynchronousOperationManager.operationQueue.%@", uuid];
+        self.IFA_operationQueue.maxConcurrentOperationCount = 1;
         NSString *l_mainSerialDispatchQueueId = [NSString stringWithFormat:@"com.infoaccent.IFAAsynchronousOperationManager.mainSerialDispatchQueue.%@", uuid];
 //        NSLog(@"l_mainSerialDispatchQueueId: %@", l_mainSerialDispatchQueueId);
         self.IFA_mainSerialDispatchQueue = dispatch_queue_create([l_mainSerialDispatchQueueId UTF8String], DISPATCH_QUEUE_SERIAL);
-        
-        // Set default managed object context for this work manager's threads
-        self.managedObjectContext = [IFAPersistenceManager sharedInstance].privateQueueManagedObjectContext;
 
     }
 

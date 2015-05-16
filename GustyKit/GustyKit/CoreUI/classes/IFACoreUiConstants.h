@@ -56,7 +56,6 @@ extern NSString* const IFAKeyUpdatedObjects;
 extern NSString* const IFAKeyDeletedObjects;
 extern NSString* const IFAKeyUpdatedProperties;
 extern NSString* const IFAKeyOriginalProperties;
-extern NSString* const IFAKeySerialQueueManagedObjectContext;
 
 // Entity Config
 extern NSString* const IFAEntityConfigFormNameDefault;

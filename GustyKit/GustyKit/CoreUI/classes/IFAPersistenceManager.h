@@ -30,8 +30,17 @@
 @interface IFAPersistenceManager : NSObject
 
 @property (strong, readonly) NSManagedObjectModel *managedObjectModel;
+
+/**
+* Main managed object context with concurrency type NSMainQueueConcurrencyType for exclusive access from the main thread.
+*/
 @property (strong, readonly) NSManagedObjectContext *managedObjectContext;
-@property (strong, readonly) NSManagedObjectContext *privateQueueManagedObjectContext;
+
+/**
+* Managed object context with concurrency type NSPrivateQueueConcurrencyType for asynchronous background fetching. Normally used in combination with the dispatchSerialBlock methods from IFAAsynchronousWorkManager and its shared instance.
+*/
+@property (strong, readonly) NSManagedObjectContext *privateQueueChildManagedObjectContext;
+
 @property (strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, readonly) NSPersistentStore *persistentStore;
 @property (strong, readonly) IFAEntityConfig *entityConfig;
@@ -147,13 +156,24 @@
 - (NSArray *)listSortDescriptorsForEntity:(NSString *)a_entityName
                         usedForRelationship:(BOOL)a_usedForRelationship;
 
+/**
+* Executes performBlock: on the receiver's managedObjectContext property instance and make that managed object context the instance returned by currentManagedObjectContext for the thread executing the block provided.
+*/
 - (void)performBlock:(void (^)())a_block;
+
+/**
+* Executes performBlockAndWait: on the receiver's managedObjectContext property instance and make that managed object context the instance returned by currentManagedObjectContext for the thread executing the block provided.
+*/
 - (void)performBlockAndWait:(void (^)())a_block;
 
-- (void)performBlockInPrivateQueue:(void (^)())a_block;
-- (void)performBlockInPrivateQueueAndWait:(void (^)())a_block;
-
+/**
+* Executes performBlock: on the NSManagedObjectContext instance provided and make that managed object context the instance returned by currentManagedObjectContext for the thread executing the block provided.
+*/
 - (void)performBlock:(void (^)())a_block managedObjectContext:(NSManagedObjectContext*)a_managedObjectContext;
+
+/**
+* Executes performBlockAndWait: on the NSManagedObjectContext instance provided and make that managed object context the instance returned by currentManagedObjectContext for the thread executing the block provided.
+*/
 - (void)performBlockAndWait:(void (^)())a_block managedObjectContext:(NSManagedObjectContext*)a_managedObjectContext;
 
 -(NSMutableArray*)managedObjectsForIds:(NSArray*)a_managedObjectIds;
@@ -169,7 +189,7 @@
 * Configure the persistence manager instance, including the Core Data stack.
 *
 * This method can configure either a SQLite store or an in memory store. The type of store will depend on the a_databaseResourceName parameter.
-* After completion, the following properties will have been set: managedObjectModel, persistentStoreCoordinator, managedObjectContext, privateQueueManagedObjectContext and entityConfig.
+* After completion, the following properties will have been set: managedObjectModel, persistentStoreCoordinator, managedObjectContext, privateQueueChildManagedObjectContext and entityConfig.
 *
 * @param a_databaseResourceName Name of the SQLite database file for a SQLite store, without the ".sqlite" file suffix. If nil, an in-memory store will be created instead.
 * @param a_managedObjectModelResourceName Name of Core Data data model resource, without the ".momd" suffix.

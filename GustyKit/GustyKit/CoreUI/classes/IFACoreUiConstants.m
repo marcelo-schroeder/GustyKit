@@ -47,7 +47,6 @@ NSString* const IFAKeyUpdatedObjects = @"ifa.key.updatedObjects";
 NSString* const IFAKeyDeletedObjects = @"ifa.key.deletedObjects";
 NSString* const IFAKeyUpdatedProperties = @"ifa.key.updatedProperties";
 NSString* const IFAKeyOriginalProperties = @"ifa.key.originalProperties";
-NSString* const IFAKeySerialQueueManagedObjectContext = @"ifa.key.serialQueueManagedObjectContext";
 
 // Entity Config
 NSString* const IFAEntityConfigFormNameDefault = @"main";
