@@ -854,23 +854,35 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     }
 }
 
-- (NSUInteger) countEntity:(NSString*)anEntityName{
-    return [self countEntity:anEntityName keysAndValues:nil];
+- (NSUInteger) countEntity:(NSString*)entityName {
+    return [self countEntity:entityName
+               keysAndValues:nil];
 }
 
 - (NSUInteger) countEntity:(NSString*)anEntityName keysAndValues:(NSDictionary*)aDictionary{
-    NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:anEntityName inManagedObjectContext:[self currentManagedObjectContext]]];
+    NSPredicate *predicate = nil;
     if (aDictionary) {
-        [request setPredicate:[self predicateForKeysAndValues:aDictionary]];
+        predicate = [self predicateForKeysAndValues:aDictionary];
     }
-	//NSLog(@"count request: %@", [request description]);
-	NSError *error;
+    return [self countEntity:anEntityName
+               withPredicate:predicate];
+}
+
+- (NSUInteger) countEntity:(NSString*)entityName
+             withPredicate:(NSPredicate *)predicate {
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:entityName
+                                   inManagedObjectContext:[self currentManagedObjectContext]]];
+    if (predicate) {
+        [request setPredicate:predicate];
+    }
+    //NSLog(@"count request: %@", [request description]);
+    NSError *error;
     NSUInteger count = [[self currentManagedObjectContext] countForFetchRequest:request error:&error];
-	if (count==NSNotFound) {
-		[IFAUIUtils handleUnrecoverableError:error];
-	}
-	return count;
+    if (count==NSNotFound) {
+        [IFAUIUtils handleUnrecoverableError:error];
+    }
+    return count;
 }
 
 - (NSArray*) fetchWithPredicate:(NSPredicate*)aPredicate 

@@ -169,6 +169,7 @@
 		F72150E019B1A9DD00AE2C33 /* IFA_Icon_Next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F72150C819AABAFF00AE2C33 /* IFA_Icon_Next@2x.png */; };
 		F72150E119B1A9DD00AE2C33 /* IFA_Icon_Previous.png in Resources */ = {isa = PBXBuildFile; fileRef = F72150C919AABAFF00AE2C33 /* IFA_Icon_Previous.png */; };
 		F72150E219B1A9DD00AE2C33 /* IFA_Icon_Previous@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F72150CA19AABAFF00AE2C33 /* IFA_Icon_Previous@2x.png */; };
+		F74A2A711B0ACD2400CD7116 /* IFAPersistenceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F74A2A701B0ACD2400CD7116 /* IFAPersistenceManagerTests.m */; };
 		F759E0581AD672B600B20D3B /* IFALocationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F759E0571AD672B600B20D3B /* IFALocationManagerTests.m */; };
 		F766D33E18ECA71000B3B590 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F766D33D18ECA71000B3B590 /* CoreLocation.framework */; };
 		F766D33F18ECA7D700B3B590 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D4DBED18EA11E100ABF401 /* MapKit.framework */; };
@@ -565,6 +566,7 @@
 		F72150EE19BD2DD700AE2C33 /* IFAMapSettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IFAMapSettingsViewController.storyboard; sourceTree = "<group>"; };
 		F743BD1E19C8E2F8004EBA3E /* IFA_Icon_Add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IFA_Icon_Add.png; sourceTree = "<group>"; };
 		F7446BD119085FA9008345FA /* GustyKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.podspec; name = GustyKit.podspec; path = ../GustyKit.podspec; sourceTree = "<group>"; };
+		F74A2A701B0ACD2400CD7116 /* IFAPersistenceManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAPersistenceManagerTests.m; sourceTree = "<group>"; };
 		F74C16E419BD4B0000B9B367 /* IFA_Icon_UserLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IFA_Icon_UserLocation.png; sourceTree = "<group>"; };
 		F74C16E519BD4B0000B9B367 /* IFA_Icon_UserLocation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IFA_Icon_UserLocation@2x.png"; sourceTree = "<group>"; };
 		F74C16E619BD6F4800B9B367 /* IFA_Icon_List.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IFA_Icon_List.png; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				F7B5A7211AC8CA0B00E47858 /* IFASelectionManagerTests.m */,
 				F7B5A7231AC914FD00E47858 /* IFASingleSelectionManagerTests.m */,
 				F759E0571AD672B600B20D3B /* IFALocationManagerTests.m */,
+				F74A2A701B0ACD2400CD7116 /* IFAPersistenceManagerTests.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -1591,6 +1594,7 @@
 				1073867536D46D572CD92C20 /* IFADateRangeTest.m in Sources */,
 				F7FF00D01AB8F2DF00A0886D /* GustyKitCoreUITestsModel.xcdatamodeld in Sources */,
 				107387F88DF310BD27B19D06 /* IFAColorSchemeTest.m in Sources */,
+				F74A2A711B0ACD2400CD7116 /* IFAPersistenceManagerTests.m in Sources */,
 				F72150DC19AF21EE00AE2C33 /* NSMutableArrayTests.m in Sources */,
 				10738463D41DBE6FDFB0DA9F /* NSDateTest.m in Sources */,
 				10738307A37B950136F43E0E /* NSNumberFormatterTests.m in Sources */,

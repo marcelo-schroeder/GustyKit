@@ -60,8 +60,15 @@
 - (BOOL)deleteAndSaveObject:(NSManagedObject *)aManagedObject validationAlertPresenter:(UIViewController *)a_validationAlertPresenter;
 - (void)rollback;
 //- (void)undo;
-- (NSUInteger) countEntity:(NSString*)anEntityName;
-- (NSUInteger) countEntity:(NSString*)anEntityName keysAndValues:(NSDictionary*)aDictionary;
+
+- (NSUInteger)countEntity:(NSString *)entityName;
+
+- (NSUInteger)countEntity:(NSString *)anEntityName
+            keysAndValues:(NSDictionary *)aDictionary;
+
+- (NSUInteger)countEntity:(NSString *)entityName
+            withPredicate:(NSPredicate *)predicate;
+
 - (BOOL)validateForSave:(NSManagedObject *)aManagedObject validationAlertPresenter:(UIViewController *)a_validationAlertPresenter;
 
 - (NSManagedObject *)instantiate:(NSString *)entityName;
