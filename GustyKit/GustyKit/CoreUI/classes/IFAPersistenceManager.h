@@ -26,8 +26,11 @@
 @class NSFetchRequest;
 @class NSManagedObjectID;
 @class NSFetchedResultsController;
+@protocol IFAPersistenceManagerDelegate;
 
 @interface IFAPersistenceManager : NSObject
+
+@property (nonatomic, weak) id<IFAPersistenceManagerDelegate> delegate;
 
 @property (strong, readonly) NSManagedObjectModel *managedObjectModel;
 
@@ -255,5 +258,19 @@
 + (instancetype)sharedInstance;
 + (BOOL)setValidationError:(NSError**)anError withMessage:(NSString*)anErrorMessage;
 + (NSMutableArray*)idsForManagedObjects:(NSArray*)a_managedObjects;
+
+@end
+
+@protocol IFAPersistenceManagerDelegate <NSObject>
+
+@optional
+
+/**
+* This callback offers the chance to have some work done before a CRUD save is performed (e.g. synchronisation of external changes).
+* @param persistenceManager The sender.
+* @param object The managed object being inserted, updated or deleted.
+*/
+- (void)  persistenceManager:(IFAPersistenceManager *)persistenceManager
+willPerformCrudSaveForObject:(NSManagedObject *)object;
 
 @end

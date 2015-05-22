@@ -19,6 +19,7 @@
 //
 
 #import "GustyKitCoreUI.h"
+#import "IFAPersistenceManager.h"
 
 static NSString *METADATA_KEY_SYSTEM_DB_TABLES_LOADED = @"systemDbTablesLoaded";
 static NSString *METADATA_VALUE_SYSTEM_DB_TABLES_LOADED = @"Y";
@@ -594,6 +595,13 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     return storeBaseUrl;
 }
 
+- (void)IFA_willPerformCrudSaveForObject:(NSManagedObject *)object {
+    if ([self.delegate respondsToSelector:@selector(persistenceManager:willPerformCrudSaveForObject:)]) {
+        [self.delegate persistenceManager:self
+             willPerformCrudSaveForObject:object];
+    }
+}
+
 #pragma mark - Public
 
 - (void) resetEditSession{
@@ -634,7 +642,9 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 }
 
 - (BOOL)saveObject:(NSManagedObject *)aManagedObject validationAlertPresenter:(UIViewController *)a_validationAlertPresenter{
-	
+
+    [self IFA_willPerformCrudSaveForObject:aManagedObject];
+
 	if([self validateForSave:aManagedObject validationAlertPresenter:a_validationAlertPresenter]){
         
 		// Manage sequence if this entity's list can be reordered by the user
@@ -684,6 +694,8 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
  Delete a managed object and save.
  */
 - (BOOL)deleteAndSaveObject:(NSManagedObject *)aManagedObject validationAlertPresenter:(UIViewController *)a_validationAlertPresenter{
+
+    [self IFA_willPerformCrudSaveForObject:aManagedObject];
     
 	if([self validateForDelete:aManagedObject alertPresenter:a_validationAlertPresenter]){
         
