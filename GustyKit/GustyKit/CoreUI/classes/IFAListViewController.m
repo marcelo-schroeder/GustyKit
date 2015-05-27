@@ -708,7 +708,7 @@
                 NSNumber *newValue = change[NSKeyValueChangeNewKey];
                 if (!oldValue.boolValue && newValue.boolValue) {
                     BOOL shouldRefreshAndReloadData = [self.listViewControllerDataSource shouldRefreshAndReloadDataWhenDataBecomesStaleAndViewIsVisibleForListViewController:self];
-                    [IFAUtils dispatchAsyncMainThreadBlock:^{
+//                    [IFAUtils dispatchAsyncMainThreadBlock:^{
                         if (shouldRefreshAndReloadData) {
                             if (self.pagingContainer) {
                                 if (self.selectedViewControllerInPagingContainer) {
@@ -718,7 +718,7 @@
                                 [self refreshAndReloadData];
                             }
                         }
-                    }];
+//                    }];
                 }
             }
             if (!self.pagingContainer) {
