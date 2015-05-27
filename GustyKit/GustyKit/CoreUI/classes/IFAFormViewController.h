@@ -25,10 +25,7 @@
 #import "IFAFormInputAccessoryView.h"
 #import "IFAEntityConfig.h"
 #import "UIViewController+IFACoreUI.h"
-
-#ifdef IFA_AVAILABLE_Help
 #import "IFAHelpTarget.h"
-#endif
 
 @protocol IFAFormViewControllerDelegate;
 @class IFAFormSectionHeaderFooterView;
@@ -39,11 +36,7 @@
 * It implements two-way binding between view and model (<object>) by using GustyKit's persistent entity configuration system.
 * This class optionally collaborates with a <IFAFormViewControllerDelegate> instance set in the <formViewControllerDelegate> property.
 */
-@interface IFAFormViewController : IFATableViewController <UIActionSheetDelegate, IFAFormInputAccessoryViewDataSource, IFAViewControllerDelegate
-#ifdef IFA_AVAILABLE_Help
-        , IFAHelpTarget
-#endif
-        >
+@interface IFAFormViewController : IFATableViewController <UIActionSheetDelegate, IFAFormInputAccessoryViewDataSource, IFAViewControllerDelegate, IFAHelpTarget>
 /**
 * Object instance for which the form is displaying details.
 */

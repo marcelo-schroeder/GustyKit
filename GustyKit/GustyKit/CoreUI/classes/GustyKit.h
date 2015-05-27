@@ -31,11 +31,4 @@
 #import "GustyKitCoreUI.h"
 
 // Help
-#ifdef IFA_AVAILABLE_Help
 #import "GustyKitHelp.h"
-#endif
-
-// GoogleMobileAdsSupport
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-#import "GustyKitGoogleMobileAdsSupport.h"
-#endif

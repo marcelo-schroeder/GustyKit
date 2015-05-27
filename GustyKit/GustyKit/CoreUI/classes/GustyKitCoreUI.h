@@ -44,6 +44,7 @@
 
 // GustyKit
 #import "GustyKitFoundation.h"
+#import "GustyKitHelp.h"
 
 //#import "IFAAboutFormViewController.h"
 //#import "IFAAboutInfoModel.h"

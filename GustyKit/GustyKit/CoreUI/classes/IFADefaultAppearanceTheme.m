@@ -20,10 +20,6 @@
 
 #import "GustyKitCoreUI.h"
 
-#ifdef IFA_AVAILABLE_Help
-#import "GustyKitHelp.h"
-#endif
-
 @interface IFADefaultAppearanceTheme ()
 
 @property (nonatomic, strong) IFAColorScheme *IFA_colorScheme;
@@ -299,7 +295,6 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
             listViewController.noDataPlaceholderAddHintImageView.image = newNoDataHelpAddHintImage;
         }
 
-#ifdef IFA_AVAILABLE_Help
     }else if ([a_viewController isKindOfClass:[IFAHelpViewController class]]) {
 
         IFAHelpViewController *viewController = (IFAHelpViewController *) a_viewController;
@@ -312,7 +307,6 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
         a_viewController.edgesForExtendedLayout = UIRectEdgeNone;
         a_viewController.automaticallyAdjustsScrollViewInsets = NO;
         a_viewController.view.backgroundColor = [UIColor clearColor];
-#endif
 
     }else if([a_viewController isKindOfClass:[IFALazyTableDataLoadingViewController class]]) {
 
@@ -343,7 +337,6 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
         }
     }
 
-#ifdef IFA_AVAILABLE_Help
     UIColor *navigationBarTintColor = a_viewController.navigationController.navigationBar.tintColor;
     [self IFA_tintCustomViewButtonImageInBarButtonItem:a_viewController.ifa_helpBarButtonItem
                                              withColor:navigationBarTintColor];
@@ -352,7 +345,6 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
         [self IFA_tintCustomViewButtonImageInBarButtonItem:helpViewController.closeBarButtonItem
                                                  withColor:navigationBarTintColor];
     }
-#endif
 
 }
 

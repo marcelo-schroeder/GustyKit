@@ -20,10 +20,6 @@
 
 #import "GustyKitCoreUI.h"
 
-#ifdef IFA_AVAILABLE_Help
-#import "GustyKitHelp.h"
-#endif
-
 @interface IFAEntityConfig ()
 
 @property (strong) NSManagedObjectContext *managedObjectContext;
@@ -466,28 +462,31 @@
                                                           inObject:a_object
                                                        inFormNamed:a_formName
                                                         createMode:a_createMode];
-#ifdef IFA_AVAILABLE_Help
     NSString *help = nil;
     NSUInteger fieldCount = [self fieldCountCountForSectionIndex:a_sectionIndex
-                                                        inObject:a_object inForm:a_formName
+                                                        inObject:a_object
+                                                          inForm:a_formName
                                                       createMode:a_createMode];
     // If there is only one field in the section, then check if there is help available specifically for that field's property
     if (fieldCount == 1) {
-        NSIndexPath *fieldIndexPath = [NSIndexPath indexPathForRow:0 inSection:a_sectionIndex];
+        NSIndexPath *fieldIndexPath = [NSIndexPath indexPathForRow:0
+                                                         inSection:a_sectionIndex];
         NSDictionary *field = [self fieldForIndexPath:fieldIndexPath
                                              inObject:a_object
                                                inForm:a_formName
                                            createMode:a_createMode];
         NSString *propertyHelpValue = nil;
         NSString *propertyName = field[@"name"];
-        IFAEntityConfigFieldType fieldType = [self fieldTypeForIndexPath:fieldIndexPath inObject:a_object
-                                                                  inForm:a_formName createMode:a_createMode];
-        if (fieldType==IFAEntityConfigFieldTypeProperty) {
+        IFAEntityConfigFieldType fieldType = [self fieldTypeForIndexPath:fieldIndexPath
+                                                                inObject:a_object
+                                                                  inForm:a_formName
+                                                              createMode:a_createMode];
+        if (fieldType == IFAEntityConfigFieldTypeProperty) {
             id propertyValue = [a_object valueForKey:propertyName];
             if ([propertyValue isKindOfClass:[NSNumber class]]) {
                 NSNumber *number = propertyValue;
                 propertyHelpValue = number.stringValue;
-            }else if ([propertyValue isKindOfClass:[IFASystemEntity class]]) {
+            } else if ([propertyValue isKindOfClass:[IFASystemEntity class]]) {
                 IFASystemEntity *systemEntity = propertyValue;
                 propertyHelpValue = systemEntity.systemEntityId.stringValue;
             }
@@ -513,20 +512,17 @@
     if (help) {
         return help;
     } else {
-#endif
-    NSString *key = [NSString stringWithFormat:@"entities.%@.forms.%@.sections.%@.sectionFooter",
-                                               [a_object.class ifa_entityName],
-                                               a_formName,
-                                               formSection[@"name"]];
-    NSString *string = [self localisedStringForKey:key];
-    if ([string isEqualToString:key]) {
-        return formSection[@"sectionFooter"];
-    } else {
-        return string;
+        NSString *key = [NSString stringWithFormat:@"entities.%@.forms.%@.sections.%@.sectionFooter",
+                                                   [a_object.class ifa_entityName],
+                                                   a_formName,
+                                                   formSection[@"name"]];
+        NSString *string = [self localisedStringForKey:key];
+        if ([string isEqualToString:key]) {
+            return formSection[@"sectionFooter"];
+        } else {
+            return string;
+        }
     }
-#ifdef IFA_AVAILABLE_Help
-    }
-#endif
 }
 
 - (NSString*)labelForIndexPath:(NSIndexPath*)anIndexPath inObject:(NSObject *)anObject inForm:(NSString*)aFormName createMode:(BOOL)aCreateMode{

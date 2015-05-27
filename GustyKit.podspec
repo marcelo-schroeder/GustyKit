@@ -16,18 +16,11 @@ Pod::Spec.new do |s|
         ss.source_files  = 'GustyKit/GustyKit/CoreUI/classes/**/*.{h,m}'
         ss.resource      = 'GustyKit/GustyKit/CoreUI/resources/**/*.*'
         ss.dependency 'GustyKit/Foundation'
+        ss.dependency 'GustyKit/Help'
         ss.dependency 'ODRefreshControl', '1.1.0'
     end
     s.subspec 'Help' do |ss|
         ss.source_files  = 'GustyKit/GustyKit/Help/classes/**/*.{h,m}'
         ss.resource      = 'GustyKit/GustyKit/Help/resources/**/*.*'
-        ss.xcconfig      = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'IFA_AVAILABLE_Help=1' }
-        ss.dependency 'GustyKit/CoreUI'
-    end
-    s.subspec 'GoogleMobileAdsSupport' do |ss|
-        ss.source_files  = 'GustyKit/GustyKit/GoogleMobileAdsSupport/classes/**/*.{h,m}'
-        ss.xcconfig      = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'IFA_AVAILABLE_GoogleMobileAdsSupport=1' }
-        ss.dependency 'GustyKit/CoreUI'
-        ss.dependency 'Google-Mobile-Ads-SDK', '~> 6'
     end
 end

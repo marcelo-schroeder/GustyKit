@@ -20,10 +20,6 @@
 
 #import "GustyKitCoreUI.h"
 
-#ifdef IFA_AVAILABLE_Help
-#import "GustyKitHelp.h"
-#endif
-
 static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
 
 @interface IFAFormViewController ()
@@ -2102,8 +2098,6 @@ responderForKeyboardInputFocusAtIndexPath:(NSIndexPath *)a_indexPath {
     return l_textFieldCell.textField;
 }
 
-#ifdef IFA_AVAILABLE_Help
-
 #pragma mark - IFAHelpTarget
 
 - (NSString *)helpTargetId {
@@ -2113,8 +2107,6 @@ responderForKeyboardInputFocusAtIndexPath:(NSIndexPath *)a_indexPath {
         return [[IFAHelpManager sharedInstance] helpTargetIdForEntityNamed:self.object.ifa_entityName];
     }
 }
-
-#endif
 
 #pragma mark - IFAViewControllerDelegate
 

@@ -20,14 +20,6 @@
 
 #import "GustyKitCoreUI.h"
 
-#ifdef IFA_AVAILABLE_Help
-#import "GustyKitHelp.h"
-#endif
-
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-#import "GustyKitGoogleMobileAdsSupport.h"
-#endif
-
 //static UIPopoverArrowDirection  const k_arrowDirectionWithoutKeyboard   = UIPopoverArrowDirectionAny;
 static UIPopoverArrowDirection  const k_arrowDirectionWithoutKeyboard   = UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown;
 static UIPopoverArrowDirection  const k_arrowDirectionWithKeyboard      = UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight;
@@ -1060,17 +1052,12 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     
 //    NSLog(@"ifa_viewWillAppear: %@, topViewController: %@, visibleViewController: %@, presentingViewController: %@, presentedViewController: %@", [self description], [self.navigationController.topViewController description], [self.navigationController.visibleViewController description], [self.presentingViewController description], [self.presentedViewController description]);
 
-#ifdef IFA_AVAILABLE_Help
     // Add the help button if help is enabled for this view controller
     if (self.ifa_helpBarButtonItem) {
         [self ifa_insertRightBarButtonItem:self.ifa_helpBarButtonItem atIndex:0];
     }
-#endif
 
     // Add observers
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-    [self ifa_startObservingGoogleMobileAdsSupportNotifications];
-#endif
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(ifa_onKeyboardNotification:)
                                                  name:UIKeyboardWillShowNotification
@@ -1136,10 +1123,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
         [self ifa_updateToolbarForEditing:self.editing animated:YES];
     }
 
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-    [self ifa_startGoogleMobileAdsRequests];
-#endif
-
 }
 
 - (void)ifa_viewWillDisappear {
@@ -1155,9 +1138,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 //    NSLog(@"ifa_viewDidDisappear: %@, topViewController: %@, visibleViewController: %@, presentingViewController: %@, presentedViewController: %@", [self description], [self.navigationController.topViewController description], [self.navigationController.visibleViewController description], [self.presentingViewController description], [self.presentedViewController description]);
         
     // Remove observers
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-    [self ifa_stopObservingGoogleMobileAdsSupportNotifications];
-#endif
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
@@ -1166,10 +1146,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     if (self.ifa_manageToolbar && [self.toolbarItems count]>0) {
         self.toolbarItems = @[];
     }
-
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-    [self ifa_stopGoogleMobileAdsRequests];
-#endif
 
     // Remove keyboard passthrough view if required
     if (self.ifa_shouldUseKeyboardPassthroughView) {
@@ -1235,10 +1211,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     [[[IFAAppearanceThemeManager sharedInstance] activeAppearanceTheme] setAppearanceOnWillAnimateRotationForViewController:self
                                                                                                       interfaceOrientation:interfaceOrientation];
 
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-    [self ifa_stopGoogleMobileAdsRequests];
-#endif
-
 }
 
 -(void)ifa_didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
@@ -1251,10 +1223,6 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
                          fromBarButtonItem:self.ifa_activePopoverControllerBarButtonItem];
         
     }
-
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-    [self ifa_startGoogleMobileAdsRequests];
-#endif
 
 }
 

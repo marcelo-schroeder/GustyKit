@@ -20,10 +20,6 @@
 
 #import "GustyKitCoreUI.h"
 
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-#import "GustyKitGoogleMobileAdsSupport.h"
-#endif
-
 @interface IFATableViewController ()
 
 @property (nonatomic, strong) UITableView *IFA_tableView;
@@ -212,42 +208,6 @@
 }
 
 #pragma mark - Overrides
-
--(void)IFA_init {
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-    if ([self ifa_shouldEnableAds]) {
-        self.shouldCreateContainerViewOnLoadView = YES;
-    }
-#endif
-}
-
--(id)init{
-    if (self=[super init]) {
-        [self IFA_init];
-    }
-    return self;
-}
-
--(id)initWithCoder:(NSCoder *)aDecoder{
-    if (self=[super initWithCoder:aDecoder]) {
-        [self IFA_init];
-    }
-    return self;
-}
-
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    if (self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        [self IFA_init];
-    }
-    return self;
-}
-
--(id)initWithStyle:(UITableViewStyle)style{
-    if (self=[super initWithStyle:style]) {
-        [self IFA_init];
-    }
-    return self;
-}
 
 -(void)dealloc{
     [self ifa_dealloc];
@@ -447,17 +407,6 @@
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [self ifa_didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
-
-#ifdef IFA_AVAILABLE_GoogleMobileAdsSupport
-- (void)ifa_updateNonAdContainerViewFrameWithGoogleMobileAdBannerViewHeight:(CGFloat)a_adBannerViewHeight {
-    if (self.IFA_tableViewBottomLayoutConstraint) {
-        self.IFA_tableViewBottomLayoutConstraint.constant = a_adBannerViewHeight;
-        [[self.ifa_googleMobileAdsSupportDataSource nonAdContainerViewForGoogleMobileAdsEnabledViewController:self] layoutIfNeeded];   // Done so that this change can be animated
-    }else{
-        [super ifa_updateNonAdContainerViewFrameWithGoogleMobileAdBannerViewHeight:a_adBannerViewHeight];
-    }
-}
-#endif
 
 #pragma mark - UITableViewDataSource protocol
 

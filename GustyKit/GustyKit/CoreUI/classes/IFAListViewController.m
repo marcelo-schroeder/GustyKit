@@ -20,10 +20,6 @@
 
 #import "GustyKitCoreUI.h"
 
-#ifdef IFA_AVAILABLE_Help
-#import "IFAHelpManager.h"
-#endif
-
 @interface IFAListViewController ()
 
 @property (nonatomic, strong) dispatch_block_t pagingContainerChildRefreshAndReloadDataAsynchronousBlock;
@@ -575,9 +571,7 @@
         if ([self.listViewControllerDataSource respondsToSelector:@selector(noDataPlaceholderDescriptionForListViewController:)]) {
             _noDataPlaceholderDescriptionLabel.text = [self.listViewControllerDataSource noDataPlaceholderDescriptionForListViewController:self];
         }else{
-#ifdef IFA_AVAILABLE_Help
             _noDataPlaceholderDescriptionLabel.text = [[IFAHelpManager sharedInstance] emptyListHelpForEntityName:self.entityName];
-#endif
         }
     }
     return _noDataPlaceholderDescriptionLabel;
@@ -861,15 +855,11 @@ fetchedResultsControllerForFetchedResultsTableViewController:(IFAFetchedResultsT
     return l_controller;
 }
 
-#ifdef IFA_AVAILABLE_Help
-
 #pragma mark - IFAHelpTarget
 
 - (NSString *)helpTargetId {
     return [[IFAHelpManager sharedInstance] helpTargetIdForEntityNamed:self.entityName];
 }
-
-#endif
 
 #pragma mark - IFAViewControllerDelegate
 
