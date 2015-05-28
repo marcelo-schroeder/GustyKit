@@ -652,9 +652,10 @@
 
     [super viewDidAppear:animated];
 
-    if ([self IFA_shouldRefreshAndReloadDueToStaleDataOnViewAppearance]) {
+    if (self.shouldRefreshAndReloadDataNextTimeViewAppears || [self IFA_shouldRefreshAndReloadDueToStaleDataOnViewAppearance]) {
         [self IFA_refreshAndReloadDataWithPagingContainerCoordination:YES];
         self.refreshAndReloadDataRequested = YES;
+        self.shouldRefreshAndReloadDataNextTimeViewAppears = NO;
     }else{
         self.refreshAndReloadDataRequested = NO;
     }

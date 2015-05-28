@@ -52,6 +52,11 @@ typedef NS_ENUM(NSUInteger, IFAListViewControllerFetchingStrategy){
 @property (nonatomic, weak) id<IFAListViewControllerDataSource> listViewControllerDataSource;
 
 /**
+* Set this property to YES to force the view controller to refresh and reload data next time the view appears.
+*/
+@property (nonatomic) BOOL shouldRefreshAndReloadDataNextTimeViewAppears;
+
+/**
 * Specifies the property name that corresponds to a persistent entity to group by, which will also determine the table view section arrangement.
 * This value is obtained directly from the "listGroupedBy" entity config property for the entity specified by the "entityName" property.
 * If the property is not nil then the fetching strategy is automatically set to IFAListViewControllerFetchingStrategyFindEntities.
