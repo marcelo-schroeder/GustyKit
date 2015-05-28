@@ -646,15 +646,25 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     [self IFA_willPerformCrudSaveForObject:aManagedObject];
 
 	if([self validateForSave:aManagedObject validationAlertPresenter:a_validationAlertPresenter]){
-        
+
+        NSString *entityName = [aManagedObject ifa_entityName];
+
 		// Manage sequence if this entity's list can be reordered by the user
 		if ([self.entityConfig listReorderAllowedForObject:aManagedObject]) {
-			NSArray* all = [self findAllForEntity:[aManagedObject ifa_entityName] includePendingChanges:YES];
+            NSArray* all = [self findAllForEntity:entityName
+                            includePendingChanges:YES];
 			for (int i = 0; i < [all count]; i++) {
 				[[all objectAtIndex:i] setValue:[NSNumber numberWithUnsignedInt:((i+1)*2)] forKey:@"seq"];
 			}
 		}
-		
+
+        // Set last update date if required
+        NSString *lastUpdateDatePropertyName = [self.entityConfig lastUpdateDatePropertyNameForEntity:entityName];
+        if (lastUpdateDatePropertyName) {
+            [aManagedObject setValue:[NSDate date]
+                              forKey:lastUpdateDatePropertyName];
+        }
+
 		return [self save];
         
 	}else {
@@ -750,19 +760,32 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
  Return new managed object instance
  */
 - (NSManagedObject *)instantiate:(NSString *)entityName{
+
     NSManagedObject *l_mo = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:[self currentManagedObjectContext]];
+
     NSError *l_error;
     NSManagedObjectContext *l_moc = [self currentManagedObjectContext];
     if(![l_moc obtainPermanentIDsForObjects:@[l_mo]
                                       error:&l_error]){
         [IFAUIUtils handleUnrecoverableError:l_error];
     };
+
+    // Set UUID if required
     NSString *uuidPropertyName = [self.entityConfig uuidPropertyNameForEntity:entityName];
     if (uuidPropertyName) {
         [l_mo setValue:[IFAUtils generateUuid]
                 forKey:uuidPropertyName];
     }
+
+    // Set last update date if required
+    NSString *lastUpdateDatePropertyName = [self.entityConfig lastUpdateDatePropertyNameForEntity:entityName];
+    if (lastUpdateDatePropertyName) {
+        [l_mo setValue:[NSDate date]
+                forKey:lastUpdateDatePropertyName];
+    }
+
 	return l_mo;
+
 }
 
 - (NSMutableArray *) findAllForEntity:(NSString *)entityName{

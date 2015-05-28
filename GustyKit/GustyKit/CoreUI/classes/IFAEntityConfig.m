@@ -329,6 +329,10 @@
     return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"uuidPropertyName"];
 }
 
+- (NSString *)lastUpdateDatePropertyNameForEntity:(NSString *)anEntityName {
+    return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"lastUpdateDatePropertyName"];
+}
+
 - (NSString*)indefiniteArticleForEntity:(NSString*)anEntityName{
 	return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"indefiniteArticle"];
 }
