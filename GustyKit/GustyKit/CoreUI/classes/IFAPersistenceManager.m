@@ -442,19 +442,6 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
     return l_isInMemory;
 }
 
-- (NSMutableArray *)inMemorySortList:(NSMutableArray *)a_array
-                           forEntity:(NSString *)a_entityName
-                   usedForRelationship:(BOOL)a_usedForRelationship {
-    if ([self isInMemoryListSortForEntity:a_entityName
-                      usedForRelationship:a_usedForRelationship]) {
-//        NSLog(@"in memory sorting: %@", [a_array description]);
-        [a_array sortUsingDescriptors:[self listSortDescriptorsForEntity:a_entityName
-                                                       usedForRelationship:a_usedForRelationship]];
-//        NSLog(@"SORTED: %@", [a_array description]);
-    }
-    return a_array;
-}
-
 /*
  Find all instances of a given entity (non-system) sorted according to configuration
  */
@@ -466,9 +453,9 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
                                          includePendingChanges:a_includePendingChanges
                                              usedForRelationship:a_usedForRelationship];
     l_fetchRequest.includesSubentities = a_includeSubentities;
-    NSMutableArray *l_array = [self inMemorySortList:[self executeFetchRequestMutable:l_fetchRequest]
-                                           forEntity:entityName
-                                   usedForRelationship:a_usedForRelationship];
+    NSMutableArray *l_array = [self inMemorySortObjects:[self executeFetchRequestMutable:l_fetchRequest]
+                                          ofEntityNamed:entityName
+                                    usedForRelationship:a_usedForRelationship];
 //    NSLog(@"findAllForNonSystemEntity for %@: %@", ifa_entityName, [l_array description]);
     return l_array;
 }
@@ -486,9 +473,9 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
     request.includesSubentities = a_includeSubentities;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"systemUseOnly == %@", @0];
     [request setPredicate:predicate];
-    return [self inMemorySortList:[self executeFetchRequestMutable:request]
-                        forEntity:entityName
-                usedForRelationship:a_usedForRelationship];
+    return [self inMemorySortObjects:[self executeFetchRequestMutable:request]
+                       ofEntityNamed:entityName
+                 usedForRelationship:a_usedForRelationship];
 }
 
 -(NSPredicate*)predicateForKeysAndValues:(NSDictionary*)aDictionary{
@@ -1625,6 +1612,19 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     
     return request;
     
+}
+
+- (NSMutableArray *)inMemorySortObjects:(NSMutableArray *)objects
+                          ofEntityNamed:(NSString *)entityName
+                    usedForRelationship:(BOOL)usedForRelationship {
+    if ([self isInMemoryListSortForEntity:entityName
+                      usedForRelationship:usedForRelationship]) {
+//        NSLog(@"in memory sorting: %@", [a_array description]);
+        [objects sortUsingDescriptors:[self listSortDescriptorsForEntity:entityName
+                                                     usedForRelationship:usedForRelationship]];
+//        NSLog(@"SORTED: %@", [a_array description]);
+    }
+    return objects;
 }
 
 + (instancetype)sharedInstance {

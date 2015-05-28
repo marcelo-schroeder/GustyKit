@@ -255,6 +255,10 @@
                                         limit:(NSUInteger)aLimit
                                     countOnly:(BOOL)aCountOnlyFlag;
 
+- (NSMutableArray *)inMemorySortObjects:(NSMutableArray *)objects
+                          ofEntityNamed:(NSString *)entityName
+                    usedForRelationship:(BOOL)usedForRelationship;
+
 + (instancetype)sharedInstance;
 + (BOOL)setValidationError:(NSError**)anError withMessage:(NSString*)anErrorMessage;
 + (NSMutableArray*)idsForManagedObjects:(NSArray*)a_managedObjects;
