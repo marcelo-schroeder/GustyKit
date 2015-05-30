@@ -57,7 +57,8 @@
             if (l_mo) { // Preferences record already exists, so make a note of the ID for later use
                 self.IFA_preferencesManagedObjectId = l_mo.objectID;
             }else{  // Preferences record does not exist, so create it and make a note of the ID for later use
-                self.IFA_preferencesManagedObjectId = [self.persistenceManager instantiate:l_preferencesClassName].objectID;
+                l_mo = [self.persistenceManager instantiate:l_preferencesClassName];
+                self.IFA_preferencesManagedObjectId = l_mo.objectID;
             }
             return l_mo;
 
