@@ -32,6 +32,14 @@
 - (void)dispatchAsyncGlobalDefaultPriorityQueueBlock:(dispatch_block_t)a_block;
 - (void)dispatchAsyncGlobalQueueBlock:(dispatch_block_t)a_block priority:(dispatch_queue_priority_t)a_priority;
 
+/**
+* Coalesce multiple calls to a selector into one call at the next turn of the current run loop.
+* @param sel Selector to execute in a coalesced manner.
+* @param target Target object where the provided selector will be executed on.
+*/
++ (void)coalescedPerformSelector:(SEL)sel
+                        onTarget:(id)target;
+
 + (dispatch_time_t)dispatchTimeForDelay:(NSTimeInterval)a_delay;
 
 + (instancetype)sharedInstance;

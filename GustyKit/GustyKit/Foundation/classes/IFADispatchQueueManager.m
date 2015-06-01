@@ -47,6 +47,18 @@
     dispatch_async(dispatch_get_global_queue(a_priority, 0), a_block);
 }
 
+// Inspired by http://www.takingnotes.co/blog/2013/01/03/coalescing/
++ (void)coalescedPerformSelector:(SEL)sel
+                        onTarget:(id)target {
+
+    // Cancel any previous perform requests to keep calls from piling up.
+    [NSObject cancelPreviousPerformRequestsWithTarget:target selector:sel object:nil];
+
+    // Schedule the call, it will hit during the next turn of the current run loop
+    [target performSelector:sel withObject:nil afterDelay:0.0];
+
+}
+
 + (dispatch_time_t)dispatchTimeForDelay:(NSTimeInterval)a_delay {
     int64_t l_delta = (int64_t)(1.0e9 * a_delay);
     dispatch_time_t l_dispatchTimeDelay = dispatch_time(DISPATCH_TIME_NOW, l_delta);
