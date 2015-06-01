@@ -22,6 +22,17 @@
 
 #pragma mark - Public
 
+// Inspired by http://www.takingnotes.co/blog/2013/01/03/coalescing/
+- (void)ifa_coalescedPerformSelector:(SEL)sel {
+
+    // Cancel any previous perform requests to keep calls from piling up.
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:sel object:nil];
+
+    // Schedule the call, it will hit during the next turn of the current run loop
+    [self performSelector:sel withObject:nil afterDelay:0.0];
+
+}
+
 + (NSBundle *)ifa_classBundle {
     return [NSBundle bundleForClass:self];
 }

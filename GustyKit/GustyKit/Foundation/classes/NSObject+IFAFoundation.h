@@ -20,6 +20,12 @@
 @interface NSObject (IFAFoundation)
 
 /**
+* Coalesce multiple calls to a selector into one call at the next turn of the current run loop.
+* @param sel Selector to execute in a coalesced manner.
+*/
+- (void)ifa_coalescedPerformSelector:(SEL)sel;
+
+/**
 * Convenience method to return the bundle for the receiver's class.
 * @returns Bundle for the receiver's class.
 */
