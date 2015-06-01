@@ -23,8 +23,8 @@
 #pragma mark - Public
 
 - (void)ifa_coalescedPerformSelector:(SEL)sel {
-    [IFADispatchQueueManager coalescedPerformSelector:sel
-                                             onTarget:self];
+    [[IFADispatchQueueManager sharedInstance] coalescedPerformSelector:sel
+                                                              onTarget:self];
 }
 
 + (NSBundle *)ifa_classBundle {

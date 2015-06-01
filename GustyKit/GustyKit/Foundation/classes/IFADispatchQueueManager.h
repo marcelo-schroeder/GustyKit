@@ -37,7 +37,7 @@
 * @param sel Selector to execute in a coalesced manner.
 * @param target Target object where the provided selector will be executed on.
 */
-+ (void)coalescedPerformSelector:(SEL)sel
+- (void)coalescedPerformSelector:(SEL)sel
                         onTarget:(id)target;
 
 + (dispatch_time_t)dispatchTimeForDelay:(NSTimeInterval)a_delay;

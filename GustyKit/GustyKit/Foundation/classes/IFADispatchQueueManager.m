@@ -48,7 +48,7 @@
 }
 
 // Inspired by http://www.takingnotes.co/blog/2013/01/03/coalescing/
-+ (void)coalescedPerformSelector:(SEL)sel
+- (void)coalescedPerformSelector:(SEL)sel
                         onTarget:(id)target {
 
     // Cancel any previous perform requests to keep calls from piling up.
