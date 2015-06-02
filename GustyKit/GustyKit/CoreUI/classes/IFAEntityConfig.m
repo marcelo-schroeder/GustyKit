@@ -334,7 +334,13 @@
 }
 
 - (NSString *)cascadeDeleteWarningForEntity:(NSString *)anEntityName {
-    return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"cascadeDeleteWarning"];
+    NSString *key = [NSString stringWithFormat:@"entities.%@.cascadeDeleteWarning", anEntityName];
+    NSString *string = [self localisedStringForKey:key];
+    if ([string isEqualToString:key]) {
+        return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"cascadeDeleteWarning"];
+    } else {
+        return string;
+    }
 }
 
 - (NSString*)indefiniteArticleForEntity:(NSString*)anEntityName{
