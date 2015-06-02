@@ -372,7 +372,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
         if (![message ifa_isEmpty]) {
             [message appendString:@"\n"];
         }
-        [message appendString:NSLocalizedStringFromTable(@"One or more associations exist with the following entities: ", @"GustyKitLocalizable", nil)];
+        [message appendString:NSLocalizedStringFromTable(@"One or more associations exist with the following: ", @"GustyKitLocalizable", nil)];
         for (NSUInteger i=0; i<[l_deleteDeniedPropertyLabels count]; i++) {
             if (i>0) {
                 if (i+1==[l_deleteDeniedPropertyLabels count]) {

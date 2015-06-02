@@ -21,6 +21,8 @@
 #import "IFAHudView.h"
 #import "IFACoreUiConstants.h"
 
+@class NSManagedObject;
+
 // Size limit for UIWebView to be able to display images in iOS 7 and above.
 // 5Mb seems to be limit for UIWebView to be able to display images in iOS 7 (i.e. no devices have less than 256Mb of RAM)
 // Based on the "Know iOS Resource Limits" section at https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/CreatingContentforSafarioniPhone/CreatingContentforSafarioniPhone.html
@@ -132,4 +134,20 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 + (void)                 openUrl:(NSURL *)a_url
 withAlertPresenterViewController:(UIViewController *)a_alertPresenterViewController
                completionHandler:(void (^)(BOOL success))a_completionHandler;
+
+/**
+* Handle a deletion request for a managed object by a view controller.
+* @param object The managed object to be deleted.
+* @param alertPresentingViewController The view controller to be presenting any required alerts to the user.
+* @param shouldAskForUserConfirmation If YES, it will get a confirmation from the user before deleting the object. If NO, it will attempt the deletion without asking for confirmation.
+* @param shouldShowSuccessfulDeletionHudConfirmation If YES, it will show a HUD message confirming the deletion if it has been successful. If NO, it will not display the HUD message.
+* @param willDeleteHandler Block to be executed just before the deletion. Return YES to go ahead with the deletion, or NO to abort.
+* @param completionHandler Block to be executed after the deletion attempt has been performed. It returns YES to indicate success, or NO to indicate failure. When the failure is due to data validation, the appropriate alert will be automatically displayed.
+*/
++ (void)handleDeletionRequestForManagedObject:(NSManagedObject *)object
+            withAlertPresentingViewController:(UIViewController *)alertPresentingViewController
+                 shouldAskForUserConfirmation:(BOOL)shouldAskForUserConfirmation
+  shouldShowSuccessfulDeletionHudConfirmation:(BOOL)shouldShowSuccessfulDeletionHudConfirmation
+                            willDeleteHandler:(BOOL (^)(NSManagedObject *objectAboutToBeDeleted))willDeleteHandler
+                            completionHandler:(void (^)(BOOL success))completionHandler;
 @end

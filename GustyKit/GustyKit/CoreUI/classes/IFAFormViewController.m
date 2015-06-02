@@ -1451,38 +1451,31 @@ withAlertPresenterViewController:self
             return;
         }
         case IFAEntityConfigFieldTypeButton: {
+            NSAssert([self.object isKindOfClass:NSManagedObject.class], @"Deletion not supported for non-NSManagedObject instances");
             IFAFormTableViewCell *l_cell = (IFAFormTableViewCell *) [tableView cellForRowAtIndexPath:indexPath];
             if ([l_cell.propertyName isEqualToString:IFAEntityConfigPropertyNameDeleteButton]) {
-                NSString *l_entityName = [[self.object ifa_entityLabel] lowercaseString];
-                NSString *l_message = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Are you sure you want to delete the %@?", @"GustyKitLocalizable", @"Are you sure you want to delete the <ENTITY_NAME>?"), l_entityName];
-                NSString *l_destructiveActionButtonTitle = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Delete %@", @"GustyKitLocalizable", @"Delete <ENTITY_NAME>"), l_entityName];
                 __weak __typeof(self) l_weakSelf = self;
-                void (^destructiveActionBlock)() = ^{
-                    NSAssert([l_weakSelf.object isKindOfClass:NSManagedObject.class], @"Selection list editor type not yet implemented for non-NSManagedObject instances");
-                    if (l_weakSelf.IFA_readOnlyModeSuspendedForEditing) {
-                        [l_weakSelf IFA_popChildManagedObjectContext];
-                    }
-                    NSManagedObject *l_managedObject = (NSManagedObject *) l_weakSelf.object;
-
-                    // Handle external changes if required
-                    if ([self IFA_shouldPreventSavingDueToExternalChangesForManagedObject:l_managedObject
-                                                                persistenceChangeDetector:self.IFA_persistenceChangeDetector]) {
-                        return;
-                    }
-
-                    if (![[IFAPersistenceManager sharedInstance] deleteAndSaveObject:l_managedObject validationAlertPresenter:l_weakSelf]) {
-                        return;
-                    }
-                    l_weakSelf.IFA_changesMadeByThisViewController = YES;
-                    [l_weakSelf ifa_notifySessionCompletion];
-                    [IFAUIUtils showAndHideUserActionConfirmationHudWithText:[NSString stringWithFormat:NSLocalizedStringFromTable(@"%@ deleted", @"GustyKitLocalizable", @"<ENTITY_NAME> deleted"),
-                                                                                                        l_weakSelf.title]];
+                BOOL (^willDeleteHandler)(NSManagedObject *) = ^BOOL(NSManagedObject *objectAboutToBeDeleted) {
+                    BOOL shouldDeleteObject = ![self IFA_shouldPreventSavingDueToExternalChangesForManagedObject:objectAboutToBeDeleted
+                                                                            persistenceChangeDetector:self.IFA_persistenceChangeDetector];
+                    return shouldDeleteObject;
                 };
-                [self ifa_presentAlertControllerWithTitle:nil
-                                                  message:l_message
-                             destructiveActionButtonTitle:l_destructiveActionButtonTitle
-                                   destructiveActionBlock:destructiveActionBlock
-                                              cancelBlock:nil];
+                void (^completionHandler)(BOOL) = ^(BOOL success) {
+                    if (success) {
+                        [[IFAPersistenceManager sharedInstance] saveMainManagedObjectContext];
+                        if (l_weakSelf.IFA_readOnlyModeSuspendedForEditing) {
+                            [l_weakSelf IFA_popChildManagedObjectContext];
+                        }
+                        l_weakSelf.IFA_changesMadeByThisViewController = YES;
+                        [l_weakSelf ifa_notifySessionCompletion];
+                    }
+                };
+                [IFAUIUtils handleDeletionRequestForManagedObject:self.managedObject
+                                withAlertPresentingViewController:self
+                                     shouldAskForUserConfirmation:YES
+                      shouldShowSuccessfulDeletionHudConfirmation:YES
+                                                willDeleteHandler:willDeleteHandler
+                                                completionHandler:completionHandler];
             }else{
                 if ([self.formViewControllerDelegate respondsToSelector:@selector(formViewController:didTapButtonNamed:)]) {
                     [self.formViewControllerDelegate formViewController:self

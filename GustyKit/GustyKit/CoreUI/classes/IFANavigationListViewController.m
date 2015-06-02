@@ -70,48 +70,53 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        // Persist deletion
-		NSManagedObject	*mo = (NSManagedObject*) [self objectForIndexPath:indexPath];
-        self.shouldIgnoreStaleDataChanges = YES;
-		if (![[IFAPersistenceManager sharedInstance] deleteAndSaveObject:mo validationAlertPresenter:self]) {
+
+        NSManagedObject	*mo = (NSManagedObject*) [self objectForIndexPath:indexPath];
+        void (^completionHandler)(BOOL) = ^(BOOL success) {
             self.shouldIgnoreStaleDataChanges = NO;
-			return;
-		}
-        self.shouldIgnoreStaleDataChanges = NO;
+            if (success) {
+                if (!self.fetchedResultsController) {
 
-        if (!self.fetchedResultsController) {
+                    // Update the main entities array
+                    [self.entities removeObject:mo];
 
-            // Update the main entities array
-            [self.entities removeObject:mo];
+                    // Update the "sections with rows" array
+                    NSMutableArray *l_sectionRows = (self.sectionsWithRows)[(NSUInteger) indexPath.section];
+                    if (self.listGroupedBy) {
+                        [l_sectionRows removeObjectAtIndex:(NSUInteger) indexPath.row];
+                        if ([l_sectionRows count]==0) {
+                            [self.sectionsWithRows removeObjectAtIndex:(NSUInteger) indexPath.section];
+                        }
+                    }
 
-            // Update the "sections with rows" array
-            NSMutableArray *l_sectionRows = (self.sectionsWithRows)[(NSUInteger) indexPath.section];
-            if (self.listGroupedBy) {
-                [l_sectionRows removeObjectAtIndex:(NSUInteger) indexPath.row];
-                if ([l_sectionRows count]==0) {
-                    [self.sectionsWithRows removeObjectAtIndex:(NSUInteger) indexPath.section];
+                    // Update the table view
+                    [self.tableView beginUpdates];
+                    [self.tableView ifa_deleteRowsAtIndexPaths:@[indexPath]];
+                    if (self.listGroupedBy && [l_sectionRows count]==0) {
+                        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:(NSUInteger) indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+                    }
+                    [self.tableView endUpdates];
+
                 }
-            }
 
-            // Update the table view
-            [self.tableView beginUpdates];
-            [self.tableView ifa_deleteRowsAtIndexPaths:@[indexPath]];
-            if (self.listGroupedBy && [l_sectionRows count]==0) {
-                [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:(NSUInteger) indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-            }
-            [self.tableView endUpdates];
+                if (self.objects.count==0) {
+                    self.staleData = YES;
+                    if (self.editing) {
+                        [self setEditing:NO animated:YES];
+                    }
+                }else{
+                    [self showEmptyListPlaceholder];
+                }
 
-        }
-
-        if (self.objects.count==0) {
-            self.staleData = YES;
-            if (self.editing) {
-                [self setEditing:NO animated:YES];
             }
-        }else{
-            [self showEmptyListPlaceholder];
-        }
+        };
+        self.shouldIgnoreStaleDataChanges = YES;
+        [IFAUIUtils handleDeletionRequestForManagedObject:mo
+                        withAlertPresentingViewController:self
+                             shouldAskForUserConfirmation:NO
+              shouldShowSuccessfulDeletionHudConfirmation:NO
+                                        willDeleteHandler:nil
+                                        completionHandler:completionHandler];
 
     }
 }

@@ -510,4 +510,45 @@ static UIImage *c_menuBarButtonItemImage = nil;
     }
 }
 
++ (void)handleDeletionRequestForManagedObject:(NSManagedObject *)object
+            withAlertPresentingViewController:(UIViewController *)alertPresentingViewController
+                 shouldAskForUserConfirmation:(BOOL)shouldAskForUserConfirmation
+  shouldShowSuccessfulDeletionHudConfirmation:(BOOL)shouldShowSuccessfulDeletionHudConfirmation
+                            willDeleteHandler:(BOOL (^)(NSManagedObject *objectAboutToBeDeleted))willDeleteHandler
+                            completionHandler:(void (^)(BOOL success))completionHandler {
+    void (^destructiveActionBlock)() = ^{
+        BOOL shouldDeleteObject = YES;
+        if (willDeleteHandler) {
+            shouldDeleteObject = willDeleteHandler(object);
+        }
+        if (shouldDeleteObject) {
+            BOOL success = [[IFAPersistenceManager sharedInstance] deleteAndSaveObject:object
+                                                              validationAlertPresenter:alertPresentingViewController];
+            if (completionHandler) {
+                completionHandler(success);
+            }
+            if (success && shouldShowSuccessfulDeletionHudConfirmation) {
+                [IFAUIUtils showAndHideUserActionConfirmationHudWithText:[NSString stringWithFormat:NSLocalizedStringFromTable(@"%@ deleted", @"GustyKitLocalizable", @"<ENTITY_LABEL> deleted"),
+                                                                                                    [object ifa_entityLabel]]];
+            }
+        }
+    };
+    if (shouldAskForUserConfirmation) {
+        NSString *entityLabelCapitalised = [object ifa_entityLabel];
+        NSString *entityLabelLowercase = [entityLabelCapitalised lowercaseString];
+        NSString *message = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Are you sure you want to delete %@ %@?", @"GustyKitLocalizable", @"Are you sure you want to delete <ENTITY_LABEL> <ENTITY_NAME>?"),
+                                                       entityLabelLowercase,
+                                                       object.ifa_displayValue];
+        NSString *destructiveActionButtonTitle = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Delete %@", @"GustyKitLocalizable", @"Delete <ENTITY_NAME>"),
+                                                                            entityLabelLowercase];
+        [alertPresentingViewController ifa_presentAlertControllerWithTitle:nil
+                                                                   message:message
+                                              destructiveActionButtonTitle:destructiveActionButtonTitle
+                                                    destructiveActionBlock:destructiveActionBlock
+                                                               cancelBlock:nil];
+    } else {
+        destructiveActionBlock();
+    }
+}
+
 @end
