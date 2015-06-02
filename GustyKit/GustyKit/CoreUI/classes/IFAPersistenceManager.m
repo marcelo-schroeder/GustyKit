@@ -254,7 +254,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 			continue;
 		}else{
             NSString *errorMessage;
-            NSString *labelForKeys = [aManagedObject ifa_labelForKeys:[keysAndValues allKeys]];
+            NSString *labelForKeys = [aManagedObject ifa_labelForKeys:uniqueKeyArray];
             if ([keysAndValues count]>1) {
                 errorMessage = [NSString stringWithFormat:NSLocalizedStringFromTable(@"This combination of %@ already exists.\n", @"GustyKitLocalizable", @"This combination of <FIELD_NAMES> already exists."), [labelForKeys lowercaseString]];
             } else {
