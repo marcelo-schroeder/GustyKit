@@ -533,12 +533,16 @@ static UIImage *c_menuBarButtonItemImage = nil;
             }
         }
     };
-    if (shouldAskForUserConfirmation) {
+    NSString *cascadeDeleteWarning = [[IFAPersistenceManager sharedInstance].entityConfig cascadeDeleteWarningForEntity:[object ifa_entityName]];
+    if (shouldAskForUserConfirmation || cascadeDeleteWarning) {
         NSString *entityLabelCapitalised = [object ifa_entityLabel];
         NSString *entityLabelLowercase = [entityLabelCapitalised lowercaseString];
-        NSString *message = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Are you sure you want to delete %@ %@?", @"GustyKitLocalizable", @"Are you sure you want to delete <ENTITY_LABEL> <ENTITY_NAME>?"),
-                                                       entityLabelLowercase,
-                                                       object.ifa_displayValue];
+        NSMutableString *message = [NSMutableString stringWithFormat:NSLocalizedStringFromTable(@"Are you sure you want to delete %@ %@?", @"GustyKitLocalizable", @"Are you sure you want to delete <ENTITY_LABEL> <ENTITY_NAME>?"),
+                                                                     entityLabelLowercase,
+                                                                     object.ifa_displayValue];
+        if (cascadeDeleteWarning) {
+            [message appendString:cascadeDeleteWarning];
+        }
         NSString *destructiveActionButtonTitle = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Delete %@", @"GustyKitLocalizable", @"Delete <ENTITY_NAME>"),
                                                                             entityLabelLowercase];
         [alertPresentingViewController ifa_presentAlertControllerWithTitle:nil

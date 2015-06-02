@@ -333,6 +333,10 @@
     return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"lastUpdateDatePropertyName"];
 }
 
+- (NSString *)cascadeDeleteWarningForEntity:(NSString *)anEntityName {
+    return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"cascadeDeleteWarning"];
+}
+
 - (NSString*)indefiniteArticleForEntity:(NSString*)anEntityName{
 	return [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"indefiniteArticle"];
 }

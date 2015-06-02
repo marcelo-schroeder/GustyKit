@@ -65,6 +65,9 @@ typedef NS_ENUM(NSUInteger, IFAEntityConfigFieldType){
 - (NSString*)labelForEntity:(NSString*)anEntityName;
 - (NSString*)uuidPropertyNameForEntity:(NSString*)anEntityName;
 - (NSString*)lastUpdateDatePropertyNameForEntity:(NSString*)anEntityName;
+
+- (NSString *)cascadeDeleteWarningForEntity:(NSString *)anEntityName;
+
 - (NSString*)indefiniteArticleForEntity:(NSString*)anEntityName;
 - (IFAEditorType)fieldEditorForEntity:(NSString*)anEntityName;
 - (NSString*)labelForObject:(NSObject*)anObject;
