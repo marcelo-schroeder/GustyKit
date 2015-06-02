@@ -541,6 +541,7 @@ static UIImage *c_menuBarButtonItemImage = nil;
                                                                      entityLabelLowercase,
                                                                      object.ifa_displayValue];
         if (cascadeDeleteWarning) {
+            [message appendString:@" "];
             [message appendString:cascadeDeleteWarning];
         }
         NSString *destructiveActionButtonTitle = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Delete %@", @"GustyKitLocalizable", @"Delete <ENTITY_NAME>"),
