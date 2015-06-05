@@ -184,3 +184,4 @@
 #import "IFAUIConfiguration.h"
 #import "IFAKeyboardVisibilityManager.h"
 #import "IFAPagingContainer.h"
+#import "IFAPersistentEntityChangeObserver.h"
