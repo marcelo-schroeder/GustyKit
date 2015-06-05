@@ -1952,7 +1952,19 @@ withAlertPresenterViewController:self
                         return;
                     }
 
-                    // Persist changes
+                    // Validate object
+                    if (![l_persistenceManager validateForSave:l_managedObject validationAlertPresenter:self]) {
+                        // If validation error occurs then simply redisplay screen (at this point, the error has already been handled from a UI POV)
+                        return;
+                    }
+
+                    // Notify delegate of the saving for an update
+                    if ([l_managedObject isUpdated] && [self.formViewControllerDelegate respondsToSelector:@selector(formViewController:willSaveUpdateForManagedObject:)]) {
+                        [self.formViewControllerDelegate formViewController:self
+                                             willSaveUpdateForManagedObject:l_managedObject];
+                    }
+
+                    // Validate again (in case the delegate callback above has modified state) and persist changes
                     if (![l_persistenceManager saveObject:l_managedObject validationAlertPresenter:self]) {
                         // If validation error occurs then simply redisplay screen (at this point, the error has already been handled from a UI POV)
                         return;

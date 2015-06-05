@@ -213,6 +213,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
                                                                forModes:nil];
                 //            [[NSNotificationCenter defaultCenter] postNotification:notification];
 //                NSLog(@"Notification sent for %@", l_entityName);
+//                NSLog(@"  userInfo: %@", l_userInfoDict);
 
             }
 

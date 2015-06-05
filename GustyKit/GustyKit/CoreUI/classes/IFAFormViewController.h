@@ -196,4 +196,11 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController;
 - (BOOL)     formViewController:(IFAFormViewController *)a_formViewController
 shouldLockFormWithPromptMessage:(NSString **)a_promptMessagePointer;
 
+/**
+* This delegate callback allows for code to be executed after a managed object has been validated for an update save and before the actual saving of the managed object context is performed.
+* @param a_formViewController The sender.
+* @param a_managedObject The managed object being saved after an update has been made by the user.
+*/
+- (void)formViewController:(IFAFormViewController *)a_formViewController willSaveUpdateForManagedObject:(NSManagedObject *)a_managedObject;
+
 @end
