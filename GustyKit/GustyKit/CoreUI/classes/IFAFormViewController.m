@@ -1451,9 +1451,9 @@ withAlertPresenterViewController:self
             return;
         }
         case IFAEntityConfigFieldTypeButton: {
-            NSAssert([self.object isKindOfClass:NSManagedObject.class], @"Deletion not supported for non-NSManagedObject instances");
             IFAFormTableViewCell *l_cell = (IFAFormTableViewCell *) [tableView cellForRowAtIndexPath:indexPath];
             if ([l_cell.propertyName isEqualToString:IFAEntityConfigPropertyNameDeleteButton]) {
+                NSAssert([self.object isKindOfClass:NSManagedObject.class], @"Deletion not supported for non-NSManagedObject instances");
                 __weak __typeof(self) l_weakSelf = self;
                 BOOL (^willDeleteHandler)(NSManagedObject *) = ^BOOL(NSManagedObject *objectAboutToBeDeleted) {
                     BOOL shouldDeleteObject = ![self IFA_shouldPreventSavingDueToExternalChangesForManagedObject:objectAboutToBeDeleted
