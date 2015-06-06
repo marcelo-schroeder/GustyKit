@@ -217,6 +217,10 @@ didChangeContentSizeCategory:(NSString *)a_contentSizeCategory {
     [self IFA_updateTableHeaderView];
 }
 
+- (NSArray *)findEntities {
+    return [[IFAPersistenceManager sharedInstance] findAllForEntity:self.entityName includePendingChanges:NO includeSubentities:YES usedForRelationship:YES];
+}
+
 #pragma mark - IFAPresenter protocol
 
 - (void)sessionDidCompleteForViewController:(UIViewController *)a_viewController changesMade:(BOOL)a_changesMade
