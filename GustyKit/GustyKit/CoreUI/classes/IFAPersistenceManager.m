@@ -571,10 +571,23 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
         storeBaseUrl = [NSURL URLWithString:a_databaseResourceRelativeFolderPath
                               relativeToURL:storeBaseUrl];
     }
+    return [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
+                                          relativeToUrl:storeBaseUrl];
+}
+
+- (NSURL *)IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
+               databaseResourceAbsoluteFolderPath:(NSString *)a_databaseResourceAbsoluteFolderPath {
+    NSURL *dataStoreBaseUrl = [NSURL fileURLWithPath:a_databaseResourceAbsoluteFolderPath];
+    return [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
+                                          relativeToUrl:dataStoreBaseUrl];
+}
+
+- (NSURL *)IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
+                                    relativeToUrl:(NSURL *)baseUrl {
     NSString *lastUrlPathComponent = [NSString stringWithFormat:@"%@.sqlite",
                                                                 a_databaseResourceName];
     NSURL *sqlStoreUrl = [NSURL URLWithString:lastUrlPathComponent
-                                relativeToURL:storeBaseUrl];
+                                relativeToURL:baseUrl];
     return sqlStoreUrl;
 }
 
@@ -1315,6 +1328,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
        databaseResourceRelativeFolderPath:(NSString *)a_databaseResourceRelativeFolderPath
+       databaseResourceAbsoluteFolderPath:(NSString *)a_databaseResourceAbsoluteFolderPath
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
                 managedObjectModelVersion:(NSNumber *)a_managedObjectModelVersion
@@ -1327,9 +1341,14 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     NSURL *dataStoreUrl;
     NSString *persistentStoreType;
     if (a_databaseResourceName) {
-        dataStoreUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
-                             databaseResourceRelativeFolderPath:a_databaseResourceRelativeFolderPath
-                             securityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier];
+        if (a_databaseResourceAbsoluteFolderPath) {
+            dataStoreUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
+                                     databaseResourceAbsoluteFolderPath:a_databaseResourceAbsoluteFolderPath];
+        } else {
+            dataStoreUrl = [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
+                                     databaseResourceRelativeFolderPath:a_databaseResourceRelativeFolderPath
+                                     securityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier];
+        }
         persistentStoreType = NSSQLiteStoreType;
     } else {
         dataStoreUrl = nil;

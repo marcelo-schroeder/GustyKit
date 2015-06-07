@@ -220,6 +220,7 @@
 */
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
        databaseResourceRelativeFolderPath:(NSString *)a_databaseResourceRelativeFolderPath
+       databaseResourceAbsoluteFolderPath:(NSString *)a_databaseResourceAbsoluteFolderPath
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
                 managedObjectModelVersion:(NSNumber *)a_managedObjectModelVersion
