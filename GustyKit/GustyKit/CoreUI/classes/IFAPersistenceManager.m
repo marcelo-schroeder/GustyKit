@@ -547,9 +547,15 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 }
 
 - (NSManagedObjectModel *)IFA_managedObjectModelForResourceNamed:(NSString *)a_resourceName
+                                                         version:(NSNumber *)a_version
                                                         inBundle:(NSBundle *)a_resourceBundle {
+    NSMutableString *resourceName = [[NSMutableString alloc] initWithString:a_resourceName];
+    if (a_version) {
+        [resourceName appendString:@" "];
+        [resourceName appendString:a_version.stringValue];
+    }
     NSBundle *bundle = a_resourceBundle ?:[NSBundle mainBundle];
-    NSString *path = [bundle pathForResource:a_resourceName
+    NSString *path = [bundle pathForResource:resourceName
                                       ofType:@"momd"];
     NSURL *momURL = [NSURL fileURLWithPath:path];
     NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
@@ -1232,6 +1238,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
         }
 
         NSManagedObjectModel *managedObjectModel = [self IFA_managedObjectModelForResourceNamed:a_managedObjectModelResourceName
+                                                                                        version:nil
                                                                                        inBundle:a_managedObjectModelResourceBundle];
         NSString *persistentStoreType = NSSQLiteStoreType;
 
@@ -1310,6 +1317,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
        databaseResourceRelativeFolderPath:(NSString *)a_databaseResourceRelativeFolderPath
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
+                managedObjectModelVersion:(NSNumber *)a_managedObjectModelVersion
                        entityConfigBundle:(NSBundle *)a_entityConfigBundle
        securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
                   muteChangeNotifications:(BOOL)a_muteChangeNotifications
@@ -1360,6 +1368,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 
     // Configure managedObjectModel
     self.managedObjectModel = [self IFA_managedObjectModelForResourceNamed:a_managedObjectModelResourceName
+                                                                   version:a_managedObjectModelVersion
                                                                   inBundle:a_managedObjectModelResourceBundle];
 
     // Configure persistentStoreCoordinator
