@@ -577,7 +577,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 
 - (NSURL *)IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
                databaseResourceAbsoluteFolderPath:(NSString *)a_databaseResourceAbsoluteFolderPath {
-    NSURL *dataStoreBaseUrl = [NSURL fileURLWithPath:a_databaseResourceAbsoluteFolderPath];
+    NSURL *dataStoreBaseUrl = [NSURL fileURLWithPath:a_databaseResourceAbsoluteFolderPath isDirectory:YES];
     return [self IFA_sqlStoreUrlForDatabaseResourceName:a_databaseResourceName
                                           relativeToUrl:dataStoreBaseUrl];
 }
@@ -597,7 +597,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
         storeBaseUrl = [NSURL URLWithString:@"CoreData/"
                               relativeToURL:[[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:a_securityApplicationGroupIdentifier]];
     } else {
-        storeBaseUrl = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        storeBaseUrl = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] isDirectory:YES];
     }
     return storeBaseUrl;
 }
@@ -1363,10 +1363,11 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     if (persistentStoreType == NSSQLiteStoreType) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSURL *storeDirectoryUrl = [dataStoreUrl URLByDeletingLastPathComponent];
+        NSString *storeDirectoryPath = storeDirectoryUrl.path;
 #ifdef DEBUG
-        NSLog(@"Checking if data store directory exists: %@", storeDirectoryUrl.path);
+        NSLog(@"Checking if data store directory exists: %@", storeDirectoryPath);
 #endif
-        if (![fileManager fileExistsAtPath:storeDirectoryUrl.path]) {
+        if (![fileManager fileExistsAtPath:storeDirectoryPath]) {
 #ifdef DEBUG
             NSLog(@"  Creating data store directory...");
 #endif
@@ -1420,9 +1421,6 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     // Instantiate entity configuration
     self.entityConfig = [[IFAEntityConfig alloc] initWithManagedObjectContext:self.managedObjectContext
                                                                        bundle:a_entityConfigBundle];
-    
-    // Force creation of the preferences record
-    [[IFAPreferencesManager sharedInstance] preferences];
     
 }
 
