@@ -102,20 +102,24 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 -(UIViewController*)initialViewController {
+    UIViewController *initialViewController;
     if ([self.dataSource respondsToSelector:@selector(initialViewController)]) {
-        return self.dataSource.initialViewController;
+        initialViewController= self.dataSource.initialViewController;
     } else {
         UIStoryboard *l_storyboard = [self storyboard];
         NSString *l_storyboardInitialViewControllerId = [self storyboardInitialViewControllerId];
-        UIViewController *l_initialViewController = nil;
         if (l_storyboardInitialViewControllerId) {
-            l_initialViewController = [l_storyboard instantiateViewControllerWithIdentifier:l_storyboardInitialViewControllerId];
+            initialViewController = [l_storyboard instantiateViewControllerWithIdentifier:l_storyboardInitialViewControllerId];
         }
-        if (!l_initialViewController) {
-            l_initialViewController = [l_storyboard instantiateInitialViewController];
+        if (!initialViewController) {
+            initialViewController = [l_storyboard instantiateInitialViewController];
         }
-        return l_initialViewController;
     }
+    if ([self.delegate respondsToSelector:@selector(uiConfiguration:didDetermineInitialViewController:)]) {
+        [self.delegate uiConfiguration:self
+     didDetermineInitialViewController:initialViewController];
+    }
+    return initialViewController;
 }
 #pragma clang diagnostic pop
 

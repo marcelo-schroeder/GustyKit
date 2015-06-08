@@ -18,10 +18,12 @@
 #import <Foundation/Foundation.h>
 
 @protocol IFAUIConfigurationDataSource;
+@protocol IFAUIConfigurationDelegate;
 
 //wip: add documentation
 @interface IFAUIConfiguration : NSObject
 @property (nonatomic, weak) id<IFAUIConfigurationDataSource> dataSource;
+@property (nonatomic, weak) id<IFAUIConfigurationDelegate> delegate;
 @property (nonatomic, readonly) BOOL useDeviceAgnosticMainStoryboard;
 -(Class)appearanceThemeClass;
 -(IFAColorScheme *)colorScheme;
@@ -49,5 +51,19 @@
 -(NSString*)storyboardInitialViewControllerId;
 -(UIStoryboard*)storyboard;
 -(UIViewController*)initialViewController;
+
+@end
+
+@protocol IFAUIConfigurationDelegate <NSObject>
+
+@optional
+
+/**
+* This delegate callback allows for extra configuration of the initial view controller such as setting properties on it.
+* @param uiConfiguration The sender.
+* @param initialViewController The initial view controller as determined by the sender.
+*/
+- (void)          uiConfiguration:(IFAUIConfiguration *)uiConfiguration
+didDetermineInitialViewController:(UIViewController *)initialViewController;
 
 @end
