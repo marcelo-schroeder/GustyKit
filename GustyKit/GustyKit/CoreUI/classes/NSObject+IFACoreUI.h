@@ -22,6 +22,12 @@
 
 @interface NSObject (IFACoreUI)
 
+// Defined as a property so that runtime introspection can pick it up as a property and things like localised and case-insensitive sorting in lists work correctly
+@property (nonatomic, strong, readonly) NSString *ifa_displayValue;
+
+// Defined as a property so that runtime introspection can pick it up as a property and things like localised and case-insensitive sorting in lists work correctly
+@property (nonatomic, strong, readonly) NSString *ifa_longDisplayValue;
+
 /**
 * Used for common initialisation.
 * To be called by init methods.
@@ -35,8 +41,6 @@
 - (NSString*)ifa_propertyStringValueForName:(NSString *)a_propertyName calendar:(NSCalendar*)a_calendar;
 - (NSString*)ifa_propertyStringValueForIndexPath:(NSIndexPath *)anIndexPath inForm:(NSString *)aFormName
                                       createMode:(BOOL)aCreateMode calendar:(NSCalendar*)a_calendar;
-- (NSString*)ifa_displayValue;
-- (NSString*)ifa_longDisplayValue;
 - (NSString*)ifa_entityLabel;
 - (void)ifa_setValue:(id)aValue forProperty:(NSString *)aKey;
 - (NSString*)ifa_entityName;
