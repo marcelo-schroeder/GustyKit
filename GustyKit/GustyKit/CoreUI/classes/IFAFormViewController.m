@@ -372,6 +372,8 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
     NSString *propertyName = [self nameForIndexPath:anIndexPath];
     UIViewController *controller;
 
+    IFAPersistenceManager *persistenceManager = [IFAPersistenceManager sharedInstance];
+
     NSUInteger editorType = [self editorTypeForIndexPath:anIndexPath];
     switch (editorType) {
         case IFAEditorTypeForm:
@@ -397,16 +399,24 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
         case IFAEditorTypeSelectionList:
         {
             NSAssert([self.object isKindOfClass:NSManagedObject.class], @"Selection list editor type not yet implemented for non-NSManagedObject instances");
-            NSManagedObject *l_managedObject = (NSManagedObject*)self.object;
-            if ([[IFAPersistenceManager sharedInstance].entityConfig isToManyRelationshipForProperty:propertyName inManagedObject:l_managedObject]) {
-                controller = [[IFAMultipleSelectionListViewController alloc] initWithManagedObject:l_managedObject
-                                                                                      propertyName:propertyName
-                                                                                formViewController:self];
-            }else {
-                controller = [[IFASingleSelectionListViewController alloc] initWithManagedObject:l_managedObject
-                                                                                    propertyName:propertyName
-                                                                              formViewController:self];
+            NSManagedObject *managedObject = (NSManagedObject *) self.object;
+            Class selectionViewControllerClass;
+            NSString *propertyEntityName = [self entityNameForProperty:propertyName];
+            if ([persistenceManager.entityConfig isToManyRelationshipForProperty:propertyName
+                                                                 inManagedObject:managedObject]) {
+                selectionViewControllerClass = [persistenceManager.entityConfig multipleSelectionListViewControllerClassForEntity:propertyEntityName];
+                if (!selectionViewControllerClass) {
+                    selectionViewControllerClass = NSClassFromString(@"IFAMultipleSelectionListViewController");
+                }
+            } else {
+                selectionViewControllerClass = [persistenceManager.entityConfig singleSelectionListViewControllerClassForEntity:propertyEntityName];
+                if (!selectionViewControllerClass) {
+                    selectionViewControllerClass = NSClassFromString(@"IFASingleSelectionListViewController");
+                }
             }
+            controller = [[selectionViewControllerClass alloc] initWithManagedObject:managedObject
+                                                                        propertyName:propertyName
+                                                                  formViewController:self];
         }
             break;
         case IFAEditorTypeFullDateAndTime:
@@ -425,7 +435,7 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
                         break;
                     case IFAEditorTypeDatePicker:
                     {
-                        NSDictionary *l_propertyOptions = [[[IFAPersistenceManager sharedInstance] entityConfig] optionsForProperty:propertyName
+                        NSDictionary *l_propertyOptions = [[persistenceManager entityConfig] optionsForProperty:propertyName
                                                                                                                            inObject:self.object];
                         if ([l_propertyOptions[@"datePickerMode"] isEqualToString:@"date"]) {
                             l_datePickerMode = UIDatePickerModeDate;

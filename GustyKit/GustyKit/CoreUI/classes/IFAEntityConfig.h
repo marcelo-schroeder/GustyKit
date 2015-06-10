@@ -54,6 +54,8 @@ typedef NS_ENUM(NSUInteger, IFAEntityConfigFieldType){
 - (NSString*)parentPropertyForDependent:(NSString*)aPropertyName inObject:(NSObject*)anObject;
 - (NSString*)listLabelForEntity:(NSString*)anEntityName;
 - (Class)formViewControllerClassForEntity:(NSString*)anEntityName;
+- (Class)multipleSelectionListViewControllerClassForEntity:(NSString*)anEntityName;
+- (Class)singleSelectionListViewControllerClassForEntity:(NSString*)anEntityName;
 - (BOOL)listReorderAllowedForEntity:(NSString*)anEntityName;
 - (BOOL)listReorderAllowedForObject:(NSObject*)anObject;
 - (BOOL)disallowDetailDisclosureForEntity:(NSString*)anEntityName;

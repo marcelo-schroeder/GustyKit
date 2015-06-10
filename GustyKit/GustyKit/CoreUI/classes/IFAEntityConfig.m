@@ -283,6 +283,14 @@
 	return NSClassFromString([[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"formViewControllerClass"]);
 }
 
+- (Class)multipleSelectionListViewControllerClassForEntity:(NSString *)anEntityName {
+    return NSClassFromString([[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"multipleSelectionListViewControllerClass"]);
+}
+
+- (Class)singleSelectionListViewControllerClassForEntity:(NSString *)anEntityName {
+    return NSClassFromString([[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"singleSelectionListViewControllerClass"]);
+}
+
 - (BOOL)listReorderAllowedForEntity:(NSString*)anEntityName{
 	return [[[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"listReorderAllowed"] boolValue];
 }

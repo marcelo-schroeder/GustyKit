@@ -332,21 +332,34 @@ static const NSUInteger k_sectionSelectedObjects = 0;
     l_cell.addToSelectionImageView.hidden = YES;
     l_cell.removeFromSelectionImageView.hidden = YES;
 
-	NSManagedObject *l_managedObject = nil;
+	NSManagedObject *l_managedObject = (NSManagedObject *) [self objectForIndexPath:indexPath];
+
 	if (indexPath.section==k_sectionSelectedObjects) {
         if (self.IFA_selectedDestinationEntities.count) {
-            l_managedObject = (self.IFA_selectedDestinationEntities)[(NSUInteger) indexPath.row];
             l_cell.removeFromSelectionImageView.hidden = NO;
         }
 	}else {
         if (self.IFA_unselectedDestinationEntities.count) {
-            l_managedObject = (self.IFA_unselectedDestinationEntities)[(NSUInteger) indexPath.row];
             l_cell.addToSelectionImageView.hidden = NO;
         }
 	}
     l_cell.label.text = [l_managedObject ifa_longDisplayValue];
     return l_cell;
 
+}
+
+- (NSObject *)objectForIndexPath:(NSIndexPath *)indexPath {
+    NSManagedObject *l_managedObject = nil;
+    if (indexPath.section==k_sectionSelectedObjects) {
+        if (self.IFA_selectedDestinationEntities.count) {
+            l_managedObject = (self.IFA_selectedDestinationEntities)[(NSUInteger) indexPath.row];
+        }
+    }else {
+        if (self.IFA_unselectedDestinationEntities.count) {
+            l_managedObject = (self.IFA_unselectedDestinationEntities)[(NSUInteger) indexPath.row];
+        }
+    }
+    return l_managedObject;
 }
 
 - (NSArray*)ifa_editModeToolbarItems {
