@@ -45,6 +45,14 @@
 + (BOOL)ifa_isDate:(NSDate *)aDate betweenDate:(NSDate *)aStartDate andDate:(NSDate*)anEndDate;
 + (NSDateFormatter*)ifa_dateFormatter;
 + (NSDateFormatter*)ifa_timeFormatter;
+
+/**
+* Resets the cached formatters created by this category.
+*
+* This category caches any date formatter requested for increased performance. However, in some cases (e.g. unit testing), it might be useful to reset the cache so that fresh instances can be created.
+*/
++ (void)ifa_resetCachedFormatters;
+
 + (NSDateFormatter*)ifa_dateAndTimeFormatter;
 
 @end

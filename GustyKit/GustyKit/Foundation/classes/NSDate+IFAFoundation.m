@@ -20,6 +20,10 @@
 
 #import "GustyKitFoundation.h"
 
+static NSDateFormatter *dateAndTimeFormatter;
+static NSDateFormatter *dateFormatter;
+static NSDateFormatter *timeFormatter;
+
 @implementation NSDate (IFAFoundation)
 
 #pragma mark - Private
@@ -154,7 +158,6 @@
 }
 
 + (NSDateFormatter*)ifa_dateAndTimeFormatter {
-	static NSDateFormatter *dateAndTimeFormatter;
 	if (!dateAndTimeFormatter) {
 		dateAndTimeFormatter = [[NSDateFormatter alloc] init];
 		[dateAndTimeFormatter setDoesRelativeDateFormatting:YES];
@@ -165,7 +168,6 @@
 }
 
 + (NSDateFormatter*)ifa_dateFormatter {
-	static NSDateFormatter *dateFormatter;
 	if (!dateFormatter) {
 		dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setDoesRelativeDateFormatting:YES];
@@ -176,13 +178,18 @@
 }
 
 + (NSDateFormatter*)ifa_timeFormatter {
-	static NSDateFormatter *timeFormatter;
 	if (!timeFormatter) {
 		timeFormatter = [[NSDateFormatter alloc] init];
 		[timeFormatter setDateStyle:NSDateFormatterNoStyle];
 		[timeFormatter setTimeStyle:NSDateFormatterMediumStyle];
 	}
 	return timeFormatter;
+}
+
++ (void)ifa_resetCachedFormatters {
+    dateAndTimeFormatter = nil;
+    dateFormatter = nil;
+    timeFormatter = nil;
 }
 
 @end
