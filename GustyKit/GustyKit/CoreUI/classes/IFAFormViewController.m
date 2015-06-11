@@ -74,7 +74,8 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
     if (l_cell == nil) {
 //        NSLog(@"    initialising cell...");
         l_cell = [[NSClassFromString(a_className) alloc] initWithReuseIdentifier:l_propertyName
-                                                                    propertyName:l_propertyName indexPath:a_indexPath
+                                                                    propertyName:l_propertyName
+                                                                       indexPath:a_indexPath
                                                               formViewController:self];
         // Set appearance
         [[[IFAAppearanceThemeManager sharedInstance] activeAppearanceTheme] setAppearanceOnInitReusableCellForViewController:self
@@ -149,7 +150,7 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
 }
 
 -(NSInteger)IFA_tagForIndexPath:(NSIndexPath*)a_indexPath{
-    return (a_indexPath.section*100)+a_indexPath.row;
+    return ((a_indexPath.section+1)*100)+a_indexPath.row;
 }
 
 -(IFASwitchTableViewCell *)IFA_switchCellForTable:(UITableView *)a_tableView indexPath:(NSIndexPath*)a_indexPath{
@@ -1381,8 +1382,8 @@ withAlertPresenterViewController:self
 
     }
 
-    (self.IFA_propertyNameToCell)[l_propertyName] = l_cellToReturn;
-    (self.propertyNameToIndexPath)[l_propertyName] = indexPath;
+    self.IFA_propertyNameToCell[l_propertyName] = l_cellToReturn;
+    self.propertyNameToIndexPath[l_propertyName] = indexPath;
 
     return [self IFA_updateEditingStateForCell:[self populateCell:l_cellToReturn] indexPath:indexPath];
 
