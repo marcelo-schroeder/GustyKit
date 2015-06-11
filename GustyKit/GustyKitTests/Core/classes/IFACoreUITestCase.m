@@ -29,8 +29,10 @@
 - (void)createInMemoryTestDatabase {
     [[IFAPersistenceManager sharedInstance] configureWithDatabaseResourceName:nil
                                            databaseResourceRelativeFolderPath:nil
+                                           databaseResourceAbsoluteFolderPath:nil
                                                managedObjectModelResourceName:@"GustyKitCoreUITestsModel"
                                              managedObjectModelResourceBundle:[NSBundle bundleForClass:[self class]]
+                                                    managedObjectModelVersion:nil
                                                            entityConfigBundle:nil
                                            securityApplicationGroupIdentifier:nil
                                                       muteChangeNotifications:NO
