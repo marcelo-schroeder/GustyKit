@@ -62,6 +62,15 @@
 - (UIColor *)groupStyleTableViewBackgroundColour;
 
 /**
+* Set the text colour for a form table view cell right label.
+* @param label The label to set the text colour on.
+* @param placeholder YES indicates the text corresponds to a placeholder (i.e. used when there is no value). NO indicates the text is not a placeholder (i.e. it is the actual value).
+*
+*/
++ (void)setTextColourForFormTableViewCellRightLabel:(UILabel *)label
+                                        placeholder:(BOOL)placeholder;
+
+/**
 * Determines the default values for <IFAHudView>'s appearance properties.
 * @param a_hudView HUD view instance to return the appearance property default values for.
 * @returns Dictionary containing <IFAHudView> property names as keys and their corresponding values as values.

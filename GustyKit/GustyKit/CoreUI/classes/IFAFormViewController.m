@@ -538,7 +538,9 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
                                                                                               inObject:self.object
                                                                                                 inForm:self.formName
                                                                                             createMode:self.createMode];
-            [l_cell setLeftLabelText:l_labelText rightLabelText:nil];
+            [l_cell setLeftLabelText:l_labelText
+                      rightLabelText:nil
+           rightLabelPlaceholderText:nil];
             return l_cell;
         }
 
@@ -839,6 +841,15 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
     }
 }
 
+- (NSString *)IFA_placeholderTextForPropertyName:(NSString *)propertyName {
+    NSString *placeholderText = nil;
+    if (self.IFA_isManagedObject) {
+        NSPropertyDescription *propertyDescription = [self.object ifa_descriptionForProperty:propertyName];
+        placeholderText = propertyDescription.isOptional ? NSLocalizedStringFromTable(@"Optional", @"GustyKitLocalizable", nil) : NSLocalizedStringFromTable(@"Required", @"GustyKitLocalizable", nil);
+    }
+    return placeholderText;
+}
+
 #pragma mark - Public
 
 - (id)initWithObject:(NSObject *)a_object readOnlyMode:(BOOL)a_readOnlyMode createMode:(BOOL)a_createMode
@@ -923,7 +934,9 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController {
         return a_cell;
     }
 
-    id l_value = [self.object valueForKey:a_cell.propertyName];
+    NSString *propertyName = a_cell.propertyName;
+
+    id l_value = [self.object valueForKey:propertyName];
 
     a_cell.customAccessoryType = [self accessoryTypeForIndexPath:a_cell.indexPath];
 
@@ -936,25 +949,29 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController {
             IFASwitchTableViewCell *l_cell = (IFASwitchTableViewCell *) a_cell;
             l_cell.switchControl.enabled = ![self IFA_isFormLocked];
             l_cell.switchControl.on = [(NSNumber *) l_value boolValue];
-            [a_cell setLeftLabelText:leftLabelText rightLabelText:nil];
+            [a_cell setLeftLabelText:leftLabelText
+                      rightLabelText:nil
+           rightLabelPlaceholderText:nil];
 
         } else{
 
-            NSString *l_valueFormat = [[IFAPersistenceManager sharedInstance].entityConfig valueFormatForProperty:a_cell.propertyName
+            NSString *l_valueFormat = [[IFAPersistenceManager sharedInstance].entityConfig valueFormatForProperty:propertyName
                                                                                                          inObject:self.object];
             NSString *l_valueString = [self.object ifa_propertyStringValueForIndexPath:a_cell.indexPath
                                                                                 inForm:self.formName
                                                                             createMode:self.createMode
                                                                               calendar:[self calendar]];
             NSString *rightLabelText = l_valueFormat ? [NSString stringWithFormat:l_valueFormat, l_valueString] : l_valueString;
-            [a_cell setLeftLabelText:leftLabelText rightLabelText:rightLabelText];
+            NSString *rightLabelPlaceHolderText = [self IFA_placeholderTextForPropertyName:propertyName];
+            [a_cell setLeftLabelText:leftLabelText
+                      rightLabelText:rightLabelText
+           rightLabelPlaceholderText:rightLabelPlaceHolderText];
 
             if ([a_cell isKindOfClass:[IFAFormTextFieldTableViewCell class]]) {
 
                 IFAFormTextFieldTableViewCell *l_cell = (IFAFormTextFieldTableViewCell *) a_cell;
                 if (self.IFA_isManagedObject) {
-                    NSPropertyDescription *propertyDescription = [self.object ifa_descriptionForProperty:a_cell.propertyName];
-                    l_cell.textField.placeholder = propertyDescription.isOptional ? NSLocalizedStringFromTable(@"Optional", @"GustyKitLocalizable", nil) : NSLocalizedStringFromTable(@"Required", @"GustyKitLocalizable", nil);
+                    l_cell.textField.placeholder = [self IFA_placeholderTextForPropertyName:propertyName];
                 }
                 [l_cell reloadData];
 

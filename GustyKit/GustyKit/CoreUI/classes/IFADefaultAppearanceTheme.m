@@ -34,13 +34,19 @@
 
 typedef NS_ENUM(NSUInteger, IFAThemeColour){
     IFAThemeColourInlineHelpText,
+    IFAThemeColourFormFieldText,
+    IFAThemeColourFormFieldPlaceholder,
 };
 
-- (UIColor *)IFA_themeColour:(IFAThemeColour)a_themeColour {
++ (UIColor *)IFA_themeColour:(IFAThemeColour)a_themeColour {
     UIColor *colour = nil;
     switch (a_themeColour){
         case IFAThemeColourInlineHelpText:
+        case IFAThemeColourFormFieldText:
             colour = [UIColor ifa_grayColorWithRGB:142];
+            break;
+        case IFAThemeColourFormFieldPlaceholder:
+            colour = [UIColor ifa_grayColorWithRGB:200];
             break;
         default:
             NSAssert(NO, @"Unexpected theme colour: %lu", (unsigned long)a_themeColour);
@@ -286,7 +292,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
 
         }else if ([a_viewController isKindOfClass:[IFAListViewController class]]) {
             IFAListViewController *listViewController = (IFAListViewController *) a_viewController;
-            UIColor *noDataHelpColor = [self IFA_themeColour:IFAThemeColourInlineHelpText];
+            UIColor *noDataHelpColor = [self.class IFA_themeColour:IFAThemeColourInlineHelpText];
             listViewController.noDataPlaceholderAddHintPrefixLabel.textColor = noDataHelpColor;
             listViewController.noDataPlaceholderAddHintSuffixLabel.textColor = noDataHelpColor;
             listViewController.noDataPlaceholderDescriptionLabel.textColor = noDataHelpColor;
@@ -401,7 +407,7 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
         l_view.formTableViewCell.bottomSeparatorImageView.image = [UIImage ifa_separatorImageForType:IFASeparatorImageTypeHorizontalBottom];
     }else if ([a_view isKindOfClass:[IFASingleSelectionListViewControllerHeaderView class]]) {
         IFASingleSelectionListViewControllerHeaderView *view = (IFASingleSelectionListViewControllerHeaderView *) a_view;
-        view.textLabel.textColor = [self IFA_themeColour:IFAThemeColourInlineHelpText];
+        view.textLabel.textColor = [self.class IFA_themeColour:IFAThemeColourInlineHelpText];
         view.textLabel.textAlignment = NSTextAlignmentLeft;
     }
 }
@@ -965,6 +971,10 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
     return [UIColor ifa_colorWithRed:239
                                green:239
                                 blue:244];
+}
+
++ (void)setTextColourForFormTableViewCellRightLabel:(UILabel *)label placeholder:(BOOL)placeholder {
+    label.textColor = placeholder ? [self IFA_themeColour:IFAThemeColourFormFieldPlaceholder] : [self IFA_themeColour:IFAThemeColourFormFieldText];
 }
 
 + (NSDictionary *)defaultAppearancePropertiesForHudView:(IFAHudView *)a_hudView {

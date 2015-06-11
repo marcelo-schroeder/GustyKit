@@ -67,5 +67,7 @@ typedef NS_ENUM(NSUInteger, IFAFormTableViewCellAccessoryType){
 * @param a_leftLabelText Left label text.
 * @param a_rightLabelText Right label text.
 */
-- (void)setLeftLabelText:(NSString *)a_leftLabelText rightLabelText:(NSString *)a_rightLabelText;
+- (void)setLeftLabelText:(NSString *)a_leftLabelText
+           rightLabelText:(NSString *)a_rightLabelText
+rightLabelPlaceholderText:(NSString *)a_rightLabelPlaceholderText;
 @end

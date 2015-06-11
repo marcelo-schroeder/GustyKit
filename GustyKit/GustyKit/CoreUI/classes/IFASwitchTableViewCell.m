@@ -55,7 +55,9 @@
     return self;
 }
 
-- (void)setLeftLabelText:(NSString *)a_leftLabelText rightLabelText:(NSString *)a_rightLabelText {
+- (void)setLeftLabelText:(NSString *)a_leftLabelText
+           rightLabelText:(NSString *)a_rightLabelText
+rightLabelPlaceholderText:(NSString *)a_rightLabelPlaceholderText {
 
     self.leftLabel.text = a_leftLabelText;
     self.rightLabel.text = a_rightLabelText;

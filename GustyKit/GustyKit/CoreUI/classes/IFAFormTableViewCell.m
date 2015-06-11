@@ -75,10 +75,21 @@
     [((IFADefaultAppearanceTheme *) self.ifa_appearanceTheme) setCustomAccessoryViewAppearanceForFormTableViewCell:self];
 }
 
-- (void)setLeftLabelText:(NSString *)a_leftLabelText rightLabelText:(NSString *)a_rightLabelText {
+- (void)setLeftLabelText:(NSString *)a_leftLabelText
+           rightLabelText:(NSString *)a_rightLabelText
+rightLabelPlaceholderText:(NSString *)a_rightLabelPlaceholderText {
 
     self.leftLabel.text = a_leftLabelText;
-    self.rightLabel.text = a_rightLabelText;
+    BOOL rightLabelTextIsPlaceholder;
+    if (a_rightLabelText && ![a_rightLabelText ifa_isEmpty]) {
+        self.rightLabel.text = a_rightLabelText;
+        rightLabelTextIsPlaceholder = NO;
+    } else {
+        self.rightLabel.text = a_rightLabelPlaceholderText;
+        rightLabelTextIsPlaceholder = YES;
+    }
+    [IFADefaultAppearanceTheme setTextColourForFormTableViewCellRightLabel:self.rightLabel
+                                                               placeholder:rightLabelTextIsPlaceholder];
 
     if (a_rightLabelText) {
         self.leftAndRightLabelsSpacingConstraint.constant = self.IFA_originalLeftAndRightLabelsSpacingConstraintConstant;
