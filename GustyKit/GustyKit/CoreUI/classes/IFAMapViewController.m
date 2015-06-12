@@ -146,7 +146,7 @@
 }
 
 - (void)IFA_onMapSettingsButtonTap:(UIBarButtonItem *)a_barButtonItem {
-    IFAMapSettingsViewController *l_mapSettingsViewController = [IFAMapSettingsViewController ifa_instantiateFromStoryboard];
+    IFAMapSettingsViewController *l_mapSettingsViewController = [IFAMapSettingsViewController ifa_instantiateFromStoryboardInBundle:[NSBundle bundleForClass:IFAMapSettingsViewController.class]];
     l_mapSettingsViewController.mapView = self.mapView;
     [self ifa_presentModalSelectionViewController:l_mapSettingsViewController
                                 fromBarButtonItem:a_barButtonItem];

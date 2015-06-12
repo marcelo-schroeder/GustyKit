@@ -122,9 +122,10 @@
 */
 - (void)ifa_removeFromParentViewControllerWithAnimationDuration:(NSTimeInterval)a_animationDuration completion:(void (^)(BOOL a_finished))a_completion;
 
-+ (instancetype)ifa_instantiateFromStoryboard;
++ (instancetype)ifa_instantiateFromStoryboardInBundle:(NSBundle *)bundle;
 
-+ (id)ifa_instantiateFromStoryboardWithViewControllerIdentifier:(NSString *)a_viewControllerIdentifier;
++ (id)ifa_instantiateFromStoryboardWithViewControllerIdentifier:(NSString *)viewControllerIdentifier
+                                                         bundle:(NSBundle *)bundle;
 
 + (NSString *)ifa_storyboardName;
 

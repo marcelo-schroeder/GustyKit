@@ -1408,19 +1408,22 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
     }
 }
 
-+ (instancetype)ifa_instantiateFromStoryboard {
-    NSString *l_storyboardName = [self ifa_storyboardName];
-    id l_viewController = [UIStoryboard ifa_instantiateInitialViewControllerFromStoryboardNamed:l_storyboardName];
-    NSAssert(l_viewController, @"It was not possible to instantiate view controller from storyboard named %@", l_storyboardName);
-    return l_viewController;
++ (instancetype)ifa_instantiateFromStoryboardInBundle:(NSBundle *)bundle {
+    NSString *storyboardName = [self ifa_storyboardName];
+    id viewController = [UIStoryboard ifa_instantiateInitialViewControllerFromStoryboardNamed:storyboardName
+                                                                                         bundle:bundle];
+    NSAssert(viewController, @"It was not possible to instantiate view controller from storyboard named %@", storyboardName);
+    return viewController;
 }
 
-+ (id)ifa_instantiateFromStoryboardWithViewControllerIdentifier:(NSString *)a_viewControllerIdentifier {
-    NSString *l_storyboardName = [self ifa_storyboardName];
-    id l_viewController = [UIStoryboard ifa_instantiateViewControllerWithIdentifier:a_viewControllerIdentifier
-                                                                fromStoryboardNamed:l_storyboardName];
-    NSAssert(l_viewController, @"It was not possible to instantiate view controller with identifier %@ from storyboard named %@", a_viewControllerIdentifier, l_storyboardName);
-    return l_viewController;
++ (id)ifa_instantiateFromStoryboardWithViewControllerIdentifier:(NSString *)viewControllerIdentifier
+                                                         bundle:(NSBundle *)bundle {
+    NSString *storyboardName = [self ifa_storyboardName];
+    id viewController = [UIStoryboard ifa_instantiateViewControllerWithIdentifier:viewControllerIdentifier
+                                                                fromStoryboardNamed:storyboardName
+                                                                             bundle:bundle];
+    NSAssert(viewController, @"It was not possible to instantiate view controller with identifier %@ from storyboard named %@", viewControllerIdentifier, storyboardName);
+    return viewController;
 }
 
 + (NSString *)ifa_storyboardName {

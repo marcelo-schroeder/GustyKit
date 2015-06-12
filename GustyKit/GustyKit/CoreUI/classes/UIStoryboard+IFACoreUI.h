@@ -19,13 +19,12 @@
 
 @interface UIStoryboard (IFACoreUI)
 
-// Default implementation assumes storyboard has the same name as the view controller class name
-+ (UIStoryboard *)ifa_storyboardNamed:(NSString *)a_storyboardName;
-
 // Uses ifa_storyboardNamed: to determine the storyboard to instantiate the view controller from
-+ (id)ifa_instantiateInitialViewControllerFromStoryboardNamed:(NSString *)a_storyboardName;
++ (id)ifa_instantiateInitialViewControllerFromStoryboardNamed:(NSString *)a_storyboardName
+                                                       bundle:(NSBundle *)a_bundle;
 
 // Uses ifa_storyboardNamed: to determine the storyboard to instantiate the view controller from
 + (id)ifa_instantiateViewControllerWithIdentifier:(NSString *)a_viewControllerIdentifier
-                              fromStoryboardNamed:(NSString *)a_storyboardName;
+                              fromStoryboardNamed:(NSString *)a_storyboardName
+                                           bundle:(NSBundle *)a_bundle;
 @end
