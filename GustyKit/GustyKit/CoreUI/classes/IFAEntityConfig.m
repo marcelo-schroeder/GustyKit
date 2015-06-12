@@ -393,6 +393,10 @@
 	return [[[[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"properties"] valueForKey:aPropertyName] valueForKey:@"enumerationSource"];
 }
 
+- (NSString *)placeholderForProperty:(NSString*)aPropertyName inEntity:(NSString*)anEntityName {
+    return [[[[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"properties"] valueForKey:aPropertyName] valueForKey:@"placeholder"];
+}
+
 - (BOOL)isEnumerationForProperty:(NSString*)aPropertyName inObject:(NSObject*)anObject{
     return [self isEnumerationForProperty:aPropertyName inEntity:[anObject ifa_entityName]];
 }

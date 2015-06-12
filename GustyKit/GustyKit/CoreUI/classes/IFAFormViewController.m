@@ -842,8 +842,9 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
 }
 
 - (NSString *)IFA_placeholderTextForPropertyName:(NSString *)propertyName {
-    NSString *placeholderText = nil;
-    if (self.IFA_isManagedObject) {
+    NSString *placeholderText = [[IFAPersistenceManager sharedInstance].entityConfig placeholderForProperty:propertyName
+                                                                                                   inEntity:self.object.ifa_entityName];
+    if (!placeholderText && self.IFA_isManagedObject) {
         NSPropertyDescription *propertyDescription = [self.object ifa_descriptionForProperty:propertyName];
         placeholderText = propertyDescription.isOptional ? NSLocalizedStringFromTable(@"Optional", @"GustyKitLocalizable", nil) : NSLocalizedStringFromTable(@"Required", @"GustyKitLocalizable", nil);
     }

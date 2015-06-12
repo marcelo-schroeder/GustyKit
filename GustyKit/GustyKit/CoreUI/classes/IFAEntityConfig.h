@@ -87,6 +87,10 @@ typedef NS_ENUM(NSUInteger, IFAEntityConfigFieldType){
 - (NSString*)entityNameForProperty:(NSString*)aPropertyName inEntity:(NSString*)anEntityName;
 - (NSString*)enumerationSourceForProperty:(NSString*)aPropertyName inObject:(NSObject*)anObject;
 - (NSString*)enumerationSourceForProperty:(NSString*)aPropertyName inEntity:(NSString*)anEntityName;
+
+- (NSString *)placeholderForProperty:(NSString *)aPropertyName
+                            inEntity:(NSString *)anEntityName;
+
 - (BOOL)isEnumerationForProperty:(NSString*)aPropertyName inObject:(NSObject*)anObject;
 - (BOOL)isEnumerationForProperty:(NSString*)aPropertyName inEntity:(NSString*)anEntityName;
 - (BOOL)shouldTriggerChangeNotificationForProperty:(NSString*)aPropertyName inManagedObject:(NSManagedObject*)aManagedObject;
