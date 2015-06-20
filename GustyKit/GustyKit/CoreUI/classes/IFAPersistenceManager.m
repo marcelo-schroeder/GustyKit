@@ -1332,6 +1332,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
            managedObjectModelResourceName:(NSString *)a_managedObjectModelResourceName
          managedObjectModelResourceBundle:(NSBundle *)a_managedObjectModelResourceBundle
                 managedObjectModelVersion:(NSNumber *)a_managedObjectModelVersion
+                              mergePolicy:(NSMergePolicy *)a_mergePolicy
                        entityConfigBundle:(NSBundle *)a_entityConfigBundle
        securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
                   muteChangeNotifications:(BOOL)a_muteChangeNotifications
@@ -1401,6 +1402,9 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     // Configure parent managedObjectContext using a main queue concurrency type
     self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [self.managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+    if (a_mergePolicy) {
+        self.managedObjectContext.mergePolicy = a_mergePolicy;
+    }
     
     // Configure child managedObjectContext using a private queue concurrency type (used for async fetches)
     self.privateQueueChildManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];

@@ -33,6 +33,7 @@
                                                managedObjectModelResourceName:@"GustyKitCoreUITestsModel"
                                              managedObjectModelResourceBundle:[NSBundle bundleForClass:[self class]]
                                                     managedObjectModelVersion:nil
+                                                                  mergePolicy:nil
                                                            entityConfigBundle:nil
                                            securityApplicationGroupIdentifier:nil
                                                       muteChangeNotifications:NO
