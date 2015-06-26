@@ -148,7 +148,7 @@
         
         // Save changes
         self.shouldIgnoreStaleDataChanges = YES;
-        [[IFAPersistenceManager sharedInstance] saveObject:fromManagedObject validationAlertPresenter:self];
+        [[IFAPersistenceManager sharedInstance] save];
         self.shouldIgnoreStaleDataChanges = NO;
 
         if (!self.fetchedResultsController) {
