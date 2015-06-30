@@ -8,7 +8,7 @@
 
 @interface IFAPersistenceChangeDetector ()
 @property(nonatomic) BOOL changed;
-@property(nonatomic) NSMutableDictionary *persistentEntityChangeNotificationUserInfoDictionariesByEntityName;
+@property(nonatomic) NSMutableDictionary *mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName;
 @property(nonatomic) BOOL IFA_observerAdded;
 @end
 
@@ -20,12 +20,12 @@
 
 - (void)reset {
     self.changed = NO;
-    [self.persistentEntityChangeNotificationUserInfoDictionariesByEntityName removeAllObjects];
+    [self.mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName removeAllObjects];
 }
 
 - (BOOL)changedForManagedObject:(NSManagedObject *)a_managedObject {
     if (a_managedObject && self.changed) {
-        NSArray *timerUserInfoDictionaries = self.persistentEntityChangeNotificationUserInfoDictionariesByEntityName[a_managedObject.ifa_entityName];
+        NSArray *timerUserInfoDictionaries = self.mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName[a_managedObject.ifa_entityName];
         if (timerUserInfoDictionaries) {
             for (NSDictionary *userInfoDictionary in timerUserInfoDictionaries) {
                 NSManagedObjectID *objectID = a_managedObject.objectID;
@@ -42,13 +42,6 @@
     return NO;
 }
 
-- (NSMutableDictionary *)persistentEntityChangeNotificationUserInfoDictionariesByEntityName {
-    if (!_persistentEntityChangeNotificationUserInfoDictionariesByEntityName) {
-        _persistentEntityChangeNotificationUserInfoDictionariesByEntityName = [NSMutableDictionary new];
-    }
-    return _persistentEntityChangeNotificationUserInfoDictionariesByEntityName;
-}
-
 - (void)setEnabled:(BOOL)enabled {
     _enabled = enabled;
     if (enabled) {
@@ -56,6 +49,10 @@
     } else {
         [self IFA_removeObserver];
     }
+}
+
+- (NSDictionary *)persistentEntityChangeNotificationUserInfoDictionariesByEntityName {
+    return self.mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName;
 }
 
 #pragma mark - Overrides
@@ -69,10 +66,10 @@
 - (void)IFA_onPersistentEntityChangeNotification:(NSNotification *)a_notification {
     self.changed = YES;
     NSString *entityName = [((Class) a_notification.object) ifa_entityName];
-    NSMutableArray *userInfoDictionaries = self.persistentEntityChangeNotificationUserInfoDictionariesByEntityName[entityName];
+    NSMutableArray *userInfoDictionaries = self.mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName[entityName];
     if (!userInfoDictionaries) {
         userInfoDictionaries = [NSMutableArray new];
-        self.persistentEntityChangeNotificationUserInfoDictionariesByEntityName[entityName] = userInfoDictionaries;
+        self.mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName[entityName] = userInfoDictionaries;
     }
     [userInfoDictionaries addObject:a_notification.userInfo];
 }
@@ -104,6 +101,13 @@
         }
     }
     return NO;
+}
+
+- (NSMutableDictionary *)mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName {
+    if (!_mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName) {
+        _mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName = [NSMutableDictionary new];
+    }
+    return _mutablePersistentEntityChangeNotificationUserInfoDictionariesByEntityName;
 }
 
 @end

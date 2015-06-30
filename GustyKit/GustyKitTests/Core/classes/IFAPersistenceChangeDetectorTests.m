@@ -55,7 +55,7 @@
     [[IFAPersistenceManager sharedInstance] save];
     // then
     assertThatBool(self.persistenceChangeDetector.changed, isTrue());
-    NSMutableDictionary *userInfoDictionariesByEntityName = self.persistenceChangeDetector.persistentEntityChangeNotificationUserInfoDictionariesByEntityName;
+    NSDictionary *userInfoDictionariesByEntityName = self.persistenceChangeDetector.persistentEntityChangeNotificationUserInfoDictionariesByEntityName;
     assertThat(userInfoDictionariesByEntityName.allKeys, containsInAnyOrder(@"TestCoreDataEntity1", nil));
     NSArray *entity1UserInfoDictionaries = userInfoDictionariesByEntityName[@"TestCoreDataEntity1"];
     assertThat(entity1UserInfoDictionaries, hasCountOf(1));
@@ -82,7 +82,7 @@
 
     // then
     assertThatBool(self.persistenceChangeDetector.changed, isTrue());
-    NSMutableDictionary *userInfoDictionariesByEntityName = self.persistenceChangeDetector.persistentEntityChangeNotificationUserInfoDictionariesByEntityName;
+    NSDictionary *userInfoDictionariesByEntityName = self.persistenceChangeDetector.persistentEntityChangeNotificationUserInfoDictionariesByEntityName;
     assertThat(userInfoDictionariesByEntityName.allKeys, containsInAnyOrder(@"TestCoreDataEntity1", @"TestCoreDataEntity2", nil));
 
     NSArray *entity1UserInfoDictionaries = userInfoDictionariesByEntityName[@"TestCoreDataEntity1"];

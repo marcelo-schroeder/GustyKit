@@ -34,7 +34,7 @@
 * - key: persistent entity name
 * - value: NSArray instance containing changes in the same format as the userInfo dictionary provided by the IFANotificationPersistentEntityChange notification.
 */
-@property(nonatomic, readonly) NSMutableDictionary *persistentEntityChangeNotificationUserInfoDictionariesByEntityName;
+@property(nonatomic, readonly) NSDictionary *persistentEntityChangeNotificationUserInfoDictionariesByEntityName;
 
 /**
 * Set to YES to enable change tracking.
