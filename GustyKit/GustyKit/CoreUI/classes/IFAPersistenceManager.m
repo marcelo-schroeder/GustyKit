@@ -1683,6 +1683,26 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     return [a_managedObjects valueForKey:@"objectID"];
 }
 
++ (NSSet *)insertedObjectsInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo {
+    return userInfo[IFAKeyInsertedObjects];
+}
+
++ (NSSet *)deletedObjectsInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo {
+    return userInfo[IFAKeyDeletedObjects];
+}
+
++ (NSSet *)updatedObjectsInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo {
+    return userInfo[IFAKeyUpdatedObjects];
+}
+
++ (NSDictionary *)originalPropertiesInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo {
+    return userInfo[IFAKeyOriginalProperties];
+}
+
++ (NSDictionary *)updatedPropertiesInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo {
+    return userInfo[IFAKeyUpdatedProperties];
+}
+
 #pragma mark -
 #pragma mark Overrides
 

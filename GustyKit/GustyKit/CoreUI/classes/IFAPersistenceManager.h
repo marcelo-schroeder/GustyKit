@@ -266,6 +266,11 @@
 + (BOOL)setValidationError:(NSError**)anError withMessage:(NSString*)anErrorMessage;
 + (NSMutableArray*)idsForManagedObjects:(NSArray*)a_managedObjects;
 
++ (NSSet *)insertedObjectsInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo;
++ (NSSet *)deletedObjectsInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo;
++ (NSSet *)updatedObjectsInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo;
++ (NSDictionary *)originalPropertiesInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo;
++ (NSDictionary *)updatedPropertiesInPersistentEntityChangeNotificationUserInfo:(NSDictionary *)userInfo;
 @end
 
 @protocol IFAPersistenceManagerDelegate <NSObject>

@@ -35,11 +35,11 @@
 - (void)onChangeNotification:(NSNotification *)notification {
     id object = notification.object;
     NSDictionary *userInfo = notification.userInfo;
-    NSSet *insertedObjects = userInfo[IFAKeyInsertedObjects];
-    NSSet *deletedObjects = userInfo[IFAKeyDeletedObjects];
-    NSSet *updatedObjects = userInfo[IFAKeyUpdatedObjects];
-    NSDictionary *originalProperties = userInfo[IFAKeyOriginalProperties];
-    NSDictionary *updatedProperties = userInfo[IFAKeyUpdatedProperties];
+    NSSet *insertedObjects = [IFAPersistenceManager insertedObjectsInPersistentEntityChangeNotificationUserInfo:userInfo];
+    NSSet *deletedObjects = [IFAPersistenceManager deletedObjectsInPersistentEntityChangeNotificationUserInfo:userInfo];
+    NSSet *updatedObjects = [IFAPersistenceManager updatedObjectsInPersistentEntityChangeNotificationUserInfo:userInfo];
+    NSDictionary *originalProperties = [IFAPersistenceManager originalPropertiesInPersistentEntityChangeNotificationUserInfo:userInfo];
+    NSDictionary *updatedProperties = [IFAPersistenceManager updatedPropertiesInPersistentEntityChangeNotificationUserInfo:userInfo];
     if (insertedObjects.count && [self.delegate respondsToSelector:@selector(persistentEntityChangeObserver:didObserveInsertionForClass:withInsertedObjects:)]) {
         [self.delegate persistentEntityChangeObserver:self
                           didObserveInsertionForClass:object
