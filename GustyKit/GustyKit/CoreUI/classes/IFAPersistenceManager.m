@@ -196,6 +196,9 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
                                 break;
                             }
                         }
+                        if (l_causeDataToGoStaleForEntity) {
+                            break;
+                        }
                     }
                     
                 }
@@ -203,11 +206,11 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
             }
             
             if (l_causeDataToGoStaleForEntity) {
-                
+
                 NSNotification *notification = [NSNotification notificationWithName:IFANotificationPersistentEntityChange
                                                                              object:NSClassFromString(l_entityName)
                                                                            userInfo:l_userInfoDict];
-                [[NSNotificationQueue defaultQueue] enqueueNotification:notification 
+                [[NSNotificationQueue defaultQueue] enqueueNotification:notification
                                                            postingStyle:NSPostNow 
                                                            coalesceMask:NSNotificationNoCoalescing 
                                                                forModes:nil];
