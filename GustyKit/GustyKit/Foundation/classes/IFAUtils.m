@@ -77,6 +77,10 @@
     [[IFADispatchQueueManager sharedInstance] dispatchAsyncGlobalDefaultPriorityQueueBlock:a_block];
 }
 
++(void)dispatchAsyncGlobalHighPriorityQueueBlock:(dispatch_block_t)a_block{
+    [[IFADispatchQueueManager sharedInstance] dispatchAsyncGlobalHighPriorityQueueBlock:a_block];
+}
+
 +(void)dispatchAsyncGlobalQueueBlock:(dispatch_block_t)a_block priority:(dispatch_queue_priority_t)a_priority{
     [[IFADispatchQueueManager sharedInstance] dispatchAsyncGlobalQueueBlock:a_block priority:a_priority];
 }

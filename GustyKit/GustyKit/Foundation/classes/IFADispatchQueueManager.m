@@ -39,12 +39,24 @@
     dispatch_sync(dispatch_get_main_queue(), a_block);
 }
 
+- (void)dispatchAsyncGlobalHighPriorityQueueBlock:(dispatch_block_t)a_block{
+    [self dispatchAsyncGlobalQueueBlock:a_block priority:DISPATCH_QUEUE_PRIORITY_HIGH];
+}
+
 - (void)dispatchAsyncGlobalDefaultPriorityQueueBlock:(dispatch_block_t)a_block{
     [self dispatchAsyncGlobalQueueBlock:a_block priority:DISPATCH_QUEUE_PRIORITY_DEFAULT];
 }
 
 - (void)dispatchAsyncGlobalQueueBlock:(dispatch_block_t)a_block priority:(dispatch_queue_priority_t)a_priority{
-    dispatch_async(dispatch_get_global_queue(a_priority, 0), a_block);
+    dispatch_queue_t dispatchQueue = dispatch_get_global_queue(a_priority, 0);
+    NSAssert(dispatchQueue != nil, @"Dispatch queue is nil");
+    dispatch_async(dispatchQueue, a_block);
+}
+
++ (dispatch_queue_t)createSerialDispatchQueueWithLabel:(NSString *)label
+                                 qualityOfServiceClass:(dispatch_qos_class_t)qualityOfServiceClass {
+    dispatch_queue_attr_t queueAttributes = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, qualityOfServiceClass, 0);
+    return dispatch_queue_create(label.UTF8String, queueAttributes);
 }
 
 // Inspired by http://www.takingnotes.co/blog/2013/01/03/coalescing/

@@ -29,8 +29,12 @@
 - (void)dispatchAsyncMainThreadBlock:(dispatch_block_t)a_block;
 - (void)dispatchAsyncMainThreadBlock:(dispatch_block_t)a_block afterDelay:(NSTimeInterval)a_delay;
 - (void)dispatchSyncMainThreadBlock:(dispatch_block_t)a_block;
+- (void)dispatchAsyncGlobalHighPriorityQueueBlock:(dispatch_block_t)a_block;
 - (void)dispatchAsyncGlobalDefaultPriorityQueueBlock:(dispatch_block_t)a_block;
 - (void)dispatchAsyncGlobalQueueBlock:(dispatch_block_t)a_block priority:(dispatch_queue_priority_t)a_priority;
+
++ (dispatch_queue_t)createSerialDispatchQueueWithLabel:(NSString *)label
+                                 qualityOfServiceClass:(dispatch_qos_class_t)qualityOfServiceClass;
 
 /**
 * Coalesce multiple calls to a selector into one call at the next turn of the current run loop.
