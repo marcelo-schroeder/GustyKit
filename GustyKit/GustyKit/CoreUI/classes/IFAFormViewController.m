@@ -2059,28 +2059,32 @@ withAlertPresenterViewController:self
 
     }
 
-    // Reload table view data to update form state
-    void (^tableViewDataReloadBlock)() = ^{
-        if (animated) {
-            [UIView transitionWithView:self.view
-                              duration:IFAAnimationDuration
-                               options:UIViewAnimationOptionTransitionCrossDissolve
-                            animations:^{
-                                [self.tableView reloadData];
-                            }
-                            completion:NULL];
+    if (!self.ifa_sessionCompletionNotified && !self.IFA_preparingForDismissalAfterRollback) {  // Table should not be reloaded in these cases (i.e. form will be dismissed soon)
+
+        // Reload table view data to update form state
+        void (^tableViewDataReloadBlock)() = ^{
+            if (animated) {
+                [UIView transitionWithView:self.view
+                                  duration:IFAAnimationDuration
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:^{
+                                    [self.tableView reloadData];
+                                }
+                                completion:NULL];
+            } else {
+                [self.tableView reloadData];
+            }
+        };
+        if (self.IFA_editingStateChangeTableViewDataReloadDelay) {
+            [IFAUtils dispatchAsyncMainThreadBlock:^{
+                tableViewDataReloadBlock();
+            } afterDelay:self.IFA_editingStateChangeTableViewDataReloadDelay];
         } else {
-            [self.tableView reloadData];
-        }
-    };
-    if (self.IFA_editingStateChangeTableViewDataReloadDelay) {
-        [IFAUtils dispatchAsyncMainThreadBlock:^{
             tableViewDataReloadBlock();
-        } afterDelay:self.IFA_editingStateChangeTableViewDataReloadDelay];
-    } else {
-        tableViewDataReloadBlock();
-    };
-    self.IFA_editingStateChangeTableViewDataReloadDelay = 0;
+        };
+        self.IFA_editingStateChangeTableViewDataReloadDelay = 0;
+
+    }
 
 }
 
