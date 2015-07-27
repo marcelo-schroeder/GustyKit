@@ -262,6 +262,11 @@
                           ofEntityNamed:(NSString *)entityName
                     usedForRelationship:(BOOL)usedForRelationship;
 
+/**
+* @returns YES if there are unsaved changes in the main managed object context or in any of the pushed child managed object contexts, otherwise it returns NO.
+*/
+- (BOOL)unsavedEditingChanges;
+
 + (instancetype)sharedInstance;
 + (BOOL)setValidationError:(NSError**)anError withMessage:(NSString*)anErrorMessage;
 + (NSMutableArray*)idsForManagedObjects:(NSArray*)a_managedObjects;

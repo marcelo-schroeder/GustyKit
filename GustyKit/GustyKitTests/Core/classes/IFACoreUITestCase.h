@@ -17,9 +17,14 @@
 
 #import "IFACommonTests.h"
 
+@class IFAPersistenceManager;
+
 @interface IFACoreUITestCase : XCTestCase
 @property (nonatomic, strong) id asynchronousWorkManagerMock;
 @property(nonatomic, strong) id dispatchQueueManagerPartialMock;
 @property(nonatomic, strong) id dispatchQueueManagerClassMock;
+
+- (void)createInMemoryTestDatabaseWithPersistenceManager:(IFAPersistenceManager *)persistenceManager;
+
 - (void)createInMemoryTestDatabase;
 @end

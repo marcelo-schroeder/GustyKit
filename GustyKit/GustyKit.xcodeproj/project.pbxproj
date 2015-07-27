@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		1073800928EF23408942168D /* IFACoreUITestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738A6FC2F5FF3529167F34 /* IFACoreUITestCase.m */; };
 		1073800E6272830317775D61 /* IFAEntityConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738E93F21BF564C6C975FB /* IFAEntityConfig.m */; };
+		107380453E714265FB5AE530 /* UIColor+IFACoreUI_WatchKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1073816992ECDA64545C8C7A /* UIColor+IFACoreUI_WatchKit.m */; };
 		1073804C9F097C3B75D64AD5 /* UICollectionView+IFACoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 107380FFAFF02FD902B39D05 /* UICollectionView+IFACoreUI.m */; };
 		1073804D290D61D1F6765F34 /* IFATextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738124D23614FD13D02001 /* IFATextViewController.m */; };
 		1073809C8318CB91760D580A /* IFAWorkInProgressModalViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1073879A8D689A464D0A5A3A /* IFAWorkInProgressModalViewManager.m */; };
@@ -176,6 +177,7 @@
 		F766D33F18ECA7D700B3B590 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D4DBED18EA11E100ABF401 /* MapKit.framework */; };
 		F766D34118ECADCE00B3B590 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F766D34018ECADCE00B3B590 /* GLKit.framework */; };
 		F76A083B1A89BA3000B66605 /* IFALazyTableDataLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F76A083A1A89BA3000B66605 /* IFALazyTableDataLoadingViewController.m */; };
+		F7805B141B65D66C00312FE2 /* UIAlertController+IFACoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F7805B131B65D66C00312FE2 /* UIAlertController+IFACoreUI.m */; };
 		F7B4AA901B21318F00E81AE1 /* IFAPersistentEntityChangeObserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B4AA8F1B21318F00E81AE1 /* IFAPersistentEntityChangeObserverTests.m */; };
 		F7B5A7221AC8CA0B00E47858 /* IFASelectionManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B5A7211AC8CA0B00E47858 /* IFASelectionManagerTests.m */; };
 		F7B5A7241AC914FD00E47858 /* IFASingleSelectionManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B5A7231AC914FD00E47858 /* IFASingleSelectionManagerTests.m */; };
@@ -247,6 +249,7 @@
 		10738154543E8EE025C253D5 /* IFAMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAMapAnnotation.h; sourceTree = "<group>"; };
 		10738160BF398A91FAFD727A /* IFAEntityConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAEntityConfig.h; sourceTree = "<group>"; };
 		1073816973626C61D45DBDE4 /* UITableViewController+IFADynamicCellHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+IFADynamicCellHeight.m"; sourceTree = "<group>"; };
+		1073816992ECDA64545C8C7A /* UIColor+IFACoreUI_WatchKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+IFACoreUI_WatchKit.m"; sourceTree = "<group>"; };
 		10738174E97D57DF071C7B26 /* IFATextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFATextViewController.h; sourceTree = "<group>"; };
 		1073817A733857A2F6D9BE7B /* NSFileManager+IFAFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+IFAFoundation.m"; sourceTree = "<group>"; };
 		107381990D98DA78227D743F /* IFASwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFASwitchTableViewCell.h; sourceTree = "<group>"; };
@@ -483,6 +486,7 @@
 		10738C652FF594F70406FB25 /* IFAPersistenceChangeDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAPersistenceChangeDetector.m; sourceTree = "<group>"; };
 		10738C6D4A8385991349268E /* IFAWorkInProgressModalViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAWorkInProgressModalViewManager.h; sourceTree = "<group>"; };
 		10738C805057D0148F7ADA68 /* NSNumberFormatter+IFAFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+IFAFoundation.h"; sourceTree = "<group>"; };
+		10738CCD06026B7BE4C4A00D /* UIColor+IFACoreUI_WatchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+IFACoreUI_WatchKit.h"; sourceTree = "<group>"; };
 		10738CE49C87348C9C817133 /* IFAAbstractSelectionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFAAbstractSelectionListViewController.h; sourceTree = "<group>"; };
 		10738CF5078176436AA71336 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		10738CF5266431351C5684A4 /* IFABlurredFadingOverlayViewControllerTransitioningDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFABlurredFadingOverlayViewControllerTransitioningDelegate.h; sourceTree = "<group>"; };
@@ -586,6 +590,8 @@
 		F766D34018ECADCE00B3B590 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		F76A08391A89BA3000B66605 /* IFALazyTableDataLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFALazyTableDataLoadingViewController.h; sourceTree = "<group>"; };
 		F76A083A1A89BA3000B66605 /* IFALazyTableDataLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFALazyTableDataLoadingViewController.m; sourceTree = "<group>"; };
+		F7805B121B65D66C00312FE2 /* UIAlertController+IFACoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+IFACoreUI.h"; sourceTree = "<group>"; };
+		F7805B131B65D66C00312FE2 /* UIAlertController+IFACoreUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+IFACoreUI.m"; sourceTree = "<group>"; };
 		F7944FF51A68F8FD00E059A3 /* GustyKitFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GustyKitFoundation.h; sourceTree = "<group>"; };
 		F7B4AA8F1B21318F00E81AE1 /* IFAPersistentEntityChangeObserverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAPersistentEntityChangeObserverTests.m; sourceTree = "<group>"; };
 		F7B5A7211AC8CA0B00E47858 /* IFASelectionManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFASelectionManagerTests.m; sourceTree = "<group>"; };
@@ -700,6 +706,8 @@
 		10738199C7133C8852C91910 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				F7805B121B65D66C00312FE2 /* UIAlertController+IFACoreUI.h */,
+				F7805B131B65D66C00312FE2 /* UIAlertController+IFACoreUI.m */,
 				F7C8061F1AE8C6BD0097280C /* 3rd party */,
 				F7C806451AE9CB5D0097280C /* IFAMenuViewController.h */,
 				F7C806461AE9CB5D0097280C /* IFAMenuViewController.m */,
@@ -931,6 +939,8 @@
 				107389CD9F1486F637C3BB88 /* IFAPagingContainer.h */,
 				107385B817408FF1C346FE7D /* IFAPersistentEntityChangeObserver.m */,
 				107388DD0AA6CDAE31E623D1 /* IFAPersistentEntityChangeObserver.h */,
+				1073816992ECDA64545C8C7A /* UIColor+IFACoreUI_WatchKit.m */,
+				10738CCD06026B7BE4C4A00D /* UIColor+IFACoreUI_WatchKit.h */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -1546,6 +1556,7 @@
 				F7C806381AE9956F0097280C /* IFAPassthroughView.m in Sources */,
 				107381C4AC28DE9A9EE81A4B /* IFAViewControllerTransitioningDelegate.m in Sources */,
 				107383C3DE1BB0393999AAF9 /* IFAViewControllerAnimatedTransitioning.m in Sources */,
+				F7805B141B65D66C00312FE2 /* UIAlertController+IFACoreUI.m in Sources */,
 				1073828CE9653253C469538D /* IFAFadingOverlayPresentationController.m in Sources */,
 				10738ADFA3E98361C065590B /* IFABlurredFadingOverlayPresentationController.m in Sources */,
 				10738ABE3E250EA62AC61E0B /* IFABlurredFadingOverlayViewControllerTransitioningDelegate.m in Sources */,
@@ -1588,6 +1599,7 @@
 				10738294318EBBF440939E18 /* IFAGoogleMobileAdsManager.m in Sources */,
 				10738F870D1C708B5327D198 /* UIViewController+IFAGoogleMobileAdsSupport.m in Sources */,
 				10738580D0EF1AFFC7536266 /* IFAPersistentEntityChangeObserver.m in Sources */,
+				107380453E714265FB5AE530 /* UIColor+IFACoreUI_WatchKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,7 +23,7 @@
 static char c_buttonKey;
 static char c_typeKey;
 
-@interface UIBarButtonItem (IFACategory_Private)
+@interface UIBarButtonItem (IFACoreUI_Private)
 
 @property (nonatomic, strong) UIButton *ifa_button;
 

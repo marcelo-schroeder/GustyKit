@@ -556,4 +556,43 @@ static UIImage *c_menuBarButtonItemImage = nil;
     }
 }
 
++ (void)presentAlertControllerWithTitle:(NSString *)a_title
+                                message:(NSString *)a_message
+                                  style:(UIAlertControllerStyle)a_style
+                                actions:(NSArray *)a_actions
+                               animated:(BOOL)a_animated
+                              presenter:(UIViewController *)a_presenter
+                             completion:(void (^)(void))a_completion {
+    NSString *title = a_title || a_style == UIAlertControllerStyleActionSheet ? a_title : @"";
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:a_message
+                                                                      preferredStyle:a_style];
+    for (UIAlertAction *action in a_actions) {
+        [alertController addAction:action];
+    }
+    if (a_presenter) {
+        UIViewController *presenterViewController = a_presenter.parentViewController ?: a_presenter;
+        [presenterViewController presentViewController:alertController
+                                              animated:a_animated
+                                            completion:a_completion];
+    } else {
+        [alertController ifa_presentAnimated:a_animated
+                              withCompletion:a_completion];
+    }
+}
+
++ (void)presentAlertControllerWithTitle:(NSString *)a_title
+                                message:(NSString *)a_message {
+    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"Continue", @"GustyKitLocalizable", nil)
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:nil];
+    [self presentAlertControllerWithTitle:a_title
+                                  message:a_message
+                                    style:UIAlertControllerStyleAlert
+                                  actions:@[continueAction]
+                                 animated:YES
+                                presenter:nil
+                               completion:nil];
+}
+
 @end

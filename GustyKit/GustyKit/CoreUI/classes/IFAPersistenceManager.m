@@ -1661,6 +1661,18 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     return objects;
 }
 
+- (BOOL)unsavedEditingChanges {
+    BOOL dirty = self.managedObjectContext.ifa_isCurrentManagedObjectDirty;
+    if (!dirty) {
+        for (NSManagedObjectContext *childManagedObjectContext in self.childManagedObjectContexts) {
+            if ((dirty = childManagedObjectContext.ifa_isCurrentManagedObjectDirty)) {
+                break;
+            }
+        }
+    }
+    return dirty;
+}
+
 + (instancetype)sharedInstance {
     static dispatch_once_t c_dispatchOncePredicate;
     static id c_instance = nil;

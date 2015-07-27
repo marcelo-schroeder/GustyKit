@@ -150,4 +150,31 @@ withAlertPresenterViewController:(UIViewController *)a_alertPresenterViewControl
   shouldShowSuccessfulDeletionHudConfirmation:(BOOL)shouldShowSuccessfulDeletionHudConfirmation
                             willDeleteHandler:(BOOL (^)(NSManagedObject *objectAboutToBeDeleted))willDeleteHandler
                             completionHandler:(void (^)(BOOL success))completionHandler;
+
+/**
+* Presents an instance of UIAlertController according to the specifications provided.
+* @param a_title The title of the alert. Use this string to get the user’s attention and communicate the reason for the alert.
+* @param a_message Descriptive text that provides additional details about the reason for the alert.
+* @param a_style The style to use when presenting the alert controller. Use this parameter to configure the alert controller as an action sheet or as a modal alert.
+* @param a_actions An array of UIAlertAction instances.
+* @param a_animated Pass YES to animate the presentation; otherwise, pass NO.
+* @param a_presenter The view controller doing the presentation. Pass nil for a global top level presentation, in which case, a temporary top level window and view controller are specifically created for this purpose and disposed of when the alert is dismissed by the user.
+* @param a_completion A completion block to be executed after the view transition has been completed.
+*/
++ (void)presentAlertControllerWithTitle:(NSString *)a_title
+                                message:(NSString *)a_message
+                                  style:(UIAlertControllerStyle)a_style
+                                actions:(NSArray *)a_actions
+                               animated:(BOOL)a_animated
+                              presenter:(UIViewController *)a_presenter
+                             completion:(void (^)(void))a_completion;
+
+/**
+* Presents a top level instance of UIAlertController with default Continue button.
+* @param a_title The title of the alert. Use this string to get the user’s attention and communicate the reason for the alert.
+* @param a_message Descriptive text that provides additional details about the reason for the alert.
+*/
++ (void)presentAlertControllerWithTitle:(NSString *)a_title
+                                message:(NSString *)a_message;
+
 @end

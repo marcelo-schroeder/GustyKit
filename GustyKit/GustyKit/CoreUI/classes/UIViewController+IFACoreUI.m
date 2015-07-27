@@ -47,7 +47,7 @@ static char c_sessionCompletionNotifiedKey;
 
 static UIViewController *c_popoverControllerPresenter;
 
-@interface UIViewController (IFACategory_Private)
+@interface UIViewController (IFACoreUI_Private)
 
 @property (nonatomic, strong) UIPopoverController *ifa_activePopoverController;
 @property (nonatomic, strong) UIBarButtonItem *ifa_activePopoverControllerBarButtonItem;
@@ -1459,15 +1459,13 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
                                       style:(UIAlertControllerStyle)a_style
                                     actions:(NSArray *)a_actions
                                  completion:(void (^)(void))a_completion {
-    NSString *title = a_title || a_style==UIAlertControllerStyleActionSheet ? a_title : @"";
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
-                                                                             message:a_message
-                                                                      preferredStyle:a_style];
-    for (UIAlertAction *action in a_actions) {
-        [alertController addAction:action];
-    }
-    UIViewController *presenterViewController = self.parentViewController ? : self;
-    [presenterViewController presentViewController:alertController animated:YES completion:a_completion];
+    [IFAUIUtils presentAlertControllerWithTitle:a_title
+                                        message:a_message
+                                          style:a_style
+                                        actions:a_actions
+                                       animated:YES
+                                      presenter:self
+                                     completion:a_completion];
 }
 
 - (void)ifa_presentAlertControllerWithTitle:(NSString *)a_title message:(NSString *)a_message {
@@ -1507,8 +1505,10 @@ withAlertPresenterViewController:nil
     UIAlertAction *continueAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"Continue", @"GustyKitLocalizable", nil)
                                                              style:UIAlertActionStyleDefault
                                                            handler:handler];
-    [self ifa_presentAlertControllerWithTitle:a_title message:a_message
-                                        style:UIAlertControllerStyleAlert actions:@[continueAction]
+    [self ifa_presentAlertControllerWithTitle:a_title
+                                      message:a_message
+                                        style:UIAlertControllerStyleAlert
+                                      actions:@[continueAction]
                                    completion:nil];
 }
 

@@ -26,18 +26,22 @@
 
 #pragma mark - Public
 
+- (void)createInMemoryTestDatabaseWithPersistenceManager:(IFAPersistenceManager *)persistenceManager {
+    [persistenceManager configureWithDatabaseResourceName:nil
+                       databaseResourceRelativeFolderPath:nil
+                       databaseResourceAbsoluteFolderPath:nil
+                           managedObjectModelResourceName:@"GustyKitCoreUITestsModel"
+                         managedObjectModelResourceBundle:[NSBundle bundleForClass:[self class]]
+                                managedObjectModelVersion:nil
+                                              mergePolicy:nil
+                                       entityConfigBundle:nil
+                       securityApplicationGroupIdentifier:nil
+                                  muteChangeNotifications:NO
+                                                 readOnly:NO];
+}
+
 - (void)createInMemoryTestDatabase {
-    [[IFAPersistenceManager sharedInstance] configureWithDatabaseResourceName:nil
-                                           databaseResourceRelativeFolderPath:nil
-                                           databaseResourceAbsoluteFolderPath:nil
-                                               managedObjectModelResourceName:@"GustyKitCoreUITestsModel"
-                                             managedObjectModelResourceBundle:[NSBundle bundleForClass:[self class]]
-                                                    managedObjectModelVersion:nil
-                                                                  mergePolicy:nil
-                                                           entityConfigBundle:nil
-                                           securityApplicationGroupIdentifier:nil
-                                                      muteChangeNotifications:NO
-                                                                     readOnly:NO];
+    [self createInMemoryTestDatabaseWithPersistenceManager:[IFAPersistenceManager sharedInstance]];
 }
 
 - (IFAAsynchronousWorkManager *)asynchronousWorkManagerMock {

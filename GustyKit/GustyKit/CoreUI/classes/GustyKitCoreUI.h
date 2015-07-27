@@ -185,3 +185,5 @@
 #import "IFAKeyboardVisibilityManager.h"
 #import "IFAPagingContainer.h"
 #import "IFAPersistentEntityChangeObserver.h"
+#import "UIColor+IFACoreUI_WatchKit.h"
+#import "UIAlertController+IFACoreUI.h"
