@@ -402,6 +402,234 @@
     
 }
 
+- (void)testDurationStringForStartDateWithHoursMinutesAbbreviatedFormat {
+
+    NSDateComponents* comps;
+    NSDate *startTimestamp;
+    NSDate *endTimestamp;
+
+    // 0s
+    comps = [self referenceDateComponents];
+    startTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"0m");
+
+    // 1s
+    comps = [self referenceDateComponents];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"0m");
+
+    // 1m0s
+    comps = [self referenceDateComponents];
+    [comps setMinute:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1m");
+
+    // 1m1s
+    comps = [self referenceDateComponents];
+    [comps setMinute:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1m");
+
+    // 1h0m0s
+    comps = [self referenceDateComponents];
+    [comps setHour:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1h");
+
+    // 1h0m1s
+    comps = [self referenceDateComponents];
+    [comps setHour:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1h");
+
+    // 1h1m0s
+    comps = [self referenceDateComponents];
+    [comps setHour:1];
+    [comps setMinute:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1h 1m");
+
+    // 1h1m1s
+    comps = [self referenceDateComponents];
+    [comps setHour:1];
+    [comps setMinute:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1h 1m");
+
+    // 1d0h0m0s
+    comps = [self nextReferenceDateComponents];
+    [comps setDay:27];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"24h");
+
+    // 1d0h0m1s
+    comps = [self nextReferenceDateComponents];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"24h");
+
+    // 1d0h1m0s
+    comps = [self nextReferenceDateComponents];
+    [comps setMinute:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"24h 1m");
+
+    // 1d0h1m1s
+    comps = [self nextReferenceDateComponents];
+    [comps setMinute:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"24h 1m");
+
+    // 1d1h0m0s
+    comps = [self nextReferenceDateComponents];
+    [comps setHour:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"25h");
+
+    // 1d1h0m1s
+    comps = [self nextReferenceDateComponents];
+    [comps setHour:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"25h");
+
+    // 1d1h1m0s
+    comps = [self nextReferenceDateComponents];
+    [comps setHour:1];
+    [comps setMinute:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"25h 1m");
+
+    // 1d1h1m1s
+    comps = [self nextReferenceDateComponents];
+    [comps setHour:1];
+    [comps setMinute:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"25h 1m");
+
+}
+
+- (void)testDurationStringForStartDateWithHoursMinutesSecondsAbbreviatedFormat {
+
+    NSDateComponents* comps;
+    NSDate *startTimestamp;
+    NSDate *endTimestamp;
+
+    // 0s
+    comps = [self referenceDateComponents];
+    startTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"0s");
+
+    // 1s
+    comps = [self referenceDateComponents];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1s");
+
+    // 1m0s
+    comps = [self referenceDateComponents];
+    [comps setMinute:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1m");
+
+    // 1m1s
+    comps = [self referenceDateComponents];
+    [comps setMinute:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1m 1s");
+
+    // 1h0m0s
+    comps = [self referenceDateComponents];
+    [comps setHour:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1h");
+
+    // 1h0m1s
+    comps = [self referenceDateComponents];
+    [comps setHour:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1h 0m 1s");
+
+    // 1h1m0s
+    comps = [self referenceDateComponents];
+    [comps setHour:1];
+    [comps setMinute:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1h 1m");
+
+    // 1h1m1s
+    comps = [self referenceDateComponents];
+    [comps setHour:1];
+    [comps setMinute:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"1h 1m 1s");
+
+    // 1d0h0m0s
+    comps = [self nextReferenceDateComponents];
+    [comps setDay:27];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"24h");
+
+    // 1d0h0m1s
+    comps = [self nextReferenceDateComponents];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"24h 0m 1s");
+
+    // 1d0h1m0s
+    comps = [self nextReferenceDateComponents];
+    [comps setMinute:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"24h 1m");
+
+    // 1d0h1m1s
+    comps = [self nextReferenceDateComponents];
+    [comps setMinute:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"24h 1m 1s");
+
+    // 1d1h0m0s
+    comps = [self nextReferenceDateComponents];
+    [comps setHour:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"25h");
+
+    // 1d1h0m1s
+    comps = [self nextReferenceDateComponents];
+    [comps setHour:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"25h 0m 1s");
+
+    // 1d1h1m0s
+    comps = [self nextReferenceDateComponents];
+    [comps setHour:1];
+    [comps setMinute:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"25h 1m");
+
+    // 1d1h1m1s
+    comps = [self nextReferenceDateComponents];
+    [comps setHour:1];
+    [comps setMinute:1];
+    [comps setSecond:1];
+    endTimestamp = [[NSCalendar ifa_threadSafeCalendar] dateFromComponents:comps];
+    XCTAssertEqualObjects([IFADateRange durationStringForStartDate:startTimestamp endDate:endTimestamp format:IFADurationFormatHoursMinutesSecondsAbbreviated calendar:[NSCalendar ifa_threadSafeCalendar]], @"25h 1m 1s");
+
+}
+
 #pragma mark -
 #pragma mark Private
 

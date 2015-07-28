@@ -31,7 +31,9 @@ typedef NS_ENUM(NSInteger, IFADurationFormat) {
     IFADurationFormatHoursMinutesSeconds,
     IFADurationFormatFull,
     IFADurationFormatHoursMinutesLong,
+    IFADurationFormatHoursMinutesAbbreviated,
     IFADurationFormatHoursMinutesSecondsLong,
+    IFADurationFormatHoursMinutesSecondsAbbreviated,
     IFADurationFormatFullLong,
 };
 

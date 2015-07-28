@@ -103,6 +103,7 @@
         BOOL dayUnitAdded = NO;
         BOOL secondUnitAdded = NO;
         BOOL l_longFormat = aFormat== IFADurationFormatHoursMinutesLong || aFormat== IFADurationFormatHoursMinutesSecondsLong || aFormat== IFADurationFormatFullLong;
+        BOOL l_abbreviatedFormat = aFormat==IFADurationFormatHoursMinutesAbbreviated || aFormat==IFADurationFormatHoursMinutesSecondsAbbreviated;
         switch (aFormat) {
             case IFADurationFormatFull:
             case IFADurationFormatFullLong:
@@ -110,10 +111,12 @@
                 dayUnitAdded = YES;
             case IFADurationFormatHoursMinutesSeconds:
             case IFADurationFormatHoursMinutesSecondsLong:
+            case IFADurationFormatHoursMinutesSecondsAbbreviated:
                 unitFlags = unitFlags | NSCalendarUnitSecond;
                 secondUnitAdded = YES;
             case IFADurationFormatHoursMinutes:
             case IFADurationFormatHoursMinutesLong:
+            case IFADurationFormatHoursMinutesAbbreviated:
                 unitFlags = unitFlags | NSCalendarUnitMinute;
                 break;
             default:
@@ -121,7 +124,7 @@
         }
         
         BOOL l_secondsIncluded = YES;
-        if (aFormat== IFADurationFormatHoursMinutes || aFormat== IFADurationFormatHoursMinutesLong) {
+        if (aFormat== IFADurationFormatHoursMinutes || aFormat== IFADurationFormatHoursMinutesLong || aFormat== IFADurationFormatHoursMinutesAbbreviated) {
             l_secondsIncluded = NO;
         }
         
@@ -178,7 +181,14 @@
             BOOL showMinute = (minutes!=0) || ((showDay || showHour) && seconds!=0) || (!l_secondsIncluded && !showDay && !showHour);
             BOOL showSecond = ((showDay || showHour || showMinute) && seconds!=0) || !(showDay || showHour || showMinute);
             BOOL l_mostSignificantShown = NO;
-            NSString *l_separator = l_longFormat ? @", " : @":";
+            NSString *l_separator;
+            if (l_longFormat) {
+                l_separator = @", ";
+            } else if (l_abbreviatedFormat) {
+                l_separator = @" ";
+            } else {
+                l_separator = @":";
+            }
             if (showDay) {
                 NSString *l_stringFormat = nil;
                 if (l_longFormat) {
@@ -195,7 +205,9 @@
                 }
                 NSString *l_stringFormat = nil;
                 if (l_longFormat) {
-                    l_stringFormat = hours==1?NSLocalizedStringFromTable(@"%ld hour", @"GustyKitLocalizable", nil):NSLocalizedStringFromTable(@"%ld hours", @"GustyKitLocalizable", nil);
+                    l_stringFormat = hours == 1 ? NSLocalizedStringFromTable(@"%ld hour", @"GustyKitLocalizable", nil) : NSLocalizedStringFromTable(@"%ld hours", @"GustyKitLocalizable", nil);
+                }else if (l_abbreviatedFormat){
+                    l_stringFormat = @"%ldh";
                 }else{
                     l_stringFormat = @"%ld";
                 }
@@ -209,6 +221,8 @@
                 NSString *l_stringFormat = nil;
                 if (l_longFormat) {
                     l_stringFormat = minutes==1?NSLocalizedStringFromTable(@"%ld minute", @"GustyKitLocalizable", nil):NSLocalizedStringFromTable(@"%ld minutes", @"GustyKitLocalizable", nil);
+                }else if (l_abbreviatedFormat){
+                    l_stringFormat = @"%ldm";
                 }else{
                     l_stringFormat = @"%ld";
                 }
@@ -222,6 +236,8 @@
                 NSString *l_stringFormat = nil;
                 if (l_longFormat) {
                     l_stringFormat = seconds==1?NSLocalizedStringFromTable(@"%ld second", @"GustyKitLocalizable", nil):NSLocalizedStringFromTable(@"%ld seconds", @"GustyKitLocalizable", nil);
+                }else if (l_abbreviatedFormat){
+                    l_stringFormat = @"%lds";
                 }else{
                     l_stringFormat = @"%ld";
                 }
