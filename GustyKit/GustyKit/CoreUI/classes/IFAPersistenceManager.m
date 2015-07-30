@@ -39,6 +39,7 @@ static NSString *METADATA_KEY_SYSTEM_DB_TABLES_VERSION = @"systemDbTablesVersion
 @property (strong) NSMutableArray *IFA_childManagedObjectContexts;
 @property (strong) NSString *threadDictionaryKeyManagedObjectContext;
 
+@property(nonatomic) BOOL IFA_observingManagedObjectContext;
 @end
 
 @implementation IFAPersistenceManager
@@ -609,6 +610,13 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     if ([self.delegate respondsToSelector:@selector(persistenceManager:willPerformCrudSaveForObject:)]) {
         [self.delegate persistenceManager:self
              willPerformCrudSaveForObject:object];
+    }
+}
+
+- (void)IFA_removeObservers {
+    if (self.IFA_observingManagedObjectContext) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        self.IFA_observingManagedObjectContext = NO;
     }
 }
 
@@ -1341,6 +1349,11 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
                   muteChangeNotifications:(BOOL)a_muteChangeNotifications
                                  readOnly:(BOOL)a_readOnly {
 
+    // Remove any active observers in case this method is called multiple times (this should happen only in a unit testing scenario)
+    if (_IFA_observingManagedObjectContext) {
+        [self IFA_removeObservers];
+    }
+
     // SQLite or InMemory store type?
     NSURL *dataStoreUrl;
     NSString *persistentStoreType;
@@ -1408,11 +1421,11 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     if (a_mergePolicy) {
         self.managedObjectContext.mergePolicy = a_mergePolicy;
     }
-    
+
     // Configure child managedObjectContext using a private queue concurrency type (used for async fetches)
     self.privateQueueChildManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [self.privateQueueChildManagedObjectContext setParentContext:self.managedObjectContext];
-    
+
     // Add observers if required
     if (!a_muteChangeNotifications) {
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -1423,12 +1436,13 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
                                                  selector:@selector(onNotification:)
                                                      name:NSManagedObjectContextWillSaveNotification
                                                    object:self.managedObjectContext];
+        self.IFA_observingManagedObjectContext = YES;
     }
-    
+
     // Instantiate entity configuration
     self.entityConfig = [[IFAEntityConfig alloc] initWithManagedObjectContext:self.managedObjectContext
                                                                        bundle:a_entityConfigBundle];
-    
+
 }
 
 - (void)manageDatabaseVersioningChangeWithSystemEntityConfigBundle:(NSBundle *)a_systemEntityConfigBundle
@@ -1719,9 +1733,7 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 #pragma mark Overrides
 
 - (void)dealloc {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-	
+    [self IFA_removeObservers];
 }
 
 //#ifdef DEBUG
