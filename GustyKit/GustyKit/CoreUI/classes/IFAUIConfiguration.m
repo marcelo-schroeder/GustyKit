@@ -31,7 +31,7 @@
 - (BOOL)useDeviceAgnosticMainStoryboard {
     return self.useDeviceAgnosticMainStoryboard = [[IFAUtils infoPList][@"IFAUseDeviceAgnosticMainStoryboard"] boolValue];
 }
-// to be overriden by subclasses
+
 -(Class)appearanceThemeClass {
     if ([self.dataSource respondsToSelector:@selector(appearanceThemeClass)]) {
         return self.dataSource.appearanceThemeClass;
@@ -41,7 +41,6 @@
     }
 }
 
-// to be overriden by subclasses
 -(IFAColorScheme *)colorScheme {
     if ([self.dataSource respondsToSelector:@selector(colorScheme)]) {
         return self.dataSource.colorScheme;
