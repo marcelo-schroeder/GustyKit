@@ -207,7 +207,6 @@
                                                                   securityApplicationGroupIdentifier:(NSString *)a_securityApplicationGroupIdentifier
                                                                                                error:(NSError **)a_error;
 
-//wip: update documentation
 /**
 * Configure the persistence manager instance, including the Core Data stack.
 *
@@ -215,8 +214,16 @@
 * After completion, the following properties will have been set: managedObjectModel, persistentStoreCoordinator, managedObjectContext, privateQueueChildManagedObjectContext and entityConfig.
 *
 * @param a_databaseResourceName Name of the SQLite database file for a SQLite store, without the ".sqlite" file suffix. If nil, an in-memory store will be created instead.
+* @param a_databaseResourceRelativeFolderPath Relative folder path for the database file. It is ignored if a_databaseResourceAbsoluteFolderPath is provided. If the a_securityApplicationGroupIdentifier parameter is provided, then the folder path is relative to the group's container folder, otherwise it is relative to the default documents folder.
+* @param a_databaseResourceAbsoluteFolderPath Absolute folder path for the database file. It takes precedence over the a_databaseResourceRelativeFolderPath parameter.
 * @param a_managedObjectModelResourceName Name of Core Data data model resource, without the ".momd" suffix.
 * @param a_managedObjectModelResourceBundle Bundle for the data model resource. If nil, main bundle will be used.
+* @param a_managedObjectModelVersion Version of the managed object model to use. If not provided, then the current version is used.
+* @param a_mergePolicy The merge policy to be adopted by the main managed object context.
+* @param a_entityConfigBundle Bundle to load "EntityConfig.plist" from.
+* @param a_securityApplicationGroupIdentifier Optional security application group identifier. This is only relevant when a_databaseResourceRelativeFolderPath is provided. See the description of that parameter for more details.
+* @param a_muteChangeNotifications Pass YES to mute change notifications, otherwise pass NO.
+* @param a_readOnly Pass YES to access the data store as read-only, otherwise pass NO.
 */
 - (void)configureWithDatabaseResourceName:(NSString *)a_databaseResourceName
        databaseResourceRelativeFolderPath:(NSString *)a_databaseResourceRelativeFolderPath

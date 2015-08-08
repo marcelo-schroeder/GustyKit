@@ -7,7 +7,6 @@
 
 @class IFATableViewController;
 
-//wip: add documentation
 @protocol IFAPagingContainer <NSObject>
 
 @required
