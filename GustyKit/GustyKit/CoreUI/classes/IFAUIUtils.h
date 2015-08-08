@@ -131,9 +131,15 @@ static const CGFloat IFAMaximumImageSizeInPixels =  5 * 1024 * 1024;
 */
 + (NSString *)cancelButtonTitle;
 
-+ (void)                 openUrl:(NSURL *)a_url
-withAlertPresenterViewController:(UIViewController *)a_alertPresenterViewController
-               completionHandler:(void (^)(BOOL success))a_completionHandler;
+/**
+* Open URL provided with the option to ask for user confirmation before leaving the host app.
+* This method only works if GustyAppKit is also integrated, otherwise it throws an exception.
+* @param a_url URL to be opened.
+* @param a_alertPresenterViewController If provided, this view controller will present an alert asking the user whether it is ok to navigate to another app which will open the URL.
+* @returns YES if the URL could be opened, otherwise NO.
+*/
++ (BOOL)                 openUrl:(NSURL *)a_url
+withAlertPresenterViewController:(UIViewController *)a_alertPresenterViewController;
 
 /**
 * Handle a deletion request for a managed object by a view controller.

@@ -154,7 +154,10 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController;
 */
 - (NSString *)titleForFooterInSection:(NSInteger)a_section;
 
-//wip: add documentation
+/**
+* Open the URL provided. This method only works if GustyAppKit is also integrated, otherwise it throws an exception.
+* @param a_url URL to be open.
+*/
 - (void)openUrl:(NSURL *)a_url;
 
 @end
