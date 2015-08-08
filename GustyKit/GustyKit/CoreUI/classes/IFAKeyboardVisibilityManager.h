@@ -17,12 +17,30 @@
 
 #import <Foundation/Foundation.h>
 
-//wip: add documentation
+/**
+* This class manages observations regarding the keyboard's visibility.
+*/
 @interface IFAKeyboardVisibilityManager : NSObject
+
+/**
+* Returns YES if the keyboard is visible, otherwise NO.
+* Value returned is only valid after <startObservingKeyboard> is called.
+*/
 @property (nonatomic, readonly, getter = isKeyboardVisible) BOOL keyboardVisible;
+
+/**
+* Returns the keyboard's frame.
+* Value returned is only valid after <startObservingKeyboard> is called.
+*/
 @property(nonatomic, readonly) CGRect keyboardFrame;
 
+/**
+* Singleton's shared instance.
+*/
 + (instancetype)sharedInstance;
 
+/**
+* Starts observing the keyboard's visibility.
+*/
 - (void)startObservingKeyboard;
 @end
