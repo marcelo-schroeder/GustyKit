@@ -55,7 +55,10 @@
 */
 @property (nonatomic) IFALocationAuthorizationType locationAuthorizationType;
 
-//wip: add documentation
+/**
+* Locates user on the map.
+* @param a_completionBlock Block to execute when the user location is known. The block receives a BOOL parameter indicating whether the operation has succeeded.
+*/
 - (void)locateUserWithCompletionBlock:(void (^)(BOOL a_success))a_completionBlock;
 @end
 
