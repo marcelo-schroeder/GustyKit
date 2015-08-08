@@ -51,7 +51,6 @@
 #import "IFAActionSheet.h"
 #import "IFAAppearanceTheme.h"
 #import "IFAAppearanceThemeManager.h"
-#import "IFAAppTerminator.h"
 #import "IFAAsynchronousWorkManager.h"
 #import "IFACircleView.h"
 #import "IFACollectionViewCell.h"
