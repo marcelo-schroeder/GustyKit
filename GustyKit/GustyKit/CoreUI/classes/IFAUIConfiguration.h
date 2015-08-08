@@ -20,7 +20,6 @@
 @protocol IFAUIConfigurationDataSource;
 @protocol IFAUIConfigurationDelegate;
 
-//wip: add documentation
 @interface IFAUIConfiguration : NSObject
 @property (nonatomic, weak) id<IFAUIConfigurationDataSource> dataSource;
 @property (nonatomic, weak) id<IFAUIConfigurationDelegate> delegate;

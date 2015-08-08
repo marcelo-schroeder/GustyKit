@@ -17,7 +17,6 @@
 
 #import <Foundation/Foundation.h>
 
-//wip: add documentation
 @interface IFAUIGlobal : NSObject
 @property (nonatomic, readonly) UIViewController *popoverControllerPresenter;
 @property (nonatomic, readonly) UIViewController *semiModalViewController;
