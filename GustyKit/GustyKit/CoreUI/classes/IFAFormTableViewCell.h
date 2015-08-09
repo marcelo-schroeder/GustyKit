@@ -66,6 +66,7 @@ typedef NS_ENUM(NSUInteger, IFAFormTableViewCellAccessoryType){
 * It will manage the preferred max layout width for the labels based on the content.
 * @param a_leftLabelText Left label text.
 * @param a_rightLabelText Right label text.
+ * @param a_rightLabelPlaceholderText Placeholder for the right label text.
 */
 - (void)setLeftLabelText:(NSString *)a_leftLabelText
            rightLabelText:(NSString *)a_rightLabelText
