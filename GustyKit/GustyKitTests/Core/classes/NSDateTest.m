@@ -59,7 +59,7 @@
 	
 }
 
--(void)testIFA_isSameDay{
+-(void)testIsSameDay{
     
     {
         
@@ -277,6 +277,15 @@
         
     }
 
+}
+
+- (void)testWithSecondPrecision {
+    // given
+    NSDate *originalDate = [NSDate dateWithTimeIntervalSinceReferenceDate:0.123];
+    // when
+    NSDate *dateWithSecondPrecision = [originalDate ifa_withSecondPrecision];
+    // then
+    XCTAssertEqualObjects(dateWithSecondPrecision, [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
 }
 
 #pragma mark -

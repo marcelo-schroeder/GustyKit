@@ -129,7 +129,9 @@ static NSDateFormatter *timeFormatter;
 -(NSDate *)ifa_withSecondPrecision {
     NSTimeInterval l_timeInterval = [self timeIntervalSinceReferenceDate];
     //    NSLog(@"l_timeInterval: %f", l_timeInterval);
-    NSDecimalNumber *l_decimalNumber = [[NSDecimalNumber alloc] initWithDouble:l_timeInterval];
+    NSNumber *l_timeIntervalNumber = @(l_timeInterval);
+    NSDecimal l_timeIntervalDecimal = l_timeIntervalNumber.decimalValue;
+    NSDecimalNumber *l_decimalNumber = [NSDecimalNumber decimalNumberWithDecimal:l_timeIntervalDecimal];
     //    NSLog(@"l_decimalNumber: %@", [l_decimalNumber description]);
     NSDecimalNumberHandler *l_decimalNumberHandler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:0 raiseOnExactness:YES raiseOnOverflow:YES raiseOnUnderflow:YES raiseOnDivideByZero:YES];
     NSDecimalNumber *l_roundedDecimalNumber = [l_decimalNumber decimalNumberByRoundingAccordingToBehavior:l_decimalNumberHandler];
