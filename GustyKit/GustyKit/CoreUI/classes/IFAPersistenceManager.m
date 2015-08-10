@@ -1125,43 +1125,47 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 }
 
 - (NSArray *)listSortDescriptorsForEntity:(NSString *)a_entityName
-                        usedForRelationship:(BOOL)a_usedForRelationship {
-	NSMutableArray *sortDescriptors = [NSMutableArray array];
-	NSSortDescriptor *sortDescriptor;
-    if (!a_usedForRelationship && [self.entityConfig listReorderAllowedForEntity:a_entityName]) {
-		// The list's sort order is controlled by the user (if provided, entity config's listSortProperties is ignored)
-		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"seq" ascending:YES];
-		[sortDescriptors addObject:sortDescriptor];
-	}else {
-        NSArray *listSortProperties = [self.entityConfig listSortPropertiesForEntity:a_entityName
-                                                                   usedForRelationship:a_usedForRelationship];
-        if (listSortProperties.count) {
-            // The list's sort order is dictated by the configuration
-            for(NSDictionary* sortItem in listSortProperties){
-                NSString *keyPath = [sortItem objectForKey:@"name"];
-                //            NSLog(@"keyPath: %@", keyPath);
-                BOOL ascending = [[sortItem objectForKey:@"ascending"] boolValue];
-                Class l_propertyClass = [IFAUtils classForPropertyNamed:keyPath
-                                                           inClassNamed:a_entityName];
-                //            NSLog(@"l_propertyClass: %@", [l_propertyClass description]);
-                if ([l_propertyClass isSubclassOfClass:[NSString class]]) {
-                    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyPath ascending:ascending selector:NSSelectorFromString(@"localizedCaseInsensitiveCompare:")];
-                    //                NSLog(@"  USING localised case insensitive compare...");
-                }else {
-                    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyPath ascending:ascending];
-                    //                NSLog(@"  NOT using localised case insensitive compare...");
-                }
-                [sortDescriptors addObject:sortDescriptor];
+                      usedForRelationship:(BOOL)a_usedForRelationship {
+    NSMutableArray *sortDescriptors = [NSMutableArray array];
+    NSSortDescriptor *sortDescriptor;
+    NSArray *listSortProperties = [self.entityConfig listSortPropertiesForEntity:a_entityName
+                                                             usedForRelationship:a_usedForRelationship];
+    if (listSortProperties.count) {
+        // The list's sort order is dictated by the configuration
+        for (NSDictionary *sortItem in listSortProperties) {
+            NSString *keyPath = [sortItem objectForKey:@"name"];
+            //            NSLog(@"keyPath: %@", keyPath);
+            BOOL ascending = [[sortItem objectForKey:@"ascending"] boolValue];
+            Class l_propertyClass = [IFAUtils classForPropertyNamed:keyPath
+                                                       inClassNamed:a_entityName];
+            //            NSLog(@"l_propertyClass: %@", [l_propertyClass description]);
+            if ([l_propertyClass isSubclassOfClass:[NSString class]]) {
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyPath
+                                                             ascending:ascending
+                                                              selector:NSSelectorFromString(@"localizedCaseInsensitiveCompare:")];
+                //                NSLog(@"  USING localised case insensitive compare...");
+            } else {
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyPath
+                                                             ascending:ascending];
+                //                NSLog(@"  NOT using localised case insensitive compare...");
             }
-        } else if ([self isSystemEntityForEntity:a_entityName]) {
-            // Falls back to the default sort order for system entities
-            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-            [sortDescriptors addObject:sortDescriptor];
-            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];  // fallback to name
             [sortDescriptors addObject:sortDescriptor];
         }
+    } else if ([self.entityConfig listReorderAllowedForEntity:a_entityName]) {
+        // The list's sort order is controlled by the user
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"seq"
+                                                     ascending:YES];
+        [sortDescriptors addObject:sortDescriptor];
+    } else if ([self isSystemEntityForEntity:a_entityName]) {
+        // Falls back to the default sort order for system entities
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index"
+                                                     ascending:YES];
+        [sortDescriptors addObject:sortDescriptor];
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+                                                     ascending:YES];  // fallback to name
+        [sortDescriptors addObject:sortDescriptor];
     }
-	return sortDescriptors;
+    return sortDescriptors;
 }
 
 - (void)performOnMainManagedObjectContextQueue:(void (^)())a_block{
