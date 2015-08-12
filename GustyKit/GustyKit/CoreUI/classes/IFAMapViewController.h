@@ -56,10 +56,18 @@
 @property (nonatomic) IFALocationAuthorizationType locationAuthorizationType;
 
 /**
+* Prevents automatic user location requests when not authorised at various points of the view controller life cycle such as: on viewDidAppear, on app becoming active after being suspended and when location services authorisation status has changed.
+* Default: NO.
+*/
+@property (nonatomic) BOOL preventsLocatingUserAutomaticallyIfNotAuthorised;
+
+/**
 * Locates user on the map.
 * @param a_completionBlock Block to execute when the user location is known. The block receives a BOOL parameter indicating whether the operation has succeeded.
+* @param a_userInitiated Set to YES to indicate that the user location request was initiated by the user, otherwise set it to NO (i.e. for automatic user location requests such as on viewDidAppear).
 */
-- (void)locateUserWithCompletionBlock:(void (^)(BOOL a_success))a_completionBlock;
+- (void)locateUserDueToUserRequest:(BOOL)a_userInitiated
+                   completionBlock:(void (^)(BOOL a_success))a_completionBlock;
 @end
 
 @protocol IFAMapViewControllerDelegate <NSObject>

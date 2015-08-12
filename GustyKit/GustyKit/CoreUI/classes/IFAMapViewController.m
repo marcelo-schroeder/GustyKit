@@ -50,11 +50,26 @@
     return _mapSettingsBarButtonItem;
 }
 
-- (void)locateUserWithCompletionBlock:(void (^)(BOOL a_success))a_completionBlock {
+- (void)locateUserDueToUserRequest:(BOOL)a_userInitiated
+                   completionBlock:(void (^)(BOOL a_success))a_completionBlock {
+
     if (self.IFA_userLocationRequested) {
         // A request is in progress - bail out.
         return;
     }
+
+    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+
+    if (self.preventsLocatingUserAutomaticallyIfNotAuthorised
+            && !a_userInitiated
+            && authorizationStatus != kCLAuthorizationStatusAuthorizedWhenInUse
+            && authorizationStatus != kCLAuthorizationStatusAuthorizedAlways) {
+        if (a_completionBlock) {
+            a_completionBlock(NO);
+        }
+        return;
+    }
+    
     if (self.mapView.userLocation.location) {
         self.IFA_userLocationRequestCompletionBlock = nil;
         if (a_completionBlock) {
@@ -62,7 +77,7 @@
         }
     } else {
         self.IFA_userLocationRequestCompletionBlock = a_completionBlock;
-        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+        if (authorizationStatus == kCLAuthorizationStatusNotDetermined) {
             void (^currentLocationBasedBlock)(CLAuthorizationStatus) = ^(CLAuthorizationStatus status) {
                 // Does nothing as the status change is being handled somewhere else
             };
@@ -74,6 +89,7 @@
             self.mapView.showsUserLocation = YES;
         }
     }
+
 }
 
 #pragma mark - Overrides
@@ -86,7 +102,8 @@
 -(void)viewDidAppear:(BOOL)animated{
 
     if (!self.ifa_isReturningVisibleViewController) {
-        [self locateUserWithCompletionBlock:nil];
+        [self locateUserDueToUserRequest:NO
+                         completionBlock:nil];
     }
 
     [super viewDidAppear:animated];
@@ -104,7 +121,8 @@
     [super ifa_onApplicationDidBecomeActiveNotification:aNotification];
     if (self.ifa_isVisibleTopChildViewController) {
         // Give a chance for the app to locate the user in case privacy settings have been changed while the app was in the background
-        [self locateUserWithCompletionBlock:nil];
+        [self locateUserDueToUserRequest:NO
+                         completionBlock:nil];
     }
 }
 
@@ -134,7 +152,7 @@
 #pragma mark - Private
 
 - (void)IFA_onUserLocationButtonTap:(UIBarButtonItem *)a_barButtonItem {
-    [self locateUserWithCompletionBlock:^(BOOL a_success) {
+    void (^completionBlock)(BOOL) = ^(BOOL a_success) {
         if (a_success) {
             [self.mapView showAnnotations:@[self.mapView.userLocation]
                                  animated:YES];
@@ -142,7 +160,9 @@
                 [self.mapViewControllerDelegate mapViewControllerDidCompleteUserRequestToShowCurrentLocation:self];
             }
         }
-    }];
+    };
+    [self locateUserDueToUserRequest:YES
+                     completionBlock:completionBlock];
 }
 
 - (void)IFA_onMapSettingsButtonTap:(UIBarButtonItem *)a_barButtonItem {
