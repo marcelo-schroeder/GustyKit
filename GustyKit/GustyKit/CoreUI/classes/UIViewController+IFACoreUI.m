@@ -1474,16 +1474,25 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
                                   actionBlock:nil];
 }
 
-- (void)ifa_presentSettingsAlertControllerWithTitle:(NSString *)a_title message:(NSString *)a_message {
+- (void)ifa_presentSettingsAlertControllerWithTitle:(NSString *)a_title
+                                            message:(NSString *)a_message
+                                settingsButtonTitle:(NSString *)a_settingsButtonTitle
+                                  cancelButtonTitle:(NSString *)a_cancelButtonTitle
+                          cancelButtonActionHandler:(void (^)())a_cancelButtonActionHandler {
     NSMutableArray *l_alertActions = [NSMutableArray new];
-    [l_alertActions addObject:[UIAlertAction actionWithTitle:@"Cancel"
+    void (^cancelButtonActionHandler)(UIAlertAction *) = ^(UIAlertAction *action) {
+        if (a_cancelButtonActionHandler) {
+            a_cancelButtonActionHandler();
+        }
+    };
+    [l_alertActions addObject:[UIAlertAction actionWithTitle:a_cancelButtonTitle?:@"Cancel"
                                                        style:UIAlertActionStyleCancel
-                                                     handler:nil]];
+                                                     handler:cancelButtonActionHandler]];
     void (^settingsHandlerBlock)(UIAlertAction *) = ^(UIAlertAction *action) {
         [IFAUIUtils      openUrl:[NSURL URLWithString:UIApplicationOpenSettingsURLString]
 withAlertPresenterViewController:nil];
     };
-    [l_alertActions addObject:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"Settings", @"GustyKitLocalizable", nil)
+    [l_alertActions addObject:[UIAlertAction actionWithTitle:a_settingsButtonTitle?:NSLocalizedStringFromTable(@"Settings", @"GustyKitLocalizable", nil)
                                                        style:UIAlertActionStyleDefault
                                                      handler:settingsHandlerBlock]];
     [self ifa_presentAlertControllerWithTitle:a_title

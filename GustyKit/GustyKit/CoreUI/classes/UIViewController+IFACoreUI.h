@@ -172,9 +172,15 @@
 * The "Settings" button opens the app specific Settings pane.
 * @param a_title The title of the alert. Use this string to get the user’s attention and communicate the reason for the alert.
 * @param a_message Descriptive text that provides additional details about the reason for the alert.
+* @param a_settingsButtonTitle Optional Settings button title. If not provided, the button's title will be "Settings".
+* @param a_cancelButtonTitle Optional Cancel button title. If not provided, the button's title will be "Cancel".
+* @param a_cancelButtonActionHandler Optional block to be executed when the user taps the Cancel button.
 */
 - (void)ifa_presentSettingsAlertControllerWithTitle:(NSString *)a_title
-                                            message:(NSString *)a_message;
+                                            message:(NSString *)a_message
+                                settingsButtonTitle:(NSString *)a_settingsButtonTitle
+                                  cancelButtonTitle:(NSString *)a_cancelButtonTitle
+                          cancelButtonActionHandler:(void (^)())a_cancelButtonActionHandler;
 
 /**
 * Presents an instance of a UIAlertController with title and message provided.
