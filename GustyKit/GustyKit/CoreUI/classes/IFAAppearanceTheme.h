@@ -151,5 +151,6 @@ typedef NS_ENUM(NSUInteger, IFABarButtonItemSpacingBarType) {
 - (void)setNavigationItemTitleViewForViewController:(UIViewController *)a_viewController
                       interfaceOrientationLandscape:(BOOL)a_interfaceOrientationLandscape;
 -(void)setAppearanceOnViewDidAppearForViewController:(UIViewController*)a_viewController;
+-(void)setAppearanceOnTintColorDidChangeForView:(UIView*)a_view;
 
 @end

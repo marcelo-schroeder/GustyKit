@@ -114,4 +114,6 @@
 * @param a_width Width constraint to be temporarily added to the view for height calculation.
 */
 - (CGFloat)ifa_calculateHeightForWidth:(CGFloat)a_width;
+
+- (void)ifa_tintColorDidChange;
 @end

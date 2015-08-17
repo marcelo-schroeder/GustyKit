@@ -27,7 +27,13 @@
 #pragma mark - Overrides
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [self ifa_awakeFromNib];
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self ifa_tintColorDidChange];
 }
 
 @end

@@ -234,4 +234,11 @@ static char c_appearanceIdKey;
     return size.height;
 }
 
+- (void)ifa_tintColorDidChange {
+    id <IFAAppearanceTheme> l_appearanceTheme = [[IFAAppearanceThemeManager sharedInstance] activeAppearanceTheme];
+    if ([l_appearanceTheme respondsToSelector:@selector(setAppearanceOnTintColorDidChangeForView:)]) {
+        [l_appearanceTheme setAppearanceOnTintColorDidChangeForView:self];
+    }
+}
+
 @end

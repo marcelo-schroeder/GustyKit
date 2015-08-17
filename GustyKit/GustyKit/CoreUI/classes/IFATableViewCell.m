@@ -36,6 +36,7 @@
 }
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [self ifa_awakeFromNib];
 }
 
@@ -71,6 +72,11 @@
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     [[self ifa_appearanceTheme] setAppearanceForCell:self onSetHighlighted:highlighted animated:animated];
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self ifa_tintColorDidChange];
 }
 
 @end

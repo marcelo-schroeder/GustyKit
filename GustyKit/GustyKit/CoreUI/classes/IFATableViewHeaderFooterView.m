@@ -41,12 +41,18 @@
 }
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [self ifa_awakeFromNib];
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
     [[self ifa_appearanceTheme] setAppearanceOnPrepareForReuseForTableViewHeaderFooterView:self];
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self ifa_tintColorDidChange];
 }
 
 @end
