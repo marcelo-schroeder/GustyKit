@@ -1665,16 +1665,16 @@ withAlertPresenterViewController:self];
     self.ifa_delegate = self;
 
     [self.tableView registerClass:[IFAFormSectionHeaderFooterView class] forHeaderFooterViewReuseIdentifier:k_sectionHeaderFooterReuseId];
-
-    [super viewDidLoad];
-
-    self.IFA_initialChildManagedObjectContextCountForAssertion = [IFAPersistenceManager sharedInstance].childManagedObjectContexts.count;
-
+    
     // Set managed object default values based on backing preferences
     IFAEntityConfig *l_entityConfig = [IFAPersistenceManager sharedInstance].entityConfig;
     if (self.createMode && !self.isSubForm) {
         [l_entityConfig setDefaultValuesFromBackingPreferencesForObject:self.object];
     }
+
+    [super viewDidLoad];
+
+    self.IFA_initialChildManagedObjectContextCountForAssertion = [IFAPersistenceManager sharedInstance].childManagedObjectContexts.count;
 
     self.switchControlTagToPropertyName = [[NSMutableDictionary alloc] init];
     self.IFA_propertyNameToCell = [[NSMutableDictionary alloc] init];
