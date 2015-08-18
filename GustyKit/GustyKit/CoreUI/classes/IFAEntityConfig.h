@@ -81,6 +81,10 @@ typedef NS_ENUM(NSUInteger, IFAEntityConfigFieldType){
 - (NSString*)urlPropertyNameForIndexPath:(NSIndexPath*)anIndexPath inObject:(NSObject*)anObject inForm:(NSString*)aFormName createMode:(BOOL)aCreateMode;
 - (NSArray*)propertiesWithBackingPreferencesForObject:(NSObject*)anObject;
 - (NSString*)backingPreferencesPropertyForProperty:(NSString*)aPropertyName inObject:(NSObject*)anObject;
+
+- (NSString *)helpPropertyNameForProperty:(NSString *)aPropertyName
+                                 inObject:(NSObject *)anObject;
+
 - (NSString*)backingPreferencesPropertyForEntity:(NSString*)anEntityName;
 
 - (NSString*)entityNameForProperty:(NSString*)aPropertyName inObject:(NSObject*)anObject;

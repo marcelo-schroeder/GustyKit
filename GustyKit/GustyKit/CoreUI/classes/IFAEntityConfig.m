@@ -503,36 +503,53 @@
                                            createMode:a_createMode];
         NSString *propertyHelpValue = nil;
         NSString *propertyName = field[@"name"];
-        IFAEntityConfigFieldType fieldType = [self fieldTypeForIndexPath:fieldIndexPath
-                                                                inObject:a_object
-                                                                  inForm:a_formName
-                                                              createMode:a_createMode];
-        if (fieldType == IFAEntityConfigFieldTypeProperty) {
-            id propertyValue = [a_object valueForKey:propertyName];
-            if ([propertyValue isKindOfClass:[NSNumber class]]) {
-                NSNumber *number = propertyValue;
-                propertyHelpValue = number.stringValue;
-            } else if ([propertyValue isKindOfClass:[IFASystemEntity class]]) {
-                IFASystemEntity *systemEntity = propertyValue;
-                propertyHelpValue = systemEntity.systemEntityId.stringValue;
-            }
-            help = [[IFAHelpManager sharedInstance] helpForPropertyName:propertyName
-                                                           inEntityName:a_object.ifa_entityName
-                                                                  value:propertyHelpValue];
+        // Try to obtain help for the property from a custom property
+        NSString *helpPropertyName = [self helpPropertyNameForProperty:propertyName
+                                                              inObject:a_object];
+        if (helpPropertyName) {
+            help = [a_object valueForKey:helpPropertyName];
         }
-        // If there is no help for a specific property value, try help for the property itself
+        // If there is no help for the property from a custom property, then try the normal channels
         if (!help) {
-            help = [[IFAHelpManager sharedInstance] helpForPropertyName:propertyName
-                                                           inEntityName:a_object.ifa_entityName
-                                                                  value:nil];
+            IFAEntityConfigFieldType fieldType = [self fieldTypeForIndexPath:fieldIndexPath
+                                                                    inObject:a_object
+                                                                      inForm:a_formName
+                                                                  createMode:a_createMode];
+            if (fieldType == IFAEntityConfigFieldTypeProperty) {
+                id propertyValue = [a_object valueForKey:propertyName];
+                if ([propertyValue isKindOfClass:[NSNumber class]]) {
+                    NSNumber *number = propertyValue;
+                    propertyHelpValue = number.stringValue;
+                } else if ([propertyValue isKindOfClass:[IFASystemEntity class]]) {
+                    IFASystemEntity *systemEntity = propertyValue;
+                    propertyHelpValue = systemEntity.systemEntityId.stringValue;
+                }
+                help = [[IFAHelpManager sharedInstance] helpForPropertyName:propertyName
+                                                               inEntityName:a_object.ifa_entityName
+                                                                      value:propertyHelpValue];
+            }
+            // If there is no help for a specific property value, try help for the property itself
+            if (!help) {
+                help = [[IFAHelpManager sharedInstance] helpForPropertyName:propertyName
+                                                               inEntityName:a_object.ifa_entityName
+                                                                      value:nil];
+            }
         }
     }
     // If there is no help available yet, try to get help for the section
     if (!help) {
-        help = [[IFAHelpManager sharedInstance] helpForSectionNamed:formSection[@"name"]
-                                                        inFormNamed:a_formName
-                                                         createMode:a_createMode
-                                                        entityNamed:a_object.ifa_entityName];
+        // Try to obtain help for the section from a custom property
+        NSString *helpPropertyName = formSection[@"helpPropertyName"];
+        if (helpPropertyName) {
+            help = [a_object valueForKey:helpPropertyName];
+        }
+        // If there is no help for the section from a custom property, then try the normal channels
+        if (!help) {
+            help = [[IFAHelpManager sharedInstance] helpForSectionNamed:formSection[@"name"]
+                                                            inFormNamed:a_formName
+                                                             createMode:a_createMode
+                                                            entityNamed:a_object.ifa_entityName];
+        }
 
     }
     if (help) {
@@ -666,7 +683,12 @@
 }
 
 - (NSString*)backingPreferencesPropertyForProperty:(NSString*)aPropertyName inObject:(NSObject*)anObject{
-	return [[[[[self entityConfigDictionary] valueForKey:[anObject ifa_entityName]] valueForKey:@"properties"] valueForKey:aPropertyName] valueForKey:@"backingPreferencesProperty"];
+    return [[[[[self entityConfigDictionary] valueForKey:[anObject ifa_entityName]] valueForKey:@"properties"] valueForKey:aPropertyName] valueForKey:@"backingPreferencesProperty"];
+}
+
+- (NSString*)helpPropertyNameForProperty:(NSString *)aPropertyName
+                                inObject:(NSObject*)anObject{
+    return [[[[[self entityConfigDictionary] valueForKey:[anObject ifa_entityName]] valueForKey:@"properties"] valueForKey:aPropertyName] valueForKey:@"helpPropertyName"];
 }
 
 - (NSString*)backingPreferencesPropertyForEntity:(NSString*)anEntityName{
