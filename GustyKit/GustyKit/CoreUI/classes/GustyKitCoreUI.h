@@ -159,3 +159,4 @@
 #import "IFAPersistentEntityChangeObserver.h"
 #import "UIColor+IFACoreUI_WatchKit.h"
 #import "UIAlertController+IFACoreUI.h"
+#import "IFACrashReportingUtils.h"
