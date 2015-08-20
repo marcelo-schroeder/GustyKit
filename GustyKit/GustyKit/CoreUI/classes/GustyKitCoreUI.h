@@ -160,3 +160,4 @@
 #import "UIColor+IFACoreUI_WatchKit.h"
 #import "UIAlertController+IFACoreUI.h"
 #import "IFACrashReportingUtils.h"
+#import "IFAAnalyticsManager.h"

@@ -1123,6 +1123,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
         [self ifa_updateToolbarForEditing:self.editing animated:YES];
     }
 
+    [[IFAAnalyticsManager sharedInstance] notifyViewDidAppearEventForViewController:self];
+
 }
 
 - (void)ifa_viewWillDisappear {
