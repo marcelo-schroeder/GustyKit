@@ -11,17 +11,11 @@
 @interface IFACrashReportingUtils : NSObject
 
 /**
-* Collects useful information to include in crash reports. Example of information included: system locale, current locale and preferred languages.
-* @returns Dictionary containing formatted default context information.
-*/
-+ (NSDictionary *)defaultContextInfo;
-
-/**
-* Formats context information to be included in crash reports. It attempts to convert non string types to string.
-* @param contextInfo Dictionary containg unformatted context info.
-* @param shouldAddDefaultContextInfo Set to YES to include default context information returned by the <defaultContextInfo> method.
+* Formats context information to be included in crash reports. It attempts to convert non string types to strings.
+* @param contextInfo Dictionary containing unformatted context info.
+* @param shouldAddUserDefaults Set to YES to include the standard user defaults contents.
 * @returns Formatted context information.
 */
 + (NSDictionary *)formatContextInfo:(NSDictionary *)contextInfo
-        shouldAddDefaultContextInfo:(BOOL)shouldAddDefaultContextInfo;
+              shouldAddUserDefaults:(BOOL)shouldAddUserDefaults;
 @end

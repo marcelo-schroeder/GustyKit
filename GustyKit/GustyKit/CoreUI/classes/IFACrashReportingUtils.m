@@ -12,23 +12,15 @@
 
 #pragma mark - Public
 
-+ (NSDictionary *)defaultContextInfo {
-    NSMutableDictionary *defaultContextInfo = [NSMutableDictionary new];
-    defaultContextInfo[@"IFA_system_Locale"] = [NSLocale systemLocale];
-    defaultContextInfo[@"IFA_current_Locale"] = [NSLocale currentLocale];
-    defaultContextInfo[@"IFA_preferred_Languages"] = [NSLocale preferredLanguages];
-    return [self formatContextInfo:defaultContextInfo
-       shouldAddDefaultContextInfo:NO];
-}
-
 + (NSDictionary *)formatContextInfo:(NSDictionary *)contextInfo
-        shouldAddDefaultContextInfo:(BOOL)shouldAddDefaultContextInfo {
+              shouldAddUserDefaults:(BOOL)shouldAddUserDefaults {
     NSMutableDictionary *formattedContextInfo = [NSMutableDictionary new];
+    if (shouldAddUserDefaults) {
+        NSDictionary *userDefaultsDictionary = [NSUserDefaults standardUserDefaults].dictionaryRepresentation;
+        [formattedContextInfo addEntriesFromDictionary:userDefaultsDictionary];
+    }
     for (NSString *key in contextInfo.allKeys) {
         formattedContextInfo[key] = [self IFA_formatCrashReportValue:contextInfo[key]];
-    }
-    if (shouldAddDefaultContextInfo) {
-        [formattedContextInfo addEntriesFromDictionary:[self defaultContextInfo]];
     }
     return formattedContextInfo;
 }
