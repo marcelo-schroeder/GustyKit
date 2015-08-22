@@ -550,6 +550,11 @@
         horizontalMargin = 0;
     }
     CGFloat chromeViewMaxWidth = referenceScreenWidth - horizontalMargin;
+
+    // Set preferred max layout width for labels - had to add this for iOS 9 compatibility (with iOS 8 build)
+    textLabel.preferredMaxLayoutWidth = chromeViewMaxWidth;
+    detailTextLabel.preferredMaxLayoutWidth = chromeViewMaxWidth;
+
     NSLayoutConstraint *chromeViewMaxWidthConstraint = [NSLayoutConstraint constraintWithItem:chromeView
                                                                                    attribute:NSLayoutAttributeWidth
                                                                                    relatedBy:NSLayoutRelationLessThanOrEqual
