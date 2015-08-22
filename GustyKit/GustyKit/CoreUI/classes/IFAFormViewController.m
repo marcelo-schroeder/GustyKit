@@ -1294,7 +1294,7 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController {
 
 - (void)openUrl:(NSURL *)a_url {
     [IFAUIUtils          openUrl:a_url
-withAlertPresenterViewController:self];
+withAlertPresenterViewController:nil];
 }
 
 #pragma mark -
