@@ -29,11 +29,6 @@ extern CGFloat const IFAMinimumTapAreaDimension;
 */
 extern CGFloat const IFATableViewEditingCellXOffset;
 
-/**
-* Offset applied to a table view cell content view right side when a standard accessory view is visible.
-*/
-extern CGFloat const IFATableViewCellContentViewRightOffsetWhenStandardAccessoryIsVisible;
-
 extern CGFloat const IFAFormSectionHeaderDefaultHeight;
 extern CGFloat const IFATableViewCellSeparatorDefaultInsetLeft;
 extern CGFloat const IFAIPhoneStatusBarDoubleHeight;
