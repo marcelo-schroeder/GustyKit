@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name                  = 'GustyKit'
     s.version           = '1.0.0'
-    s.summary           = 'A Cocoa Touch development kit that helps you develop high quality iOS app extensions faster.'
+    s.summary           = 'A Cocoa Touch framework to help you develop high quality iOS apps and app extensions faster.'
     s.homepage          = 'https://github.com/marcelo-schroeder/GustyKit'
     s.license           = 'Apache-2.0'
     s.author            = { 'Marcelo Schroeder' => 'marcelo.schroeder@infoaccent.com' }
