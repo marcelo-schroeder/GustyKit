@@ -41,7 +41,6 @@
 
 // GustyKit
 #import "GustyKitFoundation.h"
-#import "GustyKitHelp.h"
 
 #import "IFADefaultAppearanceTheme.h"
 #import "IFAAbstractFieldEditorViewController.h"
@@ -161,3 +160,9 @@
 #import "UIAlertController+IFACoreUI.h"
 #import "IFACrashReportingUtils.h"
 #import "IFAAnalyticsManager.h"
+#import "IFAHelpManager.h"
+#import "UIButton+IFAHelp.h"
+#import "UIViewController+IFAHelp.h"
+#import "IFAHelpContentViewController.h"
+#import "IFAHelpViewController.h"
+#import "IFAHelpTarget.h"

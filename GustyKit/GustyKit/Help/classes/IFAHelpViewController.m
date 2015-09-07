@@ -15,7 +15,7 @@
 //  limitations under the License.
 //
 
-#import "GustyKitHelp.h"
+#import "GustyKitCoreUI.h"
 
 @interface IFAHelpViewController ()
 @property (nonatomic, strong) IFAViewControllerTransitioningDelegate *IFA_viewControllerTransitioningDelegate;

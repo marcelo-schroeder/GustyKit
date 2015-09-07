@@ -15,7 +15,7 @@
 //  limitations under the License.
 //
 
-#import "GustyKitHelp.h"
+#import "GustyKitCoreUI.h"
 
 static char c_helpTargetViewControllerKey;
 

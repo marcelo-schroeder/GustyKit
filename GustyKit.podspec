@@ -13,14 +13,9 @@ Pod::Spec.new do |s|
         ss.source_files  = 'GustyKit/GustyKit/Foundation/classes/**/*.{h,m}'
     end
     s.subspec 'CoreUI' do |ss|
-        ss.source_files  = 'GustyKit/GustyKit/CoreUI/classes/**/*.{h,m}'
-        ss.resource      = 'GustyKit/GustyKit/CoreUI/resources/**/*.*'
+        ss.source_files  = 'GustyKit/GustyKit/CoreUI/classes/**/*.{h,m}', 'GustyKit/GustyKit/Help/classes/**/*.{h,m}'
+        ss.resource      = 'GustyKit/GustyKit/CoreUI/resources/**/*.*', 'GustyKit/GustyKit/Help/resources/**/*.*'
         ss.dependency 'GustyKit/Foundation'
-        ss.dependency 'GustyKit/Help'
         ss.dependency 'ODRefreshControl', '1.1.0'
-    end
-    s.subspec 'Help' do |ss|
-        ss.source_files  = 'GustyKit/GustyKit/Help/classes/**/*.{h,m}'
-        ss.resource      = 'GustyKit/GustyKit/Help/resources/**/*.*'
     end
 end

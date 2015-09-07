@@ -15,7 +15,7 @@
 //  limitations under the License.
 //
 
-#import "GustyKitHelp.h"
+#import "GustyKitCoreUI.h"
 
 @interface IFAHelpContentViewController ()
 @property (nonatomic, weak) UIViewController *IFA_targetViewController;

@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "GustyKitHelp.h"
+#import "GustyKitCoreUI.h"
 
 @interface IFAHelpManager ()
 

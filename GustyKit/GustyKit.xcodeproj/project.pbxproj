@@ -326,7 +326,6 @@
 		107384D434E463EC6B5AF40D /* IFASegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFASegmentedControl.m; sourceTree = "<group>"; };
 		107384D82FAA4FCC9DE2FC48 /* IFAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAUtils.m; sourceTree = "<group>"; };
 		107384E5E9C36C4D54418413 /* UIView+IFACoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+IFACoreUI.h"; sourceTree = "<group>"; };
-		107384EBCE24307C1C0BB9FF /* GustyKitHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GustyKitHelp.h; sourceTree = "<group>"; };
 		1073850CF1C4BDDF94667834 /* NSObject+IFACoreUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+IFACoreUI.m"; sourceTree = "<group>"; };
 		1073850DA7703C490946FA97 /* IFADimmedFadingOverlayPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFADimmedFadingOverlayPresentationController.m; sourceTree = "<group>"; };
 		10738512918CEAEE73AADA8E /* IFAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAViewController.m; sourceTree = "<group>"; };
@@ -1148,7 +1147,6 @@
 				10738A98369D8BF73A4C179C /* IFAHelpTarget.h */,
 				1073865CD4395002881AE797 /* IFAHelpManager.h */,
 				107384396E4F4A2D75B78A6C /* IFAHelpManager.m */,
-				107384EBCE24307C1C0BB9FF /* GustyKitHelp.h */,
 				107380CC1EE0EEE48ED2134F /* UIButton+IFAHelp.h */,
 				1073806F9F853420279BD50F /* UIButton+IFAHelp.m */,
 				107385C235DE6C46307C213E /* IFAHelpViewController.h */,

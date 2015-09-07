@@ -23,6 +23,3 @@
 
 // CoreUI
 #import "GustyKitCoreUI.h"
-
-// Help
-#import "GustyKitHelp.h"
