@@ -6,6 +6,8 @@ GustyKit provides the foundation for [GustyAppKit](https://github.com/marcelo-sc
 
 This framework has been used in a few projects for my clients.
 
+The latest API documentation can be found [here](http://cocoadocs.org/docsets/GustyKit).
+
 Additional documentation and sample code are coming soon.
 
 ## How to install GustyKit ##
