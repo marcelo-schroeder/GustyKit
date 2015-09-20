@@ -14,6 +14,8 @@
 
 @property (nonatomic, weak) id<IFAPersistentEntityChangeObserverDelegate> delegate;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
 * @param classesToObserve Array containing Class instances indicating which NSManagedObject subclasses will be observed for changes (i.e. insertions, deletions and updates).
 */

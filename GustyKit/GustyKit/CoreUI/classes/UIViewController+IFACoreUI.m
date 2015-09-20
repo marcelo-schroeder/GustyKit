@@ -1189,7 +1189,7 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 }
 
 // iOS 6 or greater (the previous method is for iOS 5)
--(NSUInteger)ifa_supportedInterfaceOrientations {
+-(UIInterfaceOrientationMask)ifa_supportedInterfaceOrientations {
     if ([IFAUIGlobal sharedInstance].semiModalViewController) {
         if ([IFAUIGlobal sharedInstance].semiModalViewPresentedInLandscapeInterfaceOrientation) {
             return UIInterfaceOrientationMaskLandscape;

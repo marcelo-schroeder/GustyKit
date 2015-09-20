@@ -26,6 +26,10 @@
 
 }
 
+@synthesize topAnchor;
+@synthesize bottomAnchor;
+@synthesize heightAnchor;
+
 #pragma mark - Public
 
 - (id)initWithLength:(CGFloat)a_length {

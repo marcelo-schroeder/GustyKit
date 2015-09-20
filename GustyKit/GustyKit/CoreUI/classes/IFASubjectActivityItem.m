@@ -41,7 +41,7 @@
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController {
     return [self activityViewController:activityViewController
-                    itemForActivityType:nil];
+                    itemForActivityType:@""];
 }
 
 - (id)activityViewController:(UIActivityViewController *)activityViewController

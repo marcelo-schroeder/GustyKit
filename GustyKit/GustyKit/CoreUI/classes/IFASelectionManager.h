@@ -96,6 +96,8 @@
 */
 - (void)deselectAllWithUserInfo:(NSDictionary*)a_userInfo;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
 * Designated initialiser.
 * @param a_dataSource The selection manager's data source (required).

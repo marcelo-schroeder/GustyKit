@@ -61,7 +61,7 @@
             }
         }];
     }else{
-        [self locationManager:nil didFailWithError:nil];
+        [self locationManager:self.underlyingLocationManager didFailWithError:[NSError new]];
     }
 }
 
