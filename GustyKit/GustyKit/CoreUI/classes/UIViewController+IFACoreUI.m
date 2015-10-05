@@ -1328,11 +1328,15 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
                           parentView:a_parentView
                  shouldFillSuperview:a_shouldFillParentView
                    animationDuration:0
+                    animationOptions:0
                           completion:nil];
 }
 
-- (void)ifa_addChildViewController:(UIViewController *)a_childViewController parentView:(UIView *)a_parentView
-               shouldFillSuperview:(BOOL)a_shouldFillParentView animationDuration:(NSTimeInterval)a_animationDuration
+- (void)ifa_addChildViewController:(UIViewController *)a_childViewController
+                        parentView:(UIView *)a_parentView
+               shouldFillSuperview:(BOOL)a_shouldFillParentView
+                 animationDuration:(NSTimeInterval)a_animationDuration
+                  animationOptions:(UIViewAnimationOptions)a_animationOptions
                         completion:(void (^)(BOOL a_finished))a_completion {
 
     BOOL animated = a_animationDuration > 0;
@@ -1350,6 +1354,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
             a_childViewController.view.alpha = 1;
         };
         [UIView animateWithDuration:a_animationDuration
+                              delay:0
+                            options:a_animationOptions
                          animations:animations
                          completion:a_completion];
 
@@ -1364,10 +1370,14 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 }
 
 - (void)ifa_removeFromParentViewController {
-    [self ifa_removeFromParentViewControllerWithAnimationDuration:0 completion:nil];
+    [self ifa_removeFromParentViewControllerWithAnimationDuration:0
+                                                 animationOptions:0
+                                                       completion:nil];
 }
 
-- (void)ifa_removeFromParentViewControllerWithAnimationDuration:(NSTimeInterval)a_animationDuration completion:(void (^)(BOOL a_finished))a_completion {
+- (void)ifa_removeFromParentViewControllerWithAnimationDuration:(NSTimeInterval)a_animationDuration
+                                               animationOptions:(UIViewAnimationOptions)a_animationOptions
+                                                     completion:(void (^)(BOOL a_finished))a_completion {
 
     BOOL animated = a_animationDuration > 0;
 
@@ -1388,6 +1398,8 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
             weakSelf.view.alpha = 0;
         };
         [UIView animateWithDuration:a_animationDuration
+                              delay:0
+                            options:a_animationOptions
                          animations:animations
                          completion:completion];
 

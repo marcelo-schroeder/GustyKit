@@ -174,6 +174,7 @@
                                           parentView:parentView
                                  shouldFillSuperview:YES
                                    animationDuration:a_animated && self.presentationAnimationDuration ? self.presentationAnimationDuration : 0
+                                    animationOptions:UIViewAnimationOptionAllowUserInteraction
                                           completion:completion];
 }
 
@@ -187,6 +188,7 @@
         weakSelf.IFA_window = nil;
     };
     [self ifa_removeFromParentViewControllerWithAnimationDuration:a_animated && self.dismissalAnimationDuration ? self.dismissalAnimationDuration : 0
+                                                 animationOptions:UIViewAnimationOptionAllowUserInteraction
                                                        completion:completion];
 }
 
