@@ -355,7 +355,6 @@
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/GoogleMobileAdsSupport/classes/UIViewController+IFAGoogleMobileAdsSupport.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/GoogleMobileAdsSupport/classes/UIViewController+IFAGoogleMobileAdsSupport.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/GustyKit-Prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/classes/GustyKitHelp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/classes/IFAHelpContentViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/classes/IFAHelpContentViewController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/classes/IFAHelpManager.h" isTestSource="false" />

@@ -711,6 +711,7 @@
 - (void)IFA_updateLayout {
     [self IFA_updateFonts];
     [self setNeedsUpdateConstraints];
+    [self setNeedsLayout];
     if (self.shouldUpdateLayoutAutomaticallyOnContentChange) {
         if (self.shouldAnimateLayoutChanges) {
             [UIView animateWithDuration:0.1 animations:^{
