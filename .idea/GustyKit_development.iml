@@ -96,6 +96,8 @@
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAHudView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAHudViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAHudViewController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAHudWrapperViewController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAHudWrapperViewController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAKeyboardVisibilityManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAKeyboardVisibilityManager.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFALazyTableDataLoadingViewController.h" isTestSource="false" />
