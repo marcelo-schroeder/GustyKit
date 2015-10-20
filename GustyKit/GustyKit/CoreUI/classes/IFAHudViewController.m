@@ -271,6 +271,7 @@
         _IFA_window = [[UIWindow alloc] initWithFrame:[IFAUIUtils screenBounds]];
         _IFA_window.backgroundColor = [UIColor clearColor];
         UIViewController *rootViewController = [IFAHudWrapperViewController new];
+        rootViewController.view.backgroundColor = [UIColor clearColor];
         _IFA_window.rootViewController = rootViewController;
     }
     return _IFA_window;
