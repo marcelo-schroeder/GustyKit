@@ -89,10 +89,7 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
 - (IFAFormTextFieldTableViewCell *)IFA_textFieldCellForTableView:(UITableView *)a_tableView
                                                      atIndexPath:(NSIndexPath *)a_indexPath {
     IFAFormTextFieldTableViewCell *cell = self.IFA_indexPathToTextFieldCellDictionary[a_indexPath];
-    if (cell) {
-        // Make sure things such as setting dynamic fonts are done
-        [self.ifa_appearanceTheme setAppearanceForCell:cell atIndexPath:a_indexPath viewController:self];
-    } else {
+    if (!cell) {
         NSUInteger editorType = [self editorTypeForIndexPath:a_indexPath];
         NSString *className = [(editorType == IFAEditorTypeText ? [IFAFormTextFieldTableViewCell class] : [IFAFormNumberFieldTableViewCell class]) description];
         cell = (IFAFormTextFieldTableViewCell *) [self IFA_cellForTableView:a_tableView
@@ -105,6 +102,8 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
             [self.IFA_editableTextFieldCells addObject:cell];
         }
     }
+    // Make sure things such as setting dynamic fonts are done
+    [self.ifa_appearanceTheme setAppearanceForCell:cell atIndexPath:a_indexPath viewController:self];
     return cell;
 }
 
