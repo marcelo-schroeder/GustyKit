@@ -42,6 +42,11 @@
 */
 @property (nonatomic, strong) NSObject *object;
 
+/**
+ * Navigation bar cancel bar button item.
+ */
+@property (nonatomic, strong, readonly) UIBarButtonItem *cancelBarButtonItem;
+
 @property (nonatomic, strong) NSString *formName;
 @property (nonatomic, weak, readonly) IFAFormViewController *parentFormViewController;
 @property (nonatomic) BOOL textFieldCommitSuspended;

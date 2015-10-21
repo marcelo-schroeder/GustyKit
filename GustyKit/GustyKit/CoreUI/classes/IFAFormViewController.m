@@ -26,7 +26,7 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
 
 @property (nonatomic, strong) NSIndexPath *IFA_indexPathForPopoverController;
 @property (nonatomic, strong) UIBarButtonItem *IFA_dismissModalFormBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *IFA_cancelBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *cancelBarButtonItem;
 @property (nonatomic) BOOL IFA_textFieldEditing;
 @property (nonatomic) BOOL IFA_textFieldTextChanged;
 @property (nonatomic, strong) NSMutableDictionary *IFA_indexPathToTextFieldCellDictionary;
@@ -205,13 +205,13 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
         [self.navigationItem setHidesBackButton:NO animated:YES];
     }else{
         [self ifa_removeLeftBarButtonItem:self.IFA_dismissModalFormBarButtonItem];
-        [self ifa_removeLeftBarButtonItem:self.IFA_cancelBarButtonItem];
+        [self ifa_removeLeftBarButtonItem:self.cancelBarButtonItem];
         if (self.editing) {
             if (self.IFA_isManagedObject || ((!self.IFA_isManagedObject) && self.ifa_presentedAsModal)) {
                 if (self.navigationItem.leftItemsSupplementBackButton) {
                     [self.navigationItem setHidesBackButton:YES animated:YES];
                 }
-                [self ifa_addLeftBarButtonItem:self.IFA_cancelBarButtonItem];
+                [self ifa_addLeftBarButtonItem:self.cancelBarButtonItem];
             }
         }else {
             [self.navigationItem setHidesBackButton:NO animated:YES];
@@ -1735,7 +1735,7 @@ withAlertPresenterViewController:nil];
                                                                                              action:@selector(IFA_onDismissButtonTap:)] : [IFAUIUtils barButtonItemForType:IFABarButtonItemTypeBack
                                                                                                                                                                     target:self
                                                                                                                                                                     action:@selector(IFA_onDismissButtonTap:)];
-    self.IFA_cancelBarButtonItem = [IFAUIUtils barButtonItemForType:IFABarButtonItemTypeCancel target:self
+    self.cancelBarButtonItem = [IFAUIUtils barButtonItemForType:IFABarButtonItemTypeCancel target:self
                                                              action:@selector(IFA_onCancelButtonTap:)];
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
