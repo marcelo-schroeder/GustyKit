@@ -150,8 +150,19 @@ typedef NS_ENUM(NSUInteger, IFAListViewControllerFetchingStrategy){
 
 - (IFAFormViewController *)formViewControllerForManagedObject:(NSManagedObject *)aManagedObject createMode:(BOOL)aCreateMode;
 - (NSManagedObject*)newManagedobject;
+
+/**
+ * Called to show the edit form for a managed object (existing or new object).
+ * Override to change behaviour.
+ */
 - (void)showEditFormForManagedObject:(NSManagedObject *)aManagedObject;
+
+/**
+ * Called to show the form for the creation of a new managed object (i.e. when the "+" button is tapped).
+ * Override to change behaviour.
+ */
 - (void)showCreateManagedObjectForm;
+
 - (void)onAddButtonTap:(id)sender;
 - (NSString*)editFormNameForCreateMode:(BOOL)aCreateMode;
 
