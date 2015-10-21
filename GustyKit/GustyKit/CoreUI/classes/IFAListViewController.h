@@ -154,6 +154,7 @@ typedef NS_ENUM(NSUInteger, IFAListViewControllerFetchingStrategy){
 /**
  * Called to show the edit form for a managed object (existing or new object).
  * Override to change behaviour.
+ * @param aManagedObject Managed object to show the edit form for. This parameter is nil for a new managed object (i.e. when the "+" button is tapped).
  */
 - (void)showEditFormForManagedObject:(NSManagedObject *)aManagedObject;
 
