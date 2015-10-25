@@ -1540,20 +1540,24 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 	return NO;
 }
 
--(void)pushChildManagedObjectContext{
+- (void)pushChildManagedObjectContext{
     NSManagedObjectContext *l_moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     l_moc.parentContext = self.managedObjectContext;
     [self.IFA_childManagedObjectContexts addObject:l_moc];
 //    NSLog(@"AFTER pushChildManagedObjectContext | self.IFA_childManagedObjectContexts.count = %u", self.IFA_childManagedObjectContexts.count);
 }
 
--(void)popChildManagedObjectContext{
+- (void)popChildManagedObjectContext{
     [self.IFA_childManagedObjectContexts removeLastObject];
 //    NSLog(@"AFTER popChildManagedObjectContext | self.IFA_childManagedObjectContexts.count = %u", self.IFA_childManagedObjectContexts.count);
 }
 
 - (NSArray *)childManagedObjectContexts {
     return self.IFA_childManagedObjectContexts;
+}
+
+- (void)removeAllChildManagedObjectContexts {
+    [self.IFA_childManagedObjectContexts removeAllObjects];
 }
 
 -(void)setIsCurrentManagedObjectDirty:(BOOL)isCurrentManagedObjectDirty{

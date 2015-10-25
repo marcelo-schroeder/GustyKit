@@ -249,9 +249,10 @@
 - (void)manageDatabaseVersioningChangeWithSystemEntityConfigBundle:(NSBundle *)a_systemEntityConfigBundle
                                                              block:(void (^)(NSUInteger a_oldSystemEntitiesVersion, NSUInteger a_newSystemEntitiesVersion))a_block;
 
--(void)pushChildManagedObjectContext;
--(void)popChildManagedObjectContext;
--(NSArray *)childManagedObjectContexts;
+- (void)pushChildManagedObjectContext;
+- (void)popChildManagedObjectContext;
+- (NSArray *)childManagedObjectContexts;
+- (void)removeAllChildManagedObjectContexts;
 
 -(NSManagedObjectContext*)currentManagedObjectContext;
 

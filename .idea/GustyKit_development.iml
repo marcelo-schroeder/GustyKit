@@ -43,9 +43,9 @@
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFACollectionViewFlowLayout.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAColorScheme.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAColorScheme.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAContextSwitchTarget.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAContextSwitchingManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAContextSwitchingManager.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFAContextSwitchTarget.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFACoreUiConstants.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFACoreUiConstants.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/IFACrashReportingUtils.h" isTestSource="false" />
@@ -287,13 +287,13 @@
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_1PixelLineVerticalLeft@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_1PixelLineVerticalRight.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_1PixelLineVerticalRight@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_ICon_Delete.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_ICon_Delete@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_Icon_Add.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_Icon_AddToSelection.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_Icon_AddToSelection@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_Icon_Close.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_Icon_Close@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_ICon_Delete.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_ICon_Delete@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_Icon_DisclosureIndicatorDown.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_Icon_DisclosureIndicatorDown@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/resources/images/IFA_Icon_DisclosureIndicatorRight.png" isTestSource="false" />
@@ -368,11 +368,11 @@
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/classes/UIButton+IFAHelp.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/classes/UIViewController+IFAHelp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/classes/UIViewController+IFAHelp.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFAHelpViewControllerWebView.css" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFA_Icon_Help_normal.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFA_Icon_Help_normal@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFA_Icon_Help_selected.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFA_Icon_Help_selected@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFAHelpViewControllerWebView.css" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/classes/IFAColorSchemeTest.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/classes/IFAColorSchemeTest.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/classes/IFACoreUITestCase.h" isTestSource="false" />
@@ -404,8 +404,8 @@
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/classes/TestCoreDataEntity3.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/classes/TestCoreDataEntity3.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/resources/GustyKitCoreUITestsModel.xcdatamodeld/GustyLibCoreUITestsModel.xcdatamodel" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/GustyKitTests-Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/en.lproj/InfoPlist.strings" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/GustyKitTests-Info.plist" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/GustyKit.podspec">
       <sourceFolder url="file://$MODULE_DIR$/GustyKit.podspec" isTestSource="false" />
@@ -649,6 +649,9 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMNotificationPoster.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMObserverRecorder.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMObserverRecorder.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMock.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMockObject.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMockObject.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMPassByRefSetter.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMPassByRefSetter.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMRealObjectForwarder.h" isTestSource="false" />
@@ -661,9 +664,6 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMStubRecorder.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMVerifier.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMVerifier.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMock.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMockObject.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCMockObject.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCObserverMockObject.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCObserverMockObject.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCPartialMockObject.h" isTestSource="false" />
@@ -672,21 +672,21 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/OCMock/Source/OCMock/OCProtocolMockObject.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ODRefreshControl/ODRefreshControl/ODRefreshControl.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ODRefreshControl/ODRefreshControl/ODRefreshControl.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/IFATestingSupport/IFATestingSupport-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/IFATestingSupport/IFATestingSupport-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/IFATestingSupport/IFATestingSupport-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/IFATestingSupport/IFATestingSupport-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/IFATestingSupport/IFATestingSupport.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCHamcrest/OCHamcrest-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCHamcrest/OCHamcrest-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCHamcrest/OCHamcrest-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCHamcrest/OCHamcrest-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCHamcrest/OCHamcrest.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCMock/OCMock-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCMock/OCMock-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCMock/OCMock-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCMock/OCMock-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/OCMock/OCMock.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ODRefreshControl/ODRefreshControl-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ODRefreshControl/ODRefreshControl-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ODRefreshControl/ODRefreshControl-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ODRefreshControl/ODRefreshControl-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ODRefreshControl/ODRefreshControl.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods-acknowledgements.markdown" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods-acknowledgements.plist" isTestSource="false" />
