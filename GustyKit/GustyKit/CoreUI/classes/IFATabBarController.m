@@ -87,6 +87,10 @@
     return [self ifa_supportedInterfaceOrientations];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [self ifa_preferredStatusBarStyle];
+}
+
 #pragma mark - IFAContextSwitchingManagerDelegate
 
 - (void)             contextSwitchingManager:(IFAContextSwitchingManager *)a_contextSwitchingManager

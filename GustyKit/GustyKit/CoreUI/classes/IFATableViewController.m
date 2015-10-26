@@ -408,6 +408,10 @@
     [self ifa_didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [self ifa_preferredStatusBarStyle];
+}
+
 #pragma mark - UITableViewDataSource protocol
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {

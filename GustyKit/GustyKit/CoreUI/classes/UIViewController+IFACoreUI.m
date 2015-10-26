@@ -930,6 +930,14 @@ typedef NS_ENUM(NSUInteger, IFANavigationBarButtonItemsSide) {
 -(void)ifa_updateToolbarNavigationButtonState {
 }
 
+- (UIStatusBarStyle)ifa_preferredStatusBarStyle {
+    if ([self.ifa_appearanceTheme respondsToSelector:@selector(preferredStatusBarStyleForViewController:)]) {
+        return [self.ifa_appearanceTheme preferredStatusBarStyleForViewController:self];
+    } else {
+        return UIStatusBarStyleDefault;
+    }
+}
+
 // To be overriden by subclasses
 - (void)ifa_onApplicationWillEnterForegroundNotification:(NSNotification*)aNotification{
 }

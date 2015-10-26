@@ -109,6 +109,10 @@
     [self ifa_setEditing:editing animated:animated];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [self ifa_preferredStatusBarStyle];
+}
+
 #pragma mark - IFAContextSwitchTarget
 
 - (BOOL)contextSwitchRequestRequired {

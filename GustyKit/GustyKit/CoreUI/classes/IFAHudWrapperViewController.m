@@ -12,8 +12,8 @@
 
 #pragma mark - Overrides
 
-- (nullable UIViewController *)childViewControllerForStatusBarStyle {
-    return self.childViewControllers.count ? self.childViewControllers[0] : nil;
-}
+//- (nullable UIViewController *)childViewControllerForStatusBarStyle {
+//    return self.childViewControllers.count ? self.childViewControllers[0] : nil;
+//}
 
 @end

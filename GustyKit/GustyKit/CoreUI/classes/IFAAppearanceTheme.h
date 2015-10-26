@@ -152,5 +152,6 @@ typedef NS_ENUM(NSUInteger, IFABarButtonItemSpacingBarType) {
                       interfaceOrientationLandscape:(BOOL)a_interfaceOrientationLandscape;
 -(void)setAppearanceOnViewDidAppearForViewController:(UIViewController*)a_viewController;
 -(void)setAppearanceOnTintColorDidChangeForView:(UIView*)a_view;
+- (UIStatusBarStyle)preferredStatusBarStyleForViewController:(UIViewController *)viewController;
 
 @end

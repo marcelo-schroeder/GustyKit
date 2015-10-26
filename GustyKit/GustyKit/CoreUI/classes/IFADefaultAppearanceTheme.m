@@ -819,6 +819,10 @@ IFA_tableViewCellSelectedBackgroundStyleForIndexPath:(NSIndexPath *)a_indexPath
     return [UIColor blackColor];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyleForViewController:(UIViewController *)viewController {
+    return UIStatusBarStyleDefault;
+}
+
 #pragma mark - Public
 
 -(void)setOrientationDependentBackgroundImagesForViewController:(UIViewController*)a_viewController{
