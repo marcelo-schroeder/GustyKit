@@ -219,7 +219,11 @@ didChangeContentSizeCategory:(NSString *)a_contentSizeCategory {
 }
 
 - (NSArray *)findEntities {
-    return [[IFAPersistenceManager sharedInstance] findAllForEntity:self.entityName includePendingChanges:NO includeSubentities:YES usedForRelationship:YES];
+    BOOL includePendingChanges = [[IFAPersistenceManager sharedInstance].entityConfig shouldIncludePendingChangesInSingleSelectionForEntity:self.entityName];
+    return [[IFAPersistenceManager sharedInstance] findAllForEntity:self.entityName
+                                              includePendingChanges:includePendingChanges
+                                                 includeSubentities:YES
+                                                usedForRelationship:YES];
 }
 
 #pragma mark - IFAPresenter protocol
