@@ -16,6 +16,5 @@ Pod::Spec.new do |s|
         ss.source_files  = 'GustyKit/GustyKit/CoreUI/classes/**/*.{h,m}', 'GustyKit/GustyKit/Help/classes/**/*.{h,m}'
         ss.resource      = 'GustyKit/GustyKit/CoreUI/resources/**/*.*', 'GustyKit/GustyKit/Help/resources/**/*.*'
         ss.dependency 'GustyKit/Foundation'
-        ss.dependency 'ODRefreshControl', '1.1.0'
     end
 end

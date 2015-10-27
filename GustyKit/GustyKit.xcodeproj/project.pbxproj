@@ -194,6 +194,7 @@
 		F7D4D84818EA00E600ABF401 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D4D84718EA00E600ABF401 /* UIKit.framework */; };
 		F7D4D84B18EA00E600ABF401 /* libGustyKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D4D83318EA00E600ABF401 /* libGustyKit.a */; };
 		F7D4D85118EA00E600ABF401 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7D4D84F18EA00E600ABF401 /* InfoPlist.strings */; };
+		F7F467821BE01E5C001FCEE3 /* IFA_ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F467801BE01E5C001FCEE3 /* IFA_ODRefreshControl.m */; };
 		F7FF00CC1AB8EAF600A0886D /* IFAPersistenceChangeDetectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FF00CB1AB8EAF600A0886D /* IFAPersistenceChangeDetectorTests.m */; };
 		F7FF00D01AB8F2DF00A0886D /* GustyKitCoreUITestsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F7FF00CE1AB8F2DF00A0886D /* GustyKitCoreUITestsModel.xcdatamodeld */; };
 		F7FF00E51AB8F81D00A0886D /* TestCoreDataEntity1.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FF00E41AB8F81D00A0886D /* TestCoreDataEntity1.m */; };
@@ -629,6 +630,10 @@
 		F7D4D84E18EA00E600ABF401 /* GustyKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GustyKitTests-Info.plist"; sourceTree = "<group>"; };
 		F7D4D85018EA00E600ABF401 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F7D4DBED18EA11E100ABF401 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F7F4677E1BE01E5C001FCEE3 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		F7F4677F1BE01E5C001FCEE3 /* IFA_ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFA_ODRefreshControl.h; sourceTree = "<group>"; };
+		F7F467801BE01E5C001FCEE3 /* IFA_ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFA_ODRefreshControl.m; sourceTree = "<group>"; };
+		F7F467811BE01E5C001FCEE3 /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
 		F7FF00CB1AB8EAF600A0886D /* IFAPersistenceChangeDetectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFAPersistenceChangeDetectorTests.m; sourceTree = "<group>"; };
 		F7FF00CF1AB8F2DF00A0886D /* GustyLibCoreUITestsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GustyLibCoreUITestsModel.xcdatamodel; sourceTree = "<group>"; };
 		F7FF00E31AB8F81D00A0886D /* TestCoreDataEntity1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCoreDataEntity1.h; sourceTree = "<group>"; };
@@ -1207,6 +1212,7 @@
 		F7C8061F1AE8C6BD0097280C /* 3rd party */ = {
 			isa = PBXGroup;
 			children = (
+				F7F4677D1BE01E5C001FCEE3 /* ODRefreshControl */,
 				F7C806201AE8C6BD0097280C /* HPGrowingTextView */,
 				F7C806271AE8C6BD0097280C /* KNSemiModal */,
 			);
@@ -1310,6 +1316,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F7F4677D1BE01E5C001FCEE3 /* ODRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				F7F4677E1BE01E5C001FCEE3 /* LICENSE.txt */,
+				F7F4677F1BE01E5C001FCEE3 /* IFA_ODRefreshControl.h */,
+				F7F467801BE01E5C001FCEE3 /* IFA_ODRefreshControl.m */,
+				F7F467811BE01E5C001FCEE3 /* README.textile */,
+			);
+			path = ODRefreshControl;
+			sourceTree = "<group>";
+		};
 		F7FF00CD1AB8F2AA00A0886D /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1355,6 +1372,7 @@
 				F7D4D84018EA00E600ABF401 /* Frameworks */,
 				F7D4D84118EA00E600ABF401 /* Resources */,
 				1C7D667698C24E6BAB3C02A4 /* Copy Pods Resources */,
+				09E4F9998437160C2ACC1DBB /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1417,6 +1435,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		09E4F9998437160C2ACC1DBB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1C7D667698C24E6BAB3C02A4 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1531,6 +1564,7 @@
 				107382D733BAA19EC2EEE1C3 /* IFAView.m in Sources */,
 				10738A3A5DB6E204CC8B3BAE /* IFAViewController.m in Sources */,
 				1073809C8318CB91760D580A /* IFAWorkInProgressModalViewManager.m in Sources */,
+				F7F467821BE01E5C001FCEE3 /* IFA_ODRefreshControl.m in Sources */,
 				10738998D43336267A93D036 /* NSAttributedString+IFACoreUI.m in Sources */,
 				10738D7B18119A794591CE92 /* NSIndexPath+IFACoreUI.m in Sources */,
 				107388FAC20AC6BEA5C686D2 /* NSManagedObject+IFACoreUI.m in Sources */,

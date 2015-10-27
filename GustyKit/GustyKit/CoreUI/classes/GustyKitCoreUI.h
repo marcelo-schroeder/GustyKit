@@ -35,7 +35,7 @@
 // KNSemiModal
 #import "UIViewController+IFA_KNSemiModal.h"
 // ODRefreshControl
-#import <ODRefreshControl/ODRefreshControl.h>
+#import "IFA_ODRefreshControl.h"
 // GrowingTextView
 #import "IFA_HPGrowingTextView.h"
 

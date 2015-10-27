@@ -4,7 +4,6 @@ xcodeproj 'GustyKit/GustyKit.xcodeproj'
 link_with 'GustyKitTests'
 
 # CoreUI dependencies
-pod 'ODRefreshControl', '1.1.0'
 
 # Tests dependencies
 pod 'IFATestingSupport'
