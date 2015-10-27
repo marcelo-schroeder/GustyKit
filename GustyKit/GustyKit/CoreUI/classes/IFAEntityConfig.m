@@ -726,6 +726,11 @@
     return l_boolObj ? l_boolObj.boolValue : YES;   // Default value is YES.
 }
 
+- (BOOL)shouldDisallowDeselectionInSingleSelectionForEntity:(NSString*)anEntityName{
+    NSNumber *l_boolObj = [[[self entityConfigDictionary] valueForKey:anEntityName] valueForKey:@"shouldDisallowDeselectionInSingleSelection"];
+    return l_boolObj ? l_boolObj.boolValue : NO;   // Default value is NO.
+}
+
 - (IFAEntityConfigFieldType)fieldTypeForIndexPath:(NSIndexPath *)a_indexPath inObject:(NSObject *)a_object
                                                                                inForm:(NSString *)a_formName
                                        createMode:(BOOL)a_createMode {

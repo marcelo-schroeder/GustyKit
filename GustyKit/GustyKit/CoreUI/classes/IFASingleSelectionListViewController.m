@@ -149,6 +149,7 @@
 		self.IFA_selectionManager = [[IFASingleSelectionManager alloc] initWithSelectionManagerDataSource:self
                                                                                  selectedObject:[self.managedObject valueForKey:self.propertyName]];
         self.IFA_selectionManager.delegate = self;
+        self.disallowDeselection = [[IFAPersistenceManager sharedInstance].entityConfig shouldDisallowDeselectionInSingleSelectionForEntity:self.entityName];
     }
 	return self;
 }

@@ -154,8 +154,10 @@ typedef NS_ENUM(NSUInteger, IFAEntityConfigFieldType){
 
 - (BOOL)shouldShowSelectNoneButtonInSelectionForEntity:(NSString *)anEntityName;
 
+- (BOOL)shouldDisallowDeselectionInSingleSelectionForEntity:(NSString *)anEntityName;
+
 - (IFAEntityConfigFieldType)fieldTypeForIndexPath:(NSIndexPath *)a_indexPath inObject:(NSObject *)a_object
-                                                                               inForm:(NSString *)a_formName createMode:(BOOL)a_createMode;
+                                           inForm:(NSString *)a_formName createMode:(BOOL)a_createMode;
 
 - (BOOL)isDestructiveButtonAtIndexPath:(NSIndexPath *)a_indexPath inObject:(NSObject *)a_object
                                 inForm:(NSString *)a_formName createMode:(BOOL)a_createMode;
