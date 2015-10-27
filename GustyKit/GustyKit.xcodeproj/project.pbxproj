@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1073800928EF23408942168D /* IFACoreUITestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738A6FC2F5FF3529167F34 /* IFACoreUITestCase.m */; };
 		1073800E6272830317775D61 /* IFAEntityConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738E93F21BF564C6C975FB /* IFAEntityConfig.m */; };
 		107380453E714265FB5AE530 /* UIColor+IFACoreUI_WatchKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1073816992ECDA64545C8C7A /* UIColor+IFACoreUI_WatchKit.m */; };
 		1073804C9F097C3B75D64AD5 /* UICollectionView+IFACoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 107380FFAFF02FD902B39D05 /* UICollectionView+IFACoreUI.m */; };
@@ -193,6 +192,7 @@
 		F7D4D84B18EA00E600ABF401 /* libGustyKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D4D83318EA00E600ABF401 /* libGustyKit.a */; };
 		F7D4D85118EA00E600ABF401 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7D4D84F18EA00E600ABF401 /* InfoPlist.strings */; };
 		F7F467821BE01E5C001FCEE3 /* IFA_ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F467801BE01E5C001FCEE3 /* IFA_ODRefreshControl.m */; };
+		F7F467831BE022EA001FCEE3 /* IFACoreUITestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738A6FC2F5FF3529167F34 /* IFACoreUITestCase.m */; };
 		F7FF00CC1AB8EAF600A0886D /* IFAPersistenceChangeDetectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FF00CB1AB8EAF600A0886D /* IFAPersistenceChangeDetectorTests.m */; };
 		F7FF00D01AB8F2DF00A0886D /* GustyKitCoreUITestsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F7FF00CE1AB8F2DF00A0886D /* GustyKitCoreUITestsModel.xcdatamodeld */; };
 		F7FF00E51AB8F81D00A0886D /* TestCoreDataEntity1.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FF00E41AB8F81D00A0886D /* TestCoreDataEntity1.m */; };
@@ -1625,7 +1625,6 @@
 				107384267F65DCD0C12C2153 /* IFADynamicCache.m in Sources */,
 				1073859972A27FAB935BE8AB /* IFAHudView.m in Sources */,
 				107381EC159574C270E1F57E /* IFAPersistenceChangeDetector.m in Sources */,
-				1073800928EF23408942168D /* IFACoreUITestCase.m in Sources */,
 				107384D6ED028918690F6AD6 /* NSObject+IFAFoundation.m in Sources */,
 				107389294E3D3DE6B6E60E26 /* IFAUIGlobal.m in Sources */,
 				10738753D8C72C2BB6E2C788 /* IFAUIConfiguration.m in Sources */,
@@ -1667,6 +1666,7 @@
 				F759E0581AD672B600B20D3B /* IFALocationManagerTests.m in Sources */,
 				F7B4AA901B21318F00E81AE1 /* IFAPersistentEntityChangeObserverTests.m in Sources */,
 				F7FF00EB1AB8F81E00A0886D /* TestCoreDataEntity2.m in Sources */,
+				F7F467831BE022EA001FCEE3 /* IFACoreUITestCase.m in Sources */,
 				10738C94729D3ADC20E0D179 /* NSDictionaryTests.m in Sources */,
 				F7B5A7221AC8CA0B00E47858 /* IFASelectionManagerTests.m in Sources */,
 			);
@@ -1783,7 +1783,6 @@
 		};
 		F7D4D85718EA00E600ABF401 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 352117ED3BF7029F2C540646 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/GustyKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1796,7 +1795,6 @@
 		};
 		F7D4D85818EA00E600ABF401 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80ECA84BFE535AB4430F53A7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/GustyKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
