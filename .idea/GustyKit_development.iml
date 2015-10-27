@@ -12,9 +12,9 @@
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/3rd party/KNSemiModal/README.md" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/3rd party/KNSemiModal/UIViewController+IFA_KNSemiModal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/3rd party/KNSemiModal/UIViewController+IFA_KNSemiModal.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/3rd party/ODRefreshControl/LICENSE.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/3rd party/ODRefreshControl/IFA_ODRefreshControl.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/3rd party/ODRefreshControl/IFA_ODRefreshControl.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/3rd party/ODRefreshControl/LICENSE.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/3rd party/ODRefreshControl/README.textile" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/GustyKit.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/CoreUI/classes/GustyKitCoreUI.h" isTestSource="false" />
@@ -430,34 +430,6 @@
       <sourceFolder url="file://$MODULE_DIR$/Podfile" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/Pods">
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/DoubleClick/DFPBannerView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/DoubleClick/DFPExtras.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/DoubleClick/DFPInterstitial.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/DoubleClick/DFPSwipeableBannerView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/DoubleClick/GADAdSizeDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/DoubleClick/GADAppEventDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/DoubleClick/GADSwipeableBannerViewDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/Mediation/GADCustomEventBanner.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/Mediation/GADCustomEventBannerDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/Mediation/GADCustomEventExtras.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/Mediation/GADCustomEventInterstitial.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/Mediation/GADCustomEventInterstitialDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/Mediation/GADCustomEventRequest.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/Search/GADSearchBannerView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/Add-ons/Search/GADSearchRequest.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADAdMobExtras.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADAdNetworkExtras.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADAdSize.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADBannerView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADBannerViewDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADInAppPurchase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADInAppPurchaseDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADInterstitial.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADInterstitialDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADModules.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADRequest.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/GADRequestError.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Google-Mobile-Ads-SDK/GoogleMobileAdsSdkiOS-6.12.2/libGoogleAdMobAds.a" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/IFATestingSupport/IFATestingSupport/IFATestingSupport/IFACommonTests.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/IFATestingSupport/IFATestingSupport/IFATestingSupport/OCMStubRecorder+IFACategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/IFATestingSupport/IFATestingSupport/IFATestingSupport/OCMStubRecorder+IFACategory.m" isTestSource="false" />

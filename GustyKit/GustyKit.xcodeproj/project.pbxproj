@@ -44,7 +44,6 @@
 		1073824DF101DD87DA6A2080 /* IFAPagingStateManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 107381F051543875B9393B9D /* IFAPagingStateManagerTests.m */; };
 		1073828CE9653253C469538D /* IFAFadingOverlayPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 107386C2C25F17A7E77539A8 /* IFAFadingOverlayPresentationController.m */; };
 		10738290C90F0B99388D6DB0 /* IFAAbstractSelectionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738A46FAFB86D380601A1F /* IFAAbstractSelectionListViewController.m */; };
-		10738294318EBBF440939E18 /* IFAGoogleMobileAdsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 107388AD583762A749A5DA79 /* IFAGoogleMobileAdsManager.m */; };
 		107382B8594313A81C3522EC /* IFAPersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738A0D4012D09C1E7C45D5 /* IFAPersistenceManager.m */; };
 		107382D2451971A4094AF0CE /* IFAAnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738D652874C30BFBB60C06 /* IFAAnalyticsManager.m */; };
 		107382D54596956D6BE82A04 /* IFAHelpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 107384396E4F4A2D75B78A6C /* IFAHelpManager.m */; };
@@ -161,7 +160,6 @@
 		10738F331302C3C7EB7F3FD0 /* IFAMultipleSelectionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738BCBAC2D1000CD2E1756 /* IFAMultipleSelectionListViewController.m */; };
 		10738F75B52CBC14B0FDCC86 /* IFAMapSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738BB178D4A9D13192958C /* IFAMapSettingsViewController.m */; };
 		10738F812EE7FD46381A5466 /* UIStoryboard+IFACoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738E40CC45E135B2D0BBD2 /* UIStoryboard+IFACoreUI.m */; };
-		10738F870D1C708B5327D198 /* UIViewController+IFAGoogleMobileAdsSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738479CA9CAE1D8AF5D52D /* UIViewController+IFAGoogleMobileAdsSupport.m */; };
 		10738F953F66F0587122D9DD /* NSMutableArray+IFACoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738FDD5125D74B0CDAAAEE /* NSMutableArray+IFACoreUI.m */; };
 		10738FC7B63B729F9A8664DD /* IFANavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10738EEB118EEB0CAA03959F /* IFANavigationController.m */; };
 		10738FD9E847A389755AEC96 /* IFAFormNumberFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1073876A84A83EA530A1C4A7 /* IFAFormNumberFieldTableViewCell.m */; };
@@ -1637,8 +1635,6 @@
 				107385C9DED98CC2CCC8D364 /* IFAHelpViewController.m in Sources */,
 				107388D8F4069646DE7002E6 /* UIViewController+IFAHelp.m in Sources */,
 				10738E84E01586A7CDE15AD7 /* IFAHelpContentViewController.m in Sources */,
-				10738294318EBBF440939E18 /* IFAGoogleMobileAdsManager.m in Sources */,
-				10738F870D1C708B5327D198 /* UIViewController+IFAGoogleMobileAdsSupport.m in Sources */,
 				10738580D0EF1AFFC7536266 /* IFAPersistentEntityChangeObserver.m in Sources */,
 				107380453E714265FB5AE530 /* UIColor+IFACoreUI_WatchKit.m in Sources */,
 				10738726C2B48E33E56C9F95 /* IFACrashReportingUtils.m in Sources */,
