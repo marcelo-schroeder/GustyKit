@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0710"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F7D4D83218EA00E600ABF401"
-               BuildableName = "libGustyKit.a"
-               BlueprintName = "GustyKit"
-               ReferencedContainer = "container:GustyKit.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F7D4D84218EA00E600ABF401"
-               BuildableName = "GustyKitTests.xctest"
-               BlueprintName = "GustyKitTests"
+               BlueprintIdentifier = "F7F4678B1BE167FA001FCEE3"
+               BuildableName = "GustyKitFramework.framework"
+               BlueprintName = "GustyKitFramework"
                ReferencedContainer = "container:GustyKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F7D4D84218EA00E600ABF401"
-               BuildableName = "GustyKitTests.xctest"
-               BlueprintName = "GustyKitTests"
+               BlueprintIdentifier = "F7F467941BE167FA001FCEE3"
+               BuildableName = "GustyKitFrameworkTests.xctest"
+               BlueprintName = "GustyKitFrameworkTests"
                ReferencedContainer = "container:GustyKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F7D4D83218EA00E600ABF401"
-            BuildableName = "libGustyKit.a"
-            BlueprintName = "GustyKit"
+            BlueprintIdentifier = "F7F4678B1BE167FA001FCEE3"
+            BuildableName = "GustyKitFramework.framework"
+            BlueprintName = "GustyKitFramework"
             ReferencedContainer = "container:GustyKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F7D4D83218EA00E600ABF401"
-            BuildableName = "libGustyKit.a"
-            BlueprintName = "GustyKit"
+            BlueprintIdentifier = "F7F4678B1BE167FA001FCEE3"
+            BuildableName = "GustyKitFramework.framework"
+            BlueprintName = "GustyKitFramework"
             ReferencedContainer = "container:GustyKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F7D4D83218EA00E600ABF401"
-            BuildableName = "libGustyKit.a"
-            BlueprintName = "GustyKit"
+            BlueprintIdentifier = "F7F4678B1BE167FA001FCEE3"
+            BuildableName = "GustyKitFramework.framework"
+            BlueprintName = "GustyKitFramework"
             ReferencedContainer = "container:GustyKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
