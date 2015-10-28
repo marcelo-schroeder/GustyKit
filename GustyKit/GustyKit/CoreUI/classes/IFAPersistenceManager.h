@@ -284,6 +284,22 @@
 */
 - (BOOL)unsavedEditingChanges;
 
+/**
+ * This method synchronises managed objects of a given entity name with the provided objects.
+ * It is useful in situations where a local cache needs to be synchronised with objects coming from a remote server.
+ * Any updates, insertions and deletions are performed in the current managed object context. The caller is responsible in saving the context.
+ * @param entityName Name of the entity to be synchronised (i.e. the target of the synchronisation).
+ * @param sourceObjects Array of source objects to be synchronised with.
+ * @param propertyNameMapping Dictionary containing the mapping between source property names (keys) and target property names (values).
+ * @param sourceIdPropertyName Property name corresponding to the shared ID in the source object. Used to match the source and target objects for syncing.
+ * @param targetIdPropertyName Property name corresponding to the shared ID in the target object. Used to match the source and target objects for syncing.
+ */
+- (void)syncEntityNamed:(NSString *)entityName
+	  withSourceObjects:(NSArray *)sourceObjects
+	propertyNameMapping:(NSDictionary *)propertyNameMapping
+   sourceIdPropertyName:(NSString *)sourceIdPropertyName
+   targetIdPropertyName:(NSString *)targetIdPropertyName;
+
 + (instancetype)sharedInstance;
 + (BOOL)setValidationError:(NSError**)anError withMessage:(NSString*)anErrorMessage;
 + (NSMutableArray*)idsForManagedObjects:(NSArray*)a_managedObjects;

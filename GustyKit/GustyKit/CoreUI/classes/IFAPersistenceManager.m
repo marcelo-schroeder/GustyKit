@@ -1732,6 +1732,32 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     return userInfo[IFAKeyUpdatedProperties];
 }
 
+- (void)syncEntityNamed:(NSString *)entityName
+      withSourceObjects:(NSArray *)sourceObjects
+    propertyNameMapping:(NSDictionary *)propertyNameMapping
+   sourceIdPropertyName:(NSString *)sourceIdPropertyName
+   targetIdPropertyName:(NSString *)targetIdPropertyName {
+    NSMutableArray <NSManagedObject *> *managedObjectsToDelete = [self findAllForEntity:entityName];
+    for (id sourceObject in sourceObjects) {
+        id sharedId = [sourceObject valueForKey:sourceIdPropertyName];
+        NSManagedObject *managedObject = [self findSingleByKeysAndValues:@{targetIdPropertyName : sharedId}
+                                                                  entity:entityName];
+        if (!managedObject) {
+            managedObject = [self instantiate:entityName];
+        }
+        for (NSString *sourcePropertyName in propertyNameMapping.allKeys) {
+            id sharedValue = [sourceObject valueForKey:sourcePropertyName];
+            [managedObject setValue:sharedValue
+                             forKey:propertyNameMapping[sourcePropertyName]];
+        }
+        [managedObjectsToDelete removeObject:managedObject];
+    }
+    for (NSManagedObject *managedObjectToDelete in managedObjectsToDelete) {
+        [self deleteObject:managedObjectToDelete
+  validationAlertPresenter:nil];
+    }
+}
+
 #pragma mark -
 #pragma mark Overrides
 

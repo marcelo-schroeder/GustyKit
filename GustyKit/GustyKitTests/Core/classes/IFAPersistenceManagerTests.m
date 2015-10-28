@@ -8,11 +8,17 @@
 #import "IFACoreUITestCase.h"
 #import "GustyKitCoreUI.h"
 #import "TestCoreDataEntity1.h"
+#import "TestCoreDataEntity2.h"
 
 @interface IFAPersistenceManagerTests : IFACoreUITestCase
 @property(nonatomic, strong) IFAPersistenceManager *persistenceManager;
 @property(nonatomic, strong) id persistenceManagerPartialMock;
 @property(nonatomic, strong) TestCoreDataEntity1 *managedObject1;
+@end
+
+@interface SyncSource : NSObject
+@property (nonatomic) NSString *property1;  // sync id
+@property (nonatomic) NSNumber *property2;
 @end
 
 @implementation IFAPersistenceManagerTests{
@@ -84,6 +90,53 @@
     XCTAssertTrue(result);
 }
 
+- (void)testSyncEntityNamed {
+
+    // Given
+    NSString *entityName = @"TestCoreDataEntity2";
+    TestCoreDataEntity2 *managedObject1 = (TestCoreDataEntity2 *) [self.persistenceManager instantiate:[TestCoreDataEntity2 ifa_entityName]];
+    managedObject1.attribute1 = @"key1";
+    managedObject1.attribute2 = @(1);
+    TestCoreDataEntity2 *managedObject2 = (TestCoreDataEntity2 *) [self.persistenceManager instantiate:[TestCoreDataEntity2 ifa_entityName]];
+    managedObject2.attribute1 = @"key2";
+    managedObject2.attribute2 = @(2);
+    TestCoreDataEntity2 *managedObject3 = (TestCoreDataEntity2 *) [self.persistenceManager instantiate:[TestCoreDataEntity2 ifa_entityName]];
+    managedObject3.attribute1 = @"key3";
+    managedObject3.attribute2 = @(3);
+    TestCoreDataEntity2 *managedObject4 = (TestCoreDataEntity2 *) [self.persistenceManager instantiate:[TestCoreDataEntity2 ifa_entityName]];
+    managedObject4.attribute1 = @"key4";
+    managedObject4.attribute2 = @(4);
+    TestCoreDataEntity2 *managedObject5 = (TestCoreDataEntity2 *) [self.persistenceManager instantiate:[TestCoreDataEntity2 ifa_entityName]];
+    managedObject5.attribute1 = @"key5";
+    managedObject5.attribute2 = @(5);
+    [self.persistenceManager save];
+
+    SyncSource *syncSource1 = [SyncSource new];
+    syncSource1.property1 = @"key2";
+    syncSource1.property2 = @(22);
+
+    SyncSource *syncSource2 = [SyncSource new];
+    syncSource2.property1 = @"key4";
+    syncSource2.property2 = @(44);
+
+    // When
+    [self.persistenceManager syncEntityNamed:entityName
+                           withSourceObjects:@[syncSource1, syncSource2]
+                         propertyNameMapping:@{@"property1" : @"attribute1", @"property2" : @"attribute2"}
+                        sourceIdPropertyName:@"property1"
+                        targetIdPropertyName:@"attribute1"];
+
+    // Then
+    [self.persistenceManager save];
+    TestCoreDataEntity2 *resultManagedObject1 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key2"}
+                                                                                                                    entity:entityName];
+    TestCoreDataEntity2 *resultManagedObject2 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key4"}
+                                                                                                                    entity:entityName];
+    XCTAssertEqual([self.persistenceManager countEntity:entityName], 2);
+    XCTAssertEqualObjects(resultManagedObject1.attribute2, @(22));
+    XCTAssertEqualObjects(resultManagedObject2.attribute2, @(44));
+}
+
 #pragma mark - Overrides
 
 - (void)setUp {
@@ -111,4 +164,7 @@
     [self.persistenceManager save];
 }
 
+@end
+
+@implementation SyncSource
 @end
