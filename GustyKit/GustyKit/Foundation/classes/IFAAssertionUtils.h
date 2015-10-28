@@ -18,6 +18,8 @@
 //  limitations under the License.
 //
 
+@import Foundation;
+
 //TODO: I am not checking NS_BLOCK_ASSERTIONS at the moment - see the Obj-C for Java devs book for explanation
 
 //TODO: I had to change "[OBJECT className]" to "[[OBJECT class] description]" to get rid of compiler warnings... this needs to be tested

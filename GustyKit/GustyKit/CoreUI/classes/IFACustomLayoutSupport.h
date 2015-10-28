@@ -16,7 +16,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@import UIKit;
 
 @interface IFACustomLayoutSupport : NSObject <UILayoutSupport>
 - (id)initWithLength:(CGFloat)a_length;

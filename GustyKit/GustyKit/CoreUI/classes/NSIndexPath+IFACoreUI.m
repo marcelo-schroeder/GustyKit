@@ -15,7 +15,7 @@
 //  limitations under the License.
 //
 
-#import "NSIndexPath+IFACoreUI.h"
+#import "GustyKitCoreUI.h"
 
 
 @implementation NSIndexPath (IFACoreUI)

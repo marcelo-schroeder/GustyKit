@@ -19,6 +19,8 @@
 //
 
 // Apple Frameworks
+@import Foundation;
+@import UIKit;
 #import <objc/message.h>    // added so I could use objc_msgSend to get rid of ARC compiler warnings for performSelector method calls
 #import <sys/utsname.h>
 

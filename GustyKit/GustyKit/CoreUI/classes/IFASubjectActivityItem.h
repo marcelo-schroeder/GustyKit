@@ -17,7 +17,7 @@
 
 
 #import <Foundation/Foundation.h>
-
+@import UIKit;
 
 @interface IFASubjectActivityItem : NSObject <UIActivityItemSource>
 - (id)initWithSubject:(NSString *)a_subject;

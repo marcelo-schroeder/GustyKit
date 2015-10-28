@@ -16,6 +16,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@import UIKit;
 
 @interface UIScrollView (IFACoreUI)
 - (void)ifa_scrollToCaretInTextView:(UITextView *)a_textView;
