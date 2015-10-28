@@ -1744,6 +1744,8 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
                                                                   entity:entityName];
         if (!managedObject) {
             managedObject = [self instantiate:entityName];
+            [managedObject setValue:sharedId
+                             forKey:targetIdPropertyName];
         }
         for (NSString *sourcePropertyName in propertyNameMapping.allKeys) {
             id sharedValue = [sourceObject valueForKey:sourcePropertyName];

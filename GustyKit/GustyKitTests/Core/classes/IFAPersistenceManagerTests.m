@@ -119,9 +119,13 @@
     syncSource2.property1 = @"key4";
     syncSource2.property2 = @(44);
 
+    SyncSource *syncSource3 = [SyncSource new];
+    syncSource3.property1 = @"key6";
+    syncSource3.property2 = @(66);
+
     // When
     [self.persistenceManager syncEntityNamed:entityName
-                           withSourceObjects:@[syncSource1, syncSource2]
+                           withSourceObjects:@[syncSource1, syncSource2, syncSource3]
                          propertyNameMapping:@{@"property1" : @"attribute1", @"property2" : @"attribute2"}
                         sourceIdPropertyName:@"property1"
                         targetIdPropertyName:@"attribute1"];
@@ -132,9 +136,12 @@
                                                                                                                     entity:entityName];
     TestCoreDataEntity2 *resultManagedObject2 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key4"}
                                                                                                                     entity:entityName];
-    XCTAssertEqual([self.persistenceManager countEntity:entityName], 2);
+    TestCoreDataEntity2 *resultManagedObject3 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key6"}
+                                                                                                                    entity:entityName];
+    XCTAssertEqual([self.persistenceManager countEntity:entityName], 3);
     XCTAssertEqualObjects(resultManagedObject1.attribute2, @(22));
     XCTAssertEqualObjects(resultManagedObject2.attribute2, @(44));
+    XCTAssertEqualObjects(resultManagedObject3.attribute2, @(66));
 }
 
 #pragma mark - Overrides

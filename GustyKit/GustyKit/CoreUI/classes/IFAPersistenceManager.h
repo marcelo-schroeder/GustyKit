@@ -290,7 +290,7 @@
  * Any updates, insertions and deletions are performed in the current managed object context. The caller is responsible in saving the context.
  * @param entityName Name of the entity to be synchronised (i.e. the target of the synchronisation).
  * @param sourceObjects Array of source objects to be synchronised with.
- * @param propertyNameMapping Dictionary containing the mapping between source property names (keys) and target property names (values).
+ * @param propertyNameMapping Dictionary containing the mapping between source property names (keys) and target property names (values). Do not include the id property mapping.
  * @param sourceIdPropertyName Property name corresponding to the shared ID in the source object. Used to match the source and target objects for syncing.
  * @param targetIdPropertyName Property name corresponding to the shared ID in the target object. Used to match the source and target objects for syncing.
  */
