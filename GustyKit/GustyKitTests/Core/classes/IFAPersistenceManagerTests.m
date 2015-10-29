@@ -126,9 +126,9 @@
     // When
     [self.persistenceManager syncEntityNamed:entityName
                            withSourceObjects:@[syncSource1, syncSource2, syncSource3]
-                         propertyNameMapping:@{@"property1" : @"attribute1", @"property2" : @"attribute2"}
-                        sourceIdPropertyName:@"property1"
-                        targetIdPropertyName:@"attribute1"];
+                              keyPathMapping:@{@"property1" : @"attribute1", @"property2" : @"attribute2"}
+                             sourceIdKeyPath:@"property1"
+                             targetIdKeyPath:@"attribute1"];
 
     // Then
     [self.persistenceManager save];

@@ -290,15 +290,15 @@
  * Any updates, insertions and deletions are performed in the current managed object context. The caller is responsible in saving the context.
  * @param entityName Name of the entity to be synchronised (i.e. the target of the synchronisation).
  * @param sourceObjects Array of source objects to be synchronised with.
- * @param propertyNameMapping Dictionary containing the mapping between source property names (keys) and target property names (values). Do not include the id property mapping.
- * @param sourceIdPropertyName Property name corresponding to the shared ID in the source object. Used to match the source and target objects for syncing.
- * @param targetIdPropertyName Property name corresponding to the shared ID in the target object. Used to match the source and target objects for syncing.
+ * @param keyPathMapping Dictionary containing the mapping between source key paths (the keys in the dictionary) and target key paths (the values in the dictionary). Do not include the id key path mapping.
+ * @param sourceIdKeyPath Key path corresponding to the shared ID in the source object. Used to match the source and target objects for syncing.
+ * @param targetIdKeyPath Key path corresponding to the shared ID in the target object. Used to match the source and target objects for syncing.
  */
 - (void)syncEntityNamed:(NSString *)entityName
 	  withSourceObjects:(NSArray *)sourceObjects
-	propertyNameMapping:(NSDictionary *)propertyNameMapping
-   sourceIdPropertyName:(NSString *)sourceIdPropertyName
-   targetIdPropertyName:(NSString *)targetIdPropertyName;
+		 keyPathMapping:(NSDictionary *)keyPathMapping
+		sourceIdKeyPath:(NSString *)sourceIdKeyPath
+		targetIdKeyPath:(NSString *)targetIdKeyPath;
 
 + (instancetype)sharedInstance;
 + (BOOL)setValidationError:(NSError**)anError withMessage:(NSString*)anErrorMessage;

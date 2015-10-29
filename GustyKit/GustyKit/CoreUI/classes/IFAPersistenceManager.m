@@ -1734,23 +1734,23 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
 
 - (void)syncEntityNamed:(NSString *)entityName
       withSourceObjects:(NSArray *)sourceObjects
-    propertyNameMapping:(NSDictionary *)propertyNameMapping
-   sourceIdPropertyName:(NSString *)sourceIdPropertyName
-   targetIdPropertyName:(NSString *)targetIdPropertyName {
+         keyPathMapping:(NSDictionary *)keyPathMapping
+        sourceIdKeyPath:(NSString *)sourceIdKeyPath
+        targetIdKeyPath:(NSString *)targetIdKeyPath {
     NSMutableArray <NSManagedObject *> *managedObjectsToDelete = [self findAllForEntity:entityName];
     for (id sourceObject in sourceObjects) {
-        id sharedId = [sourceObject valueForKey:sourceIdPropertyName];
-        NSManagedObject *managedObject = [self findSingleByKeysAndValues:@{targetIdPropertyName : sharedId}
+        id sharedId = [sourceObject valueForKeyPath:sourceIdKeyPath];
+        NSManagedObject *managedObject = [self findSingleByKeysAndValues:@{targetIdKeyPath : sharedId}
                                                                   entity:entityName];
         if (!managedObject) {
             managedObject = [self instantiate:entityName];
             [managedObject setValue:sharedId
-                             forKey:targetIdPropertyName];
+                         forKeyPath:targetIdKeyPath];
         }
-        for (NSString *sourcePropertyName in propertyNameMapping.allKeys) {
-            id sharedValue = [sourceObject valueForKey:sourcePropertyName];
+        for (NSString *sourcePropertyName in keyPathMapping.allKeys) {
+            id sharedValue = [sourceObject valueForKeyPath:sourcePropertyName];
             [managedObject setValue:sharedValue
-                             forKey:propertyNameMapping[sourcePropertyName]];
+                         forKeyPath:keyPathMapping[sourcePropertyName]];
         }
         [managedObjectsToDelete removeObject:managedObject];
     }
