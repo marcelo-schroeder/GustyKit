@@ -38,6 +38,7 @@
 #import "IFA_ODRefreshControl.h"
 // GrowingTextView
 #import "IFA_HPGrowingTextView.h"
+#import "IFA_HPTextViewInternal.h"
 
 // GustyKit
 #import "GustyKitFoundation.h"
@@ -167,3 +168,4 @@
 #import "IFAHelpViewController.h"
 #import "IFAHelpTarget.h"
 #import "IFAHudWrapperViewController.h"
+#import "NSMutableArray+IFACoreUI.h"
