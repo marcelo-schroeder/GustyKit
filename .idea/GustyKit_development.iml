@@ -377,10 +377,7 @@
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFA_Icon_Help_selected.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFA_Icon_Help_selected@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Help/resources/IFAHelpViewControllerWebView.css" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitFramework/GustyKitFramework.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitFramework/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitFrameworkTests/GustyKitFrameworkTests.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitFrameworkTests/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKit/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/classes/IFAColorSchemeTest.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/classes/IFAColorSchemeTest.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GustyKit/GustyKitTests/Core/classes/IFACoreUITestCase.h" isTestSource="false" />
@@ -426,8 +423,7 @@
     <content url="file://$MODULE_DIR$/GustyKit/GustyKit/GoogleMobileAdsSupport" />
     <content url="file://$MODULE_DIR$/GustyKit/GustyKit/GustyKit-Prefix.pch" />
     <content url="file://$MODULE_DIR$/GustyKit/GustyKit/Help" />
-    <content url="file://$MODULE_DIR$/GustyKit/GustyKitFramework" />
-    <content url="file://$MODULE_DIR$/GustyKit/GustyKitFrameworkTests" />
+    <content url="file://$MODULE_DIR$/GustyKit/GustyKit/Info.plist" />
     <content url="file://$MODULE_DIR$/GustyKit/GustyKitTests" />
     <content url="file://$MODULE_DIR$/LICENSE">
       <sourceFolder url="file://$MODULE_DIR$/LICENSE" isTestSource="false" />

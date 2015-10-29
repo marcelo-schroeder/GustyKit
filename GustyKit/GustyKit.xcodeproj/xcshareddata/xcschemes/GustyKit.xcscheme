@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F7F467941BE167FA001FCEE3"
+               BlueprintIdentifier = "F72149F21BE2BDF400954F14"
                BuildableName = "GustyKitTests.xctest"
                BlueprintName = "GustyKitTests"
                ReferencedContainer = "container:GustyKit.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F7F4678B1BE167FA001FCEE3"
+            BlueprintIdentifier = "F72149E91BE2BDF300954F14"
             BuildableName = "GustyKit.framework"
             BlueprintName = "GustyKit"
             ReferencedContainer = "container:GustyKit.xcodeproj">
@@ -64,7 +64,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F7F4678B1BE167FA001FCEE3"
+            BlueprintIdentifier = "F72149E91BE2BDF300954F14"
             BuildableName = "GustyKit.framework"
             BlueprintName = "GustyKit"
             ReferencedContainer = "container:GustyKit.xcodeproj">
@@ -82,7 +82,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F7F4678B1BE167FA001FCEE3"
+            BlueprintIdentifier = "F72149E91BE2BDF300954F14"
             BuildableName = "GustyKit.framework"
             BlueprintName = "GustyKit"
             ReferencedContainer = "container:GustyKit.xcodeproj">
