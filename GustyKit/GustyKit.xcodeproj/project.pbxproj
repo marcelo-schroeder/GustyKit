@@ -1738,9 +1738,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F767CF101A8403FD0098BD60 /* GustyKitDoc */,
 				F72149E91BE2BDF300954F14 /* GustyKit */,
 				F72149F21BE2BDF400954F14 /* GustyKitTests */,
+				F767CF101A8403FD0098BD60 /* GustyKitDoc */,
 			);
 		};
 /* End PBXProject section */
@@ -2217,6 +2217,7 @@
 				F72149FD1BE2BDF400954F14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F72149FE1BE2BDF400954F14 /* Build configuration list for PBXNativeTarget "GustyKitTests" */ = {
 			isa = XCConfigurationList;
@@ -2225,6 +2226,7 @@
 				F7214A001BE2BDF400954F14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F767CF131A8403FD0098BD60 /* Build configuration list for PBXAggregateTarget "GustyKitDoc" */ = {
 			isa = XCConfigurationList;
