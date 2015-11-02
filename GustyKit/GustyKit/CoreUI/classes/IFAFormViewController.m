@@ -1814,7 +1814,9 @@ withAlertPresenterViewController:nil];
     [super viewDidAppear:animated];
 
     if (self.createMode && !self.IFA_createModeAutoFieldEditDone) {
-        NSIndexPath *l_indexPath = [self indexPathForPropertyNamed:@"name"];
+        NSString *firstResponderPropertyName = [[IFAPersistenceManager sharedInstance].entityConfig firstResponderForForm:self.formName
+                                                                                                                 inObject:self.object] ?: @"name";
+        NSIndexPath *l_indexPath = [self indexPathForPropertyNamed:firstResponderPropertyName];
         if (l_indexPath) {
             IFAFormTextFieldTableViewCell *l_cell = (IFAFormTextFieldTableViewCell *) [self visibleCellForIndexPath:l_indexPath];
             [l_cell.textField becomeFirstResponder];

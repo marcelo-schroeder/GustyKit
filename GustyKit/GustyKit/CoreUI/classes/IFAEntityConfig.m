@@ -172,6 +172,10 @@
     return [[[[[self entityConfigDictionary] valueForKey:[anObject ifa_entityName]] valueForKey:@"forms"] valueForKey:aFormName] valueForKey:@"formFooter"];
 }
 
+- (NSString *)firstResponderForForm:(NSString *)aFormName inObject:(NSObject *)anObject {
+    return [[[[[self entityConfigDictionary] valueForKey:[anObject ifa_entityName]] valueForKey:@"forms"] valueForKey:aFormName] valueForKey:@"firstResponder"];
+}
+
 - (NSString*)viewControllerForForm:(NSString*)aFormName inEntity:(NSString*)anEntityName{
 	return [[self dictionaryForForm:aFormName forEntity:anEntityName] valueForKey:@"viewController"];
 }

@@ -117,6 +117,10 @@ typedef NS_ENUM(NSUInteger, IFAEntityConfigFieldType){
 - (NSString*)labelForForm:(NSString*)aFormName inObject:(NSObject*)anObject;
 - (NSString*)headerForForm:(NSString*)aFormName inObject:(NSObject*)anObject;
 - (NSString*)footerForForm:(NSString*)aFormName inObject:(NSObject*)anObject;
+
+- (NSString *)firstResponderForForm:(NSString *)aFormName
+                           inObject:(NSObject *)anObject;
+
 - (NSString*)viewControllerForForm:(NSString*)aFormName inObject:(NSObject*)anObject;
 
 - (BOOL)hasNavigationBarSubmitButtonForForm:(NSString *)aFormName inEntity:(NSString*)anEntityName;
