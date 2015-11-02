@@ -93,13 +93,25 @@ rightLabelPlaceholderText:(NSString *)a_rightLabelPlaceholderText {
     [IFADefaultAppearanceTheme setTextColourForFormTableViewCellRightLabel:self.rightLabel
                                                                placeholder:rightLabelTextIsPlaceholder];
 
+    UILayoutPriority leftLabelHorizontalContentHuggingPriority;
+    UILayoutPriority rightLabelHorizontalContentHuggingPriority;
     if (a_leftLabelText) {
         self.leftLabelLeftConstraint.constant = self.IFA_originalLeftLabelLeftConstraint;
+        self.rightLabel.textAlignment = NSTextAlignmentRight;
+        leftLabelHorizontalContentHuggingPriority = UILayoutPriorityDefaultHigh;
+        rightLabelHorizontalContentHuggingPriority = UILayoutPriorityRequired;
     } else {
         self.leftLabelLeftConstraint.constant = 0;
+        self.rightLabel.textAlignment = NSTextAlignmentLeft;
+        leftLabelHorizontalContentHuggingPriority = UILayoutPriorityRequired;
+        rightLabelHorizontalContentHuggingPriority = UILayoutPriorityDefaultHigh;
     }
+    [self.leftLabel setContentHuggingPriority:leftLabelHorizontalContentHuggingPriority
+                                      forAxis:UILayoutConstraintAxisHorizontal];
+    [self.rightLabel setContentHuggingPriority:rightLabelHorizontalContentHuggingPriority
+                                      forAxis:UILayoutConstraintAxisHorizontal];
 
-    if (a_rightLabelText) {
+    if (!a_leftLabelText || a_rightLabelText) {
         self.leftAndRightLabelsSpacingConstraint.constant = self.IFA_originalLeftAndRightLabelsSpacingConstraintConstant;
     } else {
         self.leftAndRightLabelsSpacingConstraint.constant = 0;
