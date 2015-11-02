@@ -140,10 +140,6 @@ static NSString *const k_sectionHeaderFooterReuseId = @"sectionHeaderFooter";
     self.IFA_rollbackPerformed = NO;
 }
 
-- (void)IFA_onCancelButtonTap:(id)sender {
-    [self quitEditing];
-}
-
 - (void)IFA_onDismissButtonTap:(id)sender {
     [self ifa_notifySessionCompletion];
 }
@@ -1296,6 +1292,10 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController {
 withAlertPresenterViewController:nil];
 }
 
+- (void)onCancelButtonTap:(UIBarButtonItem *)sender {
+    [self quitEditing];
+}
+
 #pragma mark -
 #pragma mark UITableViewDataSource
 
@@ -1735,8 +1735,9 @@ withAlertPresenterViewController:nil];
                                                                                              action:@selector(IFA_onDismissButtonTap:)] : [IFAUIUtils barButtonItemForType:IFABarButtonItemTypeBack
                                                                                                                                                                     target:self
                                                                                                                                                                     action:@selector(IFA_onDismissButtonTap:)];
-    self.cancelBarButtonItem = [IFAUIUtils barButtonItemForType:IFABarButtonItemTypeCancel target:self
-                                                             action:@selector(IFA_onCancelButtonTap:)];
+    self.cancelBarButtonItem = [IFAUIUtils barButtonItemForType:IFABarButtonItemTypeCancel
+                                                         target:self
+                                                         action:@selector(onCancelButtonTap:)];
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 

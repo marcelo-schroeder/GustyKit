@@ -165,6 +165,12 @@ parentFormViewController:(IFAFormViewController *)a_parentFormViewController;
 */
 - (void)openUrl:(NSURL *)a_url;
 
+/**
+ * Called when the cancel button is tapped.
+ * Override this method to change or add behaviour.
+ * @param sender The bar button item which has been tapped.
+ */
+- (void)onCancelButtonTap:(UIBarButtonItem *)sender;
 @end
 
 @protocol IFAFormViewControllerDelegate <NSObject>
