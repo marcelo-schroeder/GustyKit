@@ -116,32 +116,39 @@
     syncSource1.property2 = @(22);
 
     SyncSource *syncSource2 = [SyncSource new];
-    syncSource2.property1 = @"key4";
-    syncSource2.property2 = @(44);
+    syncSource2.property1 = @"key6";
+    syncSource2.property2 = @(66);
 
     SyncSource *syncSource3 = [SyncSource new];
-    syncSource3.property1 = @"key6";
-    syncSource3.property2 = @(66);
+    syncSource3.property1 = @"key4";
+    syncSource3.property2 = @(44);
 
     // When
-    [self.persistenceManager syncEntityNamed:entityName
-                           withSourceObjects:@[syncSource1, syncSource2, syncSource3]
-                              keyPathMapping:@{@"property1" : @"attribute1", @"property2" : @"attribute2"}
-                             sourceIdKeyPath:@"property1"
-                             targetIdKeyPath:@"attribute1"];
+    NSArray <TestCoreDataEntity2 *> *result = (NSArray <TestCoreDataEntity2 *> *) [self.persistenceManager syncEntityNamed:entityName
+                                                                                                         withSourceObjects:@[syncSource1, syncSource2, syncSource3]
+                                                                                                            keyPathMapping:@{@"property1" : @"attribute1", @"property2" : @"attribute2"}
+                                                                                                           sourceIdKeyPath:@"property1"
+                                                                                                           targetIdKeyPath:@"attribute1"];
 
     // Then
     [self.persistenceManager save];
     TestCoreDataEntity2 *resultManagedObject1 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key2"}
                                                                                                                     entity:entityName];
-    TestCoreDataEntity2 *resultManagedObject2 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key4"}
+    TestCoreDataEntity2 *resultManagedObject2 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key6"}
                                                                                                                     entity:entityName];
-    TestCoreDataEntity2 *resultManagedObject3 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key6"}
+    TestCoreDataEntity2 *resultManagedObject3 = (TestCoreDataEntity2 *) [self.persistenceManager findSingleByKeysAndValues:@{@"attribute1" : @"key4"}
                                                                                                                     entity:entityName];
     XCTAssertEqual([self.persistenceManager countEntity:entityName], 3);
     XCTAssertEqualObjects(resultManagedObject1.attribute2, @(22));
-    XCTAssertEqualObjects(resultManagedObject2.attribute2, @(44));
-    XCTAssertEqualObjects(resultManagedObject3.attribute2, @(66));
+    XCTAssertEqualObjects(resultManagedObject2.attribute2, @(66));
+    XCTAssertEqualObjects(resultManagedObject3.attribute2, @(44));
+    XCTAssertEqual(result.count, 3);
+    resultManagedObject1 = result[0];
+    resultManagedObject2 = result[1];
+    resultManagedObject3 = result[2];
+    XCTAssertEqualObjects(resultManagedObject1.attribute2, @(22));
+    XCTAssertEqualObjects(resultManagedObject2.attribute2, @(66));
+    XCTAssertEqualObjects(resultManagedObject3.attribute2, @(44));
 }
 
 #pragma mark - Overrides

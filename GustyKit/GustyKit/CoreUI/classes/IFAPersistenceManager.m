@@ -1732,12 +1732,12 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
     return userInfo[IFAKeyUpdatedProperties];
 }
 
-- (void)syncEntityNamed:(NSString *)entityName
-      withSourceObjects:(NSArray *)sourceObjects
-         keyPathMapping:(NSDictionary *)keyPathMapping
-        sourceIdKeyPath:(NSString *)sourceIdKeyPath
-        targetIdKeyPath:(NSString *)targetIdKeyPath {
-    NSMutableArray <NSManagedObject *> *managedObjectsToDelete = [self findAllForEntity:entityName];
+- (NSArray <NSManagedObject *> *)syncEntityNamed:(NSString *)entityName
+           withSourceObjects:(NSArray *)sourceObjects
+              keyPathMapping:(NSDictionary *)keyPathMapping
+             sourceIdKeyPath:(NSString *)sourceIdKeyPath
+             targetIdKeyPath:(NSString *)targetIdKeyPath {
+    NSMutableArray <NSManagedObject *> *synchronisedObjects = [NSMutableArray new];
     for (id sourceObject in sourceObjects) {
         id sharedId = [sourceObject valueForKeyPath:sourceIdKeyPath];
         NSManagedObject *managedObject = [self findSingleByKeysAndValues:@{targetIdKeyPath : sharedId}
@@ -1752,12 +1752,15 @@ IFA_sqlStoreUrlForDatabaseResourceName:(NSString *)a_databaseResourceName
             [managedObject setValue:sharedValue
                          forKeyPath:keyPathMapping[sourcePropertyName]];
         }
-        [managedObjectsToDelete removeObject:managedObject];
+        [synchronisedObjects addObject:managedObject];
     }
+    NSMutableArray <NSManagedObject *> *managedObjectsToDelete = [self findAllForEntity:entityName];
+    [managedObjectsToDelete removeObjectsInArray:synchronisedObjects];
     for (NSManagedObject *managedObjectToDelete in managedObjectsToDelete) {
         [self deleteObject:managedObjectToDelete
   validationAlertPresenter:nil];
     }
+    return synchronisedObjects;
 }
 
 #pragma mark -

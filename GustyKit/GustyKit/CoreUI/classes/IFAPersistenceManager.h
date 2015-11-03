@@ -293,12 +293,13 @@
  * @param keyPathMapping Dictionary containing the mapping between source key paths (the keys in the dictionary) and target key paths (the values in the dictionary). Do not include the id key path mapping.
  * @param sourceIdKeyPath Key path corresponding to the shared ID in the source object. Used to match the source and target objects for syncing.
  * @param targetIdKeyPath Key path corresponding to the shared ID in the target object. Used to match the source and target objects for syncing.
+ * @returns Array containing the synchronised objects respecting the sort order of the source objects.
  */
-- (void)syncEntityNamed:(NSString *)entityName
-	  withSourceObjects:(NSArray *)sourceObjects
-		 keyPathMapping:(NSDictionary *)keyPathMapping
-		sourceIdKeyPath:(NSString *)sourceIdKeyPath
-		targetIdKeyPath:(NSString *)targetIdKeyPath;
+- (NSArray <NSManagedObject *> *)syncEntityNamed:(NSString *)entityName
+		   withSourceObjects:(NSArray *)sourceObjects
+			  keyPathMapping:(NSDictionary *)keyPathMapping
+			 sourceIdKeyPath:(NSString *)sourceIdKeyPath
+			 targetIdKeyPath:(NSString *)targetIdKeyPath;
 
 + (instancetype)sharedInstance;
 + (BOOL)setValidationError:(NSError**)anError withMessage:(NSString*)anErrorMessage;
